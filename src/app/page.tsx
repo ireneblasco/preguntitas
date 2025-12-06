@@ -16,8 +16,8 @@ export default function Home() {
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-8">
         <div className="w-full max-w-md space-y-16">
           <div className="text-center space-y-6">
-            <h2 className="font-serif text-5xl md:text-6xl font-medium text-stone-800 leading-tight tracking-tight">
-              Preguntitas
+            <h2 className="font-serif text-3xl md:text-4xl font-medium text-stone-800 leading-tight tracking-tight">
+              The Question Spot
             </h2>
             <p className="text-stone-600 text-base leading-relaxed font-light max-w-sm mx-auto">
               Where conversations begin

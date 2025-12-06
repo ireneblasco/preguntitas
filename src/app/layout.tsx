@@ -19,7 +19,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Preguntitas",
+  title: "The Question Spot",
   description: "Preguntas para compartir y reflexionar. Sin prisa, solo momentos divertidos y profundos.",
 };
 
