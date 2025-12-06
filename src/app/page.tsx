@@ -3,33 +3,43 @@
 import Link from "next/link";
 
 const categories = [
-  { name: "Cumpleaños", color: "bg-pink-200", slug: "cumpleanos" },
-  { name: "Road Trip", color: "bg-blue-200", slug: "roadtrip" },
-  { name: "Familia – Sobremesa", color: "bg-green-200", slug: "familia" },
-  { name: "Amigos – Sobremesa", color: "bg-yellow-200", slug: "amigos" },
-  { name: "Personales / Autorreflexión", color: "bg-purple-200", slug: "personales" },
+  { name: "Amigos", slug: "amigos" },
+  { name: "Familiares", slug: "familiares" },
+  { name: "Cumpleaños", slug: "cumpleanos" },
+  { name: "Pareja", slug: "pareja" },
+  { name: "Personales", slug: "personales" },
 ];
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-      <h1 className="text-3xl font-bold mb-8 text-gray-900 text-center">
-        Preguntitas
-      </h1>
-      <p className="text-gray-700 mb-6 text-center max-w-xs">
-        Preguntas para compartir y reflexionar. Sin prisa, solo momentos divertidos y profundos.
-      </p>
+    <main className="animated-gradient min-h-screen flex flex-col relative">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-8">
+        <div className="w-full max-w-md space-y-16">
+          <div className="text-center space-y-6">
+            <h2 className="font-serif text-5xl md:text-6xl font-medium text-stone-800 leading-tight tracking-tight">
+              Preguntitas
+            </h2>
+            <p className="text-stone-600 text-base leading-relaxed font-light max-w-sm mx-auto">
+              Where conversations begin
+            </p>
+          </div>
 
-      <div className="w-full max-w-sm flex flex-col gap-4">
-        {categories.map((cat) => (
-          <Link key={cat.slug} href={`/category/${cat.slug}`}>
-            <div className={`p-6 rounded-2xl shadow-md ${cat.color} hover:scale-105 transform transition`}>
-              <h2 className="text-lg font-semibold text-gray-900 text-center">
-                {cat.name}
-              </h2>
-            </div>
-          </Link>
-        ))}
+          <div className="space-y-4">
+            {categories.map((cat) => (
+              <Link 
+                key={cat.slug} 
+                href={`/category/${cat.slug}`}
+                className="block group"
+              >
+                <div className="bg-white border border-stone-200 rounded-3xl px-8 py-6 shadow-sm transition-all duration-300 ease-out hover:shadow-md hover:border-stone-300">
+                  <h3 className="text-lg font-light text-stone-700 text-center tracking-tight">
+                    {cat.name}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </main>
   );
