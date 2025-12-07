@@ -205,17 +205,12 @@ export default function Home() {
 
                     <motion.button
                       onClick={() => router.push('/favorites')}
-                      className="w-full bg-white/90 backdrop-blur-sm border border-[#E9F0F7] rounded-full px-8 py-4 text-base font-light text-[#1C1C1C] shadow-sm hover:shadow-md hover:border-[#5AA9E6]/30 transition-all duration-300"
+                      className="w-full bg-[#F7C6B8] text-[#1C1C1C] rounded-full px-8 py-4 text-base font-light hover:bg-[#F5B8A8] transition-all duration-300 shadow-sm shadow-[#F7C6B8]/20"
                       whileHover={{ scale: 1.02, y: -1 }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
                     >
-                      <div className="flex items-center justify-center gap-2">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                        </svg>
-                        <span>My favorites</span>
-                      </div>
+                      My favorites
                     </motion.button>
                   </motion.div>
                   </motion.div>

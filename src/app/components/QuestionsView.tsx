@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 import type { PanInfo } from "framer-motion";
-import { questions, MomentType } from "../data/questions";
+import { questions, MomentType, momentOptions } from "../data/questions";
 import { addFavorite, removeFavorite, isFavorite } from "../utils/favorites";
 import RotatingCopy, { funMessages } from "./RotatingCopy";
 
@@ -36,7 +36,25 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
   const [currentQuestion, setCurrentQuestion] = useState(
     filteredQuestions.length > 0 ? filteredQuestions[0] : null
   );
+  const [nextQuestion, setNextQuestion] = useState(
+    filteredQuestions.length > 1 ? filteredQuestions[1] : null
+  );
   const previousMomentRef = useRef(moment);
+
+  // Función para obtener la siguiente pregunta aleatoria
+  const getNextRandomQuestion = () => {
+    if (filteredQuestions.length === 0) return null;
+    if (filteredQuestions.length === 1) return filteredQuestions[0];
+    
+    let nextIndex = Math.floor(Math.random() * filteredQuestions.length);
+    if (currentQuestion) {
+      const currentIndex = filteredQuestions.findIndex((q) => q.id === currentQuestion.id);
+      while (nextIndex === currentIndex) {
+        nextIndex = Math.floor(Math.random() * filteredQuestions.length);
+      }
+    }
+    return filteredQuestions[nextIndex];
+  };
 
   // Solo establecer pregunta inicial cuando cambia el momento (no automáticamente después)
   useEffect(() => {
@@ -46,10 +64,21 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
       if (filteredQuestions.length > 0) {
         const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
         setCurrentQuestion(filteredQuestions[randomIndex]);
+        // Establecer siguiente pregunta
+        if (filteredQuestions.length > 1) {
+          let nextIdx = Math.floor(Math.random() * filteredQuestions.length);
+          while (nextIdx === randomIndex) {
+            nextIdx = Math.floor(Math.random() * filteredQuestions.length);
+          }
+          setNextQuestion(filteredQuestions[nextIdx]);
+        } else {
+          setNextQuestion(null);
+        }
         setQuestionIndex(1);
         x.set(0); // Resetear posición al cambiar momento
       } else {
         setCurrentQuestion(null);
+        setNextQuestion(null);
       }
     }
     // Si el momento no cambió, mantener la pregunta actual - NO cambiar automáticamente
@@ -83,15 +112,23 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
     }
     
     setTimeout(() => {
-      let nextIndex = Math.floor(Math.random() * filteredQuestions.length);
-      if (currentQuestion) {
-        const currentIndex = filteredQuestions.findIndex((q) => q.id === currentQuestion.id);
-        while (filteredQuestions.length > 1 && nextIndex === currentIndex) {
-          nextIndex = Math.floor(Math.random() * filteredQuestions.length);
+      const nextQ = getNextRandomQuestion();
+      if (nextQ) {
+        setCurrentQuestion(nextQ);
+        setQuestionIndex((prev) => prev + 1);
+        
+        // Establecer nueva siguiente pregunta
+        if (filteredQuestions.length > 1) {
+          let newNextIdx = Math.floor(Math.random() * filteredQuestions.length);
+          const newCurrentIdx = filteredQuestions.findIndex((q) => q.id === nextQ.id);
+          while (newNextIdx === newCurrentIdx) {
+            newNextIdx = Math.floor(Math.random() * filteredQuestions.length);
+          }
+          setNextQuestion(filteredQuestions[newNextIdx]);
+        } else {
+          setNextQuestion(null);
         }
       }
-      setCurrentQuestion(filteredQuestions[nextIndex]);
-      setQuestionIndex((prev) => prev + 1);
       
       // Asegurar que x esté en 0 cuando aparece la nueva pregunta
       x.set(0);
@@ -155,6 +192,11 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
   const opacity = useTransform(x, [-150, 0, 150], [0.3, 1, 0.3]);
   const scale = useTransform(x, [-150, 0, 150], [0.9, 1, 0.9]);
   const rotateY = useTransform(x, [-150, 0, 150], [-8, 0, 8]);
+  
+  // Transformaciones para la tarjeta de peek (siguiente pregunta)
+  const peekOpacity = useTransform(x, [-150, 0], [0.4, 0.15]);
+  const peekScale = useTransform(x, [-150, 0], [0.92, 0.88]);
+  const peekY = useTransform(x, [-150, 0], [8, 12]);
 
   return (
     <div className="w-full max-w-md h-full flex flex-col relative">
@@ -176,7 +218,7 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
           </motion.button>
           {filteredQuestions.length > 0 && (
             <div className="text-xs text-[#4A4A4A] font-light">
-              {Math.min(questionIndex, filteredQuestions.length)} / {filteredQuestions.length}
+              {momentOptions.find(opt => opt.value === moment)?.label || moment}
             </div>
           )}
         </div>
@@ -195,7 +237,7 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
       </div>
 
       {/* Contenido centrado */}
-      <div className="flex-1 flex items-center justify-center px-6 pt-20 pb-32">
+      <div className="flex-1 flex items-center justify-center px-6 pt-20 pb-40">
         {filteredQuestions.length === 0 ? (
           <motion.div
             className="bg-white rounded-3xl px-8 py-12 text-center shadow-lg"
@@ -209,10 +251,29 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
           </motion.div>
         ) : (
           <div className="w-full relative" style={{ perspective: '1000px' }}>
+            {/* Tarjeta de peek (siguiente pregunta) - detrás de la actual */}
+            {nextQuestion && (
+              <motion.div
+                className="absolute inset-0 w-full pointer-events-none"
+                style={{
+                  opacity: peekOpacity,
+                  scale: peekScale,
+                  y: peekY,
+                  zIndex: 0,
+                }}
+              >
+                <div className="bg-white rounded-3xl px-8 py-12 text-center shadow-md relative min-h-[280px] flex items-center justify-center">
+                  <p className="text-2xl font-light text-[#1C1C1C] leading-relaxed tracking-tight opacity-60">
+                    {nextQuestion.text}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+            
             <motion.div
               key={currentQuestion?.id}
               ref={cardRef}
-              className="w-full"
+              className="w-full relative z-10"
               drag="x"
               dragConstraints={{ left: -150, right: 150 }}
               dragElastic={0.2}
@@ -349,7 +410,7 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
       </div>
 
       {/* Footer con botón y micro-copy */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-8 pt-4 safe-area-bottom">
+      <div className="absolute bottom-0 left-0 right-0 z-20 px-6 pb-8 pt-8 safe-area-bottom">
         <div className="flex flex-col items-center space-y-4">
           <motion.button
             onClick={handleNext}

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import type { PanInfo } from "framer-motion";
 import { questions } from "../data/questions";
 import { addFavorite, removeFavorite, isFavorite } from "../utils/favorites";
 import RotatingCopy, { funMessages } from "./RotatingCopy";
@@ -15,6 +16,9 @@ const sillyQuestions = questions.filter((q) => q.category === "silly");
 export default function SillyView({ onBack }: SillyViewProps) {
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -28,24 +32,90 @@ export default function SillyView({ onBack }: SillyViewProps) {
       ? sillyQuestions[Math.floor(Math.random() * sillyQuestions.length)]
       : null
   );
+  
+  const getNextRandomQuestion = (excludeQuestion: typeof currentQuestion) => {
+    if (sillyQuestions.length === 0) return null;
+    if (sillyQuestions.length === 1) return sillyQuestions[0];
+    
+    let nextIndex = Math.floor(Math.random() * sillyQuestions.length);
+    if (excludeQuestion) {
+      const currentIndex = sillyQuestions.findIndex((q) => q.id === excludeQuestion.id);
+      while (nextIndex === currentIndex) {
+        nextIndex = Math.floor(Math.random() * sillyQuestions.length);
+      }
+    }
+    return sillyQuestions[nextIndex];
+  };
+  
+  const [nextQuestion, setNextQuestion] = useState(() => {
+    if (sillyQuestions.length === 0) return null;
+    const initialCurrent = sillyQuestions.length > 0 
+      ? sillyQuestions[Math.floor(Math.random() * sillyQuestions.length)]
+      : null;
+    if (sillyQuestions.length > 1 && initialCurrent) {
+      let nextIdx = Math.floor(Math.random() * sillyQuestions.length);
+      const currentIdx = sillyQuestions.findIndex((q) => q.id === initialCurrent.id);
+      while (nextIdx === currentIdx) {
+        nextIdx = Math.floor(Math.random() * sillyQuestions.length);
+      }
+      return sillyQuestions[nextIdx];
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    x.set(0);
+  }, [currentQuestion?.id, x]);
 
   const handleNext = () => {
-    if (sillyQuestions.length === 0) return;
+    if (sillyQuestions.length === 0 || isTransitioning) return;
     
     setIsTransitioning(true);
+    x.set(0); // Reset x immediately
+
     setTimeout(() => {
-      let nextIndex = Math.floor(Math.random() * sillyQuestions.length);
-      if (currentQuestion) {
-        const currentIndex = sillyQuestions.findIndex((q) => q.id === currentQuestion.id);
-        while (sillyQuestions.length > 1 && nextIndex === currentIndex) {
-          nextIndex = Math.floor(Math.random() * sillyQuestions.length);
-        }
+      const nextQ = getNextRandomQuestion(currentQuestion);
+      if (nextQ) {
+        setCurrentQuestion(nextQ);
+        
+        // Establecer nueva siguiente pregunta
+        const newNextQ = getNextRandomQuestion(nextQ);
+        setNextQuestion(newNextQ);
       }
-      setCurrentQuestion(sillyQuestions[nextIndex]);
+      
       setTimeout(() => {
         setIsTransitioning(false);
       }, 650);
     }, 100);
+  };
+
+  const handleSwipe = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    if (isTransitioning) return;
+    
+    const threshold = 80;
+    const velocity = Math.abs(info.velocity.x);
+    
+    if (Math.abs(info.offset.x) > threshold || velocity > 500) {
+      x.set(0);
+      handleNext();
+    } else {
+      x.set(0);
+    }
+  };
+
+  const handleLongPressStart = () => {
+    if (!currentQuestion) return;
+    const timer = setTimeout(() => {
+      handleToggleFavorite();
+    }, 500);
+    setLongPressTimer(timer);
+  };
+
+  const handleLongPressEnd = () => {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      setLongPressTimer(null);
+    }
   };
 
   const handleToggleFavorite = () => {
@@ -59,6 +129,16 @@ export default function SillyView({ onBack }: SillyViewProps) {
       setFavoriteIds((prev) => [...prev, currentQuestion.id]);
     }
   };
+
+  // Transformaciones para el efecto de arrastre
+  const opacity = useTransform(x, [-200, 0, 200], [0, 1, 0]);
+  const scale = useTransform(x, [-200, 0, 200], [0.9, 1, 0.9]);
+  const rotateY = useTransform(x, [-200, 0, 200], [-10, 0, 10]);
+  
+  // Transformaciones para la tarjeta de peek (siguiente pregunta)
+  const peekOpacity = useTransform(x, [-200, 0], [0.4, 0.15]);
+  const peekScale = useTransform(x, [-200, 0], [0.92, 0.88]);
+  const peekY = useTransform(x, [-200, 0], [8, 12]);
 
   return (
     <div className="w-full max-w-md h-full flex flex-col justify-center space-y-8">
@@ -92,17 +172,64 @@ export default function SillyView({ onBack }: SillyViewProps) {
 
       {currentQuestion && (
         <>
-          <div className="relative flex-1 flex items-center">
-            <AnimatePresence mode="wait">
+          <div className="relative flex-1 flex items-center" style={{ perspective: '1000px' }}>
+            {/* Tarjeta de peek (siguiente pregunta) - detrás de la actual */}
+            {nextQuestion && (
               <motion.div
-                key={currentQuestion.id}
-                className="bg-white/80 backdrop-blur-sm border border-[#E9F0F7] rounded-3xl px-10 py-16 text-center shadow-sm relative w-full min-h-[280px] flex items-center justify-center"
-                initial={{ opacity: 0, y: 20, scale: 0.96, rotate: -1 }}
-                animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-                exit={{ opacity: 0, y: -20, scale: 0.96, rotate: 1 }}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                whileTap={{ scale: 0.98 }}
+                className="absolute inset-0 w-full pointer-events-none"
+                style={{
+                  opacity: peekOpacity,
+                  scale: peekScale,
+                  y: peekY,
+                  zIndex: 0,
+                }}
               >
+                <div className="bg-white/80 backdrop-blur-sm border border-[#E9F0F7] rounded-3xl px-10 py-16 text-center shadow-md relative w-full min-h-[280px] flex items-center justify-center">
+                  <p className="text-xl font-light text-[#1C1C1C] leading-relaxed tracking-tight opacity-60">
+                    {nextQuestion.text}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+            
+            <motion.div
+              key={currentQuestion.id}
+              ref={cardRef}
+              className="w-full relative z-10"
+              drag="x"
+              dragConstraints={{ left: -200, right: 200 }}
+              dragElastic={0.2}
+              dragTransition={{ bounceStiffness: 300, bounceDamping: 20 }}
+              onDragEnd={handleSwipe}
+              animate={{ x: 0 }}
+              style={{ 
+                x, 
+                opacity,
+                scale,
+                rotateY,
+                transformStyle: 'preserve-3d'
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 30, x: { duration: 0.2 } }}
+              onTouchStart={handleLongPressStart}
+              onTouchEnd={handleLongPressEnd}
+              onMouseDown={handleLongPressStart}
+              onMouseUp={handleLongPressEnd}
+              onMouseLeave={handleLongPressEnd}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={currentQuestion.id}
+                  className="bg-white/80 backdrop-blur-sm border border-[#E9F0F7] rounded-3xl px-10 py-16 text-center shadow-sm relative w-full min-h-[280px] flex items-center justify-center"
+                  initial={{ opacity: 0, y: 20, scale: 0.96, rotateX: -2 }}
+                  animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                  exit={{ opacity: 0, y: -20, scale: 0.96, rotateX: 2 }}
+                  transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    backfaceVisibility: 'hidden'
+                  }}
+                >
                 <motion.button
                   onClick={handleToggleFavorite}
                   className={`absolute top-4 right-4 p-2 transition-colors ${
@@ -162,6 +289,7 @@ export default function SillyView({ onBack }: SillyViewProps) {
                 </motion.p>
               </motion.div>
             </AnimatePresence>
+            </motion.div>
           </div>
 
           <div className="flex flex-col items-center space-y-4 pt-4">
