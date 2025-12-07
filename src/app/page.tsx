@@ -58,6 +58,20 @@ export default function Home() {
     setShowHome(true);
   };
 
+  const handleRestartOnboarding = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("hasSeenOnboarding");
+    }
+    setShowHome(false);
+    setShowSplash(true);
+    setShowOnboarding(false);
+  };
+
+  // Verificar si estamos en modo desarrollo
+  const isDevelopment = typeof window !== "undefined" 
+    ? (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost')
+    : false;
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -70,7 +84,7 @@ export default function Home() {
         {showHome && (
           <motion.main
             key="home"
-            className="animated-gradient min-h-screen flex flex-col relative"
+            className="h-screen flex flex-col relative bg-gradient-to-b from-[#FAFAFA] via-[#F5F5F7] to-[#FEF7F0] overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ 
@@ -79,27 +93,33 @@ export default function Home() {
               delay: 0.1
             }}
           >
-            <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-8 overflow-y-auto">
-              {showSilly ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                  <SillyView onBack={() => setShowSilly(false)} />
-                </motion.div>
-              ) : !showQuestions ? (
-                <motion.div
-                  className="w-full max-w-md space-y-12 py-4"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 0.3, 
-                    ease: [0.25, 0.1, 0.25, 1]
-                  }}
-                >
+            <div className="relative z-10 h-screen flex flex-col items-center justify-center px-6 py-4 overflow-hidden">
+              <AnimatePresence mode="wait">
+                {showSilly ? (
+                  <motion.div
+                    key="silly"
+                    initial={{ opacity: 0, x: 20, scale: 0.96 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: 20, scale: 0.96 }}
+                    transition={{ 
+                      duration: 0.35, 
+                      ease: [0.25, 0.1, 0.25, 1]
+                    }}
+                  >
+                    <SillyView onBack={() => setShowSilly(false)} />
+                  </motion.div>
+                ) : !showQuestions ? (
+                  <motion.div
+                    key="home"
+                    className="w-full max-w-md space-y-12"
+                    initial={{ opacity: 0, x: -20, scale: 0.96 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -20, scale: 0.96 }}
+                    transition={{ 
+                      duration: 0.35, 
+                      ease: [0.25, 0.1, 0.25, 1]
+                    }}
+                  >
                   <motion.div
                     className="text-center space-y-4"
                     initial={{ opacity: 0, y: 10 }}
@@ -165,14 +185,11 @@ export default function Home() {
                       <motion.button
                         onClick={() => setShowSilly(true)}
                         className="w-full bg-gradient-to-r from-amber-200 to-yellow-200 text-stone-800 rounded-full px-8 py-4 text-base font-light hover:from-amber-300 hover:to-yellow-300 transition-all duration-300 shadow-sm border border-amber-300/50"
-                        whileHover={{ scale: 1.02, y: -1, rotate: 0.5 }}
+                        whileHover={{ scale: 1.02, y: -1 }}
                         whileTap={{ scale: 0.98 }}
                         transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
                       >
-                        <div className="flex items-center justify-center gap-2">
-                          <span className="text-lg">🎲</span>
-                          <span>Silly Mode</span>
-                        </div>
+                        Random
                       </motion.button>
                     </motion.div>
 
@@ -191,21 +208,47 @@ export default function Home() {
                       </div>
                     </motion.button>
                   </motion.div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                  <QuestionsView
-                    moment={selectedMoment}
-                    onBack={() => setShowQuestions(false)}
-                  />
-                </motion.div>
-              )}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="questions"
+                    initial={{ opacity: 0, x: 20, scale: 0.96 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: 20, scale: 0.96 }}
+                    transition={{ 
+                      duration: 0.35, 
+                      ease: [0.25, 0.1, 0.25, 1]
+                    }}
+                  >
+                    <QuestionsView
+                      moment={selectedMoment}
+                      onBack={() => setShowQuestions(false)}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
+
+            {/* Botón de desarrollo - solo visible en modo desarrollo */}
+            {isDevelopment && (
+              <motion.div
+                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+              >
+                <motion.button
+                  onClick={handleRestartOnboarding}
+                  className="bg-white/90 backdrop-blur-sm border border-stone-300 rounded-full px-4 py-2 text-xs font-light text-stone-600 shadow-sm hover:shadow-md hover:border-stone-400 transition-all duration-200"
+                  whileHover={{ scale: 1.05, y: -1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  <span className="text-[10px] text-stone-400 mr-1.5">DEV</span>
+                  Iniciar Onboarding
+                </motion.button>
+              </motion.div>
+            )}
           </motion.main>
         )}
       </AnimatePresence>

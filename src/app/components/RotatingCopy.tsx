@@ -3,39 +3,53 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const messages = [
+const defaultMessages = [
   "Take your time.",
   "No rush.",
   "Breathe.",
   "Enjoy the moment.",
 ];
 
-export default function RotatingCopy() {
+const funMessages = [
+  "Let's get silly!",
+  "No pressure, just fun.",
+  "Keep it light.",
+  "Laugh it off.",
+  "Enjoy the chaos.",
+  "Embrace the weird.",
+];
+
+interface RotatingCopyProps {
+  messages?: string[];
+  questionId?: string; // Para cambiar mensaje cuando cambia la pregunta
+}
+
+export default function RotatingCopy({ messages = defaultMessages, questionId }: RotatingCopyProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Cambiar mensaje cuando cambia la pregunta (no rotar continuamente)
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % messages.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
+    if (questionId) {
+      // Seleccionar un mensaje aleatorio cuando cambia la pregunta
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      setCurrentIndex(randomIndex);
+    }
+  }, [questionId, messages]);
 
   return (
     <div className="h-6 flex items-center justify-center">
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={currentIndex}
-          className="text-stone-500 text-sm font-light"
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          {messages[currentIndex]}
-        </motion.p>
-      </AnimatePresence>
+      <motion.p
+        key={questionId || currentIndex}
+        className="text-stone-500 text-sm font-light"
+        initial={{ opacity: 0, y: 5 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+      >
+        {messages[currentIndex]}
+      </motion.p>
     </div>
   );
 }
+
+export { funMessages };
 

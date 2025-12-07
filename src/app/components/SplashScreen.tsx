@@ -24,6 +24,11 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center splash-gradient"
+      style={{
+        background: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 20%, #FCD34D 40%, #FBBF24 60%, #F59E0B 80%, #D97706 100%)',
+        backgroundSize: '400% 400%',
+        animation: 'gradient-shift 15s ease infinite'
+      }}
       initial={{ opacity: 1 }}
       animate={isExiting ? { opacity: 0, scale: 1.05 } : { opacity: 1, scale: 1 }}
       transition={{ 

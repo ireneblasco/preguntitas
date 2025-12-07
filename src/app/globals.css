@@ -64,54 +64,23 @@
 .animated-gradient {
   position: relative;
   background: linear-gradient(
-    135deg,
-    #fde047 0%,
-    #bef264 25%,
-    #fdba74 50%,
-    #fef08a 75%,
-    #fde047 100%
+    180deg,
+    #FAFAFA 0%,
+    #F5F5F7 50%,
+    #FEF7F0 100%
   );
-  background-size: 400% 400%;
-  animation: gradient-shift 20s ease infinite;
   overflow: hidden;
-}
-
-.animated-gradient::before,
-.animated-gradient::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.75;
-  pointer-events: none;
-}
-
-.animated-gradient::before {
-  top: -20%;
-  left: -10%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(253, 224, 71, 0.9) 0%, rgba(253, 224, 71, 0.4) 50%, transparent 70%);
-  animation: blob-float-1 25s ease-in-out infinite;
-}
-
-.animated-gradient::after {
-  bottom: -20%;
-  right: -10%;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(190, 242, 100, 0.85) 0%, rgba(190, 242, 100, 0.4) 50%, transparent 70%);
-  animation: blob-float-2 28s ease-in-out infinite;
 }
 
 .splash-gradient {
   background: linear-gradient(
     135deg,
-    #ffb3d9 0%,
-    #d4a5f5 25%,
-    #a5d8f5 50%,
-    #ffd4b3 75%,
-    #ffb3d9 100%
+    #FEF3C7 0%,
+    #FDE68A 20%,
+    #FCD34D 40%,
+    #FBBF24 60%,
+    #F59E0B 80%,
+    #D97706 100%
   );
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;

@@ -28,14 +28,18 @@ export default function FavoritesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-stone-50 flex flex-col">
+    <main className="min-h-screen bg-gradient-to-b from-[#FAFAFA] via-[#F5F5F7] to-[#FEF7F0] flex flex-col">
       <header className="px-6 pt-12 pb-4">
         <motion.button
           onClick={() => router.push('/')}
-          className="text-stone-600 text-base font-light hover:text-stone-800 transition-colors"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-stone-600 text-base font-light hover:text-stone-800 transition-colors p-2 -ml-2 rounded-full hover:bg-stone-100/50 active:bg-stone-200/50"
+          whileHover={{ scale: 1.1, x: -2 }}
+          whileTap={{ scale: 0.9, x: -4 }}
+          transition={{ 
+            duration: 0.2, 
+            ease: [0.25, 0.1, 0.25, 1],
+            scale: { type: "spring", stiffness: 400, damping: 17 }
+          }}
         >
           ← Volver
         </motion.button>
