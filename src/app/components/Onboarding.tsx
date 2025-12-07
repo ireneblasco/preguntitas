@@ -46,12 +46,15 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <button
+      <motion.button
         onClick={handleSkip}
         className="absolute top-8 right-6 text-stone-500 text-sm font-light hover:text-stone-700 transition-colors z-10"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
       >
         Skip
-      </button>
+      </motion.button>
 
       <div className="flex-1 flex items-center justify-center px-6">
         <AnimatePresence mode="wait">
@@ -98,16 +101,20 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98, y: 0 }}
           >
             Start
           </motion.button>
         ) : (
           <motion.button
             onClick={handleNext}
-            className="w-full bg-white border border-stone-200 text-stone-700 rounded-full px-8 py-4 text-base font-light hover:bg-stone-50 transition-colors duration-300"
+            className="w-full bg-white/90 backdrop-blur-sm border border-stone-200 text-stone-700 rounded-full px-8 py-4 text-base font-light hover:bg-stone-50 transition-colors duration-300"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98, y: 0 }}
           >
             Next
           </motion.button>
