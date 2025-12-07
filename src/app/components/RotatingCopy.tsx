@@ -40,7 +40,7 @@ export default function RotatingCopy({ messages = defaultMessages, questionId }:
     <div className="h-6 flex items-center justify-center">
       <motion.p
         key={questionId || currentIndex}
-        className="text-stone-500 text-sm font-light"
+        className="text-[#4A4A4A] text-sm font-light"
         initial={{ opacity: 0, y: 5 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}

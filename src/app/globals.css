@@ -2,10 +2,17 @@
 
 @theme {
   --font-serif: var(--font-playfair), serif;
+  --font-inter: var(--font-inter), sans-serif;
 }
 
 .font-serif {
   font-family: var(--font-playfair), serif;
+}
+
+.font-logo {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 * {
@@ -65,9 +72,9 @@
   position: relative;
   background: linear-gradient(
     180deg,
-    #FAFAFA 0%,
-    #F5F5F7 50%,
-    #FEF7F0 100%
+    #F8F8F8 0%,
+    #FAF5EF 50%,
+    #E9F0F7 100%
   );
   overflow: hidden;
 }
@@ -75,12 +82,11 @@
 .splash-gradient {
   background: linear-gradient(
     135deg,
-    #FEF3C7 0%,
-    #FDE68A 20%,
-    #FCD34D 40%,
-    #FBBF24 60%,
-    #F59E0B 80%,
-    #D97706 100%
+    #5AA9E6 0%,
+    #F9E79F 25%,
+    #F7C6B8 50%,
+    #A8E6CF 75%,
+    #5AA9E6 100%
   );
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;

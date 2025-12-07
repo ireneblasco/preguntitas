@@ -45,7 +45,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-b from-[#FAFAFA] via-[#F5F5F7] to-[#FEF7F0]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-b from-[#F8F8F8] via-[#FAF5EF] to-[#E9F0F7]"
       initial={{ opacity: 0 }}
       animate={isExiting ? { opacity: 0 } : { opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -53,7 +53,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
     >
       <motion.button
         onClick={handleSkip}
-        className="absolute top-8 right-6 text-stone-500 text-sm font-light hover:text-stone-700 transition-colors z-10"
+        className="absolute top-8 right-6 text-[#4A4A4A] text-sm font-light hover:text-[#1C1C1C] transition-colors z-10"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -100,15 +100,15 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                       transform: `translateY(${index * 8}px) rotate(${index === 0 ? 0 : index === 1 ? -3 : 3}deg)`,
                     }}
                   >
-                    <div className="h-2 w-2 rounded-full bg-stone-300 mb-2" />
-                    <div className="h-1.5 w-24 bg-stone-200 rounded mb-1" />
-                    <div className="h-1.5 w-32 bg-stone-200 rounded" />
+                    <div className="h-2 w-2 rounded-full bg-[#5AA9E6] mb-2" />
+                    <div className="h-1.5 w-24 bg-[#E9F0F7] rounded mb-1" />
+                    <div className="h-1.5 w-32 bg-[#E9F0F7] rounded" />
                   </motion.div>
                 ))}
               </div>
 
               <motion.h1
-                className="text-3xl md:text-4xl font-light text-stone-800 leading-tight tracking-tight mb-4"
+                className="text-3xl md:text-4xl font-light text-[#1C1C1C] leading-tight tracking-tight mb-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
@@ -116,7 +116,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 {screens[0].headline}
               </motion.h1>
               <motion.p
-                className="text-base text-stone-600 font-light leading-relaxed"
+                className="text-base text-[#4A4A4A] font-light leading-relaxed"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -139,7 +139,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               </div>
 
               <motion.h1
-                className="text-3xl md:text-4xl font-light text-stone-800 leading-tight tracking-tight mb-4"
+                className="text-3xl md:text-4xl font-light text-[#1C1C1C] leading-tight tracking-tight mb-4"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
@@ -147,7 +147,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 {screens[1].headline}
               </motion.h1>
               <motion.p
-                className="text-base text-stone-600 font-light leading-relaxed mb-8"
+                className="text-base text-[#4A4A4A] font-light leading-relaxed mb-8"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -166,14 +166,14 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
               key={index}
               className={`h-1 rounded-full transition-all duration-300 ${
                 index === currentScreen
-                  ? "bg-stone-800 w-8"
-                  : "bg-stone-300 w-1"
+                  ? "bg-[#5AA9E6] w-8"
+                  : "bg-[#E9F0F7] w-1"
               }`}
               initial={false}
               animate={{
                 width: index === currentScreen ? 32 : 4,
                 backgroundColor:
-                  index === currentScreen ? "#292524" : "#d6d3d1",
+                  index === currentScreen ? "#5AA9E6" : "#E9F0F7",
               }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             />
@@ -183,7 +183,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
         {currentScreen === screens.length - 1 ? (
           <motion.button
             onClick={handleNext}
-            className="w-full bg-stone-800 text-white rounded-full px-8 py-4 text-base font-light hover:bg-stone-700 transition-colors duration-300 shadow-sm"
+            className="w-full bg-[#5AA9E6] text-white rounded-full px-8 py-4 text-base font-light hover:bg-[#4A99D6] transition-colors duration-300 shadow-sm shadow-[#5AA9E6]/20"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -195,7 +195,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
         ) : (
           <motion.button
             onClick={handleNext}
-            className="w-full bg-white/90 backdrop-blur-sm border border-stone-200 text-stone-700 rounded-full px-8 py-4 text-base font-light hover:bg-stone-50 transition-colors duration-300 shadow-sm"
+            className="w-full bg-white/90 backdrop-blur-sm border border-[#E9F0F7] text-[#1C1C1C] rounded-full px-8 py-4 text-base font-light hover:bg-white transition-colors duration-300 shadow-sm"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -250,7 +250,7 @@ function SwipeAnimation() {
               }}
               style={{ zIndex: isActive ? 3 : isNext ? 2 : 1 }}
             >
-              <p className="text-lg font-light text-stone-700 text-center leading-relaxed">
+              <p className="text-lg font-light text-[#1C1C1C] text-center leading-relaxed">
                 {question}
               </p>
             </motion.div>
@@ -266,7 +266,7 @@ function SwipeAnimation() {
         transition={{ delay: 0.5 }}
       >
         <motion.div
-          className="w-1.5 h-1.5 rounded-full bg-stone-400"
+          className="w-1.5 h-1.5 rounded-full bg-[#5AA9E6]"
           animate={{ 
             x: [0, 8, 0],
             opacity: [0.5, 1, 0.5]
@@ -278,7 +278,7 @@ function SwipeAnimation() {
           }}
         />
         <motion.div
-          className="w-1.5 h-1.5 rounded-full bg-stone-400"
+          className="w-1.5 h-1.5 rounded-full bg-[#5AA9E6]"
           animate={{ 
             x: [0, 8, 0],
             opacity: [0.5, 1, 0.5]
@@ -291,7 +291,7 @@ function SwipeAnimation() {
           }}
         />
         <motion.div
-          className="w-1.5 h-1.5 rounded-full bg-stone-400"
+          className="w-1.5 h-1.5 rounded-full bg-[#5AA9E6]"
           animate={{ 
             x: [0, 8, 0],
             opacity: [0.5, 1, 0.5]

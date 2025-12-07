@@ -84,7 +84,7 @@ export default function Home() {
         {showHome && (
           <motion.main
             key="home"
-            className="h-screen flex flex-col relative bg-gradient-to-b from-[#FAFAFA] via-[#F5F5F7] to-[#FEF7F0] overflow-hidden"
+            className="h-screen flex flex-col relative bg-gradient-to-b from-[#F8F8F8] via-[#FAF5EF] to-[#E9F0F7] overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ 
@@ -130,12 +130,22 @@ export default function Home() {
                       ease: [0.25, 0.1, 0.25, 1]
                     }}
                   >
-                    <h2 className="font-serif text-3xl md:text-4xl font-medium text-stone-800 leading-tight tracking-tight">
-                      The Question Spot
-                    </h2>
-                    <p className="text-stone-600 text-base leading-relaxed font-light max-w-sm mx-auto">
+                    <motion.h2 
+                      className="font-serif text-3xl md:text-4xl font-medium text-[#1C1C1C] leading-tight tracking-tight"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      Question Spot
+                    </motion.h2>
+                    <motion.p 
+                      className="text-[#4A4A4A] text-base leading-relaxed font-light max-w-sm mx-auto"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.25, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
                       Where conversations begin
-                    </p>
+                    </motion.p>
                   </motion.div>
 
                   <motion.div
@@ -148,7 +158,7 @@ export default function Home() {
                       ease: [0.25, 0.1, 0.25, 1]
                     }}
                   >
-                    <p className="text-sm text-stone-500 text-center font-light">What's the moment?</p>
+                    <p className="text-sm text-[#4A4A4A] text-center font-light">What's the moment?</p>
                     <MomentSelector value={selectedMoment} onChange={setSelectedMoment} />
                   </motion.div>
 
@@ -164,7 +174,7 @@ export default function Home() {
                   >
                     <motion.button
                       onClick={() => setShowQuestions(true)}
-                      className="w-full bg-stone-800 text-white rounded-full px-8 py-4 text-base font-light hover:bg-stone-700 transition-colors duration-300 shadow-sm"
+                      className="w-full bg-[#5AA9E6] text-white rounded-full px-8 py-4 text-base font-light hover:bg-[#4A99D6] transition-colors duration-300 shadow-sm shadow-[#5AA9E6]/20"
                       whileHover={{ scale: 1.02, y: -1 }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -184,7 +194,7 @@ export default function Home() {
                     >
                       <motion.button
                         onClick={() => setShowSilly(true)}
-                        className="w-full bg-gradient-to-r from-amber-200 to-yellow-200 text-stone-800 rounded-full px-8 py-4 text-base font-light hover:from-amber-300 hover:to-yellow-300 transition-all duration-300 shadow-sm border border-amber-300/50"
+                        className="w-full bg-[#F9E79F] text-[#1C1C1C] rounded-full px-8 py-4 text-base font-light hover:bg-[#F5DF8F] transition-all duration-300 shadow-sm shadow-[#F9E79F]/20"
                         whileHover={{ scale: 1.02, y: -1 }}
                         whileTap={{ scale: 0.98 }}
                         transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -195,7 +205,7 @@ export default function Home() {
 
                     <motion.button
                       onClick={() => router.push('/favorites')}
-                      className="w-full bg-white/90 backdrop-blur-sm border border-stone-200 rounded-full px-8 py-4 text-base font-light text-stone-700 shadow-sm hover:shadow-md hover:border-stone-300 transition-all duration-300"
+                      className="w-full bg-white/90 backdrop-blur-sm border border-[#E9F0F7] rounded-full px-8 py-4 text-base font-light text-[#1C1C1C] shadow-sm hover:shadow-md hover:border-[#5AA9E6]/30 transition-all duration-300"
                       whileHover={{ scale: 1.02, y: -1 }}
                       whileTap={{ scale: 0.98 }}
                       transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
@@ -239,12 +249,12 @@ export default function Home() {
               >
                 <motion.button
                   onClick={handleRestartOnboarding}
-                  className="bg-white/90 backdrop-blur-sm border border-stone-300 rounded-full px-4 py-2 text-xs font-light text-stone-600 shadow-sm hover:shadow-md hover:border-stone-400 transition-all duration-200"
+                  className="bg-white/90 backdrop-blur-sm border border-[#E9F0F7] rounded-full px-4 py-2 text-xs font-light text-[#4A4A4A] shadow-sm hover:shadow-md hover:border-[#5AA9E6]/30 transition-all duration-200"
                   whileHover={{ scale: 1.05, y: -1 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
                 >
-                  <span className="text-[10px] text-stone-400 mr-1.5">DEV</span>
+                  <span className="text-[10px] text-[#4A4A4A] mr-1.5">DEV</span>
                   Iniciar Onboarding
                 </motion.button>
               </motion.div>

@@ -168,14 +168,14 @@ export const questions: Question[] = [
 ];
 
 export const momentOptions = [
-  { value: "date-night", label: "Date night" },
-  { value: "deep-talk", label: "Deep talk" },
-  { value: "chill-night", label: "Chill night" },
-  { value: "random-fun", label: "Fun" },
-  { value: "too-many-hours-on-road", label: "On the Road" },
-  { value: "birthday", label: "Birthday" },
-  { value: "work-icebreakers", label: "Work Icebreakers" },
-  { value: "reflections", label: "Reflections" },
+  { value: "date-night", label: "💕 Date night" },
+  { value: "deep-talk", label: "🌙 Deep talk" },
+  { value: "chill-night", label: "🍷 Friends night" },
+  { value: "random-fun", label: "🎲 Fun" },
+  { value: "too-many-hours-on-road", label: "🏠 Family" },
+  { value: "birthday", label: "🎂 Birthday" },
+  { value: "work-icebreakers", label: "💼 Work Icebreakers" },
+  { value: "reflections", label: "✨ Self reflections" },
 ];
 
 export const categoryNames: Record<string, string> = {

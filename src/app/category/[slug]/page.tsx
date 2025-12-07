@@ -60,8 +60,10 @@ export default function CategoryPage() {
         }
       }
       setCurrentQuestion(filteredQuestions[nextIndex]);
-      setIsTransitioning(false);
-    }, 400);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 650);
+    }, 100);
   };
 
   const handleToggleFavorite = () => {
@@ -77,11 +79,11 @@ export default function CategoryPage() {
   };
 
   return (
-    <main className="h-screen bg-gradient-to-b from-[#FAFAFA] via-[#F5F5F7] to-[#FEF7F0] flex flex-col overflow-hidden">
+    <main className="h-screen bg-gradient-to-b from-[#F8F8F8] via-[#FAF5EF] to-[#E9F0F7] flex flex-col overflow-hidden">
       <header className="px-6 pt-6 pb-2">
         <motion.button
           onClick={() => router.push('/')}
-          className="text-stone-600 text-base font-light hover:text-stone-800 transition-colors p-2 -ml-2 rounded-full hover:bg-stone-100/50 active:bg-stone-200/50"
+          className="text-[#4A4A4A] text-base font-light hover:text-[#1C1C1C] transition-colors p-2 -ml-2 rounded-full hover:bg-[#E9F0F7]/50 active:bg-[#E9F0F7]"
           whileHover={{ scale: 1.1, x: -2 }}
           whileTap={{ scale: 0.9, x: -4 }}
           transition={{ 
@@ -97,21 +99,21 @@ export default function CategoryPage() {
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-8 overflow-hidden">
         <div className="w-full max-w-md h-full flex flex-col justify-center space-y-8">
           <div className="text-center">
-            <h1 className="font-serif text-4xl md:text-5xl font-medium text-stone-800 leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-light text-[#1C1C1C] leading-tight tracking-tight">
               {categoryNames[slug] || slug.replace("-", " ")}
             </h1>
           </div>
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <p className="text-xs text-stone-500 text-center font-light">Momento</p>
+              <p className="text-xs text-[#4A4A4A] text-center font-light">Momento</p>
               <MomentSelector value={selectedMoment} onChange={setSelectedMoment} />
             </div>
           </div>
 
           {filteredQuestions.length === 0 ? (
-            <div className="bg-white/80 backdrop-blur-sm border border-stone-200 rounded-3xl px-10 py-16 text-center shadow-sm">
-              <p className="text-lg font-light text-stone-500 leading-relaxed">
+            <div className="bg-white/80 backdrop-blur-sm border border-[#E9F0F7] rounded-3xl px-10 py-16 text-center shadow-sm">
+              <p className="text-lg font-light text-[#4A4A4A] leading-relaxed">
                 No hay preguntas con estos filtros
               </p>
             </div>
@@ -122,18 +124,19 @@ export default function CategoryPage() {
                   {currentQuestion && (
                     <motion.div
                       key={currentQuestion.id}
-                      className="bg-white/80 backdrop-blur-sm border border-stone-200 rounded-3xl px-10 py-16 text-center shadow-sm relative w-full min-h-[280px] flex items-center justify-center"
-                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                      className="bg-white/80 backdrop-blur-sm border border-[#E9F0F7] rounded-3xl px-10 py-16 text-center shadow-sm relative w-full min-h-[280px] flex items-center justify-center"
+                      initial={{ opacity: 0, y: 20, scale: 0.96 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -10, scale: 0.98 }}
-                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                      exit={{ opacity: 0, y: -20, scale: 0.96 }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       <motion.button
                         onClick={handleToggleFavorite}
                         className={`absolute top-4 right-4 p-2 transition-colors ${
                           isFavorite(currentQuestion.id) 
                             ? "text-red-500 hover:text-red-600" 
-                            : "text-stone-400 hover:text-stone-600"
+                            : "text-[#E9F0F7] hover:text-[#5AA9E6]"
                         }`}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
@@ -175,9 +178,16 @@ export default function CategoryPage() {
                           )}
                         </motion.svg>
                       </motion.button>
-                      <p className="text-xl font-light text-stone-700 leading-relaxed tracking-tight">
+                      <motion.p 
+                        key={currentQuestion.id}
+                        className="text-xl font-light text-[#1C1C1C] leading-relaxed tracking-tight"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                      >
                         {currentQuestion.text}
-                      </p>
+                      </motion.p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -186,7 +196,7 @@ export default function CategoryPage() {
               <div className="flex flex-col items-center space-y-4 pt-4 pb-6">
                 <motion.button
                   onClick={handleNext}
-                  className="bg-white/90 backdrop-blur-sm border border-stone-200 rounded-full px-10 py-4 text-base font-light text-stone-700 shadow-sm hover:shadow-md hover:border-stone-300 transition-all duration-300 ease-out min-h-[44px] flex items-center justify-center"
+                  className="bg-[#5AA9E6] text-white rounded-full px-10 py-4 text-base font-light shadow-sm shadow-[#5AA9E6]/20 hover:bg-[#4A99D6] transition-all duration-300 ease-out min-h-[44px] flex items-center justify-center"
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98, y: 0 }}
                   transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}

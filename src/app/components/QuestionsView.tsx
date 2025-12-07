@@ -99,8 +99,8 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
       // Reset transition state después de la animación
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 350);
-    }, 50);
+      }, 650);
+    }, 100);
   };
 
   const handleSwipe = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
@@ -163,7 +163,7 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
         <div className="flex items-center justify-between mb-4">
           <motion.button
             onClick={onBack}
-            className="text-stone-600 text-base font-light hover:text-stone-800 transition-colors p-2 -ml-2 -mt-2 rounded-full hover:bg-stone-100/50 active:bg-stone-200/50"
+            className="text-[#4A4A4A] text-base font-light hover:text-[#1C1C1C] transition-colors p-2 -ml-2 -mt-2 rounded-full hover:bg-[#E9F0F7]/50 active:bg-[#E9F0F7]"
             whileHover={{ scale: 1.1, x: -2 }}
             whileTap={{ scale: 0.9, x: -4 }}
             transition={{ 
@@ -175,7 +175,7 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
             ←
           </motion.button>
           {filteredQuestions.length > 0 && (
-            <div className="text-xs text-stone-400 font-light">
+            <div className="text-xs text-[#4A4A4A] font-light">
               {Math.min(questionIndex, filteredQuestions.length)} / {filteredQuestions.length}
             </div>
           )}
@@ -183,9 +183,9 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
         
         {/* Indicador de progreso minimalista */}
         {filteredQuestions.length > 0 && (
-          <div className="h-0.5 bg-stone-200 rounded-full overflow-hidden">
+          <div className="h-0.5 bg-[#E9F0F7] rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-stone-600 rounded-full"
+              className="h-full bg-[#5AA9E6] rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -203,7 +203,7 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <p className="text-lg font-light text-stone-500 leading-relaxed">
+            <p className="text-lg font-light text-[#4A4A4A] leading-relaxed">
               No questions match these filters
             </p>
           </motion.div>
@@ -245,9 +245,9 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
                     className="bg-white rounded-3xl px-8 py-12 text-center shadow-lg relative min-h-[280px] flex items-center justify-center"
                     initial={{ 
                       opacity: 0, 
-                      y: 40, 
-                      scale: 0.92,
-                      rotateX: -5
+                      y: 20, 
+                      scale: 0.96,
+                      rotateX: -2
                     }}
                     animate={{ 
                       opacity: 1, 
@@ -258,23 +258,24 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
                     }}
                     exit={{ 
                       opacity: 0, 
-                      y: -60, 
-                      scale: 0.88,
-                      rotateX: 5,
+                      y: -20, 
+                      scale: 0.96,
+                      rotateX: 2,
                       transition: {
-                        duration: 0.3,
-                        ease: [0.4, 0, 0.2, 1]
+                        duration: 0.5,
+                        ease: [0.25, 0.1, 0.25, 1]
                       }
                     }}
                     transition={{ 
-                      duration: 0.35,
+                      duration: 0.6,
                       ease: [0.25, 0.1, 0.25, 1],
                       scale: { 
-                        duration: 0.3,
-                        ease: [0.34, 1.56, 0.64, 1]
+                        duration: 0.5,
+                        ease: [0.25, 0.1, 0.25, 1]
                       },
-                      opacity: { duration: 0.25 }
+                      opacity: { duration: 0.5 }
                     }}
+                    whileTap={{ scale: 0.98 }}
                     style={{
                       transformStyle: 'preserve-3d',
                       backfaceVisibility: 'hidden'
@@ -286,7 +287,7 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
                     className={`absolute top-4 right-4 p-2 -mr-2 -mt-2 transition-colors ${
                       isFavorite(currentQuestion.id) 
                         ? "text-red-500 hover:text-red-600" 
-                        : "text-stone-300 hover:text-stone-500"
+                        : "text-[#E9F0F7] hover:text-[#5AA9E6]"
                     }`}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
@@ -329,9 +330,16 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
                     </motion.svg>
                   </motion.button>
                   
-                  <p className="text-2xl font-light text-stone-800 leading-relaxed tracking-tight">
+                  <motion.p 
+                    key={currentQuestion.id}
+                    className="text-2xl font-light text-[#1C1C1C] leading-relaxed tracking-tight"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
                     {currentQuestion.text}
-                  </p>
+                  </motion.p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -345,7 +353,7 @@ export default function QuestionsView({ moment, onBack }: QuestionsViewProps) {
         <div className="flex flex-col items-center space-y-4">
           <motion.button
             onClick={handleNext}
-            className="bg-stone-800 text-white rounded-full px-8 py-4 text-base font-light shadow-sm hover:bg-stone-700 transition-colors duration-200 min-h-[44px] flex items-center justify-center"
+            className="bg-[#5AA9E6] text-white rounded-full px-8 py-4 text-base font-light shadow-sm shadow-[#5AA9E6]/20 hover:bg-[#4A99D6] transition-colors duration-200 min-h-[44px] flex items-center justify-center"
             whileHover={{ scale: 1.02, y: -1 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}

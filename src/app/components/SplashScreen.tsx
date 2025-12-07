@@ -25,7 +25,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center splash-gradient"
       style={{
-        background: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 20%, #FCD34D 40%, #FBBF24 60%, #F59E0B 80%, #D97706 100%)',
+        background: 'linear-gradient(135deg, #5AA9E6 0%, #F9E79F 25%, #F7C6B8 50%, #A8E6CF 75%, #5AA9E6 100%)',
         backgroundSize: '400% 400%',
         animation: 'gradient-shift 15s ease infinite'
       }}
@@ -48,7 +48,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
           ease: [0.25, 0.1, 0.25, 1]
         }}
       >
-        The Question Spot
+        Question Spot
       </motion.h1>
     </motion.div>
   );

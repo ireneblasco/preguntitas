@@ -42,8 +42,10 @@ export default function SillyView({ onBack }: SillyViewProps) {
         }
       }
       setCurrentQuestion(sillyQuestions[nextIndex]);
-      setIsTransitioning(false);
-    }, 400);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 650);
+    }, 100);
   };
 
   const handleToggleFavorite = () => {
@@ -62,7 +64,7 @@ export default function SillyView({ onBack }: SillyViewProps) {
     <div className="w-full max-w-md h-full flex flex-col justify-center space-y-8">
       <motion.button
         onClick={onBack}
-        className="text-stone-600 text-base font-light hover:text-stone-800 transition-colors self-start p-2 -ml-2 rounded-full hover:bg-stone-100/50 active:bg-stone-200/50"
+        className="text-[#4A4A4A] text-base font-light hover:text-[#1C1C1C] transition-colors self-start p-2 -ml-2 rounded-full hover:bg-[#E9F0F7]/50 active:bg-[#E9F0F7]"
         whileHover={{ scale: 1.1, x: -2 }}
         whileTap={{ scale: 0.9, x: -4 }}
         transition={{ 
@@ -80,10 +82,10 @@ export default function SillyView({ onBack }: SillyViewProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        <h1 className="font-serif text-4xl md:text-5xl font-medium text-stone-800 leading-tight tracking-tight mb-2">
+        <h1 className="text-4xl md:text-5xl font-light text-[#1C1C1C] leading-tight tracking-tight mb-2">
           Random ✨
         </h1>
-        <p className="text-stone-500 text-sm font-light">
+        <p className="text-[#4A4A4A] text-sm font-light">
           Random questions, zero pressure
         </p>
       </motion.div>
@@ -94,18 +96,19 @@ export default function SillyView({ onBack }: SillyViewProps) {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentQuestion.id}
-                className="bg-white/80 backdrop-blur-sm border border-stone-200 rounded-3xl px-10 py-16 text-center shadow-sm relative w-full min-h-[280px] flex items-center justify-center"
-                initial={{ opacity: 0, y: 10, scale: 0.98, rotate: -1 }}
+                className="bg-white/80 backdrop-blur-sm border border-[#E9F0F7] rounded-3xl px-10 py-16 text-center shadow-sm relative w-full min-h-[280px] flex items-center justify-center"
+                initial={{ opacity: 0, y: 20, scale: 0.96, rotate: -1 }}
                 animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-                exit={{ opacity: 0, y: -10, scale: 0.98, rotate: 1 }}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                exit={{ opacity: 0, y: -20, scale: 0.96, rotate: 1 }}
+                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                whileTap={{ scale: 0.98 }}
               >
                 <motion.button
                   onClick={handleToggleFavorite}
                   className={`absolute top-4 right-4 p-2 transition-colors ${
                     isFavorite(currentQuestion.id) 
                       ? "text-red-500 hover:text-red-600" 
-                      : "text-stone-400 hover:text-stone-600"
+                      : "text-[#E9F0F7] hover:text-[#5AA9E6]"
                   }`}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
@@ -147,9 +150,16 @@ export default function SillyView({ onBack }: SillyViewProps) {
                     )}
                   </motion.svg>
                 </motion.button>
-                <p className="text-xl font-light text-stone-700 leading-relaxed tracking-tight">
+                <motion.p 
+                  key={currentQuestion.id}
+                  className="text-xl font-light text-[#1C1C1C] leading-relaxed tracking-tight"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                >
                   {currentQuestion.text}
-                </p>
+                </motion.p>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -157,7 +167,7 @@ export default function SillyView({ onBack }: SillyViewProps) {
           <div className="flex flex-col items-center space-y-4 pt-4">
             <motion.button
               onClick={handleNext}
-              className="bg-white/90 backdrop-blur-sm border border-stone-200 rounded-full px-10 py-4 text-base font-light text-stone-700 shadow-sm hover:shadow-md hover:border-stone-300 transition-all duration-300 ease-out min-h-[44px] flex items-center justify-center"
+              className="bg-[#F9E79F] text-[#1C1C1C] rounded-full px-10 py-4 text-base font-light shadow-sm shadow-[#F9E79F]/20 hover:bg-[#F5DF8F] transition-all duration-300 ease-out min-h-[44px] flex items-center justify-center"
               whileHover={{ scale: 1.02, y: -1 }}
               whileTap={{ scale: 0.98, y: 0 }}
               transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
