@@ -14,7 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
-import { questions, MomentType } from '@/data/questions';
+import { useQuestions } from '@/contexts/QuestionsContext';
 import { useFavorites } from '@/utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
 
@@ -22,10 +22,11 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 100;
 
 export default function Questions() {
-  const { category: rawCategory } = useLocalSearchParams<{ category: string }>();
-  const category = typeof rawCategory === 'string' ? decodeURIComponent(rawCategory) : undefined;
+  const { moment: momentParam } = useLocalSearchParams<{ moment?: string }>();
+  const moment = typeof momentParam === 'string' ? momentParam : undefined;
   const router = useRouter();
-  const { favorites, toggleFavorite, isFavorite } = useFavorites();
+  const { questions } = useQuestions();
+  const { toggleFavorite, isFavorite } = useFavorites();
   const lang = usePreferredLanguage();
 
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -35,12 +36,11 @@ export default function Questions() {
   const scale = useSharedValue(1);
 
   const filteredQuestions = useMemo(() => {
-    if (!category) return [];
-    return questions.filter((q) => q.moment.includes(category as MomentType));
-  }, [category]);
+    if (!moment) return [];
+    return questions.filter((q) => q.moment.includes(moment));
+  }, [questions, moment]);
 
   const [shuffledQuestions, setShuffledQuestions] = useState(() => {
-    // Shuffle questions on mount
     return [...filteredQuestions].sort(() => Math.random() - 0.5);
   });
 
@@ -52,6 +52,11 @@ export default function Questions() {
     }
   }, [currentQuestion]);
 
+  useEffect(() => {
+    setShuffledQuestions([...filteredQuestions].sort(() => Math.random() - 0.5));
+    setQuestionIndex(0);
+  }, [filteredQuestions]);
+
   const handleNext = () => {
     if (filteredQuestions.length === 0) return;
     setQuestionIndex((prev) => prev + 1);
@@ -60,7 +65,6 @@ export default function Questions() {
   const handleFavorite = async () => {
     if (currentQuestion) {
       await toggleFavorite(currentQuestion.id);
-      // Haptic feedback could be added here
     }
   };
 
@@ -76,7 +80,6 @@ export default function Questions() {
     })
     .onEnd((event) => {
       if (Math.abs(event.translationX) > SWIPE_THRESHOLD) {
-        // Swipe detected
         translateX.value = withTiming(
           event.translationX > 0 ? SCREEN_WIDTH : -SCREEN_WIDTH,
           { duration: 200 },
@@ -87,7 +90,6 @@ export default function Questions() {
           }
         );
       } else {
-        // Snap back
         translateX.value = withSpring(0, { damping: 15, stiffness: 150 });
         scale.value = withSpring(1, { damping: 15, stiffness: 150 });
       }
@@ -110,9 +112,30 @@ export default function Questions() {
     };
   });
 
-  const progress = filteredQuestions.length > 0
-    ? Math.min(((questionIndex + 1) / filteredQuestions.length) * 100, 100)
-    : 0;
+  const progress =
+    filteredQuestions.length > 0
+      ? Math.min(((questionIndex + 1) / filteredQuestions.length) * 100, 100)
+      : 0;
+
+  if (!moment) {
+    return (
+      <LinearGradient
+        colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
+        style={styles.gradient}
+      >
+        <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+          <View style={styles.header}>
+            <Pressable style={styles.backButton} onPress={() => router.back()}>
+              <Text style={styles.backButtonText}>←</Text>
+            </Pressable>
+          </View>
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>Select a moment from home to start</Text>
+          </View>
+        </SafeAreaView>
+      </LinearGradient>
+    );
+  }
 
   if (filteredQuestions.length === 0) {
     return (
@@ -122,10 +145,10 @@ export default function Questions() {
       >
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
           <View style={styles.header}>
-          <Pressable style={styles.backButton} onPress={() => router.back()}>
-            <Text style={styles.backButtonText}>←</Text>
-          </Pressable>
-        </View>
+            <Pressable style={styles.backButton} onPress={() => router.back()}>
+              <Text style={styles.backButtonText}>←</Text>
+            </Pressable>
+          </View>
           <View style={styles.emptyContainer}>
             <Text style={styles.emptyText}>No questions found for this moment</Text>
           </View>
@@ -141,45 +164,42 @@ export default function Questions() {
     >
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <View style={styles.header}>
-        <Pressable style={styles.backButton} onPress={() => router.back()}>
-          <Text style={styles.backButtonText}>←</Text>
-        </Pressable>
-        <Text style={styles.categoryText}>{category}</Text>
-      </View>
-
-      <View style={styles.progressContainer}>
-        <View style={styles.progressBar}>
-          <View style={[styles.progressFill, { width: `${progress}%` }]} />
+          <Pressable style={styles.backButton} onPress={() => router.back()}>
+            <Text style={styles.backButtonText}>←</Text>
+          </Pressable>
+          <Text style={styles.categoryText}>{moment}</Text>
         </View>
-      </View>
 
-      <View style={styles.cardContainer}>
-        <GestureDetector gesture={pan}>
-          <Animated.View style={[styles.card, animatedCardStyle]}>
-            <Text style={styles.questionText}>
-              {currentQuestion ? getQuestionText(currentQuestion, lang) : ''}
-            </Text>
-            
-            <View style={styles.cardActions}>
-              <Pressable
-                style={styles.favoriteButton}
-                onPress={handleFavorite}
-              >
-                <Text style={styles.favoriteIcon}>
-                  {isFavorite(currentQuestionId) ? '❤️' : '🤍'}
-                </Text>
-              </Pressable>
-            </View>
-          </Animated.View>
-        </GestureDetector>
-      </View>
+        <View style={styles.progressContainer}>
+          <View style={styles.progressBar}>
+            <View style={[styles.progressFill, { width: `${progress}%` }]} />
+          </View>
+        </View>
 
-      <View style={styles.footer}>
-        <Text style={styles.hintText}>Swipe or tap to continue</Text>
-        <Pressable style={styles.nextButton} onPress={handleNext}>
-          <Text style={styles.nextButtonText}>Next</Text>
-        </Pressable>
-      </View>
+        <View style={styles.cardContainer}>
+          <GestureDetector gesture={pan}>
+            <Animated.View style={[styles.card, animatedCardStyle]}>
+              <Text style={styles.questionText}>
+                {currentQuestion ? getQuestionText(currentQuestion, lang) : ''}
+              </Text>
+
+              <View style={styles.cardActions}>
+                <Pressable style={styles.favoriteButton} onPress={handleFavorite}>
+                  <Text style={styles.favoriteIcon}>
+                    {isFavorite(currentQuestionId) ? '❤️' : '🤍'}
+                  </Text>
+                </Pressable>
+              </View>
+            </Animated.View>
+          </GestureDetector>
+        </View>
+
+        <View style={styles.footer}>
+          <Text style={styles.hintText}>Swipe or tap to continue</Text>
+          <Pressable style={styles.nextButton} onPress={handleNext}>
+            <Text style={styles.nextButtonText}>Next</Text>
+          </Pressable>
+        </View>
       </SafeAreaView>
     </LinearGradient>
   );
