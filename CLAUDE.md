@@ -18,10 +18,9 @@ app/                    # Expo Router screens
   _layout.tsx           # Root: fonts, splash, QuestionsProvider, Stack (no header)
   index.tsx             # Splash → onboarding or home
   onboarding.tsx        # First-time intro
-  home.tsx              # Moment selector + Start / Random / Favorites; dev menu
+  home.tsx              # Moment selector + Start / Favorites; dev menu
   questions/[category].tsx   # Swipeable cards for a moment (category = moment type)
   favorites.tsx         # List of favorited questions (swipe to delete)
-  silly.tsx             # Random "Fun / Light" and "Games" questions
 app.config.js           # Loads .env, sets expo.extra.notionApiKey / notionDatabaseId
 components/             # Shared UI (e.g. RotatingCopy)
 constants/              # Colors, typography, spacing
@@ -64,11 +63,10 @@ utils/
 2. **Onboarding** (`app/onboarding.tsx`): Intro; on finish calls `markOnboardingSeen()` and navigates to `/home`.
 3. **Home** (`app/home.tsx`):
    - Uses `useQuestions()` for `momentOptions` and `lastFetchedAt`.
-   - Renders **moment selector** from `momentOptions`; buttons: **Start** → `/questions/[category]`, **Random** → `/silly`, **My favorites** → `/favorites`.
+   - Renders **moment selector** from `momentOptions`; buttons: **Start** → `/questions/[category]`, **My favorites** → `/favorites`.
    - In dev: floating **Dev** button opens dev menu with "Last updated: &lt;date&gt;" or "Using bundled questions", **Fetch questions from Notion**, and **Reset Onboarding**.
 4. **Questions** (`app/questions/[category].tsx`): Uses `useQuestions()` for `questions` and `momentOptions`. `category` = selected moment type; filters by `q.moment.includes(category)`. Swipe or tap to advance; long-press or heart to toggle favorite. Display uses `textEs` (Spanish).
-5. **Silly** (`app/silly.tsx`): Uses `useQuestions()` for `questions`; filters where `moment` includes `"Fun / Light"` or `"Games"`; same swipe/favorite UX.
-6. **Favorites** (`app/favorites.tsx`): Uses `useQuestions()` for `questions`; shows questions whose `id` is in AsyncStorage `favorites`; swipe to remove.
+5. **Favorites** (`app/favorites.tsx`): Uses `useQuestions()` for `questions`; shows questions whose `id` is in AsyncStorage `favorites`; swipe to remove.
 
 ## Data model (in app)
 

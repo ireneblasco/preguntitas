@@ -56,7 +56,6 @@ export default function RootLayout() {
           <Stack.Screen name="home" />
           <Stack.Screen name="questions" />
           <Stack.Screen name="favorites" />
-          <Stack.Screen name="silly" />
         </Stack>
       </QuestionsProvider>
     </GestureHandlerRootView>

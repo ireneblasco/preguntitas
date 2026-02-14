@@ -28,10 +28,6 @@ export default function Home() {
     router.push({ pathname: '/questions', params: { moment: selectedMoment } });
   };
 
-  const handleRandom = () => {
-    router.push('/silly');
-  };
-
   const handleFavorites = () => {
     router.push('/favorites');
   };
@@ -125,17 +121,6 @@ export default function Home() {
             onPress={handleStart}
           >
             <Text style={[styles.buttonText, styles.buttonTextPrimary]}>Start</Text>
-          </Pressable>
-
-          <Pressable
-            style={({ pressed }) => [
-              styles.button,
-              styles.buttonYellow,
-              pressed && styles.buttonPressed,
-            ]}
-            onPress={handleRandom}
-          >
-            <Text style={[styles.buttonText, styles.buttonTextDark]}>Random</Text>
           </Pressable>
 
           <Pressable
@@ -294,9 +279,6 @@ const styles = StyleSheet.create({
   },
   buttonPrimary: {
     backgroundColor: COLORS.accent.primary,
-  },
-  buttonYellow: {
-    backgroundColor: COLORS.splash.yellow,
   },
   buttonPink: {
     backgroundColor: COLORS.accent.secondary,
