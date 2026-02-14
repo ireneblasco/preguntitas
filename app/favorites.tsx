@@ -5,20 +5,21 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
-import { questions } from '@/data/questions';
+import { useQuestions, type Question } from '@/contexts/QuestionsContext';
 import { useFavorites } from '@/utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
 
 export default function Favorites() {
   const router = useRouter();
+  const { questions } = useQuestions();
   const { favorites, removeFavorite, loading } = useFavorites();
   const lang = usePreferredLanguage();
 
   const favoriteQuestions = useMemo(() => {
     return favorites
       .map((id) => questions.find((q) => q.id === id))
-      .filter(Boolean) as typeof questions;
-  }, [favorites]);
+      .filter((q): q is Question => q != null);
+  }, [favorites, questions]);
 
   const renderRightActions = (questionId: string) => {
     return (
@@ -33,7 +34,7 @@ export default function Favorites() {
     );
   };
 
-  const renderItem = ({ item }: { item: typeof questions[0] }) => (
+  const renderItem = ({ item }: { item: Question }) => (
     <Swipeable
       renderRightActions={() => renderRightActions(item.id)}
       overshootRight={false}

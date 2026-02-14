@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -14,31 +14,39 @@ import Animated, {
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
-import { questions } from '@/data/questions';
+import { useQuestions } from '@/contexts/QuestionsContext';
 import { useFavorites } from '@/utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 100;
 
-const sillyQuestions = questions.filter(
-  (q) => q.moment.includes('Fun / Light') || q.moment.includes('Games')
-);
+// Use "Table Talks" moment as the light/fun deck for random mode
+const SILLY_MOMENT = 'Table Talks 🍷';
 
 export default function Silly() {
   const router = useRouter();
+  const { questions } = useQuestions();
   const { toggleFavorite, isFavorite } = useFavorites();
   const lang = usePreferredLanguage();
-  
+
+  const sillyQuestions = useMemo(
+    () => questions.filter((q) => q.moment.includes(SILLY_MOMENT)),
+    [questions]
+  );
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [shuffledQuestions, setShuffledQuestions] = useState(() => {
-    return [...sillyQuestions].sort(() => Math.random() - 0.5);
-  });
-  
+  const [shuffledQuestions, setShuffledQuestions] = useState<typeof sillyQuestions>(() => []);
+
+  useEffect(() => {
+    setShuffledQuestions([...sillyQuestions].sort(() => Math.random() - 0.5));
+    setCurrentQuestionIndex(0);
+  }, [sillyQuestions]);
+
   const translateX = useSharedValue(0);
   const scale = useSharedValue(1);
 
-  const currentQuestion = shuffledQuestions[currentQuestionIndex % shuffledQuestions.length];
+  const currentQuestion = shuffledQuestions[currentQuestionIndex % (shuffledQuestions.length || 1)];
 
   const handleNext = () => {
     if (sillyQuestions.length === 0) return;
