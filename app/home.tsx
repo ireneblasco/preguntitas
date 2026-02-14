@@ -4,19 +4,28 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
-import { MomentType, momentOptions } from '@/data/questions';
+import { useQuestions } from '@/contexts/QuestionsContext';
 import * as onboardingUtils from '@/utils/onboarding';
+
+function formatLastFetched(iso: string | null): string {
+  if (!iso) return 'Using bundled questions';
+  try {
+    const d = new Date(iso);
+    return `Last updated: ${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  } catch {
+    return 'Last updated: ' + iso;
+  }
+}
 
 export default function Home() {
   const router = useRouter();
-  const [selectedMoment, setSelectedMoment] = useState<MomentType>(
-    momentOptions[0]?.id ?? 'Self-Reflection'
-  );
+  const { momentOptions, lastFetchedAt, refetch } = useQuestions();
+  const [selectedMoment, setSelectedMoment] = useState<string>(momentOptions[0]?.id ?? '');
 
   const isDevelopment = __DEV__;
 
   const handleStart = () => {
-    router.push(`/questions/${encodeURIComponent(selectedMoment)}`);
+    router.push({ pathname: '/questions', params: { moment: selectedMoment } });
   };
 
   const handleRandom = () => {
@@ -28,11 +37,30 @@ export default function Home() {
   };
 
   const handleDevMenu = () => {
+    const message = formatLastFetched(lastFetchedAt);
+    const fetchLatest = () => {
+      refetch()
+        .then((fetchedAt) => {
+          if (fetchedAt == null) {
+            Alert.alert('Not configured', 'Add NOTION_API_KEY and NOTION_DATABASE_ID to .env');
+          } else {
+            Alert.alert('Questions updated', formatLastFetched(fetchedAt));
+          }
+        })
+        .catch((e: Error) => {
+          Alert.alert('Error', e?.message ?? 'Fetch failed');
+        });
+    };
+
     if (Platform.OS === 'ios') {
       Alert.alert(
         'Developer Menu',
-        'Choose an action',
+        message,
         [
+          {
+            text: 'Fetch latest questions',
+            onPress: fetchLatest,
+          },
           {
             text: 'Reset Onboarding',
             onPress: async () => {
@@ -40,23 +68,17 @@ export default function Home() {
               router.replace('/');
             },
           },
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
+          { text: 'Cancel', style: 'cancel' },
         ],
         { cancelable: true }
       );
     } else {
-      // Android uses a different Alert style
       Alert.alert(
         'Developer Menu',
-        'Choose an action',
+        message,
         [
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Fetch latest questions', onPress: fetchLatest },
           {
             text: 'Reset Onboarding',
             onPress: async () => {
@@ -86,7 +108,11 @@ export default function Home() {
 
         <View style={styles.selectorContainer}>
           <Text style={styles.label}>What's the moment?</Text>
-          <MomentSelector value={selectedMoment} onChange={setSelectedMoment} />
+          <MomentSelector
+            value={selectedMoment}
+            onChange={setSelectedMoment}
+            momentOptions={momentOptions}
+          />
         </View>
 
         <View style={styles.buttonsContainer}>
@@ -148,9 +174,11 @@ export default function Home() {
 function MomentSelector({
   value,
   onChange,
+  momentOptions,
 }: {
-  value: MomentType;
-  onChange: (value: MomentType) => void;
+  value: string;
+  onChange: (value: string) => void;
+  momentOptions: Array<{ id: string; name: string; emoji: string }>;
 }) {
   return (
     <View style={styles.chipContainer}>
