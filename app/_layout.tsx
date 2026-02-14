@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { useEffect } from 'react';
+import { useCallback, useRef } from 'react';
 import { useFonts } from 'expo-font';
 import {
   PlayfairDisplay_400Regular,
@@ -14,7 +14,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import { QuestionsProvider } from '@/contexts/QuestionsContext';
 
-// Prevent the splash screen from auto-hiding
+// Prevent the splash screen from auto-hiding (avoids "Downloading 100%" staying visible)
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -25,18 +25,25 @@ export default function RootLayout() {
     Inter_700Bold,
   });
 
-  useEffect(() => {
-    if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
+  const appIsReady = fontsLoaded || fontError;
+  const splashHidden = useRef(false);
 
-  if (!fontsLoaded && !fontError) {
+  const onLayoutRootView = useCallback(async () => {
+    if (!appIsReady || splashHidden.current) return;
+    splashHidden.current = true;
+    try {
+      await SplashScreen.hideAsync();
+    } catch (_e) {
+      // ignore if already hidden
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
     return null;
   }
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <GestureHandlerRootView style={styles.container} onLayout={onLayoutRootView}>
       <QuestionsProvider>
         <Stack
           screenOptions={{
