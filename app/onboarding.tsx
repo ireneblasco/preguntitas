@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useState, useRef, useCallback } from 'react';
 import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -88,11 +89,12 @@ export default function Onboarding() {
   return (
     <LinearGradient
       colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
-      style={styles.container}
+      style={styles.gradient}
     >
-      <Pressable style={styles.skipButton} onPress={handleSkip}>
-        <Text style={styles.skipText}>Skip</Text>
-      </Pressable>
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+        <Pressable style={styles.skipButton} onPress={handleSkip}>
+          <Text style={styles.skipText}>Skip</Text>
+        </Pressable>
 
       <FlatList
         ref={flatListRef}
@@ -132,6 +134,7 @@ export default function Onboarding() {
           </Text>
         </Pressable>
       </View>
+      </SafeAreaView>
     </LinearGradient>
   );
 }
@@ -193,6 +196,9 @@ function SwipeVisual() {
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },

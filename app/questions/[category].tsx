@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { useState, useEffect, useMemo } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
@@ -15,22 +16,26 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
 import { questions, MomentType } from '@/data/questions';
 import { useFavorites } from '@/utils/useFavorites';
+import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 100;
 
 export default function Questions() {
-  const { category } = useLocalSearchParams<{ category: string }>();
+  const { category: rawCategory } = useLocalSearchParams<{ category: string }>();
+  const category = typeof rawCategory === 'string' ? decodeURIComponent(rawCategory) : undefined;
   const router = useRouter();
   const { favorites, toggleFavorite, isFavorite } = useFavorites();
-  
+  const lang = usePreferredLanguage();
+
   const [questionIndex, setQuestionIndex] = useState(0);
   const [currentQuestionId, setCurrentQuestionId] = useState<string>('');
-  
+
   const translateX = useSharedValue(0);
   const scale = useSharedValue(1);
 
   const filteredQuestions = useMemo(() => {
+    if (!category) return [];
     return questions.filter((q) => q.moment.includes(category as MomentType));
   }, [category]);
 
@@ -113,16 +118,18 @@ export default function Questions() {
     return (
       <LinearGradient
         colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
-        style={styles.container}
+        style={styles.gradient}
       >
-        <View style={styles.header}>
+        <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+          <View style={styles.header}>
           <Pressable style={styles.backButton} onPress={() => router.back()}>
             <Text style={styles.backButtonText}>←</Text>
           </Pressable>
         </View>
-        <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>No questions found for this moment</Text>
-        </View>
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No questions found for this moment</Text>
+          </View>
+        </SafeAreaView>
       </LinearGradient>
     );
   }
@@ -130,9 +137,10 @@ export default function Questions() {
   return (
     <LinearGradient
       colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
-      style={styles.container}
+      style={styles.gradient}
     >
-      <View style={styles.header}>
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+        <View style={styles.header}>
         <Pressable style={styles.backButton} onPress={() => router.back()}>
           <Text style={styles.backButtonText}>←</Text>
         </Pressable>
@@ -148,7 +156,9 @@ export default function Questions() {
       <View style={styles.cardContainer}>
         <GestureDetector gesture={pan}>
           <Animated.View style={[styles.card, animatedCardStyle]}>
-            <Text style={styles.questionText}>{currentQuestion?.text}</Text>
+            <Text style={styles.questionText}>
+              {currentQuestion ? getQuestionText(currentQuestion, lang) : ''}
+            </Text>
             
             <View style={styles.cardActions}>
               <Pressable
@@ -170,11 +180,15 @@ export default function Questions() {
           <Text style={styles.nextButtonText}>Next</Text>
         </Pressable>
       </View>
+      </SafeAreaView>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },

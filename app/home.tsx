@@ -1,30 +1,22 @@
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert, Platform } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
-import { MomentType } from '@/data/questions';
+import { MomentType, momentOptions } from '@/data/questions';
 import * as onboardingUtils from '@/utils/onboarding';
-
-const momentOptions = [
-  { value: 'date-night', label: '💕 Date night' },
-  { value: 'deep-talk', label: '🌙 Deep talk' },
-  { value: 'chill-night', label: '🍷 Friends night' },
-  { value: 'random-fun', label: '🎲 Fun' },
-  { value: 'too-many-hours-on-road', label: '🏠 Family' },
-  { value: 'birthday', label: '🎂 Birthday' },
-  { value: 'work-icebreakers', label: '💼 Work Icebreakers' },
-  { value: 'reflections', label: '✨ Self reflections' },
-];
 
 export default function Home() {
   const router = useRouter();
-  const [selectedMoment, setSelectedMoment] = useState<MomentType>('chill-night');
+  const [selectedMoment, setSelectedMoment] = useState<MomentType>(
+    momentOptions[0]?.id ?? 'Self-Reflection'
+  );
 
   const isDevelopment = __DEV__;
 
   const handleStart = () => {
-    router.push(`/questions/${selectedMoment}`);
+    router.push(`/questions/${encodeURIComponent(selectedMoment)}`);
   };
 
   const handleRandom = () => {
@@ -80,9 +72,10 @@ export default function Home() {
   return (
     <LinearGradient
       colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
-      style={styles.container}
+      style={styles.gradient}
     >
-      <ScrollView
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+        <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
@@ -134,17 +127,20 @@ export default function Home() {
 
       {/* Floating Dev Button - only visible in development */}
       {isDevelopment && (
-        <Pressable
-          style={({ pressed }) => [
-            styles.devButton,
-            pressed && styles.devButtonPressed,
-          ]}
-          onPress={handleDevMenu}
-        >
-          <Text style={styles.devBadge}>DEV</Text>
-          <Text style={styles.devButtonText}>Dev Menu</Text>
-        </Pressable>
+        <View style={styles.devButtonContainer}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.devButton,
+              pressed && styles.devButtonPressed,
+            ]}
+            onPress={handleDevMenu}
+          >
+            <Text style={styles.devBadge}>DEV</Text>
+            <Text style={styles.devButtonText}>Dev Menu</Text>
+          </Pressable>
+        </View>
       )}
+      </SafeAreaView>
     </LinearGradient>
   );
 }
@@ -159,16 +155,16 @@ function MomentSelector({
   return (
     <View style={styles.chipContainer}>
       {momentOptions.map((option) => {
-        const isSelected = value === option.value;
+        const isSelected = value === option.id;
         return (
           <Pressable
-            key={option.value}
+            key={option.id}
             style={({ pressed }) => [
               styles.chip,
               isSelected ? styles.chipSelected : styles.chipUnselected,
               pressed && styles.chipPressed,
             ]}
-            onPress={() => onChange(option.value as MomentType)}
+            onPress={() => onChange(option.id)}
           >
             <Text
               style={[
@@ -176,7 +172,7 @@ function MomentSelector({
                 isSelected ? styles.chipTextSelected : styles.chipTextUnselected,
               ]}
             >
-              {option.label}
+              {option.emoji} {option.name}
             </Text>
           </Pressable>
         );
@@ -186,6 +182,9 @@ function MomentSelector({
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },
@@ -288,39 +287,39 @@ const styles = StyleSheet.create({
   buttonTextDark: {
     color: COLORS.text.primary,
   },
-  // Dev Button
-  devButton: {
+  // Dev Button (matches preguntitas web: centered pill)
+  devButtonContainer: {
     position: 'absolute',
     bottom: SPACING.md,
     left: 0,
     right: 0,
-    marginHorizontal: 'auto',
-    alignSelf: 'center',
+    alignItems: 'center',
+    zIndex: 100,
+  },
+  devButton: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderWidth: 1,
-    borderColor: COLORS.border.light,
+    borderColor: '#E9F0F7',
     borderRadius: BORDER_RADIUS.full,
     paddingVertical: SPACING.sm,
     paddingHorizontal: SPACING.md,
     ...SHADOWS.sm,
-    gap: SPACING.xs,
-    zIndex: 100,
   },
   devButtonPressed: {
-    opacity: 0.7,
+    opacity: 0.95,
     transform: [{ scale: 0.95 }],
   },
   devBadge: {
     fontSize: 10,
-    fontFamily: FONTS.inter.bold,
-    color: COLORS.text.secondary,
-    letterSpacing: 0.5,
+    fontFamily: FONTS.inter.regular,
+    color: '#4A4A4A',
+    marginRight: 6,
   },
   devButtonText: {
-    fontSize: FONT_SIZES.xs,
+    fontSize: 12,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
+    color: '#4A4A4A',
   },
 });

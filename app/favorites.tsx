@@ -1,24 +1,18 @@
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import { useMemo } from 'react';
 import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
 import { questions } from '@/data/questions';
 import { useFavorites } from '@/utils/useFavorites';
-
-const categoryNames: Record<string, string> = {
-  amigos: 'Amigos',
-  familiares: 'Familiares',
-  cumpleanos: 'Cumpleaños',
-  pareja: 'Pareja',
-  personales: 'Personales',
-  silly: 'Silly',
-};
+import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
 
 export default function Favorites() {
   const router = useRouter();
   const { favorites, removeFavorite, loading } = useFavorites();
+  const lang = usePreferredLanguage();
 
   const favoriteQuestions = useMemo(() => {
     return favorites
@@ -45,9 +39,9 @@ export default function Favorites() {
       overshootRight={false}
     >
       <View style={styles.questionCard}>
-        <Text style={styles.questionText}>{item.text}</Text>
+        <Text style={styles.questionText}>{getQuestionText(item, lang)}</Text>
         <Text style={styles.categoryText}>
-          {categoryNames[item.category] || item.category}
+          {item.moment.join(' • ')}
         </Text>
       </View>
     </Swipeable>
@@ -56,9 +50,10 @@ export default function Favorites() {
   return (
     <LinearGradient
       colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
-      style={styles.container}
+      style={styles.gradient}
     >
-      <View style={styles.header}>
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+        <View style={styles.header}>
         <Pressable style={styles.backButton} onPress={() => router.back()}>
           <Text style={styles.backButtonText}>← Back</Text>
         </Pressable>
@@ -90,11 +85,15 @@ export default function Favorites() {
           />
         )}
       </View>
+      </SafeAreaView>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },
