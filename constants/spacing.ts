@@ -53,10 +53,3 @@ export const SHADOWS = {
     elevation: 12,
   },
 };
-
-export const LAYOUT = {
-  containerPadding: SPACING.md,
-  maxWidth: 768,
-  cardGap: SPACING.md,
-  headerHeight: 60,
-};
