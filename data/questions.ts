@@ -1,365 +1,764 @@
-export type MomentType = "date-night" | "deep-talk" | "chill-night" | "random-fun" | "too-many-hours-on-road" | "birthday" | "work-icebreakers" | "reflections";
+// Auto-generated from Notion on 2026-02-14T21:21:49.893Z
+// Do not edit manually - changes will be overwritten
+
+export type MomentType = "Date Night 🌙" | "Deep Talk 🧠" | "Road Trip 🚗" | "Table Talks 🍷";
+
+export const momentOptions: Array<{
+  id: MomentType;
+  name: string;
+  emoji: string;
+}> = [
+  { id: "Date Night 🌙", name: "Date Night", emoji: "🌙" },
+  { id: "Deep Talk 🧠", name: "Deep Talk", emoji: "🧠" },
+  { id: "Road Trip 🚗", name: "Road Trip", emoji: "🚗" },
+  { id: "Table Talks 🍷", name: "Table Talks", emoji: "🍷" }
+];
 
 export interface Question {
   id: string;
-  text: string;
-  category: string; // Para compatibilidad con favoritos
+  textEn: string;
+  textEs: string;
   moment: MomentType[];
 }
 
 export const questions: Question[] = [
-  // Date night
-  { id: "p1", text: "¿Cuál fue el momento en que supiste que esto era especial?", category: "pareja", moment: ["date-night"] },
-  { id: "p2", text: "¿Qué pequeña cosa que hago te hace sonreír?", category: "pareja", moment: ["date-night"] },
-  { id: "p3", text: "¿Qué sueño compartido te emociona más?", category: "pareja", moment: ["date-night"] },
-  { id: "p4", text: "¿Cómo crees que hemos crecido juntos?", category: "pareja", moment: ["date-night"] },
-  { id: "p5", text: "¿Qué vulnerabilidad mía te ha hecho sentir más cerca de mí?", category: "pareja", moment: ["date-night", "deep-talk"] },
-  { id: "p6", text: "¿Qué conversación necesitamos tener pero hemos evitado?", category: "pareja", moment: ["date-night", "deep-talk"] },
-  { id: "p7", text: "¿Qué manía tienes que no conozco?", category: "pareja", moment: ["date-night"] },
-  { id: "p8", text: "¿Qué es lo más vergonzoso que has hecho por amor o crush?", category: "pareja", moment: ["date-night"] },
-  { id: "p9", text: "¿Alguna vez escribiste un mensaje romántico y lo borraste por miedo?", category: "pareja", moment: ["date-night"] },
-  { id: "p10", text: "¿Cuál es tu mayor \"fail\" intentando ligar?", category: "pareja", moment: ["date-night"] },
-  { id: "p11", text: "¿Cuál sería tu excusa más absurda para besar a alguien?", category: "pareja", moment: ["date-night"] },
-  { id: "p12", text: "¿Qué gesto tonto de otra persona te hace derretirte?", category: "pareja", moment: ["date-night"] },
-  { id: "p13", text: "¿Qué apodo ridículo te pondrías a ti mismo en una relación?", category: "pareja", moment: ["date-night"] },
-  { id: "p14", text: "¿Alguna vez fingiste que te gustaba algo solo por impresionar a alguien?", category: "pareja", moment: ["date-night"] },
-  { id: "p15", text: "¿Alguna vez te enamoraste de alguien que no era tu tipo?", category: "pareja", moment: ["date-night"] },
-  { id: "p16", text: "¿Cuál ha sido tu viaje más memorable?", category: "pareja", moment: ["date-night"] },
-  { id: "p17", text: "¿Cuál ha sido tu mayor logro personal?", category: "pareja", moment: ["date-night"] },
-  { id: "p18", text: "¿Cuál fue el momento más inesperado que terminó siendo increíblemente especial?", category: "pareja", moment: ["date-night"] },
-  { id: "p19", text: "¿Qué harías si solo te quedara un año de vida?", category: "pareja", moment: ["date-night"] },
-  { id: "p20", text: "¿Si pudieras conocer la fecha de tu muerte, querrías saberlo?", category: "pareja", moment: ["date-night"] },
-  { id: "p21", text: "¿Qué consejo te darías a ti mismo hace 10 años?", category: "pareja", moment: ["date-night"] },
-  { id: "p22", text: "¿Si pudieras cambiar una decisión del pasado, cuál sería?", category: "pareja", moment: ["date-night"] },
-  { id: "p23", text: "¿Si pudieras revivir un día de tu vida, ¿cuál sería?", category: "pareja", moment: ["date-night"] },
-  { id: "p24", text: "¿Qué persona te ha marcado más en la vida?", category: "pareja", moment: ["date-night"] },
-  { id: "p25", text: "¿Cuál es el mejor consejo que te han dado?", category: "pareja", moment: ["date-night"] },
-  { id: "p26", text: "¿Cuál es tu mayor sueño?", category: "pareja", moment: ["date-night"] },
-  { id: "p27", text: "¿Cuál fue tu primera impresión sobre mí?", category: "pareja", moment: ["date-night"] },
-  { id: "p28", text: "¿Cuál es el \"no\" que más te ha dolido?", category: "pareja", moment: ["date-night"] },
-  { id: "p29", text: "¿De qué podrías estar hablando durante 3 horas?", category: "pareja", moment: ["date-night"] },
-  { id: "p30", text: "¿Cómo sabes que estás enamorado?", category: "pareja", moment: ["date-night"] },
-  { id: "p31", text: "¿Cuál fue la última vez que te sorprendiste de ti mismo?", category: "pareja", moment: ["date-night"] },
-  { id: "p32", text: "¿A quién llamas cuando te quieres desahogar?", category: "pareja", moment: ["date-night"] },
-  { id: "p33", text: "¿Qué harías si te encontraras con tu versión de 80 años?", category: "pareja", moment: ["date-night"] },
-  { id: "p34", text: "¿Cuál es el cumplido que más te han repetido?", category: "pareja", moment: ["date-night"] },
-  { id: "p35", text: "¿Crees que el amor verdadero solo ocurre una vez en la vida?", category: "pareja", moment: ["date-night"] },
-  { id: "p36", text: "¿El destino está escrito o se construye día a día?", category: "pareja", moment: ["date-night"] },
-  { id: "p37", text: "¿Prefieres ser recordado por tus logros o por cómo hiciste sentir a los demás?", category: "pareja", moment: ["date-night"] },
-  { id: "p38", text: "¿Crees que es mejor vivir una vida intensa pero breve o una vida larga y tranquila?", category: "pareja", moment: ["date-night"] },
-  { id: "p39", text: "¿Qué pesa más: el arrepentimiento por lo que hiciste o la nostalgia por lo que no intentaste?", category: "pareja", moment: ["date-night"] },
-  { id: "p40", text: "¿Qué es más difícil: perdonar a alguien o perdonarte a ti mismo?", category: "pareja", moment: ["date-night"] },
-  { id: "p41", text: "¿Qué crees que pesa más en la vida: la suerte o el esfuerzo?", category: "pareja", moment: ["date-night"] },
-  { id: "p42", text: "¿Qué encuentras atractivo/a que otros podrían considerar inusual?", category: "pareja", moment: ["date-night"] },
-  { id: "p43", text: "¿Cuál es tu mayor preocupación sobre el futuro?", category: "pareja", moment: ["date-night"] },
-  
-  // Deep talk
-  { id: "dt1", text: "¿Qué miedo compartirías solo conmigo?", category: "amigos", moment: ["deep-talk"] },
-  { id: "dt2", text: "¿Cómo crees que nuestra amistad nos ha transformado?", category: "amigos", moment: ["deep-talk"] },
-  { id: "dt3", text: "¿Qué conversación familiar nunca has tenido pero te gustaría tener?", category: "familiares", moment: ["deep-talk"] },
-  { id: "dt4", text: "¿Qué verdad sobre ti mismo has aceptado recientemente?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt5", text: "¿Qué conversación contigo mismo necesitas tener?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt6", text: "¿Qué momento juntos te cambió la perspectiva sobre algo?", category: "amigos", moment: ["deep-talk"] },
-  { id: "dt7", text: "¿Qué le dirías a tu yo de 12 años?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt8", text: "¿Qué cosa antes te preocupaba mucho y ahora ni la piensas?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt9", text: "¿Cuál fue algo que te daba miedo y aun así lo hiciste?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt10", text: "¿Quién es la persona de tu familia con la que más conectas?", category: "familiares", moment: ["deep-talk"] },
-  { id: "dt11", text: "¿Cuál es todavía tu mayor complejo?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt12", text: "¿Cómo te imaginas dentro de 10 años? ¿y dentro de 20?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt13", text: "¿Qué recuerdo de tu infancia te hace sonreír siempre?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt14", text: "¿Cuál ha sido el momento más feliz de tu vida hasta ahora?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt15", text: "¿Qué error del pasado te enseñó más que cualquier acierto?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt16", text: "¿Cuál ha sido la lección más dura que aprendiste hasta ahora?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt17", text: "¿Qué miedo te gustaría superar este año?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt18", text: "¿Qué sueño has tenido desde pequeño y aún persigues?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt19", text: "¿Qué hábito tuyo te gustaría cambiar y por qué?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt20", text: "¿Cuál fue la situación más vergonzosa que recuerdas?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt21", text: "¿Qué persona te ha influido más en la forma en que eres hoy?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt22", text: "¿Cuál es el recuerdo más doloroso que aún te marca?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt23", text: "¿Qué momento de tu vida te hizo sentir más valiente?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt24", text: "¿Qué regalo de la vida valoras más que nada?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt25", text: "¿Qué decisión que tomaste cambió tu vida por completo?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt26", text: "¿Qué parte de tu personalidad aprecias más?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt27", text: "¿Qué relación con alguien cercano te gustaría mejorar?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt28", text: "¿Qué creencia o idea tuya cambió radicalmente con los años?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt29", text: "¿Cuál fue tu mayor logro hasta ahora?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt30", text: "¿Cuál ha sido tu mayor fracaso y qué aprendiste de él?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt31", text: "¿Qué hábito de tu infancia sigues manteniendo hoy?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt32", text: "¿Cuál es tu miedo más recurrente y cómo lo enfrentas?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt33", text: "¿Qué cosa pequeña te hace sentir profundamente feliz?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt34", text: "¿Qué consejo darías a alguien que atraviesa lo que tú viviste?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt35", text: "¿Qué momento de tu vida te hubiera gustado grabar en cámara lenta?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt36", text: "¿Qué persona te sorprendió positivamente y por qué?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt37", text: "¿Qué experiencia te hizo perder la inocencia?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt38", text: "¿Qué recuerdo te hace reír aunque sea doloroso?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt39", text: "¿Cuál es tu mayor deseo para los próximos cinco años?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt40", text: "¿Qué aspecto de ti mismo/a quisieras que los demás conocieran más?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt41", text: "¿Cuál fue tu primera gran decepción y cómo la superaste?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt42", text: "¿Qué experiencia te hizo sentirte orgulloso de ti mismo?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt43", text: "¿Cuál es tu recuerdo más nostálgico?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt44", text: "¿Qué decisión difícil tomaste y te cambió para mejor?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt45", text: "¿Qué hábito de tu familia sigues practicando sin darte cuenta?", category: "familiares", moment: ["deep-talk"] },
-  { id: "dt46", text: "¿Qué sueño que tuviste de niño/a olvidaste y ahora recuerdas?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt47", text: "¿Qué momento te hizo sentir realmente comprendido?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt48", text: "¿Qué lugar o experiencia te hizo sentir en paz?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt49", text: "¿Cuál es la pregunta que más te cuesta responder sobre ti mismo?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt50", text: "¿Qué pensamiento recurrente te acompaña desde la infancia?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt51", text: "¿Qué persona extraña o inesperada marcó tu vida?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt52", text: "¿Cuál fue tu primera gran lección sobre la amistad?", category: "amigos", moment: ["deep-talk"] },
-  { id: "dt53", text: "¿Qué te hubiera gustado hacer diferente en tu adolescencia?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt54", text: "¿Cuál es tu mayor orgullo secreto que casi nadie conoce?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt55", text: "¿Qué sueño que parecía imposible lograste hacer realidad?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt56", text: "¿Qué te da miedo que suceda y aún así quieres intentarlo?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt57", text: "¿Qué opinas del destino?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt58", text: "¿Crees que la gente es buena por naturaleza?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt59", text: "¿Qué valor consideras el más importante en una persona?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt60", text: "¿Si pudieras borrar un recuerdo, cuál sería?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt61", text: "¿Cuál es tu unpopular opinion?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt62", text: "¿Cuál es el mejor invento de la historia?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt63", text: "¿Cuál crees que es el mayor problema del mundo actual?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt64", text: "¿Es ético comer carne en la actualidad?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt65", text: "¿Debería eliminarse la pena de muerte en todos los países?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt66", text: "¿Deberían abolirse las monarquías en los países que aún las tienen?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt67", text: "¿Deberían los países permitir la inmigración sin restricciones?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt68", text: "¿Qué te inspira a seguir adelante en momentos difíciles?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt69", text: "¿Cuál es tu mayor miedo?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt70", text: "¿Qué cosa crees que no valoras lo suficiente en tu día a día?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt71", text: "¿Qué es lo que, aun teniendo miedo, has hecho?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt72", text: "¿Cuál es la cosa que crees que todas las personas deberían experimentar?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt73", text: "¿Qué solía hacerte feliz que ya no?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt74", text: "¿Si el dinero no existiera, ¿qué harías?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt75", text: "¿Qué idea equivocada crees que la gente tiene sobre ti?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt76", text: "¿Qué injusticia te afecta más emocionalmente?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt77", text: "¿Qué hábito has adoptado que ha cambiado positivamente tu vida?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt78", text: "¿Qué aspecto de tu personalidad has aprendido a aceptar con el tiempo?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt79", text: "¿Qué crees que te falta aprender para sentirte más completo?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt80", text: "¿Qué cosa te resulta más difícil expresar en palabras?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt81", text: "¿Cómo manejas tus momentos de ansiedad o tristeza?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt82", text: "¿Qué pequeño logro personal valoras más que los demás podrían no notar?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt83", text: "¿Crees que las personas realmente cambian o simplemente se adaptan?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt84", text: "¿Qué crees que olvidamos demasiado rápido en la vida diaria?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt85", text: "¿Qué frase te repites cuando necesitas motivación?", category: "personales", moment: ["deep-talk", "reflections"] },
-  { id: "dt86", text: "¿Crees que la gente es más feliz cuando sigue sus pasiones o cuando encuentra estabilidad?", category: "personales", moment: ["deep-talk"] },
-  { id: "dt87", text: "¿Crees que se aprende más del fracaso o del éxito?", category: "personales", moment: ["deep-talk"] },
-  
-  // Chill night
-  { id: "cn1", text: "¿Cuál es tu recuerdo más divertido de nuestra amistad?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn2", text: "¿Qué canción te hace pensar en mí?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn3", text: "¿Cuál es tu comida favorita para compartir?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn4", text: "¿Qué admiras más de nuestra amistad?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn5", text: "¿Cuál es tu tradición familiar favorita?", category: "familiares", moment: ["chill-night"] },
-  { id: "cn6", text: "¿Qué receta familiar te gustaría que nunca se perdiera?", category: "familiares", moment: ["chill-night"] },
-  { id: "cn7", text: "¿Cuál fue tu mayor metedura de pata en público?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn8", text: "¿Cuál es el lugar más extraño donde has dormido?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn9", text: "¿Cuál fue el objeto más raro que encontraste en casa de tus abuelos?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn10", text: "Si fueras a un concurso de talentos, ¿qué harías para sorprender?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn11", text: "¿Qué serie has visto más veces?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn12", text: "¿Qué objeto de tu casa se convertiría en un arma letal en un apocalipsis zombie?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn13", text: "¿Qué sería más incómodo: que alguien te llame por el nombre equivocado toda una cena o que te digan \"nos conocemos\" y no recuerdes de nada?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn14", text: "¿Cuál es el peor error que has cometido al enviar un mensaje?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn15", text: "¿Qué cosa absurda te da miedo sin explicación lógica?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn16", text: "¿Cuál es el lugar más raro en el que te has quedado dormido?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn17", text: "¿Cuál fue tu juguete favorito de niño?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn18", text: "¿Cuál fue tu mayor travesura de adolescente?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn19", text: "¿Qué recuerdo te hace reír siempre que lo recuerdas?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn20", text: "Defíname con 3 palabras.", category: "amigos", moment: ["chill-night"] },
-  { id: "cn21", text: "¿Qué es lo último que has hecho por primera vez?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn22", text: "¿Qué solías odiar que ya no?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn23", text: "¿Qué cosa rara te encanta hacer?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn24", text: "¿Qué es lo más aleatorio que llevas en tu bolso/mochila?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn25", text: "Si pudieras añadir un nuevo feriado nacional, ¿qué se celebraría?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn26", text: "¿Qué experiencia reciente te hizo sentir viejo/a?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn27", text: "¿Cuál es tu mayor problema de primer mundo?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn28", text: "¿Quién fue la última persona a la que llamaste o le enviaste un mensaje?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn29", text: "Si tuvieras que ponerte un nuevo nombre, ¿cuál elegirías?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn30", text: "¿Quién es tu mejor amigo, y por qué?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn31", text: "¿Qué role eres en tu grupo de amigos?", category: "amigos", moment: ["chill-night"] },
-  { id: "cn32", text: "Si todas las personas del mundo fuesen como tú, ¿cuál sería el mayor problema de este mundo?", category: "amigos", moment: ["chill-night"] },
-  
-  // Random / fun
-  { id: "rf1", text: "Si fueras un sándwich, ¿qué tipo de sándwich serías y por qué?", category: "silly", moment: ["random-fun"] },
-  { id: "rf2", text: "¿Qué superpoder inútil elegirías tener?", category: "silly", moment: ["random-fun"] },
-  { id: "rf3", text: "Si pudieras tener una conversación con cualquier animal, ¿cuál sería y qué le preguntarías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf4", text: "¿Qué objeto de tu casa tiene la historia más rara?", category: "silly", moment: ["random-fun"] },
-  { id: "rf5", text: "Si tu vida fuera una película, ¿qué actor te interpretaría?", category: "silly", moment: ["random-fun"] },
-  { id: "rf6", text: "¿Cuál es la cosa más aleatoria que has hecho esta semana?", category: "silly", moment: ["random-fun"] },
-  { id: "rf7", text: "Si pudieras cambiar una regla de la física, ¿cuál sería?", category: "silly", moment: ["random-fun"] },
-  { id: "rf8", text: "¿Qué comida crearías si fueras chef por un día?", category: "silly", moment: ["random-fun"] },
-  { id: "rf9", text: "Si fueras un vegetal, ¿cuál serías y por qué?", category: "silly", moment: ["random-fun"] },
-  { id: "rf10", text: "¿Qué superpoder inútil elegirías solo para molestar a la gente?", category: "silly", moment: ["random-fun"] },
-  { id: "rf11", text: "¿Cuál es la excusa más ridícula que has usado para no ir a un plan?", category: "silly", moment: ["random-fun"] },
-  { id: "rf12", text: "¿Qué objeto cotidiano te gustaría que hablara y qué diría?", category: "silly", moment: ["random-fun"] },
-  { id: "rf13", text: "¿Cuál es el peor consejo que te han dado y que seguiste igual?", category: "silly", moment: ["random-fun"] },
-  { id: "rf14", text: "¿Cuál sería el peor trabajo del mundo y por qué lo aceptarías igual?", category: "silly", moment: ["random-fun"] },
-  { id: "rf15", text: "¿Qué mentira ridícula has contado solo para impresionar a alguien?", category: "silly", moment: ["random-fun"] },
-  { id: "rf16", text: "¿Qué combinación de comida asquerosa probarías solo por diversión?", category: "silly", moment: ["random-fun"] },
-  { id: "rf17", text: "¿Cuál es el emoji que más usas y que más te avergüenza?", category: "silly", moment: ["random-fun"] },
-  { id: "rf18", text: "¿Qué objeto inútil comprarías solo porque es \"cool\"?", category: "silly", moment: ["random-fun"] },
-  { id: "rf19", text: "¿Qué harías si fueras presidente por un día solo para molestar al mundo?", category: "silly", moment: ["random-fun"] },
-  { id: "rf20", text: "¿Cuál es la cosa más tonta que te hace llorar de risa?", category: "silly", moment: ["random-fun"] },
-  { id: "rf21", text: "¿Qué sería más aterrador: hablar con plantas o con tu tostadora?", category: "silly", moment: ["random-fun"] },
-  { id: "rf22", text: "¿Qué hábito ridículo tienes que nadie sospecha?", category: "silly", moment: ["random-fun"] },
-  { id: "rf23", text: "¿Qué palabra inventarías para confundir a todo el mundo?", category: "silly", moment: ["random-fun"] },
-  { id: "rf24", text: "¿Qué comida de microondas crees que merece un premio Nobel?", category: "silly", moment: ["random-fun"] },
-  { id: "rf25", text: "¿Qué villano de película sería tu compañero de piso?", category: "silly", moment: ["random-fun"] },
-  { id: "rf26", text: "Si tuvieras que reemplazar tu nariz por un objeto, ¿qué elegirías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf27", text: "¿Qué emoji describiría tu vida amorosa perfectamente?", category: "silly", moment: ["random-fun"] },
-  { id: "rf28", text: "Si fueras un personaje de videojuego inútil, ¿qué harías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf29", text: "¿Qué invento absurdo comprarías sin pensarlo dos veces?", category: "silly", moment: ["random-fun"] },
-  { id: "rf30", text: "¿Cuál es la excusa más ridícula que has usado para no hacer deporte?", category: "silly", moment: ["random-fun"] },
-  { id: "rf31", text: "Si fueras un animal absurdo, ¿cuál serías y qué harías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf32", text: "¿Cuál sería tu apodo de broma entre amigos y por qué?", category: "silly", moment: ["random-fun"] },
-  { id: "rf33", text: "¿Qué frase motivacional absurda colgarías en tu pared solo para reírte?", category: "silly", moment: ["random-fun"] },
-  { id: "rf34", text: "¿Qué objeto cotidiano sería tu peor enemigo?", category: "silly", moment: ["random-fun"] },
-  { id: "rf35", text: "Si pudieras tener un talento inútil, ¿cuál sería?", category: "silly", moment: ["random-fun"] },
-  { id: "rf36", text: "¿Cuál es la peor película que amas en secreto?", category: "silly", moment: ["random-fun"] },
-  { id: "rf37", text: "Si fueras un electrodoméstico, ¿cuál serías y por qué?", category: "silly", moment: ["random-fun"] },
-  { id: "rf38", text: "¿Qué invento ridículo te describiría perfectamente como persona?", category: "silly", moment: ["random-fun"] },
-  { id: "rf39", text: "¿Qué momento ridículo de tu adolescencia te sigue dando vergüenza?", category: "silly", moment: ["random-fun"] },
-  { id: "rf40", text: "¿Alguna vez enviaste un mensaje vergonzoso al contacto equivocado?", category: "silly", moment: ["random-fun"] },
-  { id: "rf41", text: "¿Alguna vez fingiste saber algo que no tenías ni idea y te pillaron?", category: "silly", moment: ["random-fun"] },
-  { id: "rf42", text: "¿Cuál es tu olor favorito?", category: "silly", moment: ["random-fun"] },
-  { id: "rf43", text: "Si pudieras ser un momento de la semana, ¿cuál serías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf44", text: "Si tuvieras que vivir en una estación del año permanente, ¿en cuál vivirías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf45", text: "¿Qué superpoder elegirías si solo pudieras usarlo una vez al mes?", category: "silly", moment: ["random-fun"] },
-  { id: "rf46", text: "¿Qué personaje de dibujos animados te representa mejor?", category: "silly", moment: ["random-fun"] },
-  { id: "rf47", text: "Si pudieras tener un animal exótico como mascota, ¿cuál sería?", category: "silly", moment: ["random-fun"] },
-  { id: "rf48", text: "Si fueras un emoji, ¿cuál serías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf49", text: "¿Qué inventarías si tuvieras un millón de dólares?", category: "silly", moment: ["random-fun"] },
-  { id: "rf50", text: "¿Qué palabra te define mejor?", category: "silly", moment: ["random-fun"] },
-  { id: "rf51", text: "Si pudieras ser un animal, ¿cuál serías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf52", text: "¿Has tenido alguna experiencia paranormal?", category: "silly", moment: ["random-fun"] },
-  { id: "rf53", text: "¿Qué pequeño detalle de tu ciudad natal siempre recuerdas con cariño?", category: "silly", moment: ["random-fun"] },
-  { id: "rf54", text: "¿Qué cosa absurda creías de pequeño que resultó no ser verdad?", category: "silly", moment: ["random-fun"] },
-  { id: "rf55", text: "¿Cuál es tu película favorita para ver en bucle?", category: "silly", moment: ["random-fun"] },
-  { id: "rf56", text: "¿Prefieres un buen libro o una buena película?", category: "silly", moment: ["random-fun"] },
-  { id: "rf57", text: "¿Qué canción te levanta el ánimo al instante?", category: "silly", moment: ["random-fun"] },
-  { id: "rf58", text: "¿Cuál es tu plato de comida reconfortante?", category: "silly", moment: ["random-fun"] },
-  { id: "rf59", text: "Si fueras un electrodoméstico, ¿cuál serías y por qué?", category: "silly", moment: ["random-fun"] },
-  { id: "rf60", text: "Si pudieras hablar con los animales por un día, ¿qué les preguntarías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf61", text: "Si solo pudieras comer un color de alimentos por el resto de tu vida, ¿cuál elegirías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf62", text: "Si pudieras intercambiar tu vida con un famoso por un día, ¿a quién elegirías y qué harías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf63", text: "Si fueras una aplicación del móvil, ¿cuál serías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf64", text: "Si tuvieras que elegir entre hablar en verso o cantar todo lo que dices, ¿qué elegirías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf65", text: "Si pudieras tener un talento instantáneo, ¿cuál sería?", category: "silly", moment: ["random-fun"] },
-  { id: "rf66", text: "Si fueras un personaje de ficción, ¿quién serías?", category: "silly", moment: ["random-fun"] },
-  { id: "rf67", text: "Si pudieras aprender cualquier idioma al instante, ¿cuál sería?", category: "silly", moment: ["random-fun"] },
-  { id: "rf68", text: "Si tuvieras la oportunidad de cumplir un deseo para otra persona, ¿cuál sería?", category: "silly", moment: ["random-fun"] },
-  { id: "rf69", text: "¿Cuál es tu siguiente destino o país que te gustaría visitar?", category: "silly", moment: ["random-fun"] },
-  { id: "rf70", text: "Una canción, una película, un libro.", category: "silly", moment: ["random-fun"] },
-  { id: "rf71", text: "Si pudieras ser el CEO de cualquier empresa existente, ¿cuál elegirías?", category: "silly", moment: ["random-fun"] },
-  
-  // Too many hours on the road
-  { id: "tr1", text: "¿Qué lugar te ha cambiado más?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr2", text: "¿Cuál es tu mejor recuerdo de viaje?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr3", text: "¿Qué descubriste sobre ti mismo en tu último viaje?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr4", text: "¿Cuál es el lugar más inesperado donde has tenido una buena conversación?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr5", text: "¿Qué canción de viaje te trae los mejores recuerdos?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr6", text: "¿Qué es lo que más aprecias de tus amigos?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr7", text: "¿Cuál fue el mejor regalo que te han dado?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr8", text: "¿Cuál fue tu primer trabajo?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr9", text: "¿Qué es algo que tenías pensado hacer este año y al final no has hecho?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr10", text: "¿Cuál es tu recuerdo más feliz de este año?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr11", text: "¿Quién en tu familia te ha influido más en tu vida?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr12", text: "¿Quién es tu miembro de familia favorito y por qué?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr13", text: "¿Qué habilidad crees que has heredado de tus padres?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr14", text: "¿Cuál es tu comida casera favorita?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  { id: "tr15", text: "¿Qué querías ser cuando eras pequeño?", category: "amigos", moment: ["too-many-hours-on-road"] },
-  
-  // Birthday
-  { id: "bd1", text: "¿Cuál es tu recuerdo de cumpleaños favorito?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd2", text: "¿Qué regalo te hizo más feliz?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd3", text: "¿Qué lección de vida has aprendido este año?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd4", text: "¿Qué momento del último año te cambió?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd5", text: "¿Qué sueño quieres cumplir este año?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd6", text: "¿Qué cualidad tuya has descubierto recientemente?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd7", text: "¿Qué cosa que antes odiabas ahora te encanta?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd8", text: "Si pudieras tener un talento instantáneo, ¿cuál sería?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd9", text: "Si pudieras revivir un día de tu vida, ¿cuál sería?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd10", text: "¿Qué cosa pequeña te hace feliz sin importar el día?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd11", text: "¿Qué es lo último que has hecho por primera vez?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd12", text: "Si tuvieras la oportunidad de cumplir un deseo para otra persona, ¿cuál sería?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd13", text: "¿Cuál es tu siguiente destino o país que te gustaría visitar?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd14", text: "¿Cuál es tu recuerdo más feliz de este año?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd15", text: "Si el dinero no existiera, ¿qué harías?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd16", text: "¿Cuál es el cumplido que más te han repetido?", category: "cumpleanos", moment: ["birthday"] },
-  { id: "bd17", text: "¿Cuál es la mejor parte de tu día?", category: "cumpleanos", moment: ["birthday"] },
-  
-  // Work Icebreakers
-  { id: "wi1", text: "¿Qué proyecto te ha hecho sentir más orgulloso?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi2", text: "¿Qué valoras más de nuestro equipo?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi3", text: "¿Qué aprendiste de un error profesional?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi4", text: "¿Qué hábito de trabajo te ha cambiado la vida?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi5", text: "¿Cuál es tu mejor momento de colaboración?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi6", text: "¿Qué inventarías si tuvieras un millón de dólares?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi7", text: "Si fueras a un concurso de talentos, ¿qué harías para sorprender?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi8", text: "Si pudieras intercambiar tu vida con un famoso por un día, ¿a quién elegirías y qué harías?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi9", text: "Si fueras una aplicación del móvil, ¿cuál serías?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi10", text: "¿Cuál fue tu primer trabajo?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi11", text: "Si pudieras aprender cualquier idioma al instante, ¿cuál sería?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi12", text: "¿Cuál es tu unpopular opinion?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi13", text: "¿Cuál es el mejor invento de la historia?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi14", text: "Defíname con 3 palabras.", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi15", text: "¿De qué podrías estar hablando durante 3 horas?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi16", text: "¿Cuál es tu siguiente destino o país que te gustaría visitar?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi17", text: "Una canción, una película, un libro.", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi18", text: "¿Qué es lo más difícil de tu trabajo?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi19", text: "¿Qué es lo más aleatorio que llevas en tu bolso/mochila?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi20", text: "¿Cuál es tu picoteo entre horas favorito?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi21", text: "Si pudieras ser el CEO de cualquier empresa existente, ¿cuál elegirías?", category: "amigos", moment: ["work-icebreakers"] },
-  { id: "wi22", text: "¿Es más difícil hacer ejercicio o comer sano?", category: "amigos", moment: ["work-icebreakers"] },
-  
-  // Reflections
-  { id: "by1", text: "¿Qué te hace sentir más tú mismo?", category: "personales", moment: ["reflections"] },
-  { id: "by2", text: "¿Qué pequeño placer te da más felicidad?", category: "personales", moment: ["reflections"] },
-  { id: "by3", text: "¿Qué decisión reciente te ha hecho sentir orgulloso?", category: "personales", moment: ["reflections"] },
-  { id: "by4", text: "¿Qué miedo has superado este año?", category: "personales", moment: ["reflections"] },
-  { id: "by5", text: "¿Qué rutina te ayuda a reconectar contigo mismo?", category: "personales", moment: ["reflections"] },
-  { id: "by6", text: "¿Qué descubriste sobre ti mismo esta semana?", category: "personales", moment: ["reflections"] },
-  { id: "by7", text: "¿Qué desafío profesional te ha hecho crecer más?", category: "amigos", moment: ["reflections"] },
-  { id: "by8", text: "¿Cómo has cambiado tu perspectiva sobre el trabajo?", category: "amigos", moment: ["reflections"] },
-  { id: "by9", text: "¿Qué harías si solo te quedara un año de vida?", category: "personales", moment: ["reflections"] },
-  { id: "by10", text: "¿Si pudieras conocer la fecha de tu muerte, querrías saberlo?", category: "personales", moment: ["reflections"] },
-  { id: "by11", text: "¿Si pudieras borrar un recuerdo, cuál sería?", category: "personales", moment: ["reflections"] },
-  { id: "by12", text: "¿Qué consejo te darías a ti mismo hace 10 años?", category: "personales", moment: ["reflections"] },
-  { id: "by13", text: "¿Si pudieras cambiar una decisión del pasado, cuál sería?", category: "personales", moment: ["reflections"] },
-  { id: "by14", text: "¿Si pudieras revivir un día de tu vida, ¿cuál sería?", category: "personales", moment: ["reflections"] },
-  { id: "by15", text: "¿Qué cosa que antes odiabas ahora te encanta?", category: "personales", moment: ["reflections"] },
-  { id: "by16", text: "¿Cuál es tu mayor reto en este momento?", category: "personales", moment: ["reflections"] },
-  { id: "by17", text: "¿Cuál fue la última vez que te sorprendiste de ti mismo?", category: "personales", moment: ["reflections"] },
-  { id: "by18", text: "¿Qué hábito has adoptado que ha cambiado positivamente tu vida?", category: "personales", moment: ["reflections"] },
-  { id: "by19", text: "¿Qué aspecto de tu personalidad has aprendido a aceptar con el tiempo?", category: "personales", moment: ["reflections"] },
-  { id: "by20", text: "¿Qué crees que te falta aprender para sentirte más completo?", category: "personales", moment: ["reflections"] },
-  { id: "by21", text: "¿Qué cosa te resulta más difícil expresar en palabras?", category: "personales", moment: ["reflections"] },
-  { id: "by22", text: "¿Cómo manejas tus momentos de ansiedad o tristeza?", category: "personales", moment: ["reflections"] },
-  { id: "by23", text: "¿Qué pequeño logro personal valoras más que los demás podrían no notar?", category: "personales", moment: ["reflections"] },
-  { id: "by24", text: "¿Cuál es el \"no\" que más te ha dolido?", category: "personales", moment: ["reflections"] },
-  { id: "by25", text: "¿Qué es algo que tenías pensado hacer este año y al final no has hecho?", category: "personales", moment: ["reflections"] },
-  { id: "by26", text: "¿Qué es lo último por lo que has llorado?", category: "personales", moment: ["reflections"] },
-  { id: "by27", text: "¿Qué solía hacerte feliz que ya no?", category: "personales", moment: ["reflections"] },
-  { id: "by28", text: "¿Qué solías odiar que ya no?", category: "personales", moment: ["reflections"] },
-  { id: "by29", text: "¿Cuál es tu mayor preocupación sobre el futuro?", category: "personales", moment: ["reflections"] },
-  { id: "by30", text: "¿Qué frase te repites cuando necesitas motivación?", category: "personales", moment: ["reflections"] },
-  { id: "by31", text: "¿Qué crees que olvidamos demasiado rápido en la vida diaria?", category: "personales", moment: ["reflections"] },
-  { id: "by32", text: "¿Crees que las personas realmente cambian o simplemente se adaptan?", category: "personales", moment: ["reflections"] },
+  {
+    "id": "ID-156",
+    "textEn": "What is the greatest accomplishment of your life?",
+    "textEs": "¿Cuál es el logro más grande de tu vida?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-157",
+    "textEn": "What is something you would like to do but are too scared to try?",
+    "textEs": "¿Qué es algo que te gustaría hacer pero tienes demasiado miedo de intentarlo?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-120",
+    "textEn": "Have you ever seen something you cannot explain?",
+    "textEs": "¿Alguna vez has visto algo que no puedes explicar?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-142",
+    "textEn": "What characteristics do you admire most in others?",
+    "textEs": "¿Qué características admiras más en los demás?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-30",
+    "textEn": "What or who inspires you to be a better person?",
+    "textEs": "¿Qué o quién te inspira a ser una mejor persona?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-24",
+    "textEn": "How much money would make you happy?",
+    "textEs": "¿Cuánto dinero te haría feliz?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-108",
+    "textEn": "What do you think my closet looks like?",
+    "textEs": "¿Cómo crees que es mi armario: organizado o caótico?",
+    "moment": [
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-140",
+    "textEn": "What are three things we have in common?",
+    "textEs": "¿Cuáles son tres cosas que tenemos en común?",
+    "moment": [
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-7",
+    "textEn": "What is the worst thing that has happened in the world?",
+    "textEs": "¿Cuál ha sido, según tú, el peor suceso que ha ocurrido en el mundo?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-35",
+    "textEn": "If you were to get a tattoo tomorrow, what would it be?",
+    "textEs": "Si fueras a hacerte un tatuaje mañana, ¿qué te tatuarías?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-33",
+    "textEn": "What are you really intense about?",
+    "textEs": "¿En qué cosas eres realmente intenso/a?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-151",
+    "textEn": "Have you ever broken anyone’s heart?",
+    "textEs": "¿Has roto el corazón de alguien?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-20",
+    "textEn": "What's the best thing about your life?",
+    "textEs": "¿Qué es lo que más te gusta de tu vida?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-32",
+    "textEn": "What is your favorite smell?",
+    "textEs": "¿Cuál es tu olor favorito?",
+    "moment": [
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-127",
+    "textEn": "What are you addicted to?",
+    "textEs": "¿A qué eres adicto/a?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-2",
+    "textEn": "Is there an area of your life where you are never satisfied?",
+    "textEs": "¿Hay algun área en tu vida en la que nunca estés satisfecho?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-19",
+    "textEn": "Do you think opposites attract?",
+    "textEs": "¿Crees que los polos opuestos se atraen?",
+    "moment": [
+      "Date Night 🌙",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-1",
+    "textEn": "Where is your favorite place to take a nap?",
+    "textEs": "¿Cuál es tu lugar favorito para dormir la siesta?",
+    "moment": [
+      "Road Trip 🚗",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-123",
+    "textEn": "What is the first lie you can remember telling?",
+    "textEs": "¿Cuál es la primera mentira que recuerdas haber dicho?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-121",
+    "textEn": "What is something that has made you happy lately?",
+    "textEs": "¿Cuál es algo que te ha hecho feliz últimamente?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-126",
+    "textEn": "Do you like who you are?",
+    "textEs": "¿Te gusta quién eres?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-22",
+    "textEn": "Have you ever thought about dating a really good friend?",
+    "textEs": "¿Alguna vez has pensado en salir con tu mejor amigo/a?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-14",
+    "textEn": "Are you a fanatic of anything or anyone?",
+    "textEs": "¿Eres fanático/a de algo o de alguien?",
+    "moment": [
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-129",
+    "textEn": "What is one thing you wish someone did or will do for you?",
+    "textEs": "¿Cuál es una cosa que desearías que alguien hiciera o haga por ti?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-119",
+    "textEn": "What makes you cry?",
+    "textEs": "¿Qué te hace llorar?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-15",
+    "textEn": "What was the last costume you wore?",
+    "textEs": "¿Cuál fue el último disfraz que usaste?",
+    "moment": [
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-147",
+    "textEn": "What or who do you need to let go of in life?",
+    "textEs": "¿De qué o de quién necesitas desprenderte en la vida?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-9",
+    "textEn": "Do you talk to yourself?",
+    "textEs": "¿Te hablas a ti mismo cuando estás solo en casa?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-16",
+    "textEn": "What is the funniest pet name you have ever heard?",
+    "textEs": "¿Cuál es el nombre de mascota más gracioso que has escuchado?",
+    "moment": [
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-23",
+    "textEn": "What is your ideal place to raise kids or start a family?",
+    "textEs": "¿Cuál es tu lugar ideal para tener hijos o formar una familia?",
+    "moment": [
+      "Table Talks 🍷",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-25",
+    "textEn": "How did your parents meet?",
+    "textEs": "¿Cómo se conocieron tus padres?",
+    "moment": [
+      "Date Night 🌙",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-17",
+    "textEn": "What would be the hardest thing for you to let go of in your current life?",
+    "textEs": "¿Qué te resultaría más difícil soltar en tu vida actual?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-110",
+    "textEn": "Which experience has given you the most adrenaline?",
+    "textEs": "¿Qué vivencia te ha hecho sentir más adrenalina?",
+    "moment": [
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-155",
+    "textEn": "Do you think that you take good care of yourself?",
+    "textEs": "¿Crees que te cuidas bien?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-143",
+    "textEn": "Are there any relationships in your life you would like to improve or repair?",
+    "textEs": "¿Hay alguna relación en tu vida que te gustaría mejorar o reparar?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-122",
+    "textEn": "Who would you call if you had something worrying you?",
+    "textEs": "¿A quién llamarías si tuvieras un problema o algo que te angustia?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-139",
+    "textEn": "What is your biggest regret in life?",
+    "textEs": "¿Cuál es tu mayor arrepentimiento en la vida?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-34",
+    "textEn": "Are you an introvert or an extrovert?",
+    "textEs": "¿Eres introvertido/a o extrovertido/a?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-152",
+    "textEn": "What was the most memorable toy you played with when you were little?",
+    "textEs": "¿Cuál fue el juguete más memorable con el que jugaste cuando eras pequeño?",
+    "moment": [
+      "Road Trip 🚗",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-135",
+    "textEn": "What does my body language say about me?",
+    "textEs": "¿Qué dice mi lenguaje corporal sobre mí?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-154",
+    "textEn": "Do you have an old item you cannot let go of?",
+    "textEs": "¿Tienes algún objeto antiguo que no puedas soltar?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-137",
+    "textEn": "What do you value most in a friendship or relationship?",
+    "textEs": "¿Qué valoras más en una amistad o relación?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-31",
+    "textEn": "What makes you lose confidence in yourself?",
+    "textEs": "¿Qué te hace perder la seguridad en ti mismo?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-29",
+    "textEn": "Who was your first crush?",
+    "textEs": "¿Quién fue tu primer crush?",
+    "moment": [
+      "Date Night 🌙",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-12",
+    "textEn": "What would you try to avoid at all costs?",
+    "textEs": "¿Qué intentarías evitar a toda costa?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-115",
+    "textEn": "How do you think people see you?",
+    "textEs": "¿Cómo crees que te ven los demás?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-113",
+    "textEn": "Where do you find meaning in your life?",
+    "textEs": "¿Dónde encuentras significado en tu vida?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-149",
+    "textEn": "Is there something in your life that you ignore because you are not ready to face it?",
+    "textEs": "¿Hay algo en tu vida que ignoras porque no estás listo para enfrentarlo?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-131",
+    "textEn": "When and with whom did you lose your virginity?",
+    "textEs": "¿Cuándo y con quién perdiste tu virginidad?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-134",
+    "textEn": "Can you remember a time in your life when you felt the most alive?",
+    "textEs": "¿Recuerdas un momento de tu vida en el que te sentiste más vivo/a?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-10",
+    "textEn": "Out of your five senses, which one is your strongest?",
+    "textEs": "De tus cinco sentidos, ¿cuál crees que tienes más desarrollado?",
+    "moment": [
+      "Table Talks 🍷",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-138",
+    "textEn": "What is your definition of success?",
+    "textEs": "¿Cuál es tu definición de éxito?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-13",
+    "textEn": "What is the funniest question you ever asked your parents when you were younger?",
+    "textEs": "¿Cuál es la pregunta más graciosa que hiciste a tus padres cuando eras más pequeño?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-111",
+    "textEn": "What is an obstacle you’re currently trying to overcome?",
+    "textEs": "¿Cuál es un obstáculo que estás intentando superar actualmente?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-4",
+    "textEn": "If you were in a band, what instrument or role would you play?",
+    "textEs": "Si estuvieras en una banda, ¿qué instrumento tocarías o qué rol desempeñarías?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-145",
+    "textEn": "What do you think about the most?",
+    "textEs": "¿En qué piensas más frecuentemente?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-112",
+    "textEn": "When and why did you last cry?",
+    "textEs": "¿Cuándo y por qué lloraste por última vez?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-26",
+    "textEn": "Do you believe in the validity of IQ tests?",
+    "textEs": "¿Crees en la validez de las pruebas de coeficiente intelectual?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-133",
+    "textEn": "What are you most grateful for?",
+    "textEs": "¿Qué es lo que más agradeces en tu vida?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-8",
+    "textEn": "What is your favorite clothing store?",
+    "textEs": "¿Cuál es tu tienda de ropa favorita?",
+    "moment": [
+      "Road Trip 🚗",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-18",
+    "textEn": "Which would be impossible for you to give up permanently, beer or coffee?",
+    "textEs": "¿Qué te costaría más dejar, el café o la cerveza?",
+    "moment": [
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-116",
+    "textEn": "What was your honest first impression of me?",
+    "textEs": "¿Cuál fue tu primera impresión honesta sobre mí?",
+    "moment": [
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-125",
+    "textEn": "What makes you sad?",
+    "textEs": "¿Qué te pone triste?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-11",
+    "textEn": "What is something you don't mind paying more money for?",
+    "textEs": "¿Qué es algo por lo que no te importa pagar más dinero?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-141",
+    "textEn": "What three qualities make me special?",
+    "textEs": "¿Qué tres cualidades me hacen especial?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-3",
+    "textEn": "Would you raise your children the same way your parents raised you?",
+    "textEs": "¿Criarías a tus hijos de la forma en que te criaron tus padres?",
+    "moment": [
+      "Date Night 🌙",
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-5",
+    "textEn": "What is something you are doing now that you have never done before?",
+    "textEs": "¿Qué es algo que estás haciendo ahora y que nunca habías hecho antes?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-28",
+    "textEn": "Which real-life crime would you like to investigate?",
+    "textEs": "¿Qué crimen real te gustaría investigar?",
+    "moment": [
+      "Road Trip 🚗",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-124",
+    "textEn": "Are you living the life of your dreams?",
+    "textEs": "¿Estás viviendo la vida de tus sueños?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-146",
+    "textEn": "When was the last time you have asked for help?",
+    "textEs": "¿Cuándo fue la última vez que pediste ayuda?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-132",
+    "textEn": "What emotion do you experience the most?",
+    "textEs": "¿Qué emoción experimentas con más frecuencia?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-114",
+    "textEn": "What is the first thing you notice about me?",
+    "textEs": "¿Qué es lo primero que te llamó la atención de mí?",
+    "moment": [
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-158",
+    "textEn": "Have you ever stolen anything?",
+    "textEs": "¿Alguna vez has robado algo?",
+    "moment": [
+      "Road Trip 🚗",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-27",
+    "textEn": "What do you think is the biggest violation of privacy?",
+    "textEs": "¿Cuál crees que es la mayor violación de privacidad?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-144",
+    "textEn": "What do you miss about being a kid?",
+    "textEs": "¿Qué extrañas de cuando eras pequeño?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-148",
+    "textEn": "Activity: On a piece of paper, give each other five specific compliments and then read them out loud to each other. Give the paper to the player.",
+    "textEs": "Juego: En un papel, escribe 5 cumplidos sobre otro jugador y luego léelos en voz alta. Después, regala el papel a esa persona.",
+    "moment": [
+      "Date Night 🌙",
+      "Table Talks 🍷",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-130",
+    "textEn": "What is your greatest gift or talent?",
+    "textEs": "¿Cuál es tu don o talento especial?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-136",
+    "textEn": "What is the most adventurous thing you have ever done?",
+    "textEs": "¿Cuál ha sido la cosa más atrevida o aventurera que has hecho en tu vida? ",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-150",
+    "textEn": "How would you like to be remembered?",
+    "textEs": "¿Cómo te gustaría ser recordado?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-6",
+    "textEn": "What is the strangest food combination you have ever tried?",
+    "textEs": "¿Cuál es la combinación de alimentos más extraña que has probado?",
+    "moment": [
+      "Road Trip 🚗",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-128",
+    "textEn": "What is the most miraculous thing that has ever happened to you?",
+    "textEs": "¿Cuál es la cosa más milagrosa que te ha pasado?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-109",
+    "textEn": "If you could change your first name, what would you change it to?",
+    "textEs": "Si pudieras cambiar tu nombre, ¿a cuál lo cambiarías?",
+    "moment": [
+      "Road Trip 🚗",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-153",
+    "textEn": "What is the nicest thing anyone has done for you?",
+    "textEs": "¿Cuál es la cosa más bonita que alguien ha hecho por ti?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-118",
+    "textEn": "Activity: Each player must come up with three statements about themselves. Two must be truthful and one a lie. Then each player tries to guess which of the three statements is the lie.",
+    "textEs": "Actividad: Cada jugador debe crear tres afirmaciones sobre sí mismo/a. Dos deben ser verdad y una mentira. Luego, cada jugador intenta adivinar cuál de las tres afirmaciones es la mentira.",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-117",
+    "textEn": "What is one thing you would like to change about yourself?",
+    "textEs": "¿Cuál es una cosa que te gustaría cambiar de ti mismo/a?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-21",
+    "textEn": "Is it right to lie to avoid hurting someone?",
+    "textEs": "¿Es correcto mentir para no herir a alguien?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  }
 ];
-
-export const momentOptions = [
-  { value: "date-night", label: "💕 Date night" },
-  { value: "deep-talk", label: "🌙 Deep talk" },
-  { value: "chill-night", label: "🍷 Friends night" },
-  { value: "random-fun", label: "🎲 Fun" },
-  { value: "too-many-hours-on-road", label: "🏠 Family" },
-  { value: "birthday", label: "🎂 Birthday" },
-  { value: "work-icebreakers", label: "💼 Work Icebreakers" },
-  { value: "reflections", label: "✨ Self reflections" },
-];
-
-export const categoryNames: Record<string, string> = {
-  amigos: "Amigos",
-  familiares: "Familiares",
-  cumpleanos: "Cumpleaños",
-  pareja: "Pareja",
-  personales: "Personales",
-  silly: "Silly",
-};
