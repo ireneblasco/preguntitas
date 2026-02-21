@@ -4,15 +4,31 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
 import { useQuestions, type Question } from '@/contexts/QuestionsContext';
 import { useFavorites } from '@/utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
 
+/** Misma paleta que home */
+const CARD_THEMES = [
+  { bg: '#BEE656', text: '#3C6112' },
+  { bg: '#EAC1CC', text: '#6B2A2D' },
+  { bg: '#3E614A', text: '#BEE656' },
+  { bg: '#FDCF42', text: '#6B2A2D' },
+] as const;
+
+function getThemeForMoment(
+  momentId: string,
+  momentOptions: Array<{ id: string; name: string; emoji: string }>
+) {
+  const i = momentOptions.findIndex((m) => m.id === momentId);
+  return CARD_THEMES[i >= 0 ? i % CARD_THEMES.length : 0];
+}
+
 export default function Favorites() {
   const router = useRouter();
-  const { questions } = useQuestions();
-  const { favorites, removeFavorite, loading } = useFavorites();
+  const { questions, momentOptions } = useQuestions();
+  const { favorites, removeFavorite } = useFavorites();
   const lang = usePreferredLanguage();
 
   const favoriteQuestions = useMemo(() => {
@@ -21,32 +37,38 @@ export default function Favorites() {
       .filter((q): q is Question => q != null);
   }, [favorites, questions]);
 
-  const renderRightActions = (questionId: string) => {
+  const renderRightActions = (questionId: string) => (
+    <View style={styles.deleteWrap}>
+      <Pressable
+        style={styles.deleteButton}
+        onPress={() => removeFavorite(questionId)}
+      >
+        <Text style={styles.deleteText}>Remove</Text>
+      </Pressable>
+    </View>
+  );
+
+  const renderItem = ({ item }: { item: Question }) => {
+    const momentId = item.moment[0] ?? '';
+    const theme = getThemeForMoment(momentId, momentOptions);
+    const momentLabel = momentOptions.find((m) => m.id === momentId)?.name ?? momentId;
+
     return (
-      <View style={styles.deleteContainer}>
-        <Pressable
-          style={styles.deleteButton}
-          onPress={() => removeFavorite(questionId)}
-        >
-          <Text style={styles.deleteText}>Delete</Text>
-        </Pressable>
-      </View>
+      <Swipeable
+        renderRightActions={() => renderRightActions(item.id)}
+        overshootRight={false}
+      >
+        <View style={[styles.card, { backgroundColor: theme.bg }]}>
+          <View style={[styles.pill, { borderColor: theme.text }]}>
+            <Text style={[styles.pillText, { color: theme.text }]}>{momentLabel}</Text>
+          </View>
+          <Text style={[styles.questionText, { color: theme.text }]} numberOfLines={3}>
+            {getQuestionText(item, lang)}
+          </Text>
+        </View>
+      </Swipeable>
     );
   };
-
-  const renderItem = ({ item }: { item: Question }) => (
-    <Swipeable
-      renderRightActions={() => renderRightActions(item.id)}
-      overshootRight={false}
-    >
-      <View style={styles.questionCard}>
-        <Text style={styles.questionText}>{getQuestionText(item, lang)}</Text>
-        <Text style={styles.categoryText}>
-          {item.moment.join(' • ')}
-        </Text>
-      </View>
-    </Swipeable>
-  );
 
   return (
     <LinearGradient
@@ -55,25 +77,24 @@ export default function Favorites() {
     >
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <View style={styles.header}>
-        <Pressable style={styles.backButton} onPress={() => router.back()}>
-          <Text style={styles.backButtonText}>← Back</Text>
-        </Pressable>
-      </View>
+          <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
+            <Text style={styles.backLabel}>‹</Text>
+          </Pressable>
+          <Text style={styles.headerTitle}>My favorites</Text>
+          <View style={styles.headerRight} />
+        </View>
 
-      <View style={styles.content}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Your Favorites</Text>
-          <Text style={styles.subtitle}>
-            {favoriteQuestions.length === 0
-              ? 'No favorites yet'
-              : `${favoriteQuestions.length} question${favoriteQuestions.length !== 1 ? 's' : ''} saved`}
+        <View style={styles.sectionRow}>
+          <Text style={styles.sectionTitle}>Saved questions</Text>
+          <Text style={styles.sectionCount}>
+            {favoriteQuestions.length}
           </Text>
         </View>
 
         {favoriteQuestions.length === 0 ? (
-          <View style={styles.emptyContainer}>
+          <View style={styles.emptyWrap}>
             <Text style={styles.emptyText}>
-              Save questions that inspire you by tapping the heart
+              Save questions by tapping the heart on any card
             </Text>
           </View>
         ) : (
@@ -85,96 +106,113 @@ export default function Favorites() {
             showsVerticalScrollIndicator={false}
           />
         )}
-      </View>
       </SafeAreaView>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
+  gradient: { flex: 1 },
+  container: { flex: 1 },
   header: {
-    paddingTop: SPACING['2xl'],
-    paddingHorizontal: SPACING.lg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: SPACING.md,
+    paddingTop: SPACING.sm,
     paddingBottom: SPACING.md,
+    minHeight: 44,
   },
-  backButton: {
-    padding: SPACING.sm,
-    marginLeft: -SPACING.sm,
+  backBtn: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  backButtonText: {
+  backLabel: {
+    fontSize: 32,
+    fontWeight: '300',
+    color: '#007AFF',
+  },
+  headerTitle: {
+    flex: 1,
     fontSize: FONT_SIZES.base,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: SPACING.lg,
-  },
-  titleContainer: {
-    alignItems: 'center',
-    marginBottom: SPACING.xl,
-  },
-  title: {
-    fontSize: FONT_SIZES['4xl'],
-    fontFamily: FONTS.playfair.regular,
     color: COLORS.text.primary,
-    marginBottom: SPACING.sm,
     textAlign: 'center',
   },
-  subtitle: {
+  headerRight: { width: 44 },
+  sectionRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: SPACING.lg,
+    marginBottom: SPACING.md,
+  },
+  sectionTitle: {
+    fontSize: FONT_SIZES.base,
+    fontFamily: FONTS.inter.regular,
+    color: COLORS.text.primary,
+  },
+  sectionCount: {
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
     color: COLORS.text.secondary,
-    textAlign: 'center',
   },
   listContent: {
-    paddingBottom: SPACING.xl,
+    paddingHorizontal: SPACING.lg,
+    paddingBottom: SPACING['2xl'],
     gap: SPACING.md,
   },
-  questionCard: {
-    backgroundColor: COLORS.card.background,
-    borderRadius: BORDER_RADIUS['3xl'],
+  card: {
+    width: '100%',
+    borderRadius: BORDER_RADIUS['2xl'],
     padding: SPACING.lg,
+    minHeight: 100,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  pill: {
+    alignSelf: 'flex-start',
+    backgroundColor: 'transparent',
+    paddingVertical: 6,
+    paddingHorizontal: SPACING.md,
+    borderRadius: BORDER_RADIUS.full,
     borderWidth: 1,
-    borderColor: COLORS.border.light,
-    ...SHADOWS.sm,
+    marginBottom: SPACING.sm,
+  },
+  pillText: {
+    fontSize: FONT_SIZES.xs,
+    fontFamily: FONTS.inter.regular,
   },
   questionText: {
     fontSize: FONT_SIZES.lg,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.text.primary,
-    lineHeight: FONT_SIZES.lg * 1.5,
-    marginBottom: SPACING.sm,
+    lineHeight: FONT_SIZES.lg * 1.45,
   },
-  categoryText: {
-    fontSize: FONT_SIZES.xs,
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
-  },
-  deleteContainer: {
+  deleteWrap: {
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingRight: SPACING.lg,
+    paddingRight: SPACING.sm,
+    marginBottom: SPACING.md,
   },
   deleteButton: {
-    backgroundColor: '#EF4444',
+    backgroundColor: '#6B2A2D',
     paddingVertical: SPACING.md,
     paddingHorizontal: SPACING.lg,
-    borderRadius: BORDER_RADIUS.xl,
+    borderRadius: BORDER_RADIUS.lg,
     justifyContent: 'center',
+    minHeight: 80,
   },
   deleteText: {
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.text.white,
+    color: '#F8F5EE',
   },
-  emptyContainer: {
+  emptyWrap: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
