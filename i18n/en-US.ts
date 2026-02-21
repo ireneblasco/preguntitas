@@ -1,4 +1,5 @@
-export const en = {
+/** English (United States) – UI strings for en-US locale */
+export const enUS = {
   app: {
     title: 'Shallow',
   },
@@ -66,4 +67,4 @@ export const en = {
   },
 } as const;
 
-export type EnTranslations = typeof en;
+export type EnUSTranslations = typeof enUS;

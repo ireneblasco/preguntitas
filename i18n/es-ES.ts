@@ -1,4 +1,5 @@
-export const es = {
+/** Español (España) – UI strings for es-ES locale */
+export const esES = {
   app: {
     title: 'Shallow',
   },
@@ -66,4 +67,4 @@ export const es = {
   },
 } as const;
 
-export type EsTranslations = typeof es;
+export type EsESTranslations = typeof esES;

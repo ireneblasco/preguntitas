@@ -1,20 +1,26 @@
-import { en } from './en';
-import { es } from './es';
+import { enUS } from './en-US';
+import { esES } from './es-ES';
 import { pt } from './pt';
 import { de } from './de';
 import { it } from './it';
 import { fr } from './fr';
 import { enGB } from './en-GB';
 import { esMX } from './es-MX';
+import { ptBR } from './pt-BR';
 
 // ---------------------------------------------------------------------------
-// Idiomas base para los que existen ficheros de traducción (i18n/xx.ts)
+// Claves de traducción: en-US y es-ES son explícitos (inglés EE.UU., español España)
 // ---------------------------------------------------------------------------
-export const TRANSLATION_LOCALES = ['en', 'es', 'pt', 'de', 'it', 'fr'] as const;
-export type TranslationLocale = (typeof TRANSLATION_LOCALES)[number];
-
-/** Locales con fichero propio (base + regionales como en-GB, es-MX) */
-export type TranslationMapKey = TranslationLocale | 'en-GB' | 'es-MX';
+export type TranslationMapKey =
+  | 'en-US'
+  | 'es-ES'
+  | 'en-GB'
+  | 'es-MX'
+  | 'pt-BR'
+  | 'pt'
+  | 'de'
+  | 'it'
+  | 'fr';
 
 // ---------------------------------------------------------------------------
 // Locales soportados por la app (idioma solo o idioma-región ISO)
@@ -50,14 +56,15 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 /**
  * Locales que se muestran en el menú de Ajustes: un idioma por opción, más las variantes
- * regionales con traducción propia (en-GB, es-MX). No se listan en-US, en-AU, pt-BR, pt-PT, etc.
+ * regionales con traducción propia (en-GB, es-MX, pt-BR). En-US y es-ES explícitos para el usuario.
  */
 export const SETTINGS_MENU_LOCALES = [
-  'en',
+  'en-US',
   'en-GB',
-  'es',
+  'es-ES',
   'es-MX',
   'pt',
+  'pt-BR',
   'de',
   'it',
   'fr',
@@ -66,39 +73,41 @@ export const SETTINGS_MENU_LOCALES = [
 export type SettingsMenuLocale = (typeof SETTINGS_MENU_LOCALES)[number];
 
 /**
- * Para un locale cualquiera (p. ej. en-AU, pt-BR), devuelve el locale del menú de Ajustes
- * que lo representa (en, pt), para mostrar la etiqueta correcta y la selección actual.
+ * Para un locale cualquiera (p. ej. en, en-AU, pt-BR), devuelve el locale del menú de Ajustes
+ * que lo representa (en-US, es-ES, pt, etc.) para la etiqueta y la selección actual.
  */
 export function getSettingsMenuLocale(locale: Locale): SettingsMenuLocale {
   if ((SETTINGS_MENU_LOCALES as readonly string[]).includes(locale)) {
     return locale as SettingsMenuLocale;
   }
   const lang = locale.split('-')[0];
+  if (lang === 'en') return 'en-US';
+  if (lang === 'es') return 'es-ES';
   const found = SETTINGS_MENU_LOCALES.find((loc) => loc.split('-')[0] === lang);
   return (found ?? SETTINGS_MENU_LOCALES[0]) as SettingsMenuLocale;
 }
 
 /**
- * Obtiene la clave de traducción para el locale (base o regional si existe fichero).
- * Ej: "es-MX" → "es-MX", "es-ES" → "es", "en-GB" → "en-GB", "en-US" → "en".
+ * Obtiene la clave de traducción para el locale (en-US, es-ES, en-GB, es-MX, pt-BR, etc.).
+ * en / en-US / en-AU → en-US; es / es-ES → es-ES; es-MX → es-MX; en-GB → en-GB.
  */
 export function getTranslationLocale(locale: Locale): TranslationMapKey {
-  if (locale === 'en-GB' || locale === 'es-MX') return locale;
-  const base = locale.split('-')[0] as string;
-  if ((TRANSLATION_LOCALES as readonly string[]).includes(base)) {
-    return base as TranslationLocale;
-  }
-  return 'en';
+  if (locale === 'en-GB' || locale === 'es-MX' || locale === 'pt-BR') return locale;
+  const lang = locale.split('-')[0];
+  if (lang === 'en') return 'en-US';
+  if (lang === 'es') return 'es-ES';
+  if (lang === 'pt' || lang === 'de' || lang === 'it' || lang === 'fr') return lang as TranslationMapKey;
+  return 'en-US';
 }
 
 /** Nombre de cada locale para el selector en Ajustes (idioma y, si aplica, región) */
 export const LOCALE_DISPLAY_NAMES: Record<Locale, string> = {
-  en: 'English',
+  en: 'English (US)',
   'en-GB': 'English (UK)',
   'en-US': 'English (US)',
   'en-AU': 'English (Australia)',
   'en-CA': 'English (Canada)',
-  es: 'Español',
+  es: 'Español (España)',
   'es-ES': 'Español (España)',
   'es-MX': 'Español (México)',
   'es-AR': 'Español (Argentina)',
@@ -121,14 +130,15 @@ export const LOCALE_DISPLAY_NAMES: Record<Locale, string> = {
 export type Translations = Record<string, unknown>;
 
 const translationMap: Record<TranslationMapKey, Translations> = {
-  en: en as Translations,
-  es: es as Translations,
+  'en-US': enUS as Translations,
+  'es-ES': esES as Translations,
   pt: pt as Translations,
   de: de as Translations,
   it: it as Translations,
   fr: fr as Translations,
   'en-GB': enGB as Translations,
   'es-MX': esMX as Translations,
+  'pt-BR': ptBR as Translations,
 };
 
 /** Diccionarios por idioma base y, si existen, por locale regional (en-GB, es-MX) */
@@ -152,19 +162,23 @@ function normalizeLanguageTag(tag: string): string {
 }
 
 /**
- * Resuelve un languageTag del dispositivo (ej. "en-US", "es-MX") a un Locale soportado.
- * Primero intenta coincidencia exacta, luego idioma solo, luego primer locale con ese idioma.
+ * Resuelve un languageTag del dispositivo a un Locale soportado.
+ * "en" o "en-US" → en-US; "es" o "es-ES" → es-ES (explícitos de cara al usuario).
  */
 export function resolveDeviceLocale(languageTag: string): Locale {
   const normalized = normalizeLanguageTag(languageTag);
+  if (normalized === 'en') return 'en-US';
+  if (normalized === 'es') return 'es-ES';
   if (isSupportedLocale(normalized)) return normalized;
   const lang = normalized.split('-')[0] ?? '';
   const byLang = SUPPORTED_LOCALES.filter((loc) => loc.split('-')[0] === lang);
   if (byLang.length > 0) {
+    if (lang === 'en') return 'en-US';
+    if (lang === 'es') return 'es-ES';
     const withRegion = byLang.find((loc) => loc.includes('-'));
     return (withRegion ?? byLang[0]) as Locale;
   }
   return SUPPORTED_LOCALES[0];
 }
 
-export { en, es, pt, de, it, fr, enGB, esMX };
+export { enUS, esES, pt, de, it, fr, enGB, esMX, ptBR };
