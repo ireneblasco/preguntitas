@@ -12,14 +12,22 @@ import Animated, {
   interpolate,
   Extrapolation,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
 import { useQuestions } from '@/contexts/QuestionsContext';
 import { useFavorites } from '@/utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const SWIPE_THRESHOLD = 100;
+const SWIPE_THRESHOLD = 80;
+const CARD_MARGIN = SPACING.md;
+
+/** Misma paleta que home por categoría */
+const CARD_THEMES = [
+  { bg: '#BEE656', text: '#3C6112' },
+  { bg: '#EAC1CC', text: '#6B2A2D' },
+  { bg: '#3E614A', text: '#BEE656' },
+  { bg: '#FDCF42', text: '#6B2A2D' },
+] as const;
 
 export default function Questions() {
   const params = useLocalSearchParams<{ moment?: string; selectedmoment?: string }>();
@@ -29,15 +37,25 @@ export default function Questions() {
       ? ((params as Record<string, unknown>).selectedmoment as string)
       : undefined);
   const router = useRouter();
-  const { questions } = useQuestions();
+  const { questions, momentOptions } = useQuestions();
   const { toggleFavorite, isFavorite } = useFavorites();
+
+  const momentLabel = moment
+    ? (momentOptions.find((m) => m.id === moment)?.name ?? moment)
+    : '';
+  const momentThemeIndex = moment
+    ? momentOptions.findIndex((m) => m.id === moment)
+    : -1;
+  const momentTheme =
+    momentThemeIndex >= 0
+      ? CARD_THEMES[momentThemeIndex % CARD_THEMES.length]
+      : CARD_THEMES[0];
   const lang = usePreferredLanguage();
 
   const [questionIndex, setQuestionIndex] = useState(0);
   const [currentQuestionId, setCurrentQuestionId] = useState<string>('');
 
   const translateX = useSharedValue(0);
-  const scale = useSharedValue(1);
 
   const filteredQuestions = useMemo(() => {
     if (!moment) return [];
@@ -51,9 +69,7 @@ export default function Questions() {
   const currentQuestion = shuffledQuestions[questionIndex % shuffledQuestions.length];
 
   useEffect(() => {
-    if (currentQuestion) {
-      setCurrentQuestionId(currentQuestion.id);
-    }
+    if (currentQuestion) setCurrentQuestionId(currentQuestion.id);
   }, [currentQuestion]);
 
   useEffect(() => {
@@ -67,35 +83,25 @@ export default function Questions() {
   };
 
   const handleFavorite = async () => {
-    if (currentQuestion) {
-      await toggleFavorite(currentQuestion.id);
-    }
+    if (currentQuestion) await toggleFavorite(currentQuestion.id);
   };
 
   const pan = Gesture.Pan()
     .onUpdate((event) => {
       translateX.value = event.translationX;
-      scale.value = interpolate(
-        Math.abs(event.translationX),
-        [0, SWIPE_THRESHOLD],
-        [1, 0.95],
-        Extrapolation.CLAMP
-      );
     })
     .onEnd((event) => {
       if (Math.abs(event.translationX) > SWIPE_THRESHOLD) {
         translateX.value = withTiming(
           event.translationX > 0 ? SCREEN_WIDTH : -SCREEN_WIDTH,
-          { duration: 200 },
+          { duration: 180 },
           () => {
             runOnJS(handleNext)();
             translateX.value = 0;
-            scale.value = 1;
           }
         );
       } else {
-        translateX.value = withSpring(0, { damping: 15, stiffness: 150 });
-        scale.value = withSpring(1, { damping: 15, stiffness: 150 });
+        translateX.value = withSpring(0, { damping: 20, stiffness: 200 });
       }
     });
 
@@ -103,94 +109,101 @@ export default function Questions() {
     const rotate = interpolate(
       translateX.value,
       [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
-      [-10, 0, 10],
+      [-6, 0, 6],
       Extrapolation.CLAMP
     );
-
     return {
       transform: [
         { translateX: translateX.value },
-        { scale: scale.value },
         { rotateZ: `${rotate}deg` },
       ],
     };
   });
 
-  const progress =
-    filteredQuestions.length > 0
-      ? Math.min(((questionIndex + 1) / filteredQuestions.length) * 100, 100)
-      : 0;
-
   if (!moment) {
     return (
-      <LinearGradient
-        colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
-        style={styles.gradient}
-      >
+      <View style={styles.screen}>
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
           <View style={styles.header}>
-            <Pressable style={styles.backButton} onPress={() => router.back()}>
-              <Text style={styles.backButtonText}>←</Text>
+            <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
+              <Text style={styles.backLabel}>‹</Text>
             </Pressable>
           </View>
-          <View style={styles.emptyContainer}>
+          <View style={styles.emptyState}>
             <Text style={styles.emptyText}>Select a moment from home to start</Text>
           </View>
         </SafeAreaView>
-      </LinearGradient>
+      </View>
     );
   }
 
   if (filteredQuestions.length === 0) {
     return (
-      <LinearGradient
-        colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
-        style={styles.gradient}
-      >
+      <View style={styles.screen}>
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
           <View style={styles.header}>
-            <Pressable style={styles.backButton} onPress={() => router.back()}>
-              <Text style={styles.backButtonText}>←</Text>
+            <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
+              <Text style={styles.backLabel}>‹</Text>
             </Pressable>
           </View>
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No questions found for this moment</Text>
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyText}>No questions for this moment</Text>
           </View>
         </SafeAreaView>
-      </LinearGradient>
+      </View>
     );
   }
 
   return (
-    <LinearGradient
-      colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
-      style={styles.gradient}
-    >
+    <View style={styles.screen}>
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <View style={styles.header}>
-          <Pressable style={styles.backButton} onPress={() => router.back()}>
-            <Text style={styles.backButtonText}>←</Text>
+          <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
+            <Text style={styles.backLabel}>‹</Text>
           </Pressable>
-          <Text style={styles.categoryText}>{moment}</Text>
+          <Text style={styles.headerTitle} numberOfLines={1}>
+            {momentLabel}
+          </Text>
+          <View style={styles.headerRight} />
         </View>
 
-        <View style={styles.progressContainer}>
-          <View style={styles.progressBar}>
-            <View style={[styles.progressFill, { width: `${progress}%` }]} />
-          </View>
-        </View>
-
-        <View style={styles.cardContainer}>
+        <View style={styles.cardWrap}>
           <GestureDetector gesture={pan}>
-            <Animated.View style={[styles.card, animatedCardStyle]}>
-              <Text style={styles.questionText}>
-                {currentQuestion ? getQuestionText(currentQuestion, lang) : ''}
-              </Text>
-
-              <View style={styles.cardActions}>
-                <Pressable style={styles.favoriteButton} onPress={handleFavorite}>
-                  <Text style={styles.favoriteIcon}>
-                    {isFavorite(currentQuestionId) ? '❤️' : '🤍'}
+            <Animated.View
+              style={[
+                styles.card,
+                animatedCardStyle,
+                { backgroundColor: momentTheme.bg },
+              ]}
+            >
+              <View style={styles.cardInner}>
+                <View style={[styles.categoryPill, { borderColor: momentTheme.text }]}>
+                  <Text style={[styles.categoryPillText, { color: momentTheme.text }]}>
+                    {momentLabel}
+                  </Text>
+                </View>
+                <Text
+                  style={[
+                    styles.questionText,
+                    { color: momentTheme.text },
+                  ]}
+                >
+                  {currentQuestion
+                    ? getQuestionText(currentQuestion, lang)
+                    : ''}
+                </Text>
+                <Pressable
+                  style={styles.favBtn}
+                  onPress={handleFavorite}
+                  hitSlop={12}
+                >
+                  <Text
+                    style={[
+                      styles.favIcon,
+                      !isFavorite(currentQuestionId) && styles.favIconInactive,
+                    ]}
+                  >
+                    {isFavorite(currentQuestionId) ? '♥' : '♡'}
                   </Text>
                 </Pressable>
               </View>
@@ -199,19 +212,29 @@ export default function Questions() {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.hintText}>Swipe or tap to continue</Text>
-          <Pressable style={styles.nextButton} onPress={handleNext}>
-            <Text style={styles.nextButtonText}>Next</Text>
+          <Text style={styles.hint}>Swipe or tap Next</Text>
+          <Pressable
+            style={({ pressed }) => [
+              styles.nextBtn,
+              { backgroundColor: momentTheme.text },
+              pressed && styles.nextBtnPressed,
+            ]}
+            onPress={handleNext}
+          >
+            <Text style={[styles.nextBtnLabel, { color: momentTheme.bg }]}>
+              Next
+            </Text>
           </Pressable>
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  gradient: {
+  screen: {
     flex: 1,
+    backgroundColor: '#F2F2F7',
   },
   container: {
     flex: 1,
@@ -219,106 +242,125 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: SPACING['2xl'],
-    paddingHorizontal: SPACING.lg,
+    justifyContent: 'space-between',
+    paddingHorizontal: SPACING.md,
+    paddingTop: SPACING.sm,
     paddingBottom: SPACING.md,
+    minHeight: 44,
   },
-  backButton: {
-    padding: SPACING.sm,
-    marginLeft: -SPACING.sm,
+  backBtn: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  backButtonText: {
-    fontSize: FONT_SIZES['2xl'],
-    color: COLORS.text.secondary,
+  backLabel: {
+    fontSize: 32,
+    fontWeight: '300',
+    color: '#007AFF',
   },
-  categoryText: {
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
-    marginLeft: SPACING.md,
-  },
-  progressContainer: {
-    paddingHorizontal: SPACING.lg,
-    paddingBottom: SPACING.md,
-  },
-  progressBar: {
-    height: 2,
-    backgroundColor: COLORS.border.light,
-    borderRadius: BORDER_RADIUS.full,
-    overflow: 'hidden',
-  },
-  progressFill: {
-    height: '100%',
-    backgroundColor: COLORS.accent.primary,
-    borderRadius: BORDER_RADIUS.full,
-  },
-  cardContainer: {
+  headerTitle: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: SPACING.lg,
-  },
-  card: {
-    backgroundColor: COLORS.card.background,
-    borderRadius: BORDER_RADIUS['3xl'],
-    padding: SPACING.xl,
-    width: '100%',
-    minHeight: 280,
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...SHADOWS.lg,
-  },
-  questionText: {
-    fontSize: FONT_SIZES['2xl'],
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.text.primary,
-    textAlign: 'center',
-    lineHeight: FONT_SIZES['2xl'] * 1.5,
-  },
-  cardActions: {
-    position: 'absolute',
-    bottom: SPACING.lg,
-    right: SPACING.lg,
-  },
-  favoriteButton: {
-    padding: SPACING.sm,
-  },
-  favoriteIcon: {
-    fontSize: FONT_SIZES['2xl'],
-  },
-  footer: {
-    paddingHorizontal: SPACING.lg,
-    paddingBottom: SPACING['3xl'],
-    alignItems: 'center',
-  },
-  hintText: {
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
-    marginBottom: SPACING.md,
-  },
-  nextButton: {
-    backgroundColor: COLORS.accent.primary,
-    paddingVertical: SPACING.md,
-    paddingHorizontal: SPACING.xl,
-    borderRadius: BORDER_RADIUS.full,
-    ...SHADOWS.sm,
-  },
-  nextButtonText: {
     fontSize: FONT_SIZES.base,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.text.white,
+    color: '#1C1C1E',
+    textAlign: 'center',
   },
-  emptyContainer: {
+  headerRight: {
+    width: 44,
+  },
+  cardWrap: {
+    flex: 1,
+    paddingHorizontal: CARD_MARGIN,
+    paddingTop: SPACING.sm,
+    paddingBottom: SPACING.sm,
+  },
+  card: {
+    flex: 1,
+    width: '100%',
+    borderRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
+  },
+  cardInner: {
+    flex: 1,
+    padding: SPACING.xl,
+    paddingTop: SPACING['2xl'],
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  categoryPill: {
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
+    paddingVertical: 8,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: BORDER_RADIUS.full,
+    borderWidth: 1,
+    marginBottom: SPACING.xl,
+  },
+  categoryPillText: {
+    fontSize: 14,
+    fontFamily: FONTS.inter.regular,
+  },
+  questionText: {
+    fontSize: 26,
+    fontFamily: FONTS.inter.regular,
+    textAlign: 'center',
+    lineHeight: 38,
+    paddingHorizontal: SPACING.md,
+  },
+  favBtn: {
+    position: 'absolute',
+    top: SPACING.md,
+    right: SPACING.md,
+    padding: SPACING.sm,
+  },
+  favIcon: {
+    fontSize: 24,
+    color: '#FF3B30',
+  },
+  favIconInactive: {
+    color: '#C7C7CC',
+  },
+  footer: {
+    paddingHorizontal: CARD_MARGIN,
+    paddingBottom: SPACING['2xl'],
+    paddingTop: SPACING.lg,
+  },
+  hint: {
+    fontSize: 13,
+    fontFamily: FONTS.inter.regular,
+    color: '#8E8E93',
+    textAlign: 'center',
+    marginBottom: SPACING.md,
+  },
+  nextBtn: {
+    paddingVertical: 16,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  nextBtnPressed: {
+    opacity: 0.85,
+  },
+  nextBtnLabel: {
+    fontSize: 17,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
+  },
+  emptyState: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: SPACING.lg,
+    paddingHorizontal: SPACING.xl,
   },
   emptyText: {
-    fontSize: FONT_SIZES.lg,
+    fontSize: 17,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
+    color: '#8E8E93',
     textAlign: 'center',
   },
 });
