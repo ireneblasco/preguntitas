@@ -49,6 +49,36 @@ export const SUPPORTED_LOCALES = [
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 /**
+ * Locales que se muestran en el menú de Ajustes: un idioma por opción, más las variantes
+ * regionales con traducción propia (en-GB, es-MX). No se listan en-US, en-AU, pt-BR, pt-PT, etc.
+ */
+export const SETTINGS_MENU_LOCALES = [
+  'en',
+  'en-GB',
+  'es',
+  'es-MX',
+  'pt',
+  'de',
+  'it',
+  'fr',
+] as const;
+
+export type SettingsMenuLocale = (typeof SETTINGS_MENU_LOCALES)[number];
+
+/**
+ * Para un locale cualquiera (p. ej. en-AU, pt-BR), devuelve el locale del menú de Ajustes
+ * que lo representa (en, pt), para mostrar la etiqueta correcta y la selección actual.
+ */
+export function getSettingsMenuLocale(locale: Locale): SettingsMenuLocale {
+  if ((SETTINGS_MENU_LOCALES as readonly string[]).includes(locale)) {
+    return locale as SettingsMenuLocale;
+  }
+  const lang = locale.split('-')[0];
+  const found = SETTINGS_MENU_LOCALES.find((loc) => loc.split('-')[0] === lang);
+  return (found ?? SETTINGS_MENU_LOCALES[0]) as SettingsMenuLocale;
+}
+
+/**
  * Obtiene la clave de traducción para el locale (base o regional si existe fichero).
  * Ej: "es-MX" → "es-MX", "es-ES" → "es", "en-GB" → "en-GB", "en-US" → "en".
  */

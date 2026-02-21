@@ -6,7 +6,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
 import { useLocale } from '@/contexts/LocaleContext';
 import { useTranslation } from '@/hooks/useTranslation';
-import { SUPPORTED_LOCALES, LOCALE_DISPLAY_NAMES, type Locale } from '@/i18n';
+import {
+  SETTINGS_MENU_LOCALES,
+  LOCALE_DISPLAY_NAMES,
+  getSettingsMenuLocale,
+  type Locale,
+} from '@/i18n';
 
 export default function Settings() {
   const router = useRouter();
@@ -45,7 +50,7 @@ export default function Settings() {
               onPress={() => setLanguageDropdownOpen(true)}
             >
               <Text style={styles.dropdownTriggerText}>
-                {LOCALE_DISPLAY_NAMES[locale]}
+                {LOCALE_DISPLAY_NAMES[getSettingsMenuLocale(locale)]}
               </Text>
               <Text style={styles.dropdownChevron}>▼</Text>
             </Pressable>
@@ -64,25 +69,28 @@ export default function Settings() {
                     keyboardShouldPersistTaps="handled"
                     showsVerticalScrollIndicator={true}
                   >
-                    {SUPPORTED_LOCALES.map((loc) => (
-                      <Pressable
-                        key={loc}
-                        style={[
-                          styles.dropdownOption,
-                          locale === loc && styles.dropdownOptionActive,
-                        ]}
-                        onPress={() => selectLocale(loc)}
-                      >
-                        <Text
+                    {SETTINGS_MENU_LOCALES.map((loc) => {
+                      const isSelected = getSettingsMenuLocale(locale) === loc;
+                      return (
+                        <Pressable
+                          key={loc}
                           style={[
-                            styles.dropdownOptionText,
-                            locale === loc && styles.dropdownOptionTextActive,
+                            styles.dropdownOption,
+                            isSelected && styles.dropdownOptionActive,
                           ]}
+                          onPress={() => selectLocale(loc)}
                         >
-                          {LOCALE_DISPLAY_NAMES[loc]}
-                        </Text>
-                      </Pressable>
-                    ))}
+                          <Text
+                            style={[
+                              styles.dropdownOptionText,
+                              isSelected && styles.dropdownOptionTextActive,
+                            ]}
+                          >
+                            {LOCALE_DISPLAY_NAMES[loc]}
+                          </Text>
+                        </Pressable>
+                      );
+                    })}
                   </ScrollView>
                 </View>
               </View>
