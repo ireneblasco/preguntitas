@@ -108,7 +108,7 @@ export default function Index() {
         style={styles.gradient}
       >
         <Animated.Text style={[styles.title, textStyle]}>
-          Question Spot
+          Shallow
         </Animated.Text>
       </LinearGradient>
     </Animated.View>

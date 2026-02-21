@@ -98,7 +98,7 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
-          <Text style={styles.title}>Question Spot</Text>
+          <Text style={styles.title}>Shallow</Text>
           <Text style={styles.subtitle}>Where conversations begin</Text>
         </View>
 
