@@ -24,6 +24,14 @@ import * as onboardingUtils from '@/utils/onboarding';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
+/** Misma paleta que home (categorías / preguntas) */
+const CARD_THEMES = [
+  { bg: '#BEE656', text: '#3C6112' },
+  { bg: '#EAC1CC', text: '#6B2A2D' },
+  { bg: '#3E614A', text: '#BEE656' },
+  { bg: '#FDCF42', text: '#6B2A2D' },
+] as const;
+
 const SCREENS = [
   {
     headline: 'Questions that spark real conversations.',
@@ -75,8 +83,9 @@ export default function Onboarding() {
   const renderItem = ({ item, index }: { item: typeof SCREENS[0]; index: number }) => {
     return (
       <View style={[styles.slide, { width: SCREEN_WIDTH }]}>
+        {index === 0 && <OnboardingBackgroundPreview />}
         <View style={styles.visualContainer}>
-          {index === 0 ? <CardsVisual /> : <SwipeVisual />}
+          {index === 0 ? <QuestionCardVisual /> : <SwipeVisual />}
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.headline}>{item.headline}</Text>
@@ -139,6 +148,8 @@ export default function Onboarding() {
   );
 }
 
+const PAGINATION_ACTIVE_COLOR = '#6B2A2D';
+
 function PaginationDot({ index, currentIndex }: { index: number; currentIndex: number }) {
   const isActive = index === currentIndex;
   
@@ -150,45 +161,66 @@ function PaginationDot({ index, currentIndex }: { index: number; currentIndex: n
     
     return {
       width,
-      backgroundColor: isActive ? COLORS.accent.primary : COLORS.border.light,
+      backgroundColor: isActive ? PAGINATION_ACTIVE_COLOR : COLORS.border.light,
     };
   });
 
   return <Animated.View style={[styles.dot, animatedStyle]} />;
 }
 
-function CardsVisual() {
-  const cards = [0, 1, 2];
-  
+/** Fondo de la primera pantalla: tarjetas alineadas con colores vivos del home */
+function OnboardingBackgroundPreview() {
+  const cardWidth = SCREEN_WIDTH * 0.72;
+  const cardHeight = 64;
+  const offset = 12;
+  const left = (SCREEN_WIDTH - cardWidth) / 2;
   return (
-    <View style={styles.cardsContainer}>
-      {cards.map((index) => (
+    <View style={styles.bgPreview} pointerEvents="none">
+      {CARD_THEMES.map((t, i) => (
         <View
-          key={index}
+          key={i}
           style={[
-            styles.card,
+            styles.bgPreviewCard,
             {
-              top: index * 8,
-              transform: [{ rotate: `${index === 0 ? 0 : index === 1 ? -3 : 3}deg` }],
-              zIndex: 3 - index,
+              backgroundColor: t.bg,
+              top: 88 + i * offset,
+              left,
+              width: cardWidth,
+              height: cardHeight,
+              opacity: 0.72,
+              zIndex: i,
             },
           ]}
-        >
-          <View style={styles.cardDot} />
-          <View style={styles.cardLine} />
-          <View style={[styles.cardLine, { width: 128 }]} />
-        </View>
+        />
       ))}
     </View>
   );
 }
 
+/** Ilustración: tarjeta de pregunta con colores del home (Table Talks) */
+function QuestionCardVisual() {
+  const theme = CARD_THEMES[3];
+  return (
+    <View style={[styles.questionCardWrap, { backgroundColor: theme.bg }]}>
+      <View style={[styles.questionCardPill, { borderColor: theme.text }]}>
+        <Text style={[styles.questionCardPillText, { color: theme.text }]}>
+          Table Talks
+        </Text>
+      </View>
+      <Text style={[styles.questionCardText, { color: theme.text }]} numberOfLines={2}>
+        How do you think people see you?
+      </Text>
+    </View>
+  );
+}
+
 function SwipeVisual() {
+  const theme = CARD_THEMES[2];
   return (
     <View style={styles.swipeContainer}>
-      <View style={styles.swipeCard}>
-        <Text style={styles.swipeText}>
-          What everyday object would you like to talk?
+      <View style={[styles.swipeCard, { backgroundColor: theme.bg }]}>
+        <Text style={[styles.swipeText, { color: theme.text }]}>
+          What everyday object would you like to talk about?
         </Text>
       </View>
     </View>
@@ -219,16 +251,63 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: SPACING.lg,
+    position: 'relative',
+  },
+  bgPreview: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 0,
+  },
+  bgPreviewCard: {
+    position: 'absolute',
+    borderRadius: BORDER_RADIUS['2xl'],
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 2,
   },
   visualContainer: {
-    height: 200,
+    minHeight: 200,
     marginBottom: SPACING['3xl'],
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1,
+  },
+  questionCardWrap: {
+    width: SCREEN_WIDTH - SPACING.lg * 4,
+    borderRadius: BORDER_RADIUS['2xl'],
+    padding: SPACING.lg,
+    minHeight: 160,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  questionCardPill: {
+    alignSelf: 'flex-start',
+    backgroundColor: 'transparent',
+    paddingVertical: 6,
+    paddingHorizontal: SPACING.md,
+    borderRadius: BORDER_RADIUS.full,
+    borderWidth: 1,
+    marginBottom: SPACING.md,
+  },
+  questionCardPillText: {
+    fontSize: 13,
+    fontFamily: FONTS.inter.regular,
+  },
+  questionCardText: {
+    fontSize: 18,
+    fontFamily: FONTS.inter.regular,
+    textAlign: 'center',
+    lineHeight: 26,
+    paddingHorizontal: SPACING.sm,
   },
   textContainer: {
     alignItems: 'center',
     maxWidth: 400,
+    zIndex: 1,
   },
   headline: {
     fontSize: FONT_SIZES['3xl'],
@@ -269,7 +348,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonPrimary: {
-    backgroundColor: COLORS.accent.primary,
+    backgroundColor: PAGINATION_ACTIVE_COLOR,
   },
   buttonSecondary: {
     backgroundColor: COLORS.card.background,
@@ -285,41 +364,6 @@ const styles = StyleSheet.create({
   },
   buttonTextSecondary: {
     color: COLORS.text.primary,
-  },
-  // Cards Visual
-  cardsContainer: {
-    width: 256,
-    height: 160,
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  card: {
-    position: 'absolute',
-    backgroundColor: COLORS.card.background,
-    borderRadius: BORDER_RADIUS['2xl'],
-    padding: SPACING.md,
-    width: 256,
-    height: 80,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  cardDot: {
-    width: 8,
-    height: 8,
-    borderRadius: BORDER_RADIUS.full,
-    backgroundColor: COLORS.accent.primary,
-    marginBottom: SPACING.sm,
-  },
-  cardLine: {
-    height: 6,
-    width: 96,
-    backgroundColor: COLORS.background.cool,
-    borderRadius: BORDER_RADIUS.sm,
-    marginBottom: 4,
   },
   // Swipe Visual
   swipeContainer: {
