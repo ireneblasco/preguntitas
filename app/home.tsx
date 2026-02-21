@@ -121,9 +121,9 @@ export default function Home() {
               <Text style={styles.appName}>Shallow</Text>
             </View>
             <View style={styles.headerRight}>
-              <Text style={styles.lastUpdated} numberOfLines={2}>
-                {formatLastFetched(lastFetchedAt)}
-              </Text>
+              <View style={styles.logoPlaceholder}>
+                <Text style={styles.logoPlaceholderText}>◎</Text>
+              </View>
             </View>
           </View>
 
@@ -260,17 +260,23 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.xl,
   },
   headerLeft: { flex: 1 },
-  headerRight: { maxWidth: '50%' },
+  headerRight: { justifyContent: 'flex-end' },
   appName: {
     fontSize: FONT_SIZES['3xl'],
     fontFamily: FONTS.playfair.bold,
     color: COLORS.text.primary,
   },
-  lastUpdated: {
-    fontSize: FONT_SIZES.xs,
-    fontFamily: FONTS.inter.regular,
+  logoPlaceholder: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: COLORS.border.light,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoPlaceholderText: {
+    fontSize: 22,
     color: COLORS.text.secondary,
-    textAlign: 'right',
   },
   sectionRow: {
     flexDirection: 'row',
