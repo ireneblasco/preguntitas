@@ -5,7 +5,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
 import { useQuestions } from '@/contexts/QuestionsContext';
+import { useMemo } from 'react';
 import * as onboardingUtils from '@/utils/onboarding';
+
+/** Paleta "Crafting a Better World": fondos y texto con buen contraste */
+const CARD_THEMES = [
+  { bg: '#BEE656', text: '#3C6112' },   // Ethical: lima / verde bosque
+  { bg: '#EAC1CC', text: '#6B2A2D' },   // Sophisticated: rosa polvo / burdeos
+  { bg: '#3E614A', text: '#BEE656' },   // Transformative: verde bosque / lima
+  { bg: '#FDCF42', text: '#6B2A2D' },   // Nature-inspired: amarillo dorado / burdeos
+] as const;
 
 function formatLastFetched(iso: string | null): string {
   if (!iso) return 'Using bundled questions';
@@ -17,15 +26,25 @@ function formatLastFetched(iso: string | null): string {
   }
 }
 
+type MomentOption = { id: string; name: string; emoji: string };
+
 export default function Home() {
   const router = useRouter();
-  const { momentOptions, lastFetchedAt, refetch } = useQuestions();
-  const [selectedMoment, setSelectedMoment] = useState<string>(momentOptions[0]?.id ?? '');
+  const { momentOptions, questions, lastFetchedAt, refetch } = useQuestions();
+  const [expandedId, setExpandedId] = useState<string | null>(momentOptions[0]?.id ?? null);
+
+  const questionCountByMoment = useMemo(() => {
+    const count: Record<string, number> = {};
+    momentOptions.forEach((m) => {
+      count[m.id] = questions.filter((q) => q.moment.includes(m.id)).length;
+    });
+    return count;
+  }, [momentOptions, questions]);
 
   const isDevelopment = __DEV__;
 
-  const handleStart = () => {
-    router.push({ pathname: '/questions', params: { moment: selectedMoment } });
+  const handleStart = (momentId: string) => {
+    router.push({ pathname: '/questions', params: { moment: momentId } });
   };
 
   const handleFavorites = () => {
@@ -94,217 +113,248 @@ export default function Home() {
     >
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.header}>
-          <Text style={styles.title}>Shallow</Text>
-          <Text style={styles.subtitle}>Where conversations begin</Text>
-        </View>
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.header}>
+            <View style={styles.headerLeft}>
+              <Text style={styles.appName}>Shallow</Text>
+            </View>
+            <View style={styles.headerRight}>
+              <Text style={styles.lastUpdated} numberOfLines={2}>
+                {formatLastFetched(lastFetchedAt)}
+              </Text>
+            </View>
+          </View>
 
-        <View style={styles.selectorContainer}>
-          <Text style={styles.label}>What's the moment?</Text>
-          <MomentSelector
-            value={selectedMoment}
-            onChange={setSelectedMoment}
-            momentOptions={momentOptions}
-          />
-        </View>
+          <View style={styles.sectionRow}>
+            <Text style={styles.sectionTitle}>
+              Moments ({momentOptions.length})
+            </Text>
+            <Pressable onPress={handleFavorites} style={({ pressed }) => pressed && { opacity: 0.7 }}>
+              <Text style={styles.seeAll}>My favorites</Text>
+            </Pressable>
+          </View>
 
-        <View style={styles.buttonsContainer}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.button,
-              styles.buttonPrimary,
-              pressed && styles.buttonPressed,
-            ]}
-            onPress={handleStart}
-          >
-            <Text style={[styles.buttonText, styles.buttonTextPrimary]}>Start</Text>
-          </Pressable>
+          <View style={styles.cardList}>
+            {momentOptions.map((option, index) => {
+              const theme = CARD_THEMES[index % CARD_THEMES.length];
+              return (
+                <MomentCard
+                  key={option.id}
+                  option={option}
+                  theme={theme}
+                  questionCount={questionCountByMoment[option.id] ?? 0}
+                  isExpanded={expandedId === option.id}
+                  onPress={() => setExpandedId(expandedId === option.id ? null : option.id)}
+                  onStart={() => handleStart(option.id)}
+                />
+              );
+            })}
+          </View>
+        </ScrollView>
 
-          <Pressable
-            style={({ pressed }) => [
-              styles.button,
-              styles.buttonPink,
-              pressed && styles.buttonPressed,
-            ]}
-            onPress={handleFavorites}
-          >
-            <Text style={[styles.buttonText, styles.buttonTextDark]}>My favorites</Text>
-          </Pressable>
-        </View>
-      </ScrollView>
-
-      {/* Floating Dev Button - only visible in development */}
-      {isDevelopment && (
-        <View style={styles.devButtonContainer}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.devButton,
-              pressed && styles.devButtonPressed,
-            ]}
-            onPress={handleDevMenu}
-          >
-            <Text style={styles.devBadge}>DEV</Text>
-            <Text style={styles.devButtonText}>Dev Menu</Text>
-          </Pressable>
-        </View>
-      )}
+        {isDevelopment && (
+          <View style={styles.devButtonContainer}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.devButton,
+                pressed && styles.devButtonPressed,
+              ]}
+              onPress={handleDevMenu}
+            >
+              <Text style={styles.devBadge}>DEV</Text>
+              <Text style={styles.devButtonText}>Dev Menu</Text>
+            </Pressable>
+          </View>
+        )}
       </SafeAreaView>
     </LinearGradient>
   );
 }
 
-function MomentSelector({
-  value,
-  onChange,
-  momentOptions,
+const CARD_HEIGHT = 112;
+
+function MomentCard({
+  option,
+  theme,
+  questionCount,
+  isExpanded,
+  onPress,
+  onStart,
 }: {
-  value: string;
-  onChange: (value: string) => void;
-  momentOptions: Array<{ id: string; name: string; emoji: string }>;
+  option: MomentOption;
+  theme: { bg: string; text: string };
+  questionCount: number;
+  isExpanded: boolean;
+  onPress: () => void;
+  onStart: () => void;
 }) {
   return (
-    <View style={styles.chipContainer}>
-      {momentOptions.map((option) => {
-        const isSelected = value === option.id;
-        return (
-          <Pressable
-            key={option.id}
-            style={({ pressed }) => [
-              styles.chip,
-              isSelected ? styles.chipSelected : styles.chipUnselected,
-              pressed && styles.chipPressed,
-            ]}
-            onPress={() => onChange(option.id)}
-          >
-            <Text
-              style={[
-                styles.chipText,
-                isSelected ? styles.chipTextSelected : styles.chipTextUnselected,
-              ]}
-            >
+    <Pressable
+      style={[
+        styles.card,
+        {
+          backgroundColor: theme.bg,
+          height: CARD_HEIGHT,
+        },
+      ]}
+      onPress={onPress}
+    >
+      <View style={styles.cardContent}>
+        <Text
+          style={[styles.cardTitle, { color: theme.text }]}
+          numberOfLines={isExpanded ? 2 : 1}
+        >
+          {option.name}
+        </Text>
+        <View style={styles.tagsRow}>
+          <View style={[styles.tagPill, { borderColor: theme.text }]}>
+            <Text style={[styles.tagText, { color: theme.text }]}>
               {option.emoji} {option.name}
             </Text>
-          </Pressable>
-        );
-      })}
-    </View>
+          </View>
+          <View style={[styles.tagPill, styles.countPill, { borderColor: theme.text }]}>
+            <Text style={[styles.tagText, { color: theme.text }]}>
+              {questionCount}
+            </Text>
+          </View>
+        </View>
+        {isExpanded && (
+          <View style={styles.cardExpanded}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.startButton,
+                { backgroundColor: theme.text },
+                pressed && styles.startButtonPressed,
+              ]}
+              onPress={(e) => {
+                e.stopPropagation();
+                onStart();
+              }}
+            >
+              <Text style={[styles.startButtonText, { color: theme.bg }]}>
+                Start →
+              </Text>
+            </Pressable>
+          </View>
+        )}
+      </View>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  gradient: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
+  gradient: { flex: 1 },
+  container: { flex: 1 },
   scrollContent: {
     flexGrow: 1,
-    justifyContent: 'center',
     paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING['2xl'],
+    paddingTop: SPACING.md,
+    paddingBottom: SPACING['3xl'],
   },
   header: {
-    alignItems: 'center',
-    marginBottom: SPACING['3xl'],
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: SPACING.xl,
   },
-  title: {
-    fontSize: FONT_SIZES['4xl'],
+  headerLeft: { flex: 1 },
+  headerRight: { maxWidth: '50%' },
+  appName: {
+    fontSize: FONT_SIZES['3xl'],
     fontFamily: FONTS.playfair.bold,
     color: COLORS.text.primary,
-    marginBottom: SPACING.md,
-    textAlign: 'center',
   },
-  subtitle: {
+  lastUpdated: {
+    fontSize: FONT_SIZES.xs,
+    fontFamily: FONTS.inter.regular,
+    color: COLORS.text.secondary,
+    textAlign: 'right',
+  },
+  sectionRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: SPACING.md,
+  },
+  sectionTitle: {
     fontSize: FONT_SIZES.base,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
-    textAlign: 'center',
+    color: COLORS.text.primary,
   },
-  selectorContainer: {
-    marginBottom: SPACING['3xl'],
-  },
-  label: {
+  seeAll: {
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
-    textAlign: 'center',
-    marginBottom: SPACING.md,
+    color: COLORS.accent.primary,
   },
-  chipContainer: {
+  cardList: {
+    gap: SPACING.md,
+    marginBottom: SPACING['2xl'],
+  },
+  card: {
+    width: '100%',
+    borderRadius: BORDER_RADIUS['2xl'],
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.md,
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  cardContent: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  cardTitle: {
+    fontSize: FONT_SIZES.xl,
+    fontFamily: FONTS.playfair.bold,
+    marginBottom: SPACING.sm,
+  },
+  tagsRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    alignItems: 'center',
     gap: SPACING.sm,
+    marginTop: SPACING.xs,
   },
-  chip: {
-    paddingHorizontal: SPACING.md,
+  tagPill: {
+    paddingHorizontal: SPACING.sm,
+    paddingVertical: SPACING.xs,
+    borderRadius: BORDER_RADIUS.full,
+    borderWidth: 1,
+  },
+  countPill: {
+    minWidth: 28,
+    alignItems: 'center',
+  },
+  tagText: {
+    fontSize: FONT_SIZES.xs,
+    fontFamily: FONTS.inter.regular,
+  },
+  cardExpanded: {
+    marginTop: SPACING.sm,
+    alignItems: 'flex-end',
+  },
+  startButton: {
     paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.lg,
     borderRadius: BORDER_RADIUS.full,
   },
-  chipSelected: {
-    backgroundColor: COLORS.accent.primary,
-    ...SHADOWS.sm,
-  },
-  chipUnselected: {
-    backgroundColor: COLORS.card.background,
-    borderWidth: 1,
-    borderColor: COLORS.border.light,
-  },
-  chipPressed: {
-    opacity: 0.8,
-  },
-  chipText: {
+  startButtonPressed: { opacity: 0.9 },
+  startButtonText: {
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
   },
-  chipTextSelected: {
-    color: COLORS.text.white,
-  },
-  chipTextUnselected: {
-    color: COLORS.text.primary,
-  },
-  buttonsContainer: {
-    gap: SPACING.md,
-  },
-  button: {
-    paddingVertical: SPACING.md,
-    paddingHorizontal: SPACING.xl,
-    borderRadius: BORDER_RADIUS.full,
-    alignItems: 'center',
-    ...SHADOWS.sm,
-  },
-  buttonPrimary: {
-    backgroundColor: COLORS.accent.primary,
-  },
-  buttonPink: {
-    backgroundColor: COLORS.accent.secondary,
-  },
-  buttonPressed: {
-    opacity: 0.9,
-    transform: [{ scale: 0.98 }],
-  },
-  buttonText: {
-    fontSize: FONT_SIZES.base,
-    fontFamily: FONTS.inter.regular,
-  },
-  buttonTextPrimary: {
-    color: COLORS.text.white,
-  },
-  buttonTextDark: {
-    color: COLORS.text.primary,
-  },
-  // Dev Button (matches preguntitas web: centered pill)
   devButtonContainer: {
     position: 'absolute',
     bottom: SPACING.md,
     left: 0,
     right: 0,
     alignItems: 'center',
-    zIndex: 100,
+    zIndex: 200,
   },
   devButton: {
     flexDirection: 'row',

@@ -22,8 +22,12 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 100;
 
 export default function Questions() {
-  const { moment: momentParam } = useLocalSearchParams<{ moment?: string }>();
-  const moment = typeof momentParam === 'string' ? momentParam : undefined;
+  const params = useLocalSearchParams<{ moment?: string; selectedmoment?: string }>();
+  const moment =
+    (typeof params.moment === 'string' ? params.moment : null) ??
+    (typeof (params as Record<string, unknown>).selectedmoment === 'string'
+      ? ((params as Record<string, unknown>).selectedmoment as string)
+      : undefined);
   const router = useRouter();
   const { questions } = useQuestions();
   const { toggleFavorite, isFavorite } = useFavorites();
