@@ -82,6 +82,10 @@ export default function Questions() {
     setQuestionIndex((prev) => prev + 1);
   };
 
+  const handlePrevious = () => {
+    setQuestionIndex((prev) => Math.max(0, prev - 1));
+  };
+
   const handleFavorite = async () => {
     if (currentQuestion) await toggleFavorite(currentQuestion.id);
   };
@@ -92,11 +96,16 @@ export default function Questions() {
     })
     .onEnd((event) => {
       if (Math.abs(event.translationX) > SWIPE_THRESHOLD) {
+        const goRight = event.translationX > 0;
         translateX.value = withTiming(
-          event.translationX > 0 ? SCREEN_WIDTH : -SCREEN_WIDTH,
+          goRight ? SCREEN_WIDTH : -SCREEN_WIDTH,
           { duration: 180 },
           () => {
-            runOnJS(handleNext)();
+            if (goRight) {
+              runOnJS(handlePrevious)();
+            } else {
+              runOnJS(handleNext)();
+            }
             translateX.value = 0;
           }
         );
@@ -212,19 +221,41 @@ export default function Questions() {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.hint}>Swipe or tap Next</Text>
-          <Pressable
-            style={({ pressed }) => [
-              styles.nextBtn,
-              { backgroundColor: momentTheme.text },
-              pressed && styles.nextBtnPressed,
-            ]}
-            onPress={handleNext}
-          >
-            <Text style={[styles.nextBtnLabel, { color: momentTheme.bg }]}>
-              Next
-            </Text>
-          </Pressable>
+          <Text style={styles.hint}>Swipe or tap to change question</Text>
+          <View style={styles.footerButtons}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.prevBtn,
+                { borderColor: momentTheme.text },
+                questionIndex === 0 && styles.btnDisabled,
+                pressed && styles.nextBtnPressed,
+              ]}
+              onPress={handlePrevious}
+              disabled={questionIndex === 0}
+            >
+              <Text
+                style={[
+                  styles.prevBtnLabel,
+                  { color: momentTheme.text },
+                  questionIndex === 0 && styles.btnDisabledText,
+                ]}
+              >
+                Previous
+              </Text>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [
+                styles.nextBtn,
+                { backgroundColor: momentTheme.text },
+                pressed && styles.nextBtnPressed,
+              ]}
+              onPress={handleNext}
+            >
+              <Text style={[styles.nextBtnLabel, { color: momentTheme.bg }]}>
+                Next
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </SafeAreaView>
     </View>
@@ -337,7 +368,26 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: SPACING.md,
   },
+  footerButtons: {
+    flexDirection: 'row',
+    gap: SPACING.md,
+    alignItems: 'stretch',
+  },
+  prevBtn: {
+    flex: 1,
+    paddingVertical: 16,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+  },
+  prevBtnLabel: {
+    fontSize: 17,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
+  },
   nextBtn: {
+    flex: 1,
     paddingVertical: 16,
     borderRadius: 14,
     alignItems: 'center',
@@ -350,6 +400,12 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: FONTS.inter.regular,
     fontWeight: '600',
+  },
+  btnDisabled: {
+    opacity: 0.4,
+  },
+  btnDisabledText: {
+    opacity: 0.8,
   },
   emptyState: {
     flex: 1,
