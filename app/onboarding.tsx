@@ -32,14 +32,22 @@ const CARD_THEMES = [
   { bg: '#FDCF42', text: '#6B2A2D' },
 ] as const;
 
+/** Categorías como en home (name + emoji) */
+const MOMENT_OPTIONS = [
+  { name: 'Date Night', emoji: '🌙' },
+  { name: 'Deep Talk', emoji: '🧠' },
+  { name: 'Road Trip', emoji: '🚗' },
+  { name: 'Table Talks', emoji: '🍷' },
+] as const;
+
 const SCREENS = [
   {
     headline: 'Questions that spark real conversations.',
     subtext: 'Discover fun, deep, and thoughtful questions in one place.',
   },
   {
-    headline: 'Tap or swipe to explore.',
-    subtext: 'Save favorites and enjoy conversations with whoever you want.',
+    headline: 'Pick your moment.',
+    subtext: 'Road trip with friends? Date night? Deep talk or table talks? Choose the category that fits where you are.',
     cta: "Let's Go",
   },
 ];
@@ -85,7 +93,7 @@ export default function Onboarding() {
       <View style={[styles.slide, { width: SCREEN_WIDTH }]}>
         {index === 0 && <OnboardingBackgroundPreview />}
         <View style={styles.visualContainer}>
-          {index === 0 ? <QuestionCardVisual /> : <SwipeVisual />}
+          {index === 0 ? <QuestionCardVisual /> : <MomentsVisual />}
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.headline}>{item.headline}</Text>
@@ -148,7 +156,7 @@ export default function Onboarding() {
   );
 }
 
-const PAGINATION_ACTIVE_COLOR = '#6B2A2D';
+const PAGINATION_ACTIVE_COLOR = '#1C1C1E';
 
 function PaginationDot({ index, currentIndex }: { index: number; currentIndex: number }) {
   const isActive = index === currentIndex;
@@ -214,15 +222,24 @@ function QuestionCardVisual() {
   );
 }
 
-function SwipeVisual() {
-  const theme = CARD_THEMES[2];
+/** Ilustración: categorías del home con emoji + nombre y colores de la paleta */
+function MomentsVisual() {
   return (
-    <View style={styles.swipeContainer}>
-      <View style={[styles.swipeCard, { backgroundColor: theme.bg }]}>
-        <Text style={[styles.swipeText, { color: theme.text }]}>
-          What everyday object would you like to talk about?
-        </Text>
-      </View>
+    <View style={styles.momentsWrap}>
+      {MOMENT_OPTIONS.map((moment, i) => {
+        const theme = CARD_THEMES[i];
+        return (
+          <View
+            key={moment.name}
+            style={[styles.momentCard, { backgroundColor: theme.bg }]}
+          >
+            <Text style={styles.momentEmoji}>{moment.emoji}</Text>
+            <Text style={[styles.momentName, { color: theme.text }]} numberOfLines={1}>
+              {moment.name}
+            </Text>
+          </View>
+        );
+      })}
     </View>
   );
 }
@@ -304,6 +321,37 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     paddingHorizontal: SPACING.sm,
   },
+  momentsWrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: SPACING.md,
+    paddingHorizontal: SPACING.sm,
+    maxWidth: 320,
+  },
+  momentCard: {
+    width: '47%',
+    minWidth: 140,
+    borderRadius: BORDER_RADIUS['2xl'],
+    padding: SPACING.lg,
+    minHeight: 88,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  momentEmoji: {
+    fontSize: 28,
+    marginBottom: SPACING.xs,
+  },
+  momentName: {
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.regular,
+    textAlign: 'center',
+  },
   textContainer: {
     alignItems: 'center',
     maxWidth: 400,
@@ -364,33 +412,5 @@ const styles = StyleSheet.create({
   },
   buttonTextSecondary: {
     color: COLORS.text.primary,
-  },
-  // Swipe Visual
-  swipeContainer: {
-    width: 288,
-    height: 180,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  swipeCard: {
-    backgroundColor: COLORS.card.background,
-    borderRadius: BORDER_RADIUS['2xl'],
-    padding: SPACING.lg,
-    minHeight: 180,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  swipeText: {
-    fontSize: FONT_SIZES.lg,
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.text.primary,
-    textAlign: 'center',
-    lineHeight: FONT_SIZES.lg * 1.5,
   },
 });
