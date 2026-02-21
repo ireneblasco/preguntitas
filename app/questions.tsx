@@ -16,6 +16,7 @@ import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
 import { useQuestions } from '@/contexts/QuestionsContext';
 import { useFavorites } from '@/utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
@@ -37,6 +38,7 @@ export default function Questions() {
       ? ((params as Record<string, unknown>).selectedmoment as string)
       : undefined);
   const router = useRouter();
+  const { t } = useTranslation();
   const { questions, momentOptions } = useQuestions();
   const { toggleFavorite, isFavorite } = useFavorites();
 
@@ -139,7 +141,7 @@ export default function Questions() {
             </Pressable>
           </View>
           <View style={styles.emptyState}>
-            <Text style={styles.emptyText}>Select a moment from home to start</Text>
+            <Text style={styles.emptyText}>{t('questions.emptySelectMoment')}</Text>
           </View>
         </SafeAreaView>
       </View>
@@ -156,7 +158,7 @@ export default function Questions() {
             </Pressable>
           </View>
           <View style={styles.emptyState}>
-            <Text style={styles.emptyText}>No questions for this moment</Text>
+            <Text style={styles.emptyText}>{t('questions.emptyNoQuestions')}</Text>
           </View>
         </SafeAreaView>
       </View>
@@ -225,7 +227,7 @@ export default function Questions() {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.hint}>Swipe or tap to change question</Text>
+          <Text style={styles.hint}>{t('questions.hint')}</Text>
           <View style={styles.footerButtons}>
             <Pressable
               style={({ pressed }) => [
@@ -244,7 +246,7 @@ export default function Questions() {
                   questionIndex === 0 && styles.btnDisabledText,
                 ]}
               >
-                Previous
+                {t('questions.previous')}
               </Text>
             </Pressable>
             <Pressable
@@ -256,7 +258,7 @@ export default function Questions() {
               onPress={handleNext}
             >
               <Text style={[styles.nextBtnLabel, { color: momentTheme.bg }]}>
-                Next
+                {t('questions.next')}
               </Text>
             </Pressable>
           </View>

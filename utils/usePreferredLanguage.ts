@@ -1,22 +1,23 @@
-import { useMemo } from 'react';
-import { getLocales } from 'expo-localization';
+import { useLocale } from '@/contexts/LocaleContext';
+import { getTranslationLocale, type Locale } from '@/i18n';
 
-export type QuestionLanguage = 'en' | 'es';
+export type QuestionLanguage = Locale;
 
 /**
- * Returns the preferred language for question text based on device locale.
- * Use 'en' (textEn) when the phone is in English, otherwise 'es' (textEs).
+ * Returns the preferred language for question text.
+ * Uses app locale from LocaleContext (device at start, or user choice from Settings).
  */
 export function usePreferredLanguage(): QuestionLanguage {
-  return useMemo(() => {
-    const code = getLocales()[0]?.languageCode ?? 'es';
-    return code.startsWith('en') ? 'en' : 'es';
-  }, []);
+  const { locale } = useLocale();
+  return locale;
 }
 
+/** Preguntas tienen textEn y textEs; el locale de traducción determina qué campo usar. */
 export function getQuestionText(
   question: { textEn: string; textEs: string },
   lang: QuestionLanguage
 ): string {
-  return lang === 'en' ? question.textEn : question.textEs;
+  const key = getTranslationLocale(lang);
+  const useSpanish = key === 'es' || key === 'es-MX';
+  return useSpanish ? question.textEs : question.textEn;
 }

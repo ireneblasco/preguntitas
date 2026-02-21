@@ -8,6 +8,7 @@ import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
 import { useQuestions, type Question } from '@/contexts/QuestionsContext';
 import { useFavorites } from '@/utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
+import { useTranslation } from '@/hooks/useTranslation';
 
 /** Misma paleta que home */
 const CARD_THEMES = [
@@ -27,6 +28,7 @@ function getThemeForMoment(
 
 export default function Favorites() {
   const router = useRouter();
+  const { t } = useTranslation();
   const { questions, momentOptions } = useQuestions();
   const { favorites, removeFavorite } = useFavorites();
   const lang = usePreferredLanguage();
@@ -43,7 +45,7 @@ export default function Favorites() {
         style={styles.deleteButton}
         onPress={() => removeFavorite(questionId)}
       >
-        <Text style={styles.deleteText}>Remove</Text>
+        <Text style={styles.deleteText}>{t('favorites.remove')}</Text>
       </Pressable>
     </View>
   );
@@ -80,12 +82,12 @@ export default function Favorites() {
           <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
             <Text style={styles.backLabel}>‹</Text>
           </Pressable>
-          <Text style={styles.headerTitle}>My favorites</Text>
+          <Text style={styles.headerTitle}>{t('favorites.title')}</Text>
           <View style={styles.headerRight} />
         </View>
 
         <View style={styles.sectionRow}>
-          <Text style={styles.sectionTitle}>Saved questions</Text>
+          <Text style={styles.sectionTitle}>{t('favorites.savedQuestions')}</Text>
           <Text style={styles.sectionCount}>
             {favoriteQuestions.length}
           </Text>
@@ -94,7 +96,7 @@ export default function Favorites() {
         {favoriteQuestions.length === 0 ? (
           <View style={styles.emptyWrap}>
             <Text style={styles.emptyText}>
-              Save questions by tapping the heart on any card
+              {t('favorites.emptyHint')}
             </Text>
           </View>
         ) : (

@@ -14,6 +14,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import { QuestionsProvider } from '@/contexts/QuestionsContext';
+import { LocaleProvider } from '@/contexts/LocaleContext';
 
 // Prevent the splash screen from auto-hiding (avoids "Downloading 100%" staying visible)
 SplashScreen.preventAutoHideAsync();
@@ -45,7 +46,8 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={styles.container} onLayout={onLayoutRootView}>
-      <QuestionsProvider>
+      <LocaleProvider>
+        <QuestionsProvider>
         <Stack
           screenOptions={{
             headerShown: false,
@@ -57,8 +59,10 @@ export default function RootLayout() {
           <Stack.Screen name="home" />
           <Stack.Screen name="questions" />
           <Stack.Screen name="favorites" />
+          <Stack.Screen name="settings" />
         </Stack>
-      </QuestionsProvider>
+        </QuestionsProvider>
+      </LocaleProvider>
     </GestureHandlerRootView>
   );
 }

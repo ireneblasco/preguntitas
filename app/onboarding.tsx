@@ -21,6 +21,7 @@ import Animated, {
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
 import * as onboardingUtils from '@/utils/onboarding';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -40,24 +41,25 @@ const MOMENT_OPTIONS = [
   { name: 'Table Talks', emoji: '🍷' },
 ] as const;
 
-const SCREENS = [
-  {
-    headline: 'Questions that spark real conversations.',
-    subtext: 'Discover fun, deep, and thoughtful questions in one place.',
-  },
-  {
-    headline: 'Questions for the moment you\'re in.',
-    subtext: 'Road trip, date night, deep talk — the questions are organized by context so you always get the right ones for the situation.',
-  },
-  {
-    headline: 'Swipe, go back, save.',
-    subtext: 'Pass or swipe to the next question, go back to the previous one, and tap the heart to save your favorites.',
-    cta: "Let's Go",
-  },
-];
+type OnboardingScreen = { headline: string; subtext: string; cta?: string };
+
+function useOnboardingScreens(): OnboardingScreen[] {
+  const { t } = useTranslation();
+  return [
+    { headline: t('onboarding.screens.0.headline'), subtext: t('onboarding.screens.0.subtext') },
+    { headline: t('onboarding.screens.1.headline'), subtext: t('onboarding.screens.1.subtext') },
+    {
+      headline: t('onboarding.screens.2.headline'),
+      subtext: t('onboarding.screens.2.subtext'),
+      cta: t('onboarding.screens.2.cta'),
+    },
+  ];
+}
 
 export default function Onboarding() {
   const router = useRouter();
+  const { t } = useTranslation();
+  const SCREENS = useOnboardingScreens();
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
   const scrollX = useSharedValue(0);
@@ -92,7 +94,7 @@ export default function Onboarding() {
     itemVisiblePercentThreshold: 50,
   };
 
-  const renderItem = ({ item, index }: { item: typeof SCREENS[0]; index: number }) => {
+  const renderItem = ({ item, index }: { item: OnboardingScreen; index: number }) => {
     return (
       <View style={[styles.slide, { width: SCREEN_WIDTH }]}>
         {index === 0 && <OnboardingBackgroundPreview />}
@@ -116,7 +118,7 @@ export default function Onboarding() {
     >
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <Pressable style={styles.skipButton} onPress={handleSkip}>
-          <Text style={styles.skipText}>Skip</Text>
+          <Text style={styles.skipText}>{t('onboarding.skip')}</Text>
         </Pressable>
 
       <FlatList
@@ -153,7 +155,7 @@ export default function Onboarding() {
                 : styles.buttonTextSecondary,
             ]}
           >
-            {currentIndex === SCREENS.length - 1 ? SCREENS[SCREENS.length - 1].cta : 'Next'}
+            {currentIndex === SCREENS.length - 1 ? SCREENS[SCREENS.length - 1].cta : t('onboarding.next')}
           </Text>
         </Pressable>
       </View>

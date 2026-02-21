@@ -1,7 +1,7 @@
-// Auto-generated from Notion on 2026-02-14T21:21:49.893Z
+// Auto-generated from Notion on 2026-02-21T06:52:28.460Z
 // Do not edit manually - changes will be overwritten
 
-export type MomentType = "Date Night 🌙" | "Deep Talk 🧠" | "Road Trip 🚗" | "Table Talks 🍷";
+export type MomentType = "Date Night 🌙" | "Deep Talk 🧠" | "Ikigai 🌸" | "Road Trip 🚗" | "Table Talks 🍷";
 
 export const momentOptions: Array<{
   id: MomentType;
@@ -10,7 +10,8 @@ export const momentOptions: Array<{
 }> = [
   { id: "Date Night 🌙", name: "Date Night", emoji: "🌙" },
   { id: "Deep Talk 🧠", name: "Deep Talk", emoji: "🧠" },
-  { id: "Road Trip 🚗", name: "Road Trip", emoji: "🌎" },
+  { id: "Ikigai 🌸", name: "Ikigai", emoji: "🌸" },
+  { id: "Road Trip 🚗", name: "Road Trip", emoji: "🚗" },
   { id: "Table Talks 🍷", name: "Table Talks", emoji: "🍷" }
 ];
 
@@ -176,6 +177,14 @@ export const questions: Question[] = [
     "moment": [
       "Road Trip 🚗",
       "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-159",
+    "textEn": "Who is the person who has let you down the most in your life?",
+    "textEs": "¿Quién es la persona que más te ha fallado en la vida?",
+    "moment": [
+      "Deep Talk 🧠"
     ]
   },
   {
@@ -422,7 +431,8 @@ export const questions: Question[] = [
     "textEn": "Where do you find meaning in your life?",
     "textEs": "¿Dónde encuentras significado en tu vida?",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
     ]
   },
   {
@@ -611,7 +621,8 @@ export const questions: Question[] = [
     "textEn": "Are you living the life of your dreams?",
     "textEs": "¿Estás viviendo la vida de tus sueños?",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
     ]
   },
   {

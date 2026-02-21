@@ -7,6 +7,7 @@ import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/co
 import { useQuestions } from '@/contexts/QuestionsContext';
 import { useMemo } from 'react';
 import * as onboardingUtils from '@/utils/onboarding';
+import { useTranslation } from '@/hooks/useTranslation';
 
 /** Paleta "Crafting a Better World": fondos y texto con buen contraste */
 const CARD_THEMES = [
@@ -16,13 +17,14 @@ const CARD_THEMES = [
   { bg: '#FDCF42', text: '#6B2A2D' },   // Nature-inspired: amarillo dorado / burdeos
 ] as const;
 
-function formatLastFetched(iso: string | null): string {
-  if (!iso) return 'Using bundled questions';
+function formatLastFetched(iso: string | null, t: (key: string) => string): string {
+  if (!iso) return t('dev.usingBundled');
   try {
     const d = new Date(iso);
-    return `Last updated: ${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    const label = t('dev.lastUpdatedLabel');
+    return `${label}: ${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
   } catch {
-    return 'Last updated: ' + iso;
+    return t('dev.lastUpdatedLabel') + ': ' + iso;
   }
 }
 
@@ -30,6 +32,7 @@ type MomentOption = { id: string; name: string; emoji: string };
 
 export default function Home() {
   const router = useRouter();
+  const { t } = useTranslation();
   const { momentOptions, questions, lastFetchedAt, refetch } = useQuestions();
   const [expandedId, setExpandedId] = useState<string | null>(momentOptions[0]?.id ?? null);
 
@@ -52,50 +55,50 @@ export default function Home() {
   };
 
   const handleDevMenu = () => {
-    const message = formatLastFetched(lastFetchedAt);
+    const message = formatLastFetched(lastFetchedAt, t);
     const fetchLatest = () => {
       refetch()
         .then((fetchedAt) => {
           if (fetchedAt == null) {
-            Alert.alert('Not configured', 'Add NOTION_API_KEY and NOTION_DATABASE_ID to .env');
+            Alert.alert(t('alerts.notConfigured'), t('alerts.notConfiguredMessage'));
           } else {
-            Alert.alert('Questions updated', formatLastFetched(fetchedAt));
+            Alert.alert(t('alerts.questionsUpdated'), formatLastFetched(fetchedAt, t));
           }
         })
         .catch((e: Error) => {
-          Alert.alert('Error', e?.message ?? 'Fetch failed');
+          Alert.alert(t('alerts.error'), e?.message ?? t('alerts.fetchFailed'));
         });
     };
 
     if (Platform.OS === 'ios') {
       Alert.alert(
-        'Developer Menu',
+        t('dev.menuTitle'),
         message,
         [
           {
-            text: 'Fetch latest questions',
+            text: t('dev.fetchLatest'),
             onPress: fetchLatest,
           },
           {
-            text: 'Reset Onboarding',
+            text: t('dev.resetOnboarding'),
             onPress: async () => {
               await onboardingUtils.resetOnboarding();
               router.replace('/');
             },
           },
-          { text: 'Cancel', style: 'cancel' },
+          { text: t('dev.cancel'), style: 'cancel' },
         ],
         { cancelable: true }
       );
     } else {
       Alert.alert(
-        'Developer Menu',
+        t('dev.menuTitle'),
         message,
         [
-          { text: 'Cancel', style: 'cancel' },
-          { text: 'Fetch latest questions', onPress: fetchLatest },
+          { text: t('dev.cancel'), style: 'cancel' },
+          { text: t('dev.fetchLatest'), onPress: fetchLatest },
           {
-            text: 'Reset Onboarding',
+            text: t('dev.resetOnboarding'),
             onPress: async () => {
               await onboardingUtils.resetOnboarding();
               router.replace('/');
@@ -118,21 +121,26 @@ export default function Home() {
         >
           <View style={styles.header}>
             <View style={styles.headerLeft}>
-              <Text style={styles.appName}>Shallow</Text>
+              <Text style={styles.appName}>{t('home.appName')}</Text>
             </View>
             <View style={styles.headerRight}>
-              <View style={styles.logoPlaceholder}>
-                <Text style={styles.logoPlaceholderText}>◎</Text>
-              </View>
+              <Pressable
+                onPress={() => router.push('/settings')}
+                style={({ pressed }) => pressed && { opacity: 0.7 }}
+              >
+                <View style={styles.logoPlaceholder}>
+                  <Text style={styles.logoPlaceholderText}>◎</Text>
+                </View>
+              </Pressable>
             </View>
           </View>
 
           <View style={styles.sectionRow}>
             <Text style={styles.sectionTitle}>
-              What's the moment?
+              {t('home.sectionTitle')}
             </Text>
             <Pressable onPress={handleFavorites} style={({ pressed }) => pressed && { opacity: 0.7 }}>
-              <Text style={styles.seeAll}>My favorites</Text>
+              <Text style={styles.seeAll}>{t('home.myFavorites')}</Text>
             </Pressable>
           </View>
 
@@ -164,7 +172,7 @@ export default function Home() {
               onPress={handleDevMenu}
             >
               <Text style={styles.devBadge}>DEV</Text>
-              <Text style={styles.devButtonText}>Dev Menu</Text>
+              <Text style={styles.devButtonText}>{t('dev.devMenu')}</Text>
             </Pressable>
           </View>
         )}
@@ -190,6 +198,7 @@ function MomentCard({
   onPress: () => void;
   onStart: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <Pressable
       style={[
@@ -234,7 +243,7 @@ function MomentCard({
               }}
             >
               <Text style={[styles.startButtonText, { color: theme.bg }]}>
-                Start →
+                {t('home.start')}
               </Text>
             </Pressable>
           </View>
