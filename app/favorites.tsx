@@ -4,11 +4,11 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
-import { useQuestions, type Question } from '@/contexts/QuestionsContext';
-import { useFavorites } from '@/utils/useFavorites';
-import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
-import { useTranslation } from '@/hooks/useTranslation';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
+import { useQuestions, type Question } from '../contexts/QuestionsContext';
+import { useFavorites } from '../utils/useFavorites';
+import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
+import { useTranslation } from '../hooks/useTranslation';
 
 /** Misma paleta que home */
 const CARD_THEMES = [
@@ -29,7 +29,7 @@ function getThemeForMoment(
 export default function Favorites() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { questions, momentOptions } = useQuestions();
+  const { questions, momentOptions, questionTextByLocale } = useQuestions();
   const { favorites, removeFavorite } = useFavorites();
   const lang = usePreferredLanguage();
 
@@ -65,7 +65,7 @@ export default function Favorites() {
             <Text style={[styles.pillText, { color: theme.text }]}>{momentLabel}</Text>
           </View>
           <Text style={[styles.questionText, { color: theme.text }]} numberOfLines={3}>
-            {getQuestionText(item, lang)}
+            {getQuestionText(item, lang, questionTextByLocale)}
           </Text>
         </View>
       </Swipeable>

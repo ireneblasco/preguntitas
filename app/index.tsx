@@ -10,9 +10,9 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES } from '@/constants';
-import * as onboardingUtils from '@/utils/onboarding';
-import { useTranslation } from '@/hooks/useTranslation';
+import { COLORS, FONTS, FONT_SIZES } from '../constants';
+import * as onboardingUtils from '../utils/onboarding';
+import { useTranslation } from '../hooks/useTranslation';
 
 export default function Index() {
   const router = useRouter();

@@ -1,15 +1,15 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Constants from 'expo-constants';
-import { questions as bundledQuestions, momentOptions as bundledMomentOptions } from '@/data/questions';
-import { getCachedQuestions, setCachedQuestions } from '@/utils/questionsCache';
-import { fetchQuestionsFromNotion } from '@/utils/notionQuestions';
+import {
+  questions as bundledQuestions,
+  momentOptions as bundledMomentOptions,
+  questionTextByLocale as bundledQuestionTextByLocale,
+} from '../data/questions';
+import { getCachedQuestions, setCachedQuestions } from '../utils/questionsCache';
+import { fetchQuestionsFromNotion, type FetchedQuestion } from '../utils/notionQuestions';
+import type { Question } from '../types/questions';
 
-export type Question = {
-  id: string;
-  textEn: string;
-  textEs: string;
-  moment: string[];
-};
+export type { Question } from '../types/questions';
 
 export type MomentOption = {
   id: string;
@@ -20,6 +20,7 @@ export type MomentOption = {
 type QuestionsContextValue = {
   questions: Question[];
   momentOptions: MomentOption[];
+  questionTextByLocale: Record<string, Record<string, string>>;
   lastFetchedAt: string | null;
   isLoading: boolean;
   refetchError: string | null;
@@ -29,10 +30,9 @@ type QuestionsContextValue = {
 const QuestionsContext = createContext<QuestionsContextValue | null>(null);
 
 export function QuestionsProvider({ children }: { children: React.ReactNode }) {
-  const [questions, setQuestions] = useState<Question[]>(bundledQuestions as Question[]);
-  const [momentOptions, setMomentOptions] = useState<MomentOption[]>(
-    bundledMomentOptions as MomentOption[]
-  );
+  const [questions, setQuestions] = useState<Question[]>(bundledQuestions);
+  const [momentOptions, setMomentOptions] = useState<MomentOption[]>(bundledMomentOptions);
+  const [questionTextByLocale, setQuestionTextByLocale] = useState(bundledQuestionTextByLocale);
   const [lastFetchedAt, setLastFetchedAt] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [refetchError, setRefetchError] = useState<string | null>(null);
@@ -42,9 +42,14 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
   const hasCredentials = Boolean(apiKey && databaseId);
 
   const applyFetchResult = useCallback(
-    (questions: Question[], momentOptions: MomentOption[], fetchedAt: string) => {
-      setQuestions(questions);
+    (fetched: FetchedQuestion[], momentOptions: MomentOption[], fetchedAt: string) => {
+      setQuestions(fetched.map((q) => ({ id: q.id, moment: q.moment })));
       setMomentOptions(momentOptions);
+      setQuestionTextByLocale((prev) => ({
+        ...prev,
+        'en-US': Object.fromEntries(fetched.map((q) => [q.id, q.text['en-US']])),
+        'es-ES': Object.fromEntries(fetched.map((q) => [q.id, q.text['es-ES']])),
+      }));
       setLastFetchedAt(fetchedAt);
       setRefetchError(null);
     },
@@ -58,8 +63,14 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       const cached = await getCachedQuestions();
       if (cancelled) return;
       if (cached) {
-        setQuestions(cached.questions);
+        setQuestions(
+          (cached.questions as Array<{ id: string; moment: string[] }>).map((q) => ({
+            id: q.id,
+            moment: q.moment,
+          }))
+        );
         setMomentOptions(cached.momentOptions);
+        if (cached.questionTextByLocale) setQuestionTextByLocale(cached.questionTextByLocale);
         setLastFetchedAt(cached.fetchedAt);
       }
     })();
@@ -79,7 +90,15 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
         const result = await fetchQuestionsFromNotion(apiKey!, databaseId!);
         if (cancelled) return;
         const fetchedAt = new Date().toISOString();
-        await setCachedQuestions(result.questions, result.momentOptions);
+        await setCachedQuestions(
+          result.questions.map((q) => ({ id: q.id, moment: q.moment })),
+          result.momentOptions,
+          {
+            ...bundledQuestionTextByLocale,
+            'en-US': Object.fromEntries(result.questions.map((q) => [q.id, q.text['en-US']])),
+            'es-ES': Object.fromEntries(result.questions.map((q) => [q.id, q.text['es-ES']])),
+          }
+        );
         if (cancelled) return;
         applyFetchResult(result.questions, result.momentOptions, fetchedAt);
       } catch (_e) {
@@ -102,7 +121,15 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
     try {
       const result = await fetchQuestionsFromNotion(apiKey!, databaseId!);
       const fetchedAt = new Date().toISOString();
-      await setCachedQuestions(result.questions, result.momentOptions);
+      await setCachedQuestions(
+        result.questions.map((q) => ({ id: q.id, moment: q.moment })),
+        result.momentOptions,
+        {
+          ...bundledQuestionTextByLocale,
+          'en-US': Object.fromEntries(result.questions.map((q) => [q.id, q.text['en-US']])),
+          'es-ES': Object.fromEntries(result.questions.map((q) => [q.id, q.text['es-ES']])),
+        }
+      );
       applyFetchResult(result.questions, result.momentOptions, fetchedAt);
       return fetchedAt;
     } catch (e) {
@@ -126,6 +153,7 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
   const value: QuestionsContextValue = {
     questions,
     momentOptions: momentOptionsDisplay,
+    questionTextByLocale,
     lastFetchedAt,
     isLoading,
     refetchError,

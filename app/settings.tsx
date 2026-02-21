@@ -3,15 +3,15 @@ import { View, Text, StyleSheet, Pressable, ScrollView, Modal } from 'react-nati
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
-import { useLocale } from '@/contexts/LocaleContext';
-import { useTranslation } from '@/hooks/useTranslation';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
+import { useLocale } from '../contexts/LocaleContext';
+import { useTranslation } from '../hooks/useTranslation';
 import {
   SETTINGS_MENU_LOCALES,
   LOCALE_DISPLAY_NAMES,
   getSettingsMenuLocale,
   type Locale,
-} from '@/i18n';
+} from '../i18n';
 
 export default function Settings() {
   const router = useRouter();

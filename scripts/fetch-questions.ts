@@ -16,11 +16,16 @@ interface NotionPage {
   };
 }
 
+// Same shape as app: Question with text by locale (en-US, es-ES from Notion)
+interface QuestionText {
+  'en-US': string;
+  'es-ES': string;
+  [key: string]: string;
+}
 interface Question {
   id: string;
-  textEn: string;
-  textEs: string;
   moment: string[];
+  text: QuestionText;
 }
 
 // Check environment variables
@@ -124,13 +129,11 @@ function mapNotionPageToQuestion(page: NotionPage): Question | null {
       return null;
     }
 
-    // Use available text as fallback
-    return {
-      id,
-      textEn: textEn || textEs, // Fallback to Spanish if English missing
-      textEs: textEs || textEn, // Fallback to English if Spanish missing
-      moment,
+    const text: QuestionText = {
+      'en-US': textEn || textEs,
+      'es-ES': textEs || textEn,
     };
+    return { id, moment, text };
   } catch (error: any) {
     console.warn(`⚠️  Error mapping question: ${error.message}`);
     return null;
@@ -185,11 +188,16 @@ export const momentOptions: Array<{
   emoji: string;
 }> = ${momentOptions};
 
+export interface QuestionText {
+  'en-US': string;
+  'es-ES': string;
+  [key: string]: string;
+}
+
 export interface Question {
   id: string;
-  textEn: string;
-  textEs: string;
   moment: MomentType[];
+  text: QuestionText;
 }
 
 export const questions: Question[] = ${JSON.stringify(questions, null, 2)};

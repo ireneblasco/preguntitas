@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { useLocale } from '@/contexts/LocaleContext';
-import { translations, getTranslationLocale } from '@/i18n';
+import { useLocale } from '../contexts/LocaleContext';
+import { translations, getTranslationLocale } from '../i18n';
 
 function getByPath(obj: unknown, path: string): unknown {
   const parts = path.split('.');

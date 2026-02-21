@@ -13,8 +13,8 @@ import {
 import * as SplashScreen from 'expo-splash-screen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
-import { QuestionsProvider } from '@/contexts/QuestionsContext';
-import { LocaleProvider } from '@/contexts/LocaleContext';
+import { QuestionsProvider } from '../contexts/QuestionsContext';
+import { LocaleProvider } from '../contexts/LocaleContext';
 
 // Prevent the splash screen from auto-hiding (avoids "Downloading 100%" staying visible)
 SplashScreen.preventAutoHideAsync();

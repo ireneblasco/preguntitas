@@ -10,7 +10,7 @@ import { questionTexts as pt } from './questions.pt';
 import { questionTexts as de } from './questions.de';
 import { questionTexts as it } from './questions.it';
 import { questionTexts as fr } from './questions.fr';
-import type { TranslationMapKey } from '@/i18n';
+import type { TranslationMapKey } from '../i18n';
 
 export type MomentType = "Date Night 🌙" | "Deep Talk 🧠" | "Ikigai 🌸" | "Road Trip 🚗" | "Table Talks 🍷";
 

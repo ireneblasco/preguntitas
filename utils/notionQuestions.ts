@@ -1,8 +1,12 @@
-export interface Question {
+import type { Question } from '../types/questions';
+
+export type { Question } from '../types/questions';
+
+/** Shape returned by Notion fetch (en-US + es-ES only). Context converts to Question[] + questionTextByLocale. */
+export interface FetchedQuestion {
   id: string;
-  textEn: string;
-  textEs: string;
   moment: string[];
+  text: { 'en-US': string; 'es-ES': string };
 }
 
 export interface MomentOption {
@@ -40,7 +44,7 @@ function extractPlainText(richText?: Array<{ plain_text: string }>): string {
   return richText.map((item) => item.plain_text).join('');
 }
 
-function mapNotionPageToQuestion(page: NotionPage): Question | null {
+function mapNotionPageToQuestion(page: NotionPage): FetchedQuestion | null {
   try {
     const props = page.properties;
     const textEn = extractPlainText(props.English?.title);
@@ -53,16 +57,18 @@ function mapNotionPageToQuestion(page: NotionPage): Question | null {
 
     return {
       id,
-      textEn: textEn || textEs,
-      textEs: textEs || textEn,
       moment,
+      text: {
+        'en-US': textEn || textEs,
+        'es-ES': textEs || textEn,
+      },
     };
   } catch {
     return null;
   }
 }
 
-function extractUniqueMoments(questions: Question[]): string[] {
+function extractUniqueMoments(questions: FetchedQuestion[]): string[] {
   const set = new Set<string>();
   questions.forEach((q) => q.moment.forEach((m) => set.add(m)));
   return Array.from(set).sort();
@@ -80,7 +86,7 @@ function buildMomentOptions(momentNames: string[]): MomentOption[] {
 }
 
 export interface FetchQuestionsResult {
-  questions: Question[];
+  questions: FetchedQuestion[];
   momentOptions: MomentOption[];
 }
 
@@ -124,7 +130,7 @@ export async function fetchQuestionsFromNotion(
 
   const questions = pages
     .map(mapNotionPageToQuestion)
-    .filter((q): q is Question => q !== null);
+    .filter((q): q is FetchedQuestion => q !== null);
   const momentNames = extractUniqueMoments(questions);
   const momentOptions = buildMomentOptions(momentNames);
 

@@ -12,11 +12,11 @@ import Animated, {
   interpolate,
   Extrapolation,
 } from 'react-native-reanimated';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
-import { useQuestions } from '@/contexts/QuestionsContext';
-import { useFavorites } from '@/utils/useFavorites';
-import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
-import { useTranslation } from '@/hooks/useTranslation';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
+import { useQuestions } from '../contexts/QuestionsContext';
+import { useFavorites } from '../utils/useFavorites';
+import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
+import { useTranslation } from '../hooks/useTranslation';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
@@ -39,7 +39,7 @@ export default function Questions() {
       : undefined);
   const router = useRouter();
   const { t } = useTranslation();
-  const { questions, momentOptions } = useQuestions();
+  const { questions, momentOptions, questionTextByLocale } = useQuestions();
   const { toggleFavorite, isFavorite } = useFavorites();
 
   const momentLabel = moment
@@ -203,7 +203,7 @@ export default function Questions() {
                     ]}
                   >
                     {currentQuestion
-                      ? getQuestionText(currentQuestion, lang)
+                      ? getQuestionText(currentQuestion, lang, questionTextByLocale)
                       : ''}
                   </Text>
                 </View>
