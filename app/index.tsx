@@ -97,14 +97,10 @@ export default function Index() {
     <Animated.View style={[styles.container, containerStyle]}>
       <LinearGradient
         colors={[
-          COLORS.splash.blue,
-          COLORS.splash.yellow,
-          COLORS.splash.pink,
-          COLORS.splash.green,
-          COLORS.splash.blue,
+          COLORS.background.primary,
+          COLORS.background.warm,
+          COLORS.background.cool,
         ]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
         style={styles.gradient}
       >
         <Animated.Text style={[styles.title, textStyle]}>
@@ -127,7 +123,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: FONT_SIZES['4xl'],
     fontFamily: FONTS.playfair.bold,
-    color: COLORS.text.white,
+    color: COLORS.text.primary,
     textAlign: 'center',
     letterSpacing: -0.5,
   },
