@@ -36,7 +36,7 @@ const CARD_THEMES = [
 const MOMENT_OPTIONS = [
   { name: 'Date Night', emoji: '🌙' },
   { name: 'Deep Talk', emoji: '🧠' },
-  { name: 'Road Trip', emoji: '🚗' },
+  { name: 'Road Trip', emoji: '🌎' },
   { name: 'Table Talks', emoji: '🍷' },
 ] as const;
 
@@ -46,8 +46,8 @@ const SCREENS = [
     subtext: 'Discover fun, deep, and thoughtful questions in one place.',
   },
   {
-    headline: 'Pick your moment.',
-    subtext: 'Road trip with friends? Date night? Deep talk or table talks? Choose the category that fits where you are.',
+    headline: 'Questions for the moment you\'re in.',
+    subtext: 'Road trip, date night, deep talk — the questions are organized by context so you always get the right ones for the situation.',
     cta: "Let's Go",
   },
 ];

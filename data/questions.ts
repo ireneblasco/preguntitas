@@ -10,7 +10,7 @@ export const momentOptions: Array<{
 }> = [
   { id: "Date Night 🌙", name: "Date Night", emoji: "🌙" },
   { id: "Deep Talk 🧠", name: "Deep Talk", emoji: "🧠" },
-  { id: "Road Trip 🚗", name: "Road Trip", emoji: "🚗" },
+  { id: "Road Trip 🚗", name: "Road Trip", emoji: "🌎" },
   { id: "Table Talks 🍷", name: "Table Talks", emoji: "🍷" }
 ];
 

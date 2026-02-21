@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import Constants from 'expo-constants';
 import { questions as bundledQuestions, momentOptions as bundledMomentOptions } from '@/data/questions';
 import { getCachedQuestions, setCachedQuestions } from '@/utils/questionsCache';
@@ -113,9 +113,19 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
     }
   }, [hasCredentials, apiKey, databaseId, applyFetchResult]);
 
+  const momentOptionsDisplay = useMemo(
+    () =>
+      momentOptions.map((m) =>
+        m.id.includes('Road Trip') || m.name === 'Road Trip'
+          ? { ...m, emoji: '🌎' }
+          : m
+      ),
+    [momentOptions]
+  );
+
   const value: QuestionsContextValue = {
     questions,
-    momentOptions,
+    momentOptions: momentOptionsDisplay,
     lastFetchedAt,
     isLoading,
     refetchError,
