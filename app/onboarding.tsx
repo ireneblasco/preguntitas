@@ -48,6 +48,10 @@ const SCREENS = [
   {
     headline: 'Questions for the moment you\'re in.',
     subtext: 'Road trip, date night, deep talk — the questions are organized by context so you always get the right ones for the situation.',
+  },
+  {
+    headline: 'Swipe, go back, save.',
+    subtext: 'Pass or swipe to the next question, go back to the previous one, and tap the heart to save your favorites.',
     cta: "Let's Go",
   },
 ];
@@ -93,7 +97,9 @@ export default function Onboarding() {
       <View style={[styles.slide, { width: SCREEN_WIDTH }]}>
         {index === 0 && <OnboardingBackgroundPreview />}
         <View style={styles.visualContainer}>
-          {index === 0 ? <QuestionCardVisual /> : <MomentsVisual />}
+          {index === 0 && <QuestionCardVisual />}
+          {index === 1 && <MomentsVisual />}
+          {index === 2 && <SwipeActionsVisual />}
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.headline}>{item.headline}</Text>
@@ -147,7 +153,7 @@ export default function Onboarding() {
                 : styles.buttonTextSecondary,
             ]}
           >
-            {currentIndex === SCREENS.length - 1 ? SCREENS[1].cta : 'Next'}
+            {currentIndex === SCREENS.length - 1 ? SCREENS[SCREENS.length - 1].cta : 'Next'}
           </Text>
         </Pressable>
       </View>
@@ -240,6 +246,26 @@ function MomentsVisual() {
           </View>
         );
       })}
+    </View>
+  );
+}
+
+/** Ilustración: swipe, volver atrás y favoritos (mismo estilo) */
+function SwipeActionsVisual() {
+  const theme = CARD_THEMES[0];
+  return (
+    <View style={styles.actionsWrap}>
+      <View style={[styles.actionCard, { backgroundColor: theme.bg }]}>
+        <View style={styles.actionRow}>
+          <View style={[styles.actionPill, { borderColor: theme.text }]}>
+            <Text style={[styles.actionLabel, { color: theme.text }]}>← Previous</Text>
+          </View>
+          <Text style={[styles.actionIcon, { color: theme.text }]}>♥</Text>
+        </View>
+        <Text style={[styles.actionHint, { color: theme.text }]} numberOfLines={1}>
+          Swipe or tap Next
+        </Text>
+      </View>
     </View>
   );
 }
@@ -349,6 +375,46 @@ const styles = StyleSheet.create({
   },
   momentName: {
     fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.regular,
+    textAlign: 'center',
+  },
+  actionsWrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: SPACING.sm,
+  },
+  actionCard: {
+    width: SCREEN_WIDTH - SPACING.lg * 4,
+    borderRadius: BORDER_RADIUS['2xl'],
+    padding: SPACING.lg,
+    minHeight: 120,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  actionRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: SPACING.md,
+  },
+  actionPill: {
+    paddingVertical: 6,
+    paddingHorizontal: SPACING.md,
+    borderRadius: BORDER_RADIUS.full,
+    borderWidth: 1,
+  },
+  actionLabel: {
+    fontSize: 13,
+    fontFamily: FONTS.inter.regular,
+  },
+  actionIcon: {
+    fontSize: 24,
+  },
+  actionHint: {
+    fontSize: 15,
     fontFamily: FONTS.inter.regular,
     textAlign: 'center',
   },
