@@ -186,21 +186,25 @@ export default function Questions() {
               ]}
             >
               <View style={styles.cardInner}>
-                <View style={[styles.categoryPill, { borderColor: momentTheme.text }]}>
-                  <Text style={[styles.categoryPillText, { color: momentTheme.text }]}>
-                    {momentLabel}
+                <View style={styles.categoryPillWrap}>
+                  <View style={[styles.categoryPill, { borderColor: momentTheme.text }]}>
+                    <Text style={[styles.categoryPillText, { color: momentTheme.text }]}>
+                      {momentLabel}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.questionBlock}>
+                  <Text
+                    style={[
+                      styles.questionText,
+                      { color: momentTheme.text },
+                    ]}
+                  >
+                    {currentQuestion
+                      ? getQuestionText(currentQuestion, lang)
+                      : ''}
                   </Text>
                 </View>
-                <Text
-                  style={[
-                    styles.questionText,
-                    { color: momentTheme.text },
-                  ]}
-                >
-                  {currentQuestion
-                    ? getQuestionText(currentQuestion, lang)
-                    : ''}
-                </Text>
                 <Pressable
                   style={styles.favBtn}
                   onPress={handleFavorite}
@@ -319,29 +323,37 @@ const styles = StyleSheet.create({
   cardInner: {
     flex: 1,
     padding: SPACING.xl,
-    paddingTop: SPACING['2xl'],
-    justifyContent: 'center',
+  },
+  categoryPillWrap: {
+    position: 'absolute',
+    top: SPACING.lg,
+    left: 0,
+    right: 0,
     alignItems: 'center',
+    zIndex: 1,
   },
   categoryPill: {
-    alignSelf: 'center',
     backgroundColor: 'transparent',
     paddingVertical: 8,
     paddingHorizontal: SPACING.lg,
     borderRadius: BORDER_RADIUS.full,
     borderWidth: 1,
-    marginBottom: SPACING.xl,
   },
   categoryPillText: {
     fontSize: 14,
     fontFamily: FONTS.inter.regular,
+  },
+  questionBlock: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: SPACING.md,
   },
   questionText: {
     fontSize: 26,
     fontFamily: FONTS.inter.regular,
     textAlign: 'center',
     lineHeight: 38,
-    paddingHorizontal: SPACING.md,
   },
   favBtn: {
     position: 'absolute',
