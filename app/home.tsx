@@ -129,7 +129,7 @@ export default function Home() {
 
           <View style={styles.sectionRow}>
             <Text style={styles.sectionTitle}>
-              Moments ({momentOptions.length})
+              What's the moment?
             </Text>
             <Pressable onPress={handleFavorites} style={({ pressed }) => pressed && { opacity: 0.7 }}>
               <Text style={styles.seeAll}>My favorites</Text>
