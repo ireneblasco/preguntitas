@@ -6,8 +6,8 @@ const ARROW_ICON_SIZE = 44;
 
 export type MomentOption = { id: string; name: string; emoji: string };
 
-const CARD_HEIGHT_COLLAPSED = 100;
-const CARD_HEIGHT_EXPANDED = 136;
+const CARD_HEIGHT_COLLAPSED = 88;
+const CARD_HEIGHT_EXPANDED = 104;
 
 type MomentCardProps = {
   option: MomentOption;
@@ -40,13 +40,14 @@ export function MomentCard({
       onPress={onPress}
     >
       <View style={styles.cardContent}>
-        {/* Top row: tag pill (left) + arrow button (right), iOS style */}
+        {/* Top row: emoji + category name (left) + arrow button (right) */}
         <View style={styles.headerRow}>
-          <View style={[styles.tagPill, { borderColor: theme.text, backgroundColor: 'rgba(255,255,255,0.25)' }]}>
-            <Text style={[styles.tagText, { color: theme.text }]} numberOfLines={1}>
-              {option.emoji} {option.name}
-            </Text>
-          </View>
+          <Text
+            style={[styles.categoryTitle, { color: theme.text }]}
+            numberOfLines={1}
+          >
+            {option.emoji} {option.name}
+          </Text>
           {showExpanded && (
             <Pressable
               style={({ pressed }) => [
@@ -64,14 +65,7 @@ export function MomentCard({
             </Pressable>
           )}
         </View>
-        {/* Title: same left edge as card padding */}
-        <Text
-          style={[styles.cardTitle, { color: theme.text }]}
-          numberOfLines={isExpanded ? 2 : 1}
-        >
-          {option.name}
-        </Text>
-        {/* Subtitle: same left alignment as title */}
+        {/* Number of questions */}
         <Text
           style={[styles.cardSubtitle, { color: theme.text }]}
           numberOfLines={1}
@@ -106,27 +100,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: SPACING.sm,
   },
-  tagPill: {
-    paddingHorizontal: SPACING.sm,
-    paddingVertical: SPACING.xs,
-    borderRadius: BORDER_RADIUS.full,
-    borderWidth: 1,
-    alignSelf: 'flex-start',
-  },
-  tagText: {
-    fontSize: FONT_SIZES.xs,
-    fontFamily: FONTS.inter.regular,
-    lineHeight: FONT_SIZES.xs * 1.35,
-    textAlign: 'left',
-    includeFontPadding: false,
-  },
-  cardTitle: {
+  categoryTitle: {
+    flex: 1,
     fontSize: FONT_SIZES.xl,
     fontFamily: FONTS.playfair.bold,
     lineHeight: FONT_SIZES.xl * 1.28,
     textAlign: 'left',
-    marginBottom: SPACING.xs,
     includeFontPadding: false,
+    marginRight: SPACING.sm,
   },
   cardSubtitle: {
     fontSize: FONT_SIZES.sm,
