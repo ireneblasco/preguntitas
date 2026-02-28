@@ -29,6 +29,7 @@ export const enUS = {
     sectionTitle: "What's the moment?",
     myFavorites: 'My favorites',
     start: 'Start →',
+    questionsLabel: 'questions',
   },
   dev: {
     menuTitle: 'Developer Menu',

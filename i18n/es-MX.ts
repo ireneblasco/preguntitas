@@ -29,6 +29,7 @@ export const esMX = {
     sectionTitle: '¿Cuál es el momento?',
     myFavorites: 'Mis favoritas',
     start: 'Empezar →',
+    questionsLabel: 'preguntas',
   },
   dev: {
     menuTitle: 'Menú de desarrollo',

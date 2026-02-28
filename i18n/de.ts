@@ -28,6 +28,7 @@ export const de = {
     sectionTitle: 'Was ist der Moment?',
     myFavorites: 'Meine Favoriten',
     start: 'Starten →',
+    questionsLabel: 'Fragen',
   },
   dev: {
     menuTitle: 'Entwickler-Menü',

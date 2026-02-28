@@ -29,6 +29,7 @@ export const enGB = {
     sectionTitle: "What's the moment?",
     myFavorites: 'My favourites',
     start: 'Start →',
+    questionsLabel: 'questions',
   },
   dev: {
     menuTitle: 'Developer menu',

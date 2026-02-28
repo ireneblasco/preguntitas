@@ -28,6 +28,7 @@ export const fr = {
     sectionTitle: 'C\'est quoi le moment ?',
     myFavorites: 'Mes favoris',
     start: 'Commencer →',
+    questionsLabel: 'questions',
   },
   dev: {
     menuTitle: 'Menu développeur',

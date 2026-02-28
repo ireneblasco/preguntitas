@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     color: COLORS.accent.primary,
   },
   cardList: {
-    gap: SPACING.md,
+    gap: SPACING.sm,
     marginBottom: SPACING['2xl'],
   },
   devButtonContainer: {

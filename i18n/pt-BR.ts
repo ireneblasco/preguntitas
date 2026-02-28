@@ -29,6 +29,7 @@ export const ptBR = {
     sectionTitle: 'Qual é o momento?',
     myFavorites: 'Meus favoritos',
     start: 'Começar →',
+    questionsLabel: 'perguntas',
   },
   dev: {
     menuTitle: 'Menu do desenvolvedor',
