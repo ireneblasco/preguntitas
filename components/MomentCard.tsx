@@ -6,8 +6,8 @@ const ARROW_ICON_SIZE = 44;
 
 export type MomentOption = { id: string; name: string; emoji: string };
 
-const CARD_HEIGHT_COLLAPSED = 88;
-const CARD_HEIGHT_EXPANDED = 104;
+const CARD_HEIGHT_COLLAPSED = 96;
+const CARD_HEIGHT_EXPANDED = 120;
 
 type MomentCardProps = {
   option: MomentOption;
