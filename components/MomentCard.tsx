@@ -2,6 +2,8 @@ import { Text, StyleSheet, Pressable, View } from 'react-native';
 import { FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
 import { useTranslation } from '../hooks/useTranslation';
 
+const ARROW_ICON_SIZE = 44;
+
 export type MomentOption = { id: string; name: string; emoji: string };
 
 const CARD_HEIGHT_COLLAPSED = 100;
@@ -38,7 +40,7 @@ export function MomentCard({
       onPress={onPress}
     >
       <View style={styles.cardContent}>
-        {/* Top row: tag pill (left) + Start button (right), iOS style */}
+        {/* Top row: tag pill (left) + arrow button (right), iOS style */}
         <View style={styles.headerRow}>
           <View style={[styles.tagPill, { borderColor: theme.text, backgroundColor: 'rgba(255,255,255,0.25)' }]}>
             <Text style={[styles.tagText, { color: theme.text }]} numberOfLines={1}>
@@ -48,17 +50,17 @@ export function MomentCard({
           {showExpanded && (
             <Pressable
               style={({ pressed }) => [
-                styles.startButton,
-                pressed && styles.startButtonPressed,
+                styles.arrowButton,
+                pressed && styles.arrowButtonPressed,
               ]}
               onPress={(e) => {
                 e.stopPropagation();
                 onStart();
               }}
+              accessibilityLabel={t('home.start')}
+              accessibilityRole="button"
             >
-              <Text style={styles.startButtonText} allowFontScaling>
-                {t('home.start')}
-              </Text>
+              <Text style={styles.arrowIcon}>↗</Text>
             </Pressable>
           )}
         </View>
@@ -134,24 +136,19 @@ const styles = StyleSheet.create({
     opacity: 0.9,
     includeFontPadding: false,
   },
-  startButton: {
-    paddingVertical: SPACING.sm,
-    paddingHorizontal: SPACING.md,
-    borderRadius: BORDER_RADIUS.full,
-    minHeight: 36,
+  arrowButton: {
+    width: ARROW_ICON_SIZE,
+    height: ARROW_ICON_SIZE,
+    borderRadius: ARROW_ICON_SIZE / 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.95)',
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.12)',
+    backgroundColor: '#1a1a1a',
   },
-  startButtonPressed: { opacity: 0.9 },
-  startButtonText: {
-    fontSize: FONT_SIZES.sm,
-    lineHeight: FONT_SIZES.sm * 1.25,
-    fontFamily: FONTS.inter.regular,
-    color: '#000',
-    textAlign: 'center',
+  arrowButtonPressed: { opacity: 0.85 },
+  arrowIcon: {
+    fontSize: 22,
+    color: '#FFF',
+    lineHeight: 22,
     includeFontPadding: false,
   },
 });
