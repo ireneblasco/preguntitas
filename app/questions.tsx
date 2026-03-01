@@ -15,7 +15,7 @@ import Animated, {
   FadeOut,
 } from 'react-native-reanimated';
 import type { ClosenessLevel } from '../types/questions';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
@@ -48,8 +48,9 @@ export default function Questions() {
   const { questions, momentOptions, questionTextByLocale } = useQuestions();
   const { toggleFavorite, isFavorite } = useFavorites();
 
+  const momentOption = moment ? momentOptions.find((m) => m.id === moment) : null;
   const momentLabel = moment
-    ? (momentOptions.find((m) => m.id === moment)?.name ?? moment)
+    ? (getCategoryDisplayName(momentOption) || momentOption?.name || moment)
     : '';
   const momentTheme = moment
     ? getThemeForMomentId(moment, momentOptions)

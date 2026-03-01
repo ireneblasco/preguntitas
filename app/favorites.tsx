@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName } from '../constants';
 import { useQuestions, type Question } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
@@ -37,7 +37,8 @@ export default function Favorites() {
   const renderItem = ({ item }: { item: Question }) => {
     const momentId = item.moment[0] ?? '';
     const theme = getThemeForMomentId(momentId, momentOptions);
-    const momentLabel = momentOptions.find((m) => m.id === momentId)?.name ?? momentId;
+    const momentOption = momentOptions.find((m) => m.id === momentId);
+    const momentLabel = getCategoryDisplayName(momentOption) || momentOption?.name || momentId;
 
     return (
       <Swipeable

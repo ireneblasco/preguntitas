@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, CARD_THEMES, sortMomentOptions } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, CARD_THEMES, sortMomentOptions, getCategoryDisplayName } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useMemo } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
@@ -79,7 +79,7 @@ export default function Home() {
               return (
                 <MomentCard
                   key={option.id}
-                  option={option}
+                  option={{ ...option, name: getCategoryDisplayName(option) || option.name }}
                   theme={theme}
                   subtitleLabel={MOMENT_LABELS[option.id] ?? MOMENT_LABELS[option.name] ?? DEFAULT_MOMENT_LABEL}
                   isExpanded={expandedId === option.id}
@@ -89,13 +89,6 @@ export default function Home() {
             })}
           </View>
         </ScrollView>
-        {/* Fade inferior estilo iOS: indica que hay más categorías abajo */}
-        <View style={styles.bottomFade} pointerEvents="none">
-          <LinearGradient
-            colors={['transparent', COLORS.background.cool]}
-            style={StyleSheet.absoluteFill}
-          />
-        </View>
       </SafeAreaView>
     </LinearGradient>
   );
@@ -142,12 +135,5 @@ const styles = StyleSheet.create({
   cardList: {
     gap: SPACING.sm,
     marginBottom: SPACING['2xl'],
-  },
-  bottomFade: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 80,
   },
 });

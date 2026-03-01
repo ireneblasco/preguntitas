@@ -47,3 +47,13 @@ export function getThemeForMomentId(
   const index = ordered.findIndex((m) => m.id === momentId);
   return CARD_THEMES[index >= 0 ? index % CARD_THEMES.length : 0];
 }
+
+/** Display name for categories (e.g. "Con mi abuela" → "Grandparents"). */
+export function getCategoryDisplayName(option: { id: string; name: string } | null | undefined): string {
+  if (!option) return '';
+  const { id, name } = option;
+  if (name === 'Con mi abuela' || name === 'Con mi abuela 👵' || id === 'Con mi abuela' || id === 'Con mi abuela 👵') {
+    return 'Grandparents';
+  }
+  return name || id || '';
+}
