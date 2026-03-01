@@ -18,7 +18,7 @@ export const de = {
       {
         headline: 'Wischen, zurück, speichern.',
         subtext:
-          'Weiterwischen zur nächsten Frage, zurück zur vorherigen, oder Herz antippen um Favoriten zu speichern.',
+          'Weiterwischen zur nächsten Frage, zurück zur vorherigen, oder Lesezeichen antippen zum Speichern.',
         cta: 'Los geht\'s',
       },
     ],
@@ -26,7 +26,7 @@ export const de = {
   home: {
     appName: 'Shallow',
     sectionTitle: 'Was ist der Moment?',
-    myFavorites: 'Meine Favoriten',
+    myFavorites: 'Gespeichert',
     start: 'Starten →',
     questionsLabel: 'Fragen',
   },
@@ -47,10 +47,10 @@ export const de = {
     fetchFailed: 'Laden fehlgeschlagen',
   },
   favorites: {
-    title: 'Meine Favoriten',
+    title: 'Gespeichert',
     savedQuestions: 'Gespeicherte Fragen',
     remove: 'Entfernen',
-    emptyHint: 'Speichere Fragen, indem du das Herz auf einer Karte antippst',
+    emptyHint: 'Speichere Fragen, indem du das Lesezeichen auf einer Karte antippst',
   },
   questions: {
     previous: 'Zurück',

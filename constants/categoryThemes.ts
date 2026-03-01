@@ -1,6 +1,6 @@
 /**
  * Single source of truth for category card and question card colors.
- * Used on home (category cards), questions (question cards), and favorites
+ * Used on home (category cards), questions (question cards), and saved
  * so each category has a consistent color identity across the app.
  */
 
@@ -37,7 +37,7 @@ export function sortMomentOptions<T extends { id: string; name: string }>(option
 
 /**
  * Returns the same theme used for this category on the homepage.
- * Use this for question cards and favorites so colors match the category card.
+ * Use this for question cards and saved screen so colors match the category card.
  */
 export function getThemeForMomentId(
   momentId: string,

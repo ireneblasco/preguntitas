@@ -19,7 +19,7 @@ export const ptBR = {
       {
         headline: 'Deslize, volte, guarde.',
         subtext:
-          'Passe ou deslize para a próxima pergunta, volte à anterior ou toque no coração para guardar as favoritas.',
+          'Passe ou deslize para a próxima pergunta, volte à anterior ou toque no marcador para guardar.',
         cta: 'Começar',
       },
     ],
@@ -27,7 +27,7 @@ export const ptBR = {
   home: {
     appName: 'Shallow',
     sectionTitle: 'Qual é o momento?',
-    myFavorites: 'Meus favoritos',
+    myFavorites: 'Salvos',
     start: 'Começar →',
     questionsLabel: 'perguntas',
   },
@@ -48,10 +48,10 @@ export const ptBR = {
     fetchFailed: 'Falha ao buscar',
   },
   favorites: {
-    title: 'Meus favoritos',
+    title: 'Salvos',
     savedQuestions: 'Perguntas salvas',
     remove: 'Remover',
-    emptyHint: 'Guarde perguntas tocando no coração em qualquer cartão',
+    emptyHint: 'Guarde perguntas tocando no marcador em qualquer cartão',
   },
   questions: {
     previous: 'Anterior',

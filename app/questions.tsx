@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useState, useEffect, useMemo } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -227,14 +228,11 @@ export default function Questions() {
                   onPress={handleFavorite}
                   hitSlop={12}
                 >
-                  <Text
-                    style={[
-                      styles.favIcon,
-                      !isFavorite(currentQuestionId) && styles.favIconInactive,
-                    ]}
-                  >
-                    {isFavorite(currentQuestionId) ? '♥' : '♡'}
-                  </Text>
+                  <Ionicons
+                    name={isFavorite(currentQuestionId) ? 'bookmark' : 'bookmark-outline'}
+                    size={24}
+                    color={isFavorite(currentQuestionId) ? '#1C1C1E' : '#C7C7CC'}
+                  />
                 </Pressable>
               </View>
             </Animated.View>
@@ -381,13 +379,6 @@ const styles = StyleSheet.create({
     top: SPACING.md,
     right: SPACING.md,
     padding: SPACING.sm,
-  },
-  favIcon: {
-    fontSize: 24,
-    color: '#FF3B30',
-  },
-  favIconInactive: {
-    color: '#C7C7CC',
   },
   footer: {
     paddingHorizontal: CARD_MARGIN,

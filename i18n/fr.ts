@@ -18,7 +18,7 @@ export const fr = {
       {
         headline: 'Glisse, reviens, enregistre.',
         subtext:
-          'Passe ou glisse à la question suivante, reviens en arrière ou appuie sur le cœur pour enregistrer tes favoris.',
+          'Passe ou glisse à la question suivante, reviens en arrière ou appuie sur le signet pour enregistrer.',
         cta: 'C\'est parti',
       },
     ],
@@ -26,7 +26,7 @@ export const fr = {
   home: {
     appName: 'Shallow',
     sectionTitle: 'C\'est quoi le moment ?',
-    myFavorites: 'Mes favoris',
+    myFavorites: 'Enregistrés',
     start: 'Commencer →',
     questionsLabel: 'questions',
   },
@@ -47,10 +47,10 @@ export const fr = {
     fetchFailed: 'Échec du chargement',
   },
   favorites: {
-    title: 'Mes favoris',
+    title: 'Enregistrés',
     savedQuestions: 'Questions enregistrées',
     remove: 'Retirer',
-    emptyHint: 'Enregistre des questions en appuyant sur le cœur sur n\'importe quelle carte',
+    emptyHint: 'Enregistre des questions en appuyant sur le signet sur n\'importe quelle carte',
   },
   questions: {
     previous: 'Précédent',

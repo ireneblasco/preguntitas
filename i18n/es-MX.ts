@@ -19,7 +19,7 @@ export const esMX = {
       {
         headline: 'Desliza, regresa, guarda.',
         subtext:
-          'Pasa o desliza a la siguiente pregunta, regresa a la anterior o toca el corazón para guardar tus favoritas.',
+          'Pasa o desliza a la siguiente pregunta, regresa a la anterior o toca el marcador para guardar.',
         cta: 'Vamos',
       },
     ],
@@ -27,7 +27,7 @@ export const esMX = {
   home: {
     appName: 'Shallow',
     sectionTitle: '¿Cuál es el momento?',
-    myFavorites: 'Mis favoritas',
+    myFavorites: 'Guardados',
     start: 'Empezar →',
     questionsLabel: 'preguntas',
   },
@@ -48,10 +48,10 @@ export const esMX = {
     fetchFailed: 'Error al traer',
   },
   favorites: {
-    title: 'Mis favoritas',
+    title: 'Guardados',
     savedQuestions: 'Preguntas guardadas',
     remove: 'Quitar',
-    emptyHint: 'Guarda preguntas tocando el corazón en cualquier tarjeta',
+    emptyHint: 'Guarda preguntas tocando el marcador en cualquier tarjeta',
   },
   questions: {
     previous: 'Anterior',

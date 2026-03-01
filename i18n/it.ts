@@ -18,7 +18,7 @@ export const it = {
       {
         headline: 'Scorri, torna indietro, salva.',
         subtext:
-          'Passa o scorri alla prossima domanda, torna alla precedente o tocca il cuore per salvare i preferiti.',
+          'Passa o scorri alla prossima domanda, torna alla precedente o tocca il segnalibro per salvare.',
         cta: 'Inizia',
       },
     ],
@@ -26,7 +26,7 @@ export const it = {
   home: {
     appName: 'Shallow',
     sectionTitle: 'Qual è il momento?',
-    myFavorites: 'I miei preferiti',
+    myFavorites: 'Salvati',
     start: 'Inizia →',
     questionsLabel: 'domande',
   },
@@ -47,10 +47,10 @@ export const it = {
     fetchFailed: 'Caricamento fallito',
   },
   favorites: {
-    title: 'I miei preferiti',
+    title: 'Salvati',
     savedQuestions: 'Domande salvate',
     remove: 'Rimuovi',
-    emptyHint: 'Salva le domande toccando il cuore su qualsiasi carta',
+    emptyHint: 'Salva le domande toccando il segnalibro su qualsiasi carta',
   },
   questions: {
     previous: 'Precedente',

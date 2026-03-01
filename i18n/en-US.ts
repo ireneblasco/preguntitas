@@ -19,7 +19,7 @@ export const enUS = {
       {
         headline: 'Swipe, go back, save.',
         subtext:
-          'Pass or swipe to the next question, go back to the previous one, and tap the heart to save your favorites.',
+          'Pass or swipe to the next question, go back to the previous one, and tap the bookmark to save.',
         cta: "Let's Go",
       },
     ],
@@ -27,7 +27,7 @@ export const enUS = {
   home: {
     appName: 'Shallow',
     sectionTitle: "What's the moment?",
-    myFavorites: 'My favorites',
+    myFavorites: 'Saved',
     start: 'Start →',
     questionsLabel: 'questions',
   },
@@ -48,10 +48,10 @@ export const enUS = {
     fetchFailed: 'Fetch failed',
   },
   favorites: {
-    title: 'My favorites',
+    title: 'Saved',
     savedQuestions: 'Saved questions',
     remove: 'Remove',
-    emptyHint: 'Save questions by tapping the heart on any card',
+    emptyHint: 'Save questions by tapping the bookmark on any card',
   },
   questions: {
     previous: 'Previous',
