@@ -12,6 +12,7 @@ import Animated, {
   interpolate,
   Extrapolation,
 } from 'react-native-reanimated';
+import type { ClosenessLevel } from '../types/questions';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
@@ -22,6 +23,16 @@ import { analytics } from '../utils/analytics';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
 const CARD_MARGIN = SPACING.md;
+
+const CLOSENESS_LABELS: Record<ClosenessLevel, string> = {
+  1: 'Level 1 Icebreaker',
+  2: 'Level 2 Personal',
+  3: 'Level 3 Vulnerable',
+};
+function getClosenessLabel(level?: ClosenessLevel): string {
+  if (level === 1 || level === 2 || level === 3) return CLOSENESS_LABELS[level];
+  return CLOSENESS_LABELS[1];
+}
 
 /** Misma paleta que home por categoría */
 const CARD_THEMES = [
@@ -195,7 +206,9 @@ export default function Questions() {
                 <View style={styles.categoryPillWrap}>
                   <View style={[styles.categoryPill, { borderColor: momentTheme.text }]}>
                     <Text style={[styles.categoryPillText, { color: momentTheme.text }]}>
-                      {momentLabel}
+                      {currentQuestion
+                        ? getClosenessLabel(currentQuestion.closenessLevel)
+                        : getClosenessLabel(1)}
                     </Text>
                   </View>
                 </View>

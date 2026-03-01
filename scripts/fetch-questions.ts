@@ -5,15 +5,10 @@ import * as path from 'path';
 // Load environment variables
 dotenv.config();
 
-// Notion API types
+// Notion API types - properties key can be name ("Closeness") or Notion internal id
 interface NotionPage {
   id: string;
-  properties: {
-    English?: { title?: Array<{ plain_text: string }> };
-    Spanish?: { rich_text?: Array<{ plain_text: string }> };
-    Moment?: { multi_select?: Array<{ name: string }> };
-    ID?: { unique_id?: { prefix: string; number: number } };
-  };
+  properties: Record<string, unknown>;
 }
 
 // Same shape as app: Question with text by locale (en-US, es-ES from Notion)
@@ -22,9 +17,12 @@ interface QuestionText {
   'es-ES': string;
   [key: string]: string;
 }
+type ClosenessLevel = 1 | 2 | 3;
+
 interface Question {
   id: string;
   moment: string[];
+  closenessLevel?: ClosenessLevel;
   text: QuestionText;
 }
 
@@ -106,9 +104,39 @@ function extractPlainText(richText?: Array<{ plain_text: string }>): string {
   return richText.map(item => item.plain_text).join('');
 }
 
+function getClosenessProp(props: Record<string, unknown>): { number?: number | null; select?: { name: string } | null } | undefined {
+  const entry = Object.entries(props).find(([key]) => key.toLowerCase().includes('closeness'));
+  if (!entry) return undefined;
+  const val = entry[1];
+  if (!val || typeof val !== 'object') return undefined;
+  const obj = val as Record<string, unknown>;
+  if ('number' in obj || 'select' in obj) return obj as { number?: number | null; select?: { name: string } | null };
+  if (obj.type === 'number' && typeof (obj as { number?: number }).number === 'number')
+    return { number: (obj as { number: number }).number };
+  if (obj.type === 'select' && (obj as { select?: { name: string } }).select)
+    return { select: (obj as { select: { name: string } }).select };
+  return undefined;
+}
+
+function parseClosenessLevel(props: Record<string, unknown>): ClosenessLevel | undefined {
+  const closeness = getClosenessProp(props);
+  if (!closeness) return undefined;
+  const num = closeness.number;
+  if (num === 1 || num === 2 || num === 3) return num;
+  const name = closeness.select?.name?.trim();
+  if (!name) return undefined;
+  const lower = name.toLowerCase();
+  if (lower.includes('icebreaker') || name === '1' || lower.includes('level 1')) return 1;
+  if (lower.includes('personal') || name === '2' || lower.includes('level 2')) return 2;
+  if (lower.includes('vulnerable') || name === '3' || lower.includes('level 3')) return 3;
+  const n = parseInt(name, 10);
+  if (n === 1 || n === 2 || n === 3) return n;
+  return undefined;
+}
+
 function mapNotionPageToQuestion(page: NotionPage): Question | null {
   try {
-    const props = page.properties;
+    const props = page.properties as Record<string, any>;
 
     // Extract English text (from title)
     const textEn = extractPlainText(props.English?.title);
@@ -117,11 +145,13 @@ function mapNotionPageToQuestion(page: NotionPage): Question | null {
     const textEs = extractPlainText(props.Spanish?.rich_text);
 
     // Extract moments from Moment multi-select
-    const moment = props.Moment?.multi_select?.map(m => m.name) || [];
+    const moment = props.Moment?.multi_select?.map((m: { name: string }) => m.name) || [];
 
     // Extract ID from unique_id
     const uniqueId = props.ID?.unique_id;
     const id = uniqueId ? `${uniqueId.prefix}-${uniqueId.number}` : page.id;
+
+    const closenessLevel = parseClosenessLevel(props);
 
     // Validate required fields
     if (!textEn && !textEs) {
@@ -133,7 +163,7 @@ function mapNotionPageToQuestion(page: NotionPage): Question | null {
       'en-US': textEn || textEs,
       'es-ES': textEs || textEn,
     };
-    return { id, moment, text };
+    return { id, moment, ...(closenessLevel != null && { closenessLevel }), text };
   } catch (error: any) {
     console.warn(`⚠️  Error mapping question: ${error.message}`);
     return null;
@@ -197,6 +227,7 @@ export interface QuestionText {
 export interface Question {
   id: string;
   moment: MomentType[];
+  closenessLevel?: 1 | 2 | 3;
   text: QuestionText;
 }
 

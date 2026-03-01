@@ -43,7 +43,13 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
 
   const applyFetchResult = useCallback(
     (fetched: FetchedQuestion[], momentOptions: MomentOption[], fetchedAt: string) => {
-      setQuestions(fetched.map((q) => ({ id: q.id, moment: q.moment })));
+      setQuestions(
+        fetched.map((q) => ({
+          id: q.id,
+          moment: q.moment,
+          ...(q.closenessLevel != null && { closenessLevel: q.closenessLevel }),
+        }))
+      );
       setMomentOptions(momentOptions);
       setQuestionTextByLocale((prev) => ({
         ...prev,
@@ -64,10 +70,13 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       if (cancelled) return;
       if (cached) {
         setQuestions(
-          (cached.questions as Array<{ id: string; moment: string[] }>).map((q) => ({
-            id: q.id,
-            moment: q.moment,
-          }))
+          (cached.questions as Array<{ id: string; moment: string[]; closenessLevel?: 1 | 2 | 3 }>).map(
+            (q) => ({
+              id: q.id,
+              moment: q.moment,
+              ...(q.closenessLevel != null && { closenessLevel: q.closenessLevel }),
+            })
+          )
         );
         setMomentOptions(cached.momentOptions);
         if (cached.questionTextByLocale) setQuestionTextByLocale(cached.questionTextByLocale);
@@ -91,7 +100,11 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
         if (cancelled) return;
         const fetchedAt = new Date().toISOString();
         await setCachedQuestions(
-          result.questions.map((q) => ({ id: q.id, moment: q.moment })),
+          result.questions.map((q) => ({
+            id: q.id,
+            moment: q.moment,
+            ...(q.closenessLevel != null && { closenessLevel: q.closenessLevel }),
+          })),
           result.momentOptions,
           {
             ...bundledQuestionTextByLocale,
@@ -122,7 +135,11 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
       const result = await fetchQuestionsFromNotion(apiKey!, databaseId!);
       const fetchedAt = new Date().toISOString();
       await setCachedQuestions(
-        result.questions.map((q) => ({ id: q.id, moment: q.moment })),
+        result.questions.map((q) => ({
+          id: q.id,
+          moment: q.moment,
+          ...(q.closenessLevel != null && { closenessLevel: q.closenessLevel }),
+        })),
         result.momentOptions,
         {
           ...bundledQuestionTextByLocale,

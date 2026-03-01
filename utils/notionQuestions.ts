@@ -2,10 +2,14 @@ import type { Question } from '../types/questions';
 
 export type { Question } from '../types/questions';
 
+/** 1 = Icebreaker, 2 = Personal, 3 = Vulnerable */
+export type ClosenessLevel = 1 | 2 | 3;
+
 /** Shape returned by Notion fetch (en-US + es-ES only). Context converts to Question[] + questionTextByLocale. */
 export interface FetchedQuestion {
   id: string;
   moment: string[];
+  closenessLevel?: ClosenessLevel;
   text: { 'en-US': string; 'es-ES': string };
 }
 
@@ -17,12 +21,15 @@ export interface MomentOption {
 
 interface NotionPage {
   id: string;
-  properties: {
-    English?: { title?: Array<{ plain_text: string }> };
-    Spanish?: { rich_text?: Array<{ plain_text: string }> };
-    Moment?: { multi_select?: Array<{ name: string }> };
-    ID?: { unique_id?: { prefix: string; number: number } };
-  };
+  properties: Record<
+    string,
+    | { title?: Array<{ plain_text: string }> }
+    | { rich_text?: Array<{ plain_text: string }> }
+    | { multi_select?: Array<{ name: string }> }
+    | { unique_id?: { prefix: string; number: number } }
+    | { select?: { name: string } | null; number?: number | null }
+    | { number?: number | null }
+  >;
 }
 
 const DEFAULT_EMOJI = '💬';
@@ -44,6 +51,38 @@ function extractPlainText(richText?: Array<{ plain_text: string }>): string {
   return richText.map((item) => item.plain_text).join('');
 }
 
+/** Find Closeness property (Notion may use name "Closeness" or internal id as key). */
+function getClosenessProp(props: NotionPage['properties']): { number?: number | null; select?: { name: string } | null } | undefined {
+  const entry = Object.entries(props).find(([key]) => key.toLowerCase().includes('closeness'));
+  if (!entry) return undefined;
+  const val = entry[1] as unknown;
+  if (!val || typeof val !== 'object') return undefined;
+  const obj = val as Record<string, unknown>;
+  if ('number' in obj || 'select' in obj) return obj as { number?: number | null; select?: { name: string } | null };
+  if (obj.type === 'number' && typeof (obj as { number?: number }).number === 'number')
+    return { number: (obj as { number: number }).number };
+  if (obj.type === 'select' && (obj as { select?: { name: string } }).select)
+    return { select: (obj as { select: { name: string } }).select };
+  return undefined;
+}
+
+/** Parse Notion Closeness (number 1–3 or select name) to 1 | 2 | 3. */
+function parseClosenessLevel(props: NotionPage['properties']): ClosenessLevel | undefined {
+  const closeness = getClosenessProp(props);
+  if (!closeness) return undefined;
+  const num = closeness.number;
+  if (num === 1 || num === 2 || num === 3) return num;
+  const name = closeness.select?.name?.trim();
+  if (!name) return undefined;
+  const lower = name.toLowerCase();
+  if (lower.includes('icebreaker') || name === '1' || lower.includes('level 1')) return 1;
+  if (lower.includes('personal') || name === '2' || lower.includes('level 2')) return 2;
+  if (lower.includes('vulnerable') || name === '3' || lower.includes('level 3')) return 3;
+  const n = parseInt(name, 10);
+  if (n === 1 || n === 2 || n === 3) return n;
+  return undefined;
+}
+
 function mapNotionPageToQuestion(page: NotionPage): FetchedQuestion | null {
   try {
     const props = page.properties;
@@ -52,12 +91,14 @@ function mapNotionPageToQuestion(page: NotionPage): FetchedQuestion | null {
     const moment = props.Moment?.multi_select?.map((m) => m.name) ?? [];
     const uniqueId = props.ID?.unique_id;
     const id = uniqueId ? `${uniqueId.prefix}-${uniqueId.number}` : page.id;
+    const closenessLevel = parseClosenessLevel(props);
 
     if (!textEn && !textEs) return null;
 
     return {
       id,
       moment,
+      ...(closenessLevel != null && { closenessLevel }),
       text: {
         'en-US': textEn || textEs,
         'es-ES': textEs || textEn,
