@@ -11,19 +11,41 @@ import { MomentCard } from '../components/MomentCard';
 import { AppLogo } from '../components/AppLogo';
 import { analytics } from '../utils/analytics';
 
-/** Paleta "Crafting a Better World": fondos y texto con buen contraste */
+/** Paleta cohesiva estilo iOS: fondos y texto con buen contraste */
 const CARD_THEMES = [
-  { bg: '#BEE656', text: '#3C6112' },   // Ethical: lima / verde bosque
-  { bg: '#EAC1CC', text: '#6B2A2D' },   // Sophisticated: rosa polvo / burdeos
-  { bg: '#3E614A', text: '#BEE656' },   // Transformative: verde bosque / lima
-  { bg: '#FDCF42', text: '#6B2A2D' },   // Nature-inspired: amarillo dorado / burdeos
+  { bg: '#BEE656', text: '#3C6112' },   // Deep Talk: lima / verde bosque
+  { bg: '#EAC1CC', text: '#6B2A2D' },   // Ikigai: rosa polvo / burdeos
+  { bg: '#3E614A', text: '#BEE656' },   // Date Night: verde bosque / lima
+  { bg: '#FDCF42', text: '#6B2A2D' },   // Con mi abuela: amarillo dorado / burdeos
+  { bg: '#5B9BD1', text: '#1A2E45' },   // Road Trip: azul intenso / azul oscuro (tonos fuertes, contraste)
+  { bg: '#C9B8A8', text: '#3D2E28' },   // Table Talks: beige terracota / marrón
 ] as const;
+
+/** Orden deseado de categorías: Deep Talk, Ikigai, Date Night, Con mi abuela, resto */
+const CARD_ORDER_IDS = ['Deep Talk 🧠', 'Ikigai 🌸', 'Date Night 🌙'] as const;
+
+function sortMomentOptions<T extends { id: string; name: string }>(options: T[]): T[] {
+  const order = [...CARD_ORDER_IDS];
+  const conMiAbuela = options.find((o) => o.name === 'Con mi abuela');
+  const rest = options.filter(
+    (o) => !order.includes(o.id as (typeof CARD_ORDER_IDS)[number]) && o.name !== 'Con mi abuela'
+  );
+  const ordered: T[] = [];
+  for (const id of order) {
+    const option = options.find((o) => o.id === id);
+    if (option) ordered.push(option);
+  }
+  if (conMiAbuela) ordered.push(conMiAbuela);
+  for (const o of rest) ordered.push(o);
+  return ordered;
+}
 
 export default function Home() {
   const router = useRouter();
   const { t } = useTranslation();
   const { momentOptions, questions } = useQuestions();
-  const [expandedId, setExpandedId] = useState<string | null>(momentOptions[0]?.id ?? null);
+  const orderedOptions = useMemo(() => sortMomentOptions(momentOptions), [momentOptions]);
+  const [expandedId, setExpandedId] = useState<string | null>(orderedOptions[0]?.id ?? null);
 
   const questionCountByMoment = useMemo(() => {
     const count: Record<string, number> = {};
@@ -51,7 +73,7 @@ export default function Home() {
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         >
           <View style={styles.header}>
             <View style={styles.headerLeft}>
@@ -77,7 +99,7 @@ export default function Home() {
           </View>
 
           <View style={styles.cardList}>
-            {momentOptions.map((option, index) => {
+            {orderedOptions.map((option, index) => {
               const theme = CARD_THEMES[index % CARD_THEMES.length];
               return (
                 <MomentCard
@@ -92,6 +114,13 @@ export default function Home() {
             })}
           </View>
         </ScrollView>
+        {/* Fade inferior estilo iOS: indica que hay más categorías abajo */}
+        <View style={styles.bottomFade} pointerEvents="none">
+          <LinearGradient
+            colors={['transparent', COLORS.background.cool]}
+            style={StyleSheet.absoluteFill}
+          />
+        </View>
       </SafeAreaView>
     </LinearGradient>
   );
@@ -138,5 +167,12 @@ const styles = StyleSheet.create({
   cardList: {
     gap: SPACING.sm,
     marginBottom: SPACING['2xl'],
+  },
+  bottomFade: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 80,
   },
 });

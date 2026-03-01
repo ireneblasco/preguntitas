@@ -41,13 +41,13 @@ export function MomentCard({
       accessibilityHint={t('home.start')}
     >
       <View style={styles.cardContent}>
-        {/* Top row: emoji + category name (left) + arrow (visual only) */}
+        {/* Top row: category name (left) + arrow (visual only) */}
         <View style={styles.headerRow}>
           <Text
             style={[styles.categoryTitle, { color: theme.text }]}
             numberOfLines={1}
           >
-            {option.emoji} {option.name}
+            {option.name}
           </Text>
           {showExpanded && (
             <View style={styles.arrowButton}>
