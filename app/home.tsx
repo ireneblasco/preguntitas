@@ -24,6 +24,17 @@ const CARD_THEMES = [
 /** Orden deseado de categorías: Deep Talk, Ikigai, Date Night, Con mi abuela, resto */
 const CARD_ORDER_IDS = ['Deep Talk 🧠', 'Ikigai 🌸', 'Date Night 🌙'] as const;
 
+/** Short experiential labels per category (no counts). Key = moment option id. */
+const EXPERIENCE_LABELS: Record<string, string> = {
+  'Deep Talk 🧠': 'Deep & reflective',
+  'Ikigai 🌸': 'Purpose & Values',
+  'Date Night 🌙': 'Emotional · Intimate',
+  'Con mi abuela': 'Family · Stories',
+  'Con mi abuela 👵': 'Family · Stories',
+  'Road Trip 🚗': 'Stories · Light · Meaningful',
+  'Table Talks 🍷': 'Social · Personal',
+};
+
 function sortMomentOptions<T extends { id: string; name: string }>(options: T[]): T[] {
   const order = [...CARD_ORDER_IDS];
   const conMiAbuela = options.find((o) => o.name === 'Con mi abuela');
@@ -43,17 +54,9 @@ function sortMomentOptions<T extends { id: string; name: string }>(options: T[])
 export default function Home() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { momentOptions, questions } = useQuestions();
+  const { momentOptions } = useQuestions();
   const orderedOptions = useMemo(() => sortMomentOptions(momentOptions), [momentOptions]);
   const [expandedId, setExpandedId] = useState<string | null>(orderedOptions[0]?.id ?? null);
-
-  const questionCountByMoment = useMemo(() => {
-    const count: Record<string, number> = {};
-    momentOptions.forEach((m) => {
-      count[m.id] = questions.filter((q) => q.moment.includes(m.id)).length;
-    });
-    return count;
-  }, [momentOptions, questions]);
 
   const handleStart = (momentId: string) => {
     const categoryName = momentOptions.find((m) => m.id === momentId)?.name ?? momentId;
@@ -106,7 +109,7 @@ export default function Home() {
                   key={option.id}
                   option={option}
                   theme={theme}
-                  questionCount={questionCountByMoment[option.id] ?? 0}
+                  experienceLabel={EXPERIENCE_LABELS[option.id] ?? 'Meaningful'}
                   isExpanded={expandedId === option.id}
                   onStart={() => handleStart(option.id)}
                 />
