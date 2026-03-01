@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Modal } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Modal, Alert, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
 import { useLocale } from '../contexts/LocaleContext';
+import { useQuestions } from '../contexts/QuestionsContext';
 import { useTranslation } from '../hooks/useTranslation';
 import {
   SETTINGS_MENU_LOCALES,
@@ -12,17 +13,82 @@ import {
   getSettingsMenuLocale,
   type Locale,
 } from '../i18n';
+import * as onboardingUtils from '../utils/onboarding';
+
+function formatLastFetched(iso: string | null, t: (key: string) => string): string {
+  if (!iso) return t('dev.usingBundled');
+  try {
+    const d = new Date(iso);
+    const label = t('dev.lastUpdatedLabel');
+    return `${label}: ${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  } catch {
+    return t('dev.lastUpdatedLabel') + ': ' + iso;
+  }
+}
 
 export default function Settings() {
   const router = useRouter();
   const { t } = useTranslation();
   const { locale, setLocale } = useLocale();
+  const { lastFetchedAt, refetch } = useQuestions();
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
 
   const closeDropdown = () => setLanguageDropdownOpen(false);
   const selectLocale = (loc: Locale) => {
     setLocale(loc);
     closeDropdown();
+  };
+
+  const handleDevMenu = () => {
+    const message = formatLastFetched(lastFetchedAt, t);
+    const fetchLatest = () => {
+      refetch()
+        .then((fetchedAt) => {
+          if (fetchedAt == null) {
+            Alert.alert(t('alerts.notConfigured'), t('alerts.notConfiguredMessage'));
+          } else {
+            Alert.alert(t('alerts.questionsUpdated'), formatLastFetched(fetchedAt, t));
+          }
+        })
+        .catch((e: Error) => {
+          Alert.alert(t('alerts.error'), e?.message ?? t('alerts.fetchFailed'));
+        });
+    };
+
+    if (Platform.OS === 'ios') {
+      Alert.alert(
+        t('dev.menuTitle'),
+        message,
+        [
+          { text: t('dev.fetchLatest'), onPress: fetchLatest },
+          {
+            text: t('dev.resetOnboarding'),
+            onPress: async () => {
+              await onboardingUtils.resetOnboarding();
+              router.replace('/');
+            },
+          },
+          { text: t('dev.cancel'), style: 'cancel' },
+        ],
+        { cancelable: true }
+      );
+    } else {
+      Alert.alert(
+        t('dev.menuTitle'),
+        message,
+        [
+          { text: t('dev.cancel'), style: 'cancel' },
+          { text: t('dev.fetchLatest'), onPress: fetchLatest },
+          {
+            text: t('dev.resetOnboarding'),
+            onPress: async () => {
+              await onboardingUtils.resetOnboarding();
+              router.replace('/');
+            },
+          },
+        ]
+      );
+    }
   };
 
   return (
@@ -96,6 +162,16 @@ export default function Settings() {
               </View>
             </Modal>
           </View>
+
+          {__DEV__ && (
+            <View style={styles.section}>
+              <Text style={styles.sectionLabel}>{t('dev.menuTitle')}</Text>
+              <Pressable style={styles.dropdownTrigger} onPress={handleDevMenu}>
+                <Text style={styles.dropdownTriggerText}>{t('dev.devMenu')}</Text>
+                <Text style={styles.dropdownChevron}>›</Text>
+              </Pressable>
+            </View>
+          )}
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>
