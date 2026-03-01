@@ -4,27 +4,11 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId } from '../constants';
 import { useQuestions, type Question } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
 import { useTranslation } from '../hooks/useTranslation';
-
-/** Misma paleta que home */
-const CARD_THEMES = [
-  { bg: '#BEE656', text: '#3C6112' },
-  { bg: '#EAC1CC', text: '#6B2A2D' },
-  { bg: '#3E614A', text: '#BEE656' },
-  { bg: '#FDCF42', text: '#6B2A2D' },
-] as const;
-
-function getThemeForMoment(
-  momentId: string,
-  momentOptions: Array<{ id: string; name: string; emoji: string }>
-) {
-  const i = momentOptions.findIndex((m) => m.id === momentId);
-  return CARD_THEMES[i >= 0 ? i % CARD_THEMES.length : 0];
-}
 
 export default function Favorites() {
   const router = useRouter();
@@ -52,7 +36,7 @@ export default function Favorites() {
 
   const renderItem = ({ item }: { item: Question }) => {
     const momentId = item.moment[0] ?? '';
-    const theme = getThemeForMoment(momentId, momentOptions);
+    const theme = getThemeForMomentId(momentId, momentOptions);
     const momentLabel = momentOptions.find((m) => m.id === momentId)?.name ?? momentId;
 
     return (
