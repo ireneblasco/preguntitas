@@ -14,6 +14,7 @@ import { COLORS, FONTS, FONT_SIZES } from '../constants';
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
 import { AppLogo } from '../components/AppLogo';
+import { analytics } from '../utils/analytics';
 
 export default function Index() {
   const router = useRouter();
@@ -48,6 +49,7 @@ export default function Index() {
       containerScale.value = withDelay(200, withTiming(1.08, { duration: 700, easing: Easing.inOut(Easing.cubic) }));
 
       setTimeout(async () => {
+        analytics.appOpen();
         const hasSeenOnboarding = await onboardingUtils.hasSeenOnboarding();
         if (hasSeenOnboarding) {
           router.replace('/home');

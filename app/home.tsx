@@ -10,6 +10,7 @@ import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
 import { MomentCard } from '../components/MomentCard';
 import { AppLogo } from '../components/AppLogo';
+import { analytics } from '../utils/analytics';
 
 /** Paleta "Crafting a Better World": fondos y texto con buen contraste */
 const CARD_THEMES = [
@@ -47,6 +48,8 @@ export default function Home() {
   const isDevelopment = __DEV__;
 
   const handleStart = (momentId: string) => {
+    const categoryName = momentOptions.find((m) => m.id === momentId)?.name ?? momentId;
+    analytics.categoryOpened(categoryName);
     router.push({ pathname: '/questions', params: { moment: momentId } });
   };
 

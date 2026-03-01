@@ -17,6 +17,7 @@ import { useQuestions } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
 import { useTranslation } from '../hooks/useTranslation';
+import { analytics } from '../utils/analytics';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
@@ -71,7 +72,10 @@ export default function Questions() {
   const currentQuestion = shuffledQuestions[questionIndex % shuffledQuestions.length];
 
   useEffect(() => {
-    if (currentQuestion) setCurrentQuestionId(currentQuestion.id);
+    if (currentQuestion) {
+      setCurrentQuestionId(currentQuestion.id);
+      analytics.questionViewed(currentQuestion.id);
+    }
   }, [currentQuestion]);
 
   useEffect(() => {
