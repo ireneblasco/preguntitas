@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   seeAll: {
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
-    color: COLORS.accent.primary,
+    color: COLORS.text.primary,
   },
   cardList: {
     gap: SPACING.sm,
