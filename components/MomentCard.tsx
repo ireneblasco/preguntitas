@@ -14,7 +14,6 @@ type MomentCardProps = {
   theme: { bg: string; text: string };
   questionCount: number;
   isExpanded: boolean;
-  onPress: () => void;
   onStart: () => void;
 };
 
@@ -23,7 +22,6 @@ export function MomentCard({
   theme,
   questionCount,
   isExpanded,
-  onPress,
   onStart,
 }: MomentCardProps) {
   const { t } = useTranslation();
@@ -37,10 +35,13 @@ export function MomentCard({
           height: showExpanded ? CARD_HEIGHT_EXPANDED : CARD_HEIGHT_COLLAPSED,
         },
       ]}
-      onPress={onPress}
+      onPress={onStart}
+      accessibilityLabel={`${option.name}, ${questionCount} ${t('home.questionsLabel')}`}
+      accessibilityRole="button"
+      accessibilityHint={t('home.start')}
     >
       <View style={styles.cardContent}>
-        {/* Top row: emoji + category name (left) + arrow button (right) */}
+        {/* Top row: emoji + category name (left) + arrow (visual only) */}
         <View style={styles.headerRow}>
           <Text
             style={[styles.categoryTitle, { color: theme.text }]}
@@ -49,20 +50,9 @@ export function MomentCard({
             {option.emoji} {option.name}
           </Text>
           {showExpanded && (
-            <Pressable
-              style={({ pressed }) => [
-                styles.arrowButton,
-                pressed && styles.arrowButtonPressed,
-              ]}
-              onPress={(e) => {
-                e.stopPropagation();
-                onStart();
-              }}
-              accessibilityLabel={t('home.start')}
-              accessibilityRole="button"
-            >
+            <View style={styles.arrowButton}>
               <Text style={styles.arrowIcon}>↗</Text>
-            </Pressable>
+            </View>
           )}
         </View>
         {/* Number of questions */}
@@ -120,12 +110,9 @@ const styles = StyleSheet.create({
   arrowButton: {
     width: ARROW_ICON_SIZE,
     height: ARROW_ICON_SIZE,
-    borderRadius: ARROW_ICON_SIZE / 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1a1a1a',
   },
-  arrowButtonPressed: { opacity: 0.85 },
   arrowIcon: {
     fontSize: 22,
     color: '#FFF',

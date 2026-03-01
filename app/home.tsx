@@ -155,7 +155,6 @@ export default function Home() {
                   theme={theme}
                   questionCount={questionCountByMoment[option.id] ?? 0}
                   isExpanded={expandedId === option.id}
-                  onPress={() => setExpandedId(expandedId === option.id ? null : option.id)}
                   onStart={() => handleStart(option.id)}
                 />
               );
