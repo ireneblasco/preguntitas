@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: FONT_SIZES['4xl'],
-    fontFamily: FONTS.playfair.bold,
     color: COLORS.text.primary,
     textAlign: 'center',
     letterSpacing: -0.5,

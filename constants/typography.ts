@@ -1,12 +1,8 @@
+// System default font only (no custom fonts loaded)
 export const FONTS = {
-  // Font families
-  playfair: {
-    regular: 'PlayfairDisplay_400Regular',
-    bold: 'PlayfairDisplay_700Bold',
-  },
   inter: {
-    regular: 'Inter_400Regular',
-    bold: 'Inter_700Bold',
+    regular: undefined as string | undefined,
+    bold: undefined as string | undefined,
   },
 };
 

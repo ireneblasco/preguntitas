@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
   categoryTitle: {
     flex: 1,
     fontSize: FONT_SIZES.xl,
-    fontFamily: FONTS.playfair.bold,
     lineHeight: FONT_SIZES.xl * 1.28,
     textAlign: 'left',
     includeFontPadding: false,

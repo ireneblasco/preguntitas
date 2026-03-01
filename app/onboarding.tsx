@@ -427,7 +427,6 @@ const styles = StyleSheet.create({
   },
   headline: {
     fontSize: FONT_SIZES['3xl'],
-    fontFamily: FONTS.playfair.regular,
     color: COLORS.text.primary,
     textAlign: 'center',
     marginBottom: SPACING.md,

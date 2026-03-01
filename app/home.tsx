@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
   headerRight: { justifyContent: 'flex-end' },
   appName: {
     fontSize: FONT_SIZES['3xl'],
-    fontFamily: FONTS.playfair.bold,
     color: COLORS.text.primary,
   },
   sectionRow: {
