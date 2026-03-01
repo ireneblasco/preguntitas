@@ -9,6 +9,7 @@ import { useMemo } from 'react';
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
 import { MomentCard } from '../components/MomentCard';
+import { AppLogo } from '../components/AppLogo';
 
 /** Paleta "Crafting a Better World": fondos y texto con buen contraste */
 const CARD_THEMES = [
@@ -127,9 +128,7 @@ export default function Home() {
                 onPress={() => router.push('/settings')}
                 style={({ pressed }) => pressed && { opacity: 0.7 }}
               >
-                <View style={styles.logoPlaceholder}>
-                  <Text style={styles.logoPlaceholderText}>◎</Text>
-                </View>
+                <AppLogo size={40} withCircle />
               </Pressable>
             </View>
           </View>
@@ -201,18 +200,6 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES['3xl'],
     fontFamily: FONTS.playfair.bold,
     color: COLORS.text.primary,
-  },
-  logoPlaceholder: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: COLORS.border.light,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoPlaceholderText: {
-    fontSize: 22,
-    color: COLORS.text.secondary,
   },
   sectionRow: {
     flexDirection: 'row',

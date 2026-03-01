@@ -13,6 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES } from '../constants';
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
+import { AppLogo } from '../components/AppLogo';
 
 export default function Index() {
   const router = useRouter();
@@ -88,9 +89,7 @@ export default function Index() {
         style={styles.gradient}
       >
         <Animated.View style={[styles.logoWrap, logoStyle]}>
-          <View style={styles.logoCircle}>
-            <Text style={styles.logoIcon}>◎</Text>
-          </View>
+          <AppLogo size={56} withCircle />
         </Animated.View>
         <Animated.Text style={[styles.title, textStyle]}>
           {t('app.title')}
@@ -111,18 +110,6 @@ const styles = StyleSheet.create({
   },
   logoWrap: {
     marginBottom: 24,
-  },
-  logoCircle: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: COLORS.border.light,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoIcon: {
-    fontSize: 28,
-    color: COLORS.text.secondary,
   },
   title: {
     fontSize: FONT_SIZES['4xl'],
