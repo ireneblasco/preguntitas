@@ -12,7 +12,7 @@ const CARD_HEIGHT_EXPANDED = 120;
 type MomentCardProps = {
   option: MomentOption;
   theme: { bg: string; text: string };
-  experienceLabel: string;
+  subtitleLabel: string;
   isExpanded: boolean;
   onStart: () => void;
 };
@@ -20,7 +20,7 @@ type MomentCardProps = {
 export function MomentCard({
   option,
   theme,
-  experienceLabel,
+  subtitleLabel,
   isExpanded,
   onStart,
 }: MomentCardProps) {
@@ -36,7 +36,7 @@ export function MomentCard({
         },
       ]}
       onPress={onStart}
-      accessibilityLabel={`${option.name}, ${experienceLabel}`}
+      accessibilityLabel={`${option.name}, ${subtitleLabel}`}
       accessibilityRole="button"
       accessibilityHint={t('home.start')}
     >
@@ -55,12 +55,12 @@ export function MomentCard({
             </View>
           )}
         </View>
-        {/* Experiential label (tone of the category) */}
+        {/* Emotional/experiential label */}
         <Text
           style={[styles.cardSubtitle, { color: theme.text }]}
           numberOfLines={1}
         >
-          {experienceLabel}
+          {subtitleLabel}
         </Text>
       </View>
     </Pressable>

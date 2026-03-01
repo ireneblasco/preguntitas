@@ -24,16 +24,17 @@ const CARD_THEMES = [
 /** Orden deseado de categorías: Deep Talk, Ikigai, Date Night, Con mi abuela, resto */
 const CARD_ORDER_IDS = ['Deep Talk 🧠', 'Ikigai 🌸', 'Date Night 🌙'] as const;
 
-/** Short experiential labels per category (no counts). Key = moment option id. */
-const EXPERIENCE_LABELS: Record<string, string> = {
-  'Deep Talk 🧠': 'Deep & reflective',
-  'Ikigai 🌸': 'Purpose & Values',
+/** Short emotional/experiential label per category (no counts). Fallback for unknown categories. */
+const MOMENT_LABELS: Record<string, string> = {
+  'Deep Talk 🧠': 'Deep · Reflective',
+  'Ikigai 🌸': 'Purpose · Values',
   'Date Night 🌙': 'Emotional · Intimate',
-  'Con mi abuela': 'Family · Stories',
-  'Con mi abuela 👵': 'Family · Stories',
-  'Road Trip 🚗': 'Stories · Light · Meaningful',
+  'Con mi abuela': 'Stories · Family',
+  'Con mi abuela 👵': 'Stories · Family',
+  'Road Trip 🚗': 'Fun · Stories · Meaningful',
   'Table Talks 🍷': 'Social · Personal',
 };
+const DEFAULT_MOMENT_LABEL = 'Meaningful';
 
 function sortMomentOptions<T extends { id: string; name: string }>(options: T[]): T[] {
   const order = [...CARD_ORDER_IDS];
@@ -109,7 +110,7 @@ export default function Home() {
                   key={option.id}
                   option={option}
                   theme={theme}
-                  experienceLabel={EXPERIENCE_LABELS[option.id] ?? 'Meaningful'}
+                  subtitleLabel={MOMENT_LABELS[option.id] ?? MOMENT_LABELS[option.name] ?? DEFAULT_MOMENT_LABEL}
                   isExpanded={expandedId === option.id}
                   onStart={() => handleStart(option.id)}
                 />
