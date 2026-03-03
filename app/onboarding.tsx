@@ -7,6 +7,7 @@ import {
   FlatList,
   ViewToken,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useState, useRef, useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -262,7 +263,7 @@ function SwipeActionsVisual() {
           <View style={[styles.actionPill, { borderColor: theme.text }]}>
             <Text style={[styles.actionLabel, { color: theme.text }]}>← Previous</Text>
           </View>
-          <Text style={[styles.actionIcon, { color: theme.text }]}>♥</Text>
+          <Ionicons name="bookmark" size={24} color={theme.text} />
         </View>
         <Text style={[styles.actionHint, { color: theme.text }]} numberOfLines={1}>
           Swipe or tap Next
