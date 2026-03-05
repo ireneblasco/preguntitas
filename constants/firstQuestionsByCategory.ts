@@ -12,5 +12,5 @@ export const FIRST_5_QUESTION_IDS_BY_MOMENT: Record<string, string[]> = {
   'Date Night 🌙': ['ID-116', 'ID-10', 'ID-231', 'ID-34', 'ID-29'],
   'Con mi abuela': [],
   'Road Trip 🚗': ['ID-11','ID-35', 'ID-109', 'ID-110', 'ID-8'],
-  'Table Talks 🍷': ['ID-158', 'ID-4', 'ID-3', 'ID-144','ID-21'],
+  'Table Talks 🍷': ['ID-265', 'ID-248', 'ID-241', 'ID-236','ID-21'],
 };

@@ -11,7 +11,7 @@ export const it = {
         subtext: 'Scopri domande divertenti, profonde e riflessive in un solo posto.',
       },
       {
-        headline: 'Domande per il momento in cui sei.',
+        headline: 'Scegli il momento.',
         subtext:
           'Road trip, appuntamento, conversazione profonda — le domande sono organizzate per contesto così hai sempre quelle giuste.',
       },
@@ -24,6 +24,10 @@ export const it = {
         headline: 'Scorri, torna indietro, salva.',
         subtext:
           'Passa o scorri alla prossima domanda, torna alla precedente o tocca il segnalibro per salvare.',
+      },
+      {
+        headline: 'Basta conversazioni noiose.',
+        subtext: '',
         cta: 'Inizia',
       },
     ],

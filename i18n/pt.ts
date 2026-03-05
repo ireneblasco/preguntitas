@@ -11,7 +11,7 @@ export const pt = {
         subtext: 'Descubra perguntas divertidas, profundas e reflexivas num só lugar.',
       },
       {
-        headline: 'Perguntas para o momento em que estás.',
+        headline: 'Escolhe o momento.',
         subtext:
           'Viagem, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para teres sempre as certas.',
       },
@@ -24,6 +24,10 @@ export const pt = {
         headline: 'Desliza, volta, guarda.',
         subtext:
           'Passa ou desliza para a próxima pergunta, volta atrás ou toca no marcador para guardar.',
+      },
+      {
+        headline: 'Chega de conversas sem graça.',
+        subtext: '',
         cta: 'Começar',
       },
     ],

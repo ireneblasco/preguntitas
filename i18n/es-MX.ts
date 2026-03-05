@@ -12,7 +12,7 @@ export const esMX = {
         subtext: 'Descubre preguntas divertidas, profundas y reflexivas en un solo lugar.',
       },
       {
-        headline: 'Preguntas para el momento en el que estás.',
+        headline: 'Elige el momento.',
         subtext:
           'Road trip, cita, plática profunda — las preguntas están organizadas por contexto para que siempre tengas las adecuadas.',
       },
@@ -25,6 +25,10 @@ export const esMX = {
         headline: 'Desliza, regresa, guarda.',
         subtext:
           'Pasa o desliza a la siguiente pregunta, regresa a la anterior o toca el marcador para guardar.',
+      },
+      {
+        headline: 'No más conversaciones aburridas.',
+        subtext: '',
         cta: 'Vamos',
       },
     ],

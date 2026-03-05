@@ -11,7 +11,7 @@ export const fr = {
         subtext: 'Découvre des questions amusantes, profondes et réfléchies en un seul endroit.',
       },
       {
-        headline: 'Des questions pour le moment où tu es.',
+        headline: 'Choisis le moment.',
         subtext:
           'Road trip, rendez-vous, conversation profonde — les questions sont organisées par contexte pour avoir toujours les bonnes.',
       },
@@ -24,6 +24,10 @@ export const fr = {
         headline: 'Glisse, reviens, enregistre.',
         subtext:
           'Passe ou glisse à la question suivante, reviens en arrière ou appuie sur le signet pour enregistrer.',
+      },
+      {
+        headline: 'Fini les conversations ennuyeuses.',
+        subtext: '',
         cta: 'C\'est parti',
       },
     ],

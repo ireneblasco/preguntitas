@@ -12,9 +12,9 @@ export const enGB = {
         subtext: 'Discover fun, deep, and thoughtful questions in one place.',
       },
       {
-        headline: "Questions for the moment you're in.",
+        headline: 'Pick the moment.',
         subtext:
-          'Road trip, date night, deep talk — the questions are organised by context so you always get the right ones for the situation.',
+          'Date night, road trips, dinners, or deep conversations.\n\nShallow gives you the right questions for the moment.',
       },
       {
         headline: 'Each card shows how deep it goes.',
@@ -25,6 +25,10 @@ export const enGB = {
         headline: 'Swipe, go back, save.',
         subtext:
           'Pass or swipe to the next question, go back to the previous one, and tap the bookmark to save.',
+      },
+      {
+        headline: 'No more boring conversations.',
+        subtext: '',
         cta: "Let's go",
       },
     ],

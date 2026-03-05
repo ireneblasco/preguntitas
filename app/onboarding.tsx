@@ -51,7 +51,11 @@ function useOnboardingScreens(): OnboardingScreen[] {
     {
       headline: t('onboarding.screens.3.headline'),
       subtext: t('onboarding.screens.3.subtext'),
-      cta: t('onboarding.screens.3.cta'),
+    },
+    {
+      headline: t('onboarding.screens.4.headline'),
+      subtext: t('onboarding.screens.4.subtext'),
+      cta: t('onboarding.screens.4.cta'),
     },
   ];
 }

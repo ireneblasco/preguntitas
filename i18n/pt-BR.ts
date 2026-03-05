@@ -12,7 +12,7 @@ export const ptBR = {
         subtext: 'Descubra perguntas divertidas, profundas e reflexivas em um só lugar.',
       },
       {
-        headline: 'Perguntas para o momento em que você está.',
+        headline: 'Escolha o momento.',
         subtext:
           'Viagem, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para você sempre ter as certas.',
       },
@@ -25,6 +25,10 @@ export const ptBR = {
         headline: 'Deslize, volte, guarde.',
         subtext:
           'Passe ou deslize para a próxima pergunta, volte à anterior ou toque no marcador para guardar.',
+      },
+      {
+        headline: 'Chega de conversas sem graça.',
+        subtext: '',
         cta: 'Começar',
       },
     ],

@@ -11,7 +11,7 @@ export const de = {
         subtext: 'Entdecke witzige, tiefgründige und nachdenkliche Fragen an einem Ort.',
       },
       {
-        headline: 'Fragen für den Moment, in dem du bist.',
+        headline: 'Wähl den Moment.',
         subtext:
           'Roadtrip, Date Night, tiefes Gespräch — die Fragen sind nach Kontext sortiert, damit du immer die passenden hast.',
       },
@@ -24,6 +24,10 @@ export const de = {
         headline: 'Wischen, zurück, speichern.',
         subtext:
           'Weiterwischen zur nächsten Frage, zurück zur vorherigen, oder Lesezeichen antippen zum Speichern.',
+      },
+      {
+        headline: 'Keine langweiligen Gespräche mehr.',
+        subtext: '',
         cta: 'Los geht\'s',
       },
     ],
