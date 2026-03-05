@@ -6,31 +6,37 @@
 
 export type CategoryTheme = { bg: string; text: string };
 
-/** Paleta cohesiva estilo iOS: fondos y texto con buen contraste */
+/** Paleta cohesiva estilo iOS (orden = orden de categorías: Deep Talk, Road Trip, Table Talk, Date Night, Ikigai, Grandparents) */
 export const CARD_THEMES: readonly CategoryTheme[] = [
   { bg: '#BEE656', text: '#3C6112' },   // Deep Talk: lima / verde bosque
-  { bg: '#EAC1CC', text: '#6B2A2D' },   // Ikigai: rosa polvo / burdeos
-  { bg: '#3E614A', text: '#BEE656' },   // Date Night: verde bosque / lima
-  { bg: '#FDCF42', text: '#6B2A2D' },   // Con mi abuela: amarillo dorado / burdeos
   { bg: '#5B9BD1', text: '#1A2E45' },   // Road Trip: azul intenso / azul oscuro
   { bg: '#C9B8A8', text: '#3D2E28' },   // Table Talks: beige terracota / marrón
+  { bg: '#3E614A', text: '#BEE656' },   // Date Night: verde bosque / lima
+  { bg: '#EAC1CC', text: '#6B2A2D' },   // Ikigai: rosa polvo / burdeos
+  { bg: '#FDCF42', text: '#6B2A2D' },   // Con mi abuela: amarillo dorado / burdeos
 ] as const;
 
-/** Orden deseado de categorías: Deep Talk, Ikigai, Date Night, Con mi abuela, resto */
-const CARD_ORDER_IDS = ['Deep Talk 🧠', 'Ikigai 🌸', 'Date Night 🌙'] as const;
+/** Orden deseado: Deep Talk, Road Trip, Table Talk, Date Night, Ikigai, Grandparents (Con mi abuela) */
+const CARD_ORDER_IDS = [
+  'Deep Talk 🧠',
+  'Road Trip 🚗',
+  'Table Talks 🍷',
+  'Date Night 🌙',
+  'Ikigai 🌸',
+  'Con mi abuela',
+] as const;
 
 export function sortMomentOptions<T extends { id: string; name: string }>(options: T[]): T[] {
   const order = [...CARD_ORDER_IDS];
-  const conMiAbuela = options.find((o) => o.name === 'Con mi abuela');
-  const rest = options.filter(
-    (o) => !order.includes(o.id as (typeof CARD_ORDER_IDS)[number]) && o.name !== 'Con mi abuela'
-  );
   const ordered: T[] = [];
   for (const id of order) {
-    const option = options.find((o) => o.id === id);
+    const option = options.find((o) => {
+      if (id === 'Con mi abuela') return o.name === 'Con mi abuela' || o.id === 'Con mi abuela' || o.id.startsWith('Con mi abuela');
+      return o.id === id;
+    });
     if (option) ordered.push(option);
   }
-  if (conMiAbuela) ordered.push(conMiAbuela);
+  const rest = options.filter((o) => !ordered.includes(o));
   for (const o of rest) ordered.push(o);
   return ordered;
 }
