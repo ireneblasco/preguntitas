@@ -6,14 +6,14 @@
 
 export type CategoryTheme = { bg: string; text: string };
 
-/** Paleta cohesiva estilo iOS (orden = orden de categorías: Deep Talk, Road Trip, Table Talk, Date Night, Ikigai, Grandparents) */
+/** Primeras 4 desde referencia (fondo + acento); resto igual */
 export const CARD_THEMES: readonly CategoryTheme[] = [
-  { bg: '#BEE656', text: '#3C6112' },   // Deep Talk: lima / verde bosque
-  { bg: '#5B9BD1', text: '#1A2E45' },   // Road Trip: azul intenso / azul oscuro
-  { bg: '#C9B8A8', text: '#3D2E28' },   // Table Talks: beige terracota / marrón
-  { bg: '#3E614A', text: '#BEE656' },   // Date Night: verde bosque / lima
-  { bg: '#EAC1CC', text: '#6B2A2D' },   // Ikigai: rosa polvo / burdeos
-  { bg: '#FDCF42', text: '#6B2A2D' },   // Con mi abuela: amarillo dorado / burdeos
+  { bg: '#2D584F', text: '#E0FF5A' },   // Deep Talk — Verde bosque + lima (Values/Beliefs)
+  { bg: '#FCE29A', text: '#F08051' },   // Road Trip — Melocotón + naranja-rojo (Emotions)
+  { bg: '#94D8C8', text: '#37706A' },   // Table Talk — Teal claro + teal oscuro (Stories)
+  { bg: '#7A1F3B', text: '#EFC9D6' },   // Date Night — Burdeos + rosa claro (Stories)
+  { bg: '#EAC1CC', text: '#6B2A2D' },   // Ikigai
+  { bg: '#E0FF5A', text: '#2D584F' },   // Grandparents — mismos que Deep Talk, invertidos (lima + verde bosque)
 ] as const;
 
 /** Orden deseado: Deep Talk, Road Trip, Table Talk, Date Night, Ikigai, Grandparents (Con mi abuela) */

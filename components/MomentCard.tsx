@@ -51,7 +51,7 @@ export function MomentCard({
           </Text>
           {showExpanded && (
             <View style={styles.arrowButton}>
-              <Text style={styles.arrowIcon}>↗</Text>
+              <Text style={[styles.arrowIcon, { color: theme.text }]}>↗</Text>
             </View>
           )}
         </View>
