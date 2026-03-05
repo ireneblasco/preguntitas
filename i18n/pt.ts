@@ -16,6 +16,11 @@ export const pt = {
           'Viagem, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para teres sempre as certas.',
       },
       {
+        headline: 'Cada cartão mostra o nível de confiança.',
+        subtext:
+          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa. Escolhe o nível que encaixa.',
+      },
+      {
         headline: 'Desliza, volta, guarda.',
         subtext:
           'Passa ou desliza para a próxima pergunta, volta atrás ou toca no marcador para guardar.',

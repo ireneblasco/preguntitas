@@ -16,6 +16,11 @@ export const de = {
           'Roadtrip, Date Night, tiefes Gespräch — die Fragen sind nach Kontext sortiert, damit du immer die passenden hast.',
       },
       {
+        headline: 'Jede Karte zeigt die Tiefe.',
+        subtext:
+          'Icebreaker für Leichtes, Personal zum Näherkommen, Vulnerable für das Echte. Wähle das Level, das passt.',
+      },
+      {
         headline: 'Wischen, zurück, speichern.',
         subtext:
           'Weiterwischen zur nächsten Frage, zurück zur vorherigen, oder Lesezeichen antippen zum Speichern.',

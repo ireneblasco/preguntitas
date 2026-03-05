@@ -17,6 +17,11 @@ export const enUS = {
           'Road trip, date night, deep talk — the questions are organized by context so you always get the right ones for the situation.',
       },
       {
+        headline: 'Each card shows how deep it goes.',
+        subtext:
+          'Icebreaker for light fun, Personal for getting closer, and Vulnerable for the real stuff. Pick the level that fits the moment.',
+      },
+      {
         headline: 'Swipe, go back, save.',
         subtext:
           'Pass or swipe to the next question, go back to the previous one, and tap the bookmark to save.',

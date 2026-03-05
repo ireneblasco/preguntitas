@@ -16,6 +16,11 @@ export const it = {
           'Road trip, appuntamento, conversazione profonda — le domande sono organizzate per contesto così hai sempre quelle giuste.',
       },
       {
+        headline: 'Ogni carta mostra il livello di confidenza.',
+        subtext:
+          'Icebreaker per qualcosa di leggero, Personal per avvicinarsi, Vulnerable per ciò che conta. Scegli il livello che fa per te.',
+      },
+      {
         headline: 'Scorri, torna indietro, salva.',
         subtext:
           'Passa o scorri alla prossima domanda, torna alla precedente o tocca il segnalibro per salvare.',

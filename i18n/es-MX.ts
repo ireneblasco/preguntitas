@@ -17,6 +17,11 @@ export const esMX = {
           'Road trip, cita, plática profunda — las preguntas están organizadas por contexto para que siempre tengas las adecuadas.',
       },
       {
+        headline: 'Cada tarjeta muestra el nivel de confianza.',
+        subtext:
+          'Icebreaker para algo ligero, Personal para conectar más y Vulnerable para lo que de verdad importa. Elige el nivel que encaje.',
+      },
+      {
         headline: 'Desliza, regresa, guarda.',
         subtext:
           'Pasa o desliza a la siguiente pregunta, regresa a la anterior o toca el marcador para guardar.',

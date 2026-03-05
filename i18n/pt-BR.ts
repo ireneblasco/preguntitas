@@ -17,6 +17,11 @@ export const ptBR = {
           'Viagem, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para você sempre ter as certas.',
       },
       {
+        headline: 'Cada cartão mostra o nível de intimidade.',
+        subtext:
+          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa. Escolha o nível que combina.',
+      },
+      {
         headline: 'Deslize, volte, guarde.',
         subtext:
           'Passe ou deslize para a próxima pergunta, volte à anterior ou toque no marcador para guardar.',

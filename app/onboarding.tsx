@@ -20,7 +20,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, CARD_THEMES as APP_CARD_THEMES } from '../constants';
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -49,10 +49,11 @@ function useOnboardingScreens(): OnboardingScreen[] {
   return [
     { headline: t('onboarding.screens.0.headline'), subtext: t('onboarding.screens.0.subtext') },
     { headline: t('onboarding.screens.1.headline'), subtext: t('onboarding.screens.1.subtext') },
+    { headline: t('onboarding.screens.2.headline'), subtext: t('onboarding.screens.2.subtext') },
     {
-      headline: t('onboarding.screens.2.headline'),
-      subtext: t('onboarding.screens.2.subtext'),
-      cta: t('onboarding.screens.2.cta'),
+      headline: t('onboarding.screens.3.headline'),
+      subtext: t('onboarding.screens.3.subtext'),
+      cta: t('onboarding.screens.3.cta'),
     },
   ];
 }
@@ -102,7 +103,8 @@ export default function Onboarding() {
         <View style={styles.visualContainer}>
           {index === 0 && <QuestionCardVisual />}
           {index === 1 && <MomentsVisual />}
-          {index === 2 && <SwipeActionsVisual />}
+          {index === 2 && <ClosenessVisual />}
+          {index === 3 && <SwipeActionsVisual />}
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.headline}>{item.headline}</Text>
@@ -249,6 +251,23 @@ function MomentsVisual() {
           </View>
         );
       })}
+    </View>
+  );
+}
+
+/** Referencia visual real: tarjeta de pregunta como en la app, con pill de closeness (icebreaker / personal / vulnerable) */
+function ClosenessVisual() {
+  const theme = APP_CARD_THEMES[2];
+  return (
+    <View style={[styles.questionCardWrap, { backgroundColor: theme.bg }]}>
+      <View style={[styles.questionCardPill, { borderColor: theme.text }]}>
+        <Text style={[styles.questionCardPillText, { color: theme.text }]}>
+          Level 2 Personal
+        </Text>
+      </View>
+      <Text style={[styles.questionCardText, { color: theme.text }]} numberOfLines={2}>
+        What’s something you’re still healing from?
+      </Text>
     </View>
   );
 }

@@ -16,6 +16,11 @@ export const fr = {
           'Road trip, rendez-vous, conversation profonde — les questions sont organisées par contexte pour avoir toujours les bonnes.',
       },
       {
+        headline: 'Chaque carte affiche le niveau de proximité.',
+        subtext:
+          'Icebreaker pour du léger, Personal pour se rapprocher, Vulnerable pour l’essentiel. Choisis le niveau qui va bien.',
+      },
+      {
         headline: 'Glisse, reviens, enregistre.',
         subtext:
           'Passe ou glisse à la question suivante, reviens en arrière ou appuie sur le signet pour enregistrer.',
