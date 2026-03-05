@@ -4,6 +4,7 @@ import { useCallback, useRef } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../constants';
 import { QuestionsProvider } from '../contexts/QuestionsContext';
 import { LocaleProvider } from '../contexts/LocaleContext';
 
@@ -49,5 +50,6 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background.white,
   },
 });

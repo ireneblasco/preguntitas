@@ -83,11 +83,7 @@ export default function Index() {
   return (
     <Animated.View style={[styles.container, containerStyle]}>
       <LinearGradient
-        colors={[
-          COLORS.background.primary,
-          COLORS.background.warm,
-          COLORS.background.cool,
-        ]}
+        colors={[COLORS.background.white, COLORS.background.primary]}
         style={styles.gradient}
       >
         <Animated.View style={[styles.logoWrap, logoStyle]}>
