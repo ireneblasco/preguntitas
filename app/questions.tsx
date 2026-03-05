@@ -68,11 +68,20 @@ export default function Questions() {
     return questions.filter((q) => q.moment.includes(moment));
   }, [questions, moment]);
 
-  const [shuffledQuestions, setShuffledQuestions] = useState(() => {
-    return [...filteredQuestions].sort(() => Math.random() - 0.5);
-  });
+  const shuffledQuestions = useMemo(() => {
+    if (filteredQuestions.length === 0) return [];
+    const copy = [...filteredQuestions];
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }, [filteredQuestions]);
 
-  const currentQuestion = shuffledQuestions[questionIndex % shuffledQuestions.length];
+  const currentQuestion =
+    shuffledQuestions.length > 0
+      ? shuffledQuestions[questionIndex % shuffledQuestions.length]
+      : undefined;
 
   useEffect(() => {
     if (currentQuestion) {
@@ -80,11 +89,6 @@ export default function Questions() {
       analytics.questionViewed(currentQuestion.id);
     }
   }, [currentQuestion]);
-
-  useEffect(() => {
-    setShuffledQuestions([...filteredQuestions].sort(() => Math.random() - 0.5));
-    setQuestionIndex(0);
-  }, [filteredQuestions]);
 
   const handleNext = () => {
     if (filteredQuestions.length === 0) return;
