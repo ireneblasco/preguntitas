@@ -36,10 +36,6 @@ export default function Home() {
     router.push({ pathname: '/questions', params: { moment: momentId } });
   };
 
-  const handleFavorites = () => {
-    router.push('/favorites');
-  };
-
   return (
     <LinearGradient
       colors={[COLORS.background.white, COLORS.background.primary]}
@@ -68,9 +64,6 @@ export default function Home() {
             <Text style={styles.sectionTitle}>
               {t('home.sectionTitle')}
             </Text>
-            <Pressable onPress={handleFavorites} style={({ pressed }) => pressed && { opacity: 0.7 }}>
-              <Text style={styles.seeAll}>{t('home.myFavorites')}</Text>
-            </Pressable>
           </View>
 
           <View style={styles.cardList}>
@@ -123,11 +116,6 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: FONT_SIZES.base,
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.text.primary,
-  },
-  seeAll: {
-    fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
     color: COLORS.text.primary,
   },
