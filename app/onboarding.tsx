@@ -255,9 +255,9 @@ function MomentsVisual() {
 
 /** Ejemplo de pregunta por nivel de closeness (carrusel con transición fluida) */
 const CLOSENESS_EXAMPLES = [
-  { label: 'Level 1 Icebreaker', question: "What's your go-to karaoke song?" },
-  { label: 'Level 2 Personal', question: "What's something you're still healing from?" },
-  { label: 'Level 3 Vulnerable', question: "What's a fear you've never shared with anyone?" },
+  { label: 'Level 1 Icebreaker', question: 'Out of your five senses, which one is your strongest?' },
+  { label: 'Level 2 Personal', question: 'What is your ideal place to raise kids or start a family?' },
+  { label: 'Level 3 Vulnerable', question: 'What makes you lose confidence in yourself?' },
 ] as const;
 
 const CLOSENESS_ROTATE_MS = 3800;
