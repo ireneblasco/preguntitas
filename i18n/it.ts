@@ -18,7 +18,7 @@ export const it = {
       {
         headline: 'Ogni carta mostra il livello di confidenza.',
         subtext:
-          'Icebreaker per qualcosa di leggero, Personal per avvicinarsi, Vulnerable per ciò che conta. Scegli il livello che fa per te.',
+          'Icebreaker per qualcosa di leggero, Personal per avvicinarsi, Vulnerable per ciò che conta.',
       },
       {
         headline: 'Scorri, torna indietro, salva.',

@@ -18,7 +18,7 @@ export const de = {
       {
         headline: 'Jede Karte zeigt die Tiefe.',
         subtext:
-          'Icebreaker für Leichtes, Personal zum Näherkommen, Vulnerable für das Echte. Wähle das Level, das passt.',
+          'Icebreaker für Leichtes, Personal zum Näherkommen, Vulnerable für das Echte.',
       },
       {
         headline: 'Wischen, zurück, speichern.',

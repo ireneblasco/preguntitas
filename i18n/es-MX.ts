@@ -19,7 +19,7 @@ export const esMX = {
       {
         headline: 'Cada tarjeta muestra el nivel de confianza.',
         subtext:
-          'Icebreaker para algo ligero, Personal para conectar más y Vulnerable para lo que de verdad importa. Elige el nivel que encaje.',
+          'Icebreaker para algo ligero, Personal para conectar más y Vulnerable para lo que de verdad importa.',
       },
       {
         headline: 'Desliza, regresa, guarda.',

@@ -18,7 +18,7 @@ export const fr = {
       {
         headline: 'Chaque carte affiche le niveau de proximité.',
         subtext:
-          'Icebreaker pour du léger, Personal pour se rapprocher, Vulnerable pour l’essentiel. Choisis le niveau qui va bien.',
+          'Icebreaker pour du léger, Personal pour se rapprocher, Vulnerable pour l’essentiel.',
       },
       {
         headline: 'Glisse, reviens, enregistre.',

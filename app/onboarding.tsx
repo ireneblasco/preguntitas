@@ -8,15 +8,13 @@ import {
   ViewToken,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  interpolate,
-  Extrapolation,
   Easing,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -255,19 +253,86 @@ function MomentsVisual() {
   );
 }
 
-/** Referencia visual real: tarjeta de pregunta como en la app, con pill de closeness (icebreaker / personal / vulnerable) */
+/** Ejemplo de pregunta por nivel de closeness (carrusel con transición fluida) */
+const CLOSENESS_EXAMPLES = [
+  { label: 'Level 1 Icebreaker', question: "What's your go-to karaoke song?" },
+  { label: 'Level 2 Personal', question: "What's something you're still healing from?" },
+  { label: 'Level 3 Vulnerable', question: "What's a fear you've never shared with anyone?" },
+] as const;
+
+const CLOSENESS_ROTATE_MS = 3800;
+const CLOSENESS_CARD_WIDTH = SCREEN_WIDTH - SPACING.lg * 4;
+const CLOSENESS_SLIDE_DURATION = 500;
+
+/** Carrusel horizontal: 3 tarjetas en fila, transición por deslizamiento suave */
 function ClosenessVisual() {
+  const [index, setIndex] = useState(0);
   const theme = APP_CARD_THEMES[2];
+  const slideX = useSharedValue(0);
+
+  const goNext = useCallback(() => {
+    setIndex((i) => (i + 1) % CLOSENESS_EXAMPLES.length);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(goNext, CLOSENESS_ROTATE_MS);
+    return () => clearInterval(id);
+  }, [goNext]);
+
+  useEffect(() => {
+    slideX.value = withTiming(index, {
+      duration: CLOSENESS_SLIDE_DURATION,
+      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+    });
+  }, [index]);
+
+  const carouselStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: -slideX.value * CLOSENESS_CARD_WIDTH }],
+  }));
+
   return (
-    <View style={[styles.questionCardWrap, { backgroundColor: theme.bg }]}>
-      <View style={[styles.questionCardPill, { borderColor: theme.text }]}>
-        <Text style={[styles.questionCardPillText, { color: theme.text }]}>
-          Level 2 Personal
-        </Text>
+    <View style={styles.closenessWrap}>
+      <View style={[styles.closenessCarouselMask, { width: CLOSENESS_CARD_WIDTH }]}>
+        <Animated.View style={[styles.closenessCarousel, carouselStyle]}>
+          {CLOSENESS_EXAMPLES.map((example) => (
+            <View
+              key={example.label}
+              style={[
+                styles.questionCardWrap,
+                { width: CLOSENESS_CARD_WIDTH, backgroundColor: theme.bg },
+              ]}
+            >
+              <View
+                style={[
+                  styles.closenessLevelPill,
+                  {
+                    borderColor: theme.text,
+                    backgroundColor: `${theme.text}22`,
+                  },
+                ]}
+              >
+                <Text style={[styles.closenessLevelPillText, { color: theme.text }]}>
+                  {example.label}
+                </Text>
+              </View>
+              <Text style={[styles.questionCardText, { color: theme.text }]} numberOfLines={2}>
+                {example.question}
+              </Text>
+            </View>
+          ))}
+        </Animated.View>
       </View>
-      <Text style={[styles.questionCardText, { color: theme.text }]} numberOfLines={2}>
-        What’s something you’re still healing from?
-      </Text>
+      <View style={styles.closenessDots}>
+        {CLOSENESS_EXAMPLES.map((_, i) => (
+          <View
+            key={i}
+            style={[
+              styles.closenessDot,
+              i === index && styles.closenessDotActive,
+            ]}
+          />
+        ))}
+      </View>
     </View>
   );
 }
@@ -338,6 +403,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 1,
   },
+  closenessWrap: {
+    alignItems: 'center',
+    width: '100%',
+  },
+  closenessCarouselMask: {
+    overflow: 'hidden',
+    alignSelf: 'center',
+  },
+  closenessCarousel: {
+    flexDirection: 'row',
+  },
+  closenessDots: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+    marginTop: SPACING.lg,
+  },
+  closenessDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: COLORS.border.light,
+  },
+  closenessDotActive: {
+    width: 20,
+    backgroundColor: COLORS.text.primary,
+  },
   questionCardWrap: {
     width: SCREEN_WIDTH - SPACING.lg * 4,
     borderRadius: BORDER_RADIUS['2xl'],
@@ -361,6 +453,19 @@ const styles = StyleSheet.create({
   questionCardPillText: {
     fontSize: 13,
     fontFamily: FONTS.inter.regular,
+  },
+  closenessLevelPill: {
+    alignSelf: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: BORDER_RADIUS.full,
+    borderWidth: 2,
+    marginBottom: SPACING.lg,
+  },
+  closenessLevelPillText: {
+    fontSize: 14,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
   },
   questionCardText: {
     fontSize: 18,

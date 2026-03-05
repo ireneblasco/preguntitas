@@ -19,7 +19,7 @@ export const enGB = {
       {
         headline: 'Each card shows how deep it goes.',
         subtext:
-          'Icebreaker for light fun, Personal for getting closer, and Vulnerable for the real stuff. Pick the level that fits the moment.',
+          'Icebreaker for light fun, Personal for getting closer, and Vulnerable for the real stuff.',
       },
       {
         headline: 'Swipe, go back, save.',

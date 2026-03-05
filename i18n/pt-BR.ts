@@ -19,7 +19,7 @@ export const ptBR = {
       {
         headline: 'Cada cartão mostra o nível de intimidade.',
         subtext:
-          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa. Escolha o nível que combina.',
+          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa.',
       },
       {
         headline: 'Deslize, volte, guarde.',

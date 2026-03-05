@@ -18,7 +18,7 @@ export const pt = {
       {
         headline: 'Cada cartão mostra o nível de confiança.',
         subtext:
-          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa. Escolhe o nível que encaixa.',
+          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa.',
       },
       {
         headline: 'Desliza, volta, guarda.',
