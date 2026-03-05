@@ -16,7 +16,7 @@ import Animated, {
   FadeOut,
 } from 'react-native-reanimated';
 import type { ClosenessLevel } from '../types/questions';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName, FIRST_5_QUESTION_IDS_BY_MOMENT } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
@@ -69,14 +69,21 @@ export default function Questions() {
   }, [questions, moment]);
 
   const shuffledQuestions = useMemo(() => {
-    if (filteredQuestions.length === 0) return [];
-    const copy = [...filteredQuestions];
-    for (let i = copy.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
+    if (filteredQuestions.length === 0 || !moment) return [];
+    const firstFiveIds = FIRST_5_QUESTION_IDS_BY_MOMENT[moment] ?? [];
+    const byId = new Map(filteredQuestions.map((q) => [q.id, q]));
+    const fixed: typeof filteredQuestions = [];
+    for (const id of firstFiveIds) {
+      const q = byId.get(id);
+      if (q) fixed.push(q);
     }
-    return copy;
-  }, [filteredQuestions]);
+    const rest = filteredQuestions.filter((q) => !firstFiveIds.includes(q.id));
+    for (let i = rest.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [rest[i], rest[j]] = [rest[j], rest[i]];
+    }
+    return [...fixed, ...rest];
+  }, [filteredQuestions, moment]);
 
   const currentQuestion =
     shuffledQuestions.length > 0
