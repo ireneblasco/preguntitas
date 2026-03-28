@@ -1,9 +1,11 @@
-// System default font only (no custom fonts loaded)
+// Inter: system default (undefined = platform UI font). Brasika Display: loaded in app/_layout.tsx via expo-font.
 export const FONTS = {
   inter: {
     regular: undefined as string | undefined,
     bold: undefined as string | undefined,
   },
+  /** Wordmark / app title — Brasika Display (same family as in Canva). */
+  brasikaDisplay: 'BrasikaDisplay',
 };
 
 export const FONT_SIZES = {

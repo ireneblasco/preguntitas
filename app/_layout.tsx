@@ -1,31 +1,33 @@
 import '../global.css';
 import { Stack } from 'expo-router';
-import { useCallback, useRef } from 'react';
+import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../constants';
 import { QuestionsProvider } from '../contexts/QuestionsContext';
 import { LocaleProvider } from '../contexts/LocaleContext';
 
-// Prevent the splash screen from auto-hiding (avoids "Downloading 100%" staying visible)
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const splashHidden = useRef(false);
+  const [fontsLoaded, fontError] = useFonts({
+    BrasikaDisplay: require('../assets/fonts/BrasikaDisplay-Regular.otf'),
+  });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (splashHidden.current) return;
-    splashHidden.current = true;
-    try {
-      await SplashScreen.hideAsync();
-    } catch (_e) {
-      // ignore if already hidden
+  useEffect(() => {
+    if (fontsLoaded || fontError) {
+      SplashScreen.hideAsync().catch(() => {});
     }
-  }, []);
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
 
   return (
-    <GestureHandlerRootView style={styles.container} onLayout={onLayoutRootView}>
+    <GestureHandlerRootView style={styles.container}>
       <LocaleProvider>
         <QuestionsProvider>
         <Stack
