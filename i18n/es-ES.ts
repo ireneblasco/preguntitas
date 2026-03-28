@@ -1,7 +1,7 @@
 /** Español (España) – UI strings for es-ES locale */
 export const esES = {
   app: {
-    title: 'Shallow',
+    title: 'Mellow',
   },
   onboarding: {
     skip: 'Omitir',
@@ -34,7 +34,7 @@ export const esES = {
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'Mellow',
     sectionTitle: '¿Cuál es el momento?',
     myFavorites: 'Guardados',
     start: 'Empezar →',

@@ -1,7 +1,7 @@
 /** Español de México (es-MX) – vocabulario y giros mexicanos */
 export const esMX = {
   app: {
-    title: 'Shallow',
+    title: 'Mellow',
   },
   onboarding: {
     skip: 'Saltar',
@@ -34,7 +34,7 @@ export const esMX = {
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'Mellow',
     sectionTitle: '¿Cuál es el momento?',
     myFavorites: 'Guardados',
     start: 'Empezar →',

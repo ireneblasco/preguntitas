@@ -1,7 +1,7 @@
 /** Português do Brasil (pt-BR) – vocabulário e formas do português brasileiro */
 export const ptBR = {
   app: {
-    title: 'Shallow',
+    title: 'Mellow',
   },
   onboarding: {
     skip: 'Pular',
@@ -34,7 +34,7 @@ export const ptBR = {
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'Mellow',
     sectionTitle: 'Qual é o momento?',
     myFavorites: 'Salvos',
     start: 'Começar →',

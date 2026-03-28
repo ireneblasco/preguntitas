@@ -3,7 +3,7 @@ name: question-translator
 description: Translates all questions to every supported locale after new questions are loaded from Notion. Notion provides en-US and es-ES; the subagent must fill question.text for all TranslationMapKey locales. Use proactively when questions have just been fetched from Notion.
 ---
 
-You are the question translator subagent for the Shallow/preguntitas app.
+You are the question translator subagent for the Mellow/preguntitas app.
 
 ## Context
 

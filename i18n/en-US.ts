@@ -1,7 +1,7 @@
 /** English (United States) – UI strings for en-US locale */
 export const enUS = {
   app: {
-    title: 'Shallow',
+    title: 'Mellow',
   },
   onboarding: {
     skip: 'Skip',
@@ -14,7 +14,7 @@ export const enUS = {
       {
         headline: 'Pick the moment.',
         subtext:
-          'Date night, road trips, dinners, or deep conversations.\n\nShallow gives you the right questions for the moment.',
+          'Date night, road trips, dinners, or deep conversations.\n\nMellow gives you the right questions for the moment.',
       },
       {
         headline: 'Each card shows how deep it goes.',
@@ -34,7 +34,7 @@ export const enUS = {
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'Mellow',
     sectionTitle: "What's the moment?",
     myFavorites: 'Saved',
     start: 'Start →',
