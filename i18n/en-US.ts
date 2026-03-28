@@ -14,7 +14,7 @@ export const enUS = {
       {
         headline: 'Pick the moment.',
         subtext:
-          'Date night, road trips, dinners, or deep conversations.\n\nmellow gives you the right questions for the moment.',
+          'Road trip, date night, deep talk — the questions are organized by context so you always get the right ones for the situation.',
       },
       {
         headline: 'Each card shows how deep it goes.',

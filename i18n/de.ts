@@ -13,7 +13,7 @@ export const de = {
       {
         headline: 'Wähl den Moment.',
         subtext:
-          'Roadtrip, Date Night, tiefes Gespräch — die Fragen sind nach Kontext sortiert, damit du immer die passenden hast.',
+          'Roadtrip, Date Night, tiefes Gespräch — die Fragen sind nach Kontext sortiert, damit du immer die passenden für die Situation hast.',
       },
       {
         headline: 'Jede Karte zeigt die Tiefe.',

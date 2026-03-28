@@ -14,7 +14,7 @@ export const esES = {
       {
         headline: 'Elige el momento.',
         subtext:
-          'Road trip, cita, conversación profunda — las preguntas están organizadas por contexto para que siempre tengas las adecuadas.',
+          'Road trip, cita romántica, charla profunda — las preguntas están organizadas por contexto para que siempre tengas las adecuadas para la situación.',
       },
       {
         headline: 'Cada tarjeta muestra el nivel de confianza.',

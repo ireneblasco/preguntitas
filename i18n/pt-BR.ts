@@ -14,7 +14,7 @@ export const ptBR = {
       {
         headline: 'Escolha o momento.',
         subtext:
-          'Viagem, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para você sempre ter as certas.',
+          'Road trip, encontro romântico, papo profundo — as perguntas estão organizadas por contexto para você sempre ter as certas para a situação.',
       },
       {
         headline: 'Cada cartão mostra o nível de intimidade.',

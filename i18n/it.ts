@@ -13,7 +13,7 @@ export const it = {
       {
         headline: 'Scegli il momento.',
         subtext:
-          'Road trip, appuntamento, conversazione profonda — le domande sono organizzate per contesto così hai sempre quelle giuste.',
+          'Road trip, serata romantica, conversazione profonda — le domande sono organizzate per contesto così hai sempre quelle giuste per la situazione.',
       },
       {
         headline: 'Ogni carta mostra il livello di confidenza.',
