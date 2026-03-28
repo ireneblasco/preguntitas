@@ -22,11 +22,6 @@ export const enGB = {
           'Icebreaker for light fun, Personal for getting closer, and Vulnerable for the real stuff.',
       },
       {
-        headline: 'Swipe, go back, save.',
-        subtext:
-          'Pass or swipe to the next question, go back to the previous one, and tap the bookmark to save.',
-      },
-      {
         headline: 'No more boring conversations.',
         subtext: '',
         cta: "Let's go",

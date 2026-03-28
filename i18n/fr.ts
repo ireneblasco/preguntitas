@@ -21,11 +21,6 @@ export const fr = {
           'Icebreaker pour du léger, Personal pour se rapprocher, Vulnerable pour l’essentiel.',
       },
       {
-        headline: 'Glisse, reviens, enregistre.',
-        subtext:
-          'Passe ou glisse à la question suivante, reviens en arrière ou appuie sur le signet pour enregistrer.',
-      },
-      {
         headline: 'Fini les conversations ennuyeuses.',
         subtext: '',
         cta: 'C\'est parti',

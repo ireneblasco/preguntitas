@@ -22,11 +22,6 @@ export const esES = {
           'Icebreaker para algo ligero, Personal para conectar más y Vulnerable para lo que de verdad importa.',
       },
       {
-        headline: 'Desliza, vuelve, guarda.',
-        subtext:
-          'Pasa o desliza a la siguiente pregunta, vuelve atrás o toca el marcador para guardar.',
-      },
-      {
         headline: 'No más conversaciones aburridas.',
         subtext: '',
         cta: 'Empezar',

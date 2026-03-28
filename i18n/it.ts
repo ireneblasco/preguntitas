@@ -21,11 +21,6 @@ export const it = {
           'Icebreaker per qualcosa di leggero, Personal per avvicinarsi, Vulnerable per ciò che conta.',
       },
       {
-        headline: 'Scorri, torna indietro, salva.',
-        subtext:
-          'Passa o scorri alla prossima domanda, torna alla precedente o tocca il segnalibro per salvare.',
-      },
-      {
         headline: 'Basta conversazioni noiose.',
         subtext: '',
         cta: 'Inizia',

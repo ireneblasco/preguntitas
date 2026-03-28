@@ -21,11 +21,6 @@ export const pt = {
           'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa.',
       },
       {
-        headline: 'Desliza, volta, guarda.',
-        subtext:
-          'Passa ou desliza para a próxima pergunta, volta atrás ou toca no marcador para guardar.',
-      },
-      {
         headline: 'Chega de conversas sem graça.',
         subtext: '',
         cta: 'Começar',

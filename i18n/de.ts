@@ -21,11 +21,6 @@ export const de = {
           'Icebreaker für Leichtes, Personal zum Näherkommen, Vulnerable für das Echte.',
       },
       {
-        headline: 'Wischen, zurück, speichern.',
-        subtext:
-          'Weiterwischen zur nächsten Frage, zurück zur vorherigen, oder Lesezeichen antippen zum Speichern.',
-      },
-      {
         headline: 'Keine langweiligen Gespräche mehr.',
         subtext: '',
         cta: 'Los geht\'s',
