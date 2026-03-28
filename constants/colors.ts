@@ -1,53 +1,70 @@
+/** Mellow brand: bosque, lima, terracota, melocotón — tonos cálidos y retro */
 export const COLORS = {
-  // Background colors
+  brand: {
+    forest: '#2D5A47',
+    lime: '#D9ED82',
+    terracotta: '#C24651',
+    coral: '#E16270',
+    pink: '#F2BDCD',
+    orange: '#F2995D',
+    peach: '#F4C4A8',
+    /** Wordmark del logo */
+    wordmark: '#D97B45',
+    cream: '#FAF3EB',
+  },
+
   background: {
-    primary: '#F8F8F8',
-    warm: '#FAF5EF',
-    cool: '#E9F0F7',
+    primary: '#F6F0E8',
+    warm: '#FAF3EB',
+    cool: '#EEF6E2',
     white: '#FFFFFF',
+    limeWash: '#F0F4DC',
   },
-  
-  // Text colors
+
   text: {
-    primary: '#1F2937',
-    secondary: '#6B7280',
-    light: '#9CA3AF',
+    primary: '#243D33',
+    secondary: '#5C6B63',
+    light: '#8A9690',
     white: '#FFFFFF',
   },
-  
-  // Border colors
+
   border: {
-    light: '#E5E7EB',
-    medium: '#D1D5DB',
-    dark: '#9CA3AF',
+    light: '#E2DDD4',
+    medium: '#C9C3BA',
+    dark: '#9A9590',
   },
-  
-  // Splash screen gradient colors
+
   splash: {
+    top: '#FAF6EF',
+    bottom: '#E8EDC8',
     blue: '#5AA9E6',
     yellow: '#F9E79F',
     pink: '#F7C6B8',
     green: '#A8E6CF',
   },
-  
-  // Accent colors
+
   accent: {
-    primary: '#5AA9E6',
-    secondary: '#F7C6B8',
-    success: '#A8E6CF',
-    warning: '#F9E79F',
+    primary: '#2D5A47',
+    secondary: '#F2995D',
+    success: '#D9ED82',
+    warning: '#F2995D',
   },
-  
-  // UI element colors
+
   card: {
     background: '#FFFFFF',
-    shadow: 'rgba(0, 0, 0, 0.05)',
+    shadow: 'rgba(45, 90, 71, 0.08)',
   },
-  
-  // Interactive elements
+
   interactive: {
-    active: '#5AA9E6',
+    active: '#2D5A47',
     inactive: '#9CA3AF',
-    hover: '#E9F0F7',
+    hover: '#E8F0E2',
   },
-};
+
+  /** Enlaces / chevrons que antes eran azul sistema */
+  ui: {
+    link: '#2D5A47',
+    footerTrack: '#E8DFD4',
+    favoriteMuted: 'rgba(36, 61, 51, 0.35)',
+  },
+} as const;

@@ -1,6 +1,6 @@
 export const it = {
   app: {
-    title: 'Mellow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Salta',
@@ -33,7 +33,7 @@ export const it = {
     ],
   },
   home: {
-    appName: 'Mellow',
+    appName: 'mellow',
     sectionTitle: 'Qual è il momento?',
     myFavorites: 'Salvati',
     start: 'Inizia →',

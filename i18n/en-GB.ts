@@ -1,7 +1,7 @@
 /** British English (en-GB) – spelling and wording variants */
 export const enGB = {
   app: {
-    title: 'Mellow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Skip',
@@ -14,7 +14,7 @@ export const enGB = {
       {
         headline: 'Pick the moment.',
         subtext:
-          'Date night, road trips, dinners, or deep conversations.\n\nMellow gives you the right questions for the moment.',
+          'Date night, road trips, dinners, or deep conversations.\n\nmellow gives you the right questions for the moment.',
       },
       {
         headline: 'Each card shows how deep it goes.',
@@ -34,7 +34,7 @@ export const enGB = {
     ],
   },
   home: {
-    appName: 'Mellow',
+    appName: 'mellow',
     sectionTitle: "What's the moment?",
     myFavorites: 'Saved',
     start: 'Start →',

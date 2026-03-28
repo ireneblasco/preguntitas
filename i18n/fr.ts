@@ -1,6 +1,6 @@
 export const fr = {
   app: {
-    title: 'Mellow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Passer',
@@ -33,7 +33,7 @@ export const fr = {
     ],
   },
   home: {
-    appName: 'Mellow',
+    appName: 'mellow',
     sectionTitle: 'C\'est quoi le moment ?',
     myFavorites: 'Enregistrés',
     start: 'Commencer →',
