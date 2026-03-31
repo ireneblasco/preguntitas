@@ -28,6 +28,16 @@ const NOTION_API_KEY = process.env.NOTION_API_KEY;
 const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 if (!NOTION_API_KEY || !NOTION_DATABASE_ID) {
+  if (process.env.EAS_BUILD === 'true') {
+    console.warn(
+      'Skipping fetch-questions on EAS: NOTION_API_KEY / NOTION_DATABASE_ID not set for this build.',
+    );
+    console.warn(
+      'Using committed data/questions.ts. Add those env vars (EAS secrets / project env) to refresh at build time.',
+    );
+    process.exit(0);
+  }
+
   console.error('❌ Error: Missing required environment variables');
   console.error('');
   console.error('Please create a .env file with:');
@@ -227,7 +237,20 @@ async function main() {
     const outputPath = path.join(__dirname, '..', 'data', 'questions.ts');
     fs.writeFileSync(outputPath, fileContent, 'utf-8');
 
+    const momentOptionsForJson = momentNames.map((fullName: string) => {
+      const { name, emoji } = parseMomentNameWithEmoji(fullName);
+      const displayName = name || fullName;
+      return { id: fullName, name: displayName, emoji };
+    });
+    const jsonPath = path.join(__dirname, '..', 'data', 'questions.json');
+    fs.writeFileSync(
+      jsonPath,
+      JSON.stringify({ questions, momentOptions: momentOptionsForJson }, null, 2),
+      'utf-8'
+    );
+
     console.log(`✅ Generated data/questions.ts with ${questions.length} questions`);
+    console.log(`✅ Generated data/questions.json (Swift / native bundle)`);
     console.log('');
     console.log('Moments:', momentNames.join(', '));
   } catch (error: any) {
