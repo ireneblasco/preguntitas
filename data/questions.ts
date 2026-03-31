@@ -1,24 +1,14 @@
-// Entry point for questions: list + texts by locale (same pattern as i18n)
-// Do not edit manually - run scripts/fetch-questions.js and translation pipeline
+// Auto-generated from Notion on 2026-03-31T03:08:37.877Z
+// Do not edit manually - changes will be overwritten
 
-import { questionTexts as enUS } from './questions.en-US';
-import { questionTexts as esES } from './questions.es-ES';
-import { questionTexts as enGB } from './questions.en-GB';
-import { questionTexts as esMX } from './questions.es-MX';
-import { questionTexts as ptBR } from './questions.pt-BR';
-import { questionTexts as pt } from './questions.pt';
-import { questionTexts as de } from './questions.de';
-import { questionTexts as it } from './questions.it';
-import { questionTexts as fr } from './questions.fr';
-import type { TranslationMapKey } from '@/i18n';
-
-export type MomentType = "Date Night 🌙" | "Deep Talk 🧠" | "Ikigai 🌸" | "Road Trip 🚗" | "Table Talks 🍷";
+export type MomentType = "Con mi abuela 💌" | "Date Night 🌙" | "Deep Talk 🧠" | "Ikigai 🌸" | "Road Trip 🚗" | "Table Talks 🍷";
 
 export const momentOptions: Array<{
   id: MomentType;
   name: string;
   emoji: string;
 }> = [
+  { id: "Con mi abuela 💌", name: "Con mi abuela", emoji: "💌" },
   { id: "Date Night 🌙", name: "Date Night", emoji: "🌙" },
   { id: "Deep Talk 🧠", name: "Deep Talk", emoji: "🧠" },
   { id: "Ikigai 🌸", name: "Ikigai", emoji: "🌸" },
@@ -28,24 +18,32 @@ export const momentOptions: Array<{
 
 export interface Question {
   id: string;
+  textEn: string;
+  textEs: string;
   moment: MomentType[];
 }
 
 export const questions: Question[] = [
   {
     "id": "ID-156",
+    "textEn": "What is the greatest accomplishment of your life?",
+    "textEs": "¿Cuál es el logro más grande de tu vida?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-157",
+    "textEn": "What is something you would like to do but are too scared to try?",
+    "textEs": "¿Qué es algo que te gustaría hacer pero tienes demasiado miedo de intentarlo?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-120",
+    "textEn": "Have you ever seen something you cannot explain?",
+    "textEs": "¿Alguna vez has visto algo que no puedes explicar?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -53,6 +51,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-142",
+    "textEn": "What characteristics do you admire most in others?",
+    "textEs": "¿Qué características admiras más en los demás?",
     "moment": [
       "Deep Talk 🧠",
       "Date Night 🌙"
@@ -60,6 +60,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-30",
+    "textEn": "What or who inspires you to be a better person?",
+    "textEs": "¿Qué o quién te inspira a ser una mejor persona?",
     "moment": [
       "Table Talks 🍷",
       "Deep Talk 🧠"
@@ -67,6 +69,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-24",
+    "textEn": "How much money would make you happy?",
+    "textEs": "¿Cuánto dinero te haría feliz?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -74,24 +78,32 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-108",
+    "textEn": "What do you think my closet looks like?",
+    "textEs": "¿Cómo crees que es mi armario: organizado o caótico?",
     "moment": [
       "Road Trip 🚗"
     ]
   },
   {
     "id": "ID-140",
+    "textEn": "What are three things we have in common?",
+    "textEs": "¿Cuáles son tres cosas que tenemos en común?",
     "moment": [
       "Date Night 🌙"
     ]
   },
   {
     "id": "ID-7",
+    "textEn": "What is the worst thing that has happened in the world?",
+    "textEs": "¿Cuál ha sido, según tú, el peor suceso que ha ocurrido en el mundo?",
     "moment": [
       "Table Talks 🍷"
     ]
   },
   {
     "id": "ID-35",
+    "textEn": "If you were to get a tattoo tomorrow, what would it be?",
+    "textEs": "Si fueras a hacerte un tatuaje mañana, ¿qué te tatuarías?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -99,6 +111,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-33",
+    "textEn": "What are you really intense about?",
+    "textEs": "¿En qué cosas eres realmente intenso/a?",
     "moment": [
       "Table Talks 🍷",
       "Deep Talk 🧠",
@@ -107,6 +121,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-151",
+    "textEn": "Have you ever broken anyone’s heart?",
+    "textEs": "¿Has roto el corazón de alguien?",
     "moment": [
       "Deep Talk 🧠",
       "Date Night 🌙"
@@ -114,6 +130,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-20",
+    "textEn": "What's the best thing about your life?",
+    "textEs": "¿Qué es lo que más te gusta de tu vida?",
     "moment": [
       "Deep Talk 🧠",
       "Table Talks 🍷"
@@ -121,12 +139,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-32",
+    "textEn": "What is your favorite smell?",
+    "textEs": "¿Cuál es tu olor favorito?",
     "moment": [
       "Road Trip 🚗"
     ]
   },
   {
     "id": "ID-127",
+    "textEn": "What are you addicted to?",
+    "textEs": "¿A qué eres adicto/a?",
     "moment": [
       "Deep Talk 🧠",
       "Table Talks 🍷"
@@ -134,32 +156,987 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-2",
+    "textEn": "Is there an area of your life where you are never satisfied?",
+    "textEs": "¿Hay algun área en tu vida en la que nunca estés satisfecho?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-19",
+    "textEn": "Do you think opposites attract?",
+    "textEs": "¿Crees que los polos opuestos se atraen?",
     "moment": [
       "Date Night 🌙",
       "Table Talks 🍷"
     ]
   },
   {
-    "id": "ID-1",
+    "id": "ID-159",
+    "textEn": "Who is the person who has let you down the most in your life?",
+    "textEs": "¿Quién es la persona que más te ha fallado en la vida?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-177",
+    "textEn": "What version of yourself no longer exists?",
+    "textEs": "¿Qué versión de ti ya no existe?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-181",
+    "textEn": "What part of you has changed the most over the past few years?",
+    "textEs": "¿Qué parte de ti ha cambiado más en los últimos años?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-189",
+    "textEn": "What would you like people to remember about you?",
+    "textEs": "¿Qué te gustaría que recordaran de ti?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-190",
+    "textEn": "What would you like to forgive yourself for?",
+    "textEs": "¿Qué te gustaría perdonarte?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-178",
+    "textEn": "When do you feel most like yourself?",
+    "textEs": "¿En qué momento sientes que eres más tú?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-186",
+    "textEn": "When was the last time you truly surprised yourself?",
+    "textEs": "¿Cuándo fue la última vez que te sorprendiste a ti mismo/a?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-184",
+    "textEn": "Which emotion is the hardest for you to manage?",
+    "textEs": "¿Qué emoción te cuesta más gestionar?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-191",
+    "textEn": "What would you like to understand better about your personality?",
+    "textEs": "¿Qué te gustaría entender mejor sobre tu personalidad?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-161",
+    "textEn": "¿Te consideras una persona ambiciosa?",
+    "textEs": "¿Te consideras una persona ambiciosa?",
+    "moment": []
+  },
+  {
+    "id": "ID-165",
+    "textEn": "Do you care what others think of you?",
+    "textEs": "¿Te importa lo que piensen de ti?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-187",
+    "textEn": "What excites you these days?",
+    "textEs": "¿Qué te ilusiona últimamente?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-163",
+    "textEn": "Do you consider yourself an ambitious person?",
+    "textEs": "¿Te consideras una persona ambiciosa?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-164",
+    "textEn": "What does freedom mean to you?",
+    "textEs": "¿Qué significa para ti la libertad?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-172",
+    "textEn": "If you lost everything tomorrow, what would you still have?",
+    "textEs": "Si mañana lo perdieras todo, ¿qué te quedaría?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-182",
+    "textEn": "What do you think people usually misunderstand about you?",
+    "textEs": "¿Qué crees que la gente suele malinterpretar de ti?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-169",
+    "textEn": "Who do you need to forgive? And who needs to forgive you?",
+    "textEs": "¿A quién necesitas perdonar? ¿Y quién te tiene que perdonar a ti?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-170",
+    "textEn": "Have you ever felt lonely even when surrounded by people?",
+    "textEs": "¿Te has sentido sola estando rodeada de gente?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-183",
+    "textEn": "What have you learned about yourself that you didn’t know before?",
+    "textEs": "¿Qué has aprendido sobre ti que antes no sabías?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-162",
+    "textEn": "¿Te consideras una persona ambiciosa?",
+    "textEs": "¿Te consideras una persona ambiciosa?",
+    "moment": []
+  },
+  {
+    "id": "ID-193",
+    "textEn": "Why are you worth it?",
+    "textEs": "¿Por qué lo vales?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-167",
+    "textEn": "What has been the hardest moment of your life?",
+    "textEs": "¿Cuál ha sido el momento más duro de tu vida?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-160",
+    "textEn": "¿Te consideras una persona ambiciosa?",
+    "textEs": "¿Te consideras una persona ambiciosa?",
+    "moment": []
+  },
+  {
+    "id": "ID-185",
+    "textEn": "What makes you feel at peace?",
+    "textEs": "¿Qué te hace sentir en paz?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-179",
+    "textEn": "What part of your success isn’t visible to others?",
+    "textEs": "¿Qué parte de tu éxito no se ve?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-188",
+    "textEn": "What decision helped you grow the most?",
+    "textEs": "¿Qué decisión te hizo madurar?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-166",
+    "textEn": "Who are you when no one is watching?",
+    "textEs": "¿Quién eres cuando nadie te está mirando?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-180",
+    "textEn": "Who supports you when you can’t go on?",
+    "textEs": "¿Quién te sostiene cuando tú no puedes más?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-168",
+    "textEn": "What wound are you still carrying that hasn’t fully healed?",
+    "textEs": "¿Qué herida arrastras que todavía no has cerrado?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-175",
+    "textEn": "What still hurts even though you say it’s over?",
+    "textEs": "¿Qué te duele todavía aunque digas que ya pasó?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-171",
+    "textEn": "What part of you do people not know?",
+    "textEs": "¿Qué parte de ti no conoce la gente?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-173",
+    "textEn": "Are you afraid of getting older?",
+    "textEs": "¿Te da miedo envejecer?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-174",
+    "textEn": "What conversation do you still need to have with yourself?",
+    "textEs": "¿Qué conversación tienes pendiente contigo mismo?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-176",
+    "textEn": "Have you been brave, or mostly afraid?",
+    "textEs": "¿Has sido valiente o has tenido miedo casi siempre?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-216",
+    "textEn": "Do you believe in a love that lasts a lifetime?",
+    "textEs": "¿Crees en un amor que dure toda la vida?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-214",
+    "textEn": "If you could go back to your 20-year-old self, what would you tell them?",
+    "textEs": "Si pudieras volver a tus 20 años, ¿qué te dirías?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-218",
+    "textEn": "What was easier than you thought it would be?",
+    "textEs": "¿Qué fue más fácil de lo que pensabas?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-217",
+    "textEn": "What was harder than you expected in life?",
+    "textEs": "¿Qué fue más difícil de lo que imaginabas en la vida?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-208",
+    "textEn": "Is there anything you wish you had worried less about?",
+    "textEs": "¿Hay algo por lo que te hubiera gustado preocuparte menos?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-227",
+    "textEn": "What do you think society has lost?",
+    "textEs": "¿Qué crees que la sociedad ha perdido?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-204",
+    "textEn": "If your close friends described your “zone of genius”, what would they say?",
+    "textEs": "Si tus amigos describieran tu “zona de genialidad”, ¿qué dirían?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-228",
+    "textEn": "What did you give too much importance to when you were young, only to realize later it didn’t matter?",
+    "textEs": "¿A qué le diste demasiada importancia de joven y luego te diste cuenta de que no la tenía?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-207",
+    "textEn": "When you look back at your life, what makes you feel most proud?",
+    "textEs": "Cuando miras atrás en tu vida, ¿qué es lo que más orgullo te da?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-206",
+    "textEn": "What are you curious about lately?",
+    "textEs": "¿Sobre qué sientes una curiosidad últimamente?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-226",
+    "textEn": "Do you think people today have it easier or harder than before? Why?",
+    "textEs": "¿Crees que hoy la gente lo tiene más fácil o más difícil que antes? ¿Por qué?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-225",
+    "textEn": "What does a “good life” mean to you now?",
+    "textEs": "¿Qué significa ahora para ti una “buena vida”?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-219",
+    "textEn": "What do you see in the younger generations that gives you hope?",
+    "textEs": "¿Qué ves en las nuevas generaciones que te da esperanza?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-201",
+    "textEn": "If you had to teach something tomorrow, what would you choose?",
+    "textEs": "Si tuvieses que enseñar algo mañana, ¿qué elegirías?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-221",
+    "textEn": "What matters more than people think?",
+    "textEs": "¿Qué importa más de lo que la gente cree?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-195",
+    "textEn": "What would you do if you knew you couldn’t fail?",
+    "textEs": "¿Qué harías si supieras que no puedes fracasar?",
+    "moment": [
+      "Ikigai 🌸",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-222",
+    "textEn": "What fear controlled you at some point in your life?",
+    "textEs": "¿Qué miedo te controló en algún momento de tu vida?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-199",
+    "textEn": "What do you do naturally that others find difficult?",
+    "textEs": "¿Qué haces con naturalidad que a otros les cuesta?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-231",
+    "textEn": "Who was the first person you told about me?",
+    "textEs": "¿Quién fue la primera persona a la que le hablaste de mí?",
+    "moment": [
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-196",
+    "textEn": "In what kind of conversations do you lose track of time?",
+    "textEs": "¿En qué tipo de conversaciones pierdes la noción del tiempo?",
+    "moment": [
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-197",
+    "textEn": "What topics do you constantly look up without anyone pushing you?",
+    "textEs": "¿Qué temas buscas constantemente sin que nadie te obligue?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-224",
+    "textEn": "When did you feel most proud of yourself, even if no one noticed?",
+    "textEs": "¿Cuándo te sentiste más orgulloso/a de ti aunque nadie lo supiera?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-198",
+    "textEn": "What kind of problems do you enjoy solving?",
+    "textEs": "¿Qué tipo de problemas disfrutas resolver?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-215",
+    "textEn": "What decision changed your life the most?",
+    "textEs": "¿Qué decisión cambió más tu vida?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-200",
+    "textEn": "In what situations do you tend to take the lead without realizing it?",
+    "textEs": "¿En qué situaciones sueles tomar el liderazgo sin darte cuenta?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-205",
+    "textEn": "What do people often ask you for help with?",
+    "textEs": "¿Con qué cosas suelen pedirte ayuda?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-220",
+    "textEn": "Which member of the family do you think resembles you the most? Why?",
+    "textEs": "¿Qué miembro de la familia crees que se parece más a ti? ¿Por qué?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-229",
+    "textEn": "At what time in your life did you feel the happiest?",
+    "textEs": "¿En qué etapa de tu vida te has sentido más feliz?",
+    "moment": [
+      "Con mi abuela 💌"
+    ]
+  },
+  {
+    "id": "ID-223",
+    "textEn": "What memory still makes you emotional?",
+    "textEs": "¿Qué recuerdo todavía te emociona?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-202",
+    "textEn": "Which version of yourself do you admire?",
+    "textEs": "¿Qué versión de ti admiras?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-232",
+    "textEn": "What do you wish you could do more often?",
+    "textEs": "¿Qué te gustaría hacer más a menudo?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-213",
+    "textEn": "What do you think you spent too much time on?",
+    "textEs": "¿En qué crees que invertiste demasiado tiempo?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-233",
+    "textEn": "What’s your biggest wasted talent?",
+    "textEs": "¿Cuál es tu mayor talento desperdiciado?",
     "moment": [
       "Road Trip 🚗",
       "Table Talks 🍷"
     ]
   },
   {
-    "id": "ID-159",
+    "id": "ID-234",
+    "textEn": "If you could turn into an animal, which one would you be?",
+    "textEs": "Si pudieras convertirte en un animal, ¿cuál serías?",
+    "moment": [
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-266",
+    "textEn": "What movie have you watched the most times?",
+    "textEs": "¿Cuál es la película que más veces has visto?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-263",
+    "textEn": "Who are you more like: your mother or your father?",
+    "textEs": "¿A quién te pareces más: a tu madre o a tu padre?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-239",
+    "textEn": "Would you rather live a luxurious life in the mountains or by the beach?",
+    "textEs": "¿Preferirías una vida de lujo en la montaña o una vida de lujo en la playa?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-253",
+    "textEn": "What hobbies do you think you'll have when you're older?",
+    "textEs": "¿Qué hobbies crees que tendrás cuando tengas 65 años?",
+    "moment": [
+      "Table Talks 🍷",
+      "Ikigai 🌸"
+    ]
+  },
+  {
+    "id": "ID-258",
+    "textEn": "Would you be willing to get married more than once?",
+    "textEs": "¿Estarías dispuesto/a a casarte más de una vez?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-265",
+    "textEn": "If you knew you couldn’t die, what adventure would you try?",
+    "textEs": "Si supieras que no puedes morir, ¿qué aventura probarías?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-257",
+    "textEn": "If you could have any animal as a pet, which one would you choose?",
+    "textEs": "Si pudieras tener cualquier animal como mascota, ¿cuál elegirías?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-241",
+    "textEn": "If you could be born with a different nationality, which one would you choose?",
+    "textEs": "Si pudieras nacer con otra nacionalidad, ¿cuál elegirías?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-237",
+    "textEn": "Have you ever forgiven someone for cheating?",
+    "textEs": "¿Alguna vez has perdonado una infidelidad?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
+    "id": "ID-236",
+    "textEn": "Could you forgive someone for cheating? ",
+    "textEs": "¿Serías capaz de perdonar una infidelidad?\n",
+    "moment": [
+      "Table Talks 🍷",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-269",
+    "textEn": "In what situation have you feared for your life?",
+    "textEs": "¿En qué situación has sentido miedo por tu vida?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-271",
+    "textEn": "Would you tattoo your partner’s name on your body?",
+    "textEs": "¿Te tatuarías el nombre de tu pareja?",
+    "moment": [
+      "Table Talks 🍷",
+      "Date Night 🌙",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-261",
+    "textEn": "How many children would you like to have?",
+    "textEs": "¿Cuántos hijos te gustaría tener?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-250",
+    "textEn": "If you could instantly master one more language, which one would you choose?",
+    "textEs": "Si pudieras aprender perfectamente un idioma más, ¿cuál elegirías?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-238",
+    "textEn": "If you got a dog today, what would you name it?",
+    "textEs": "Si tuvieras un perro hoy, ¿qué nombre le pondrías?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-246",
+    "textEn": "Do you think everything happens for a reason, or that life is random?",
+    "textEs": "¿Crees que todo pasa por algo o que la vida es aleatoria?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-244",
+    "textEn": "Who is your favorite ex?",
+    "textEs": "¿Quién es tu ex favorito?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-259",
+    "textEn": "Do you believe in God?",
+    "textEs": "¿Crees en Dios?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-245",
+    "textEn": "What habit from your mother have you realized you do yourself?",
+    "textEs": "¿Qué mania de tu madre te has dado cuenta que ahora haces tú?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-254",
+    "textEn": "A classic one: if your life were written like a book, would you read the ending?",
+    "textEs": "La típica: si tu vida estuviera escrita como un libro, ¿leerías el final?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-270",
+    "textEn": "Have you ever had surgery?",
+    "textEs": "¿Te han operado alguna vez?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-252",
+    "textEn": "What would you say to your younger self?",
+    "textEs": "¿Qué le dirías a tu yo de niño?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-256",
+    "textEn": "If you died tomorrow, would you feel you made good use of your time?",
+    "textEs": "Si murieras mañana, ¿sentirías que has aprovechado bien tu tiempo?",
+    "moment": [
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-249",
+    "textEn": "If you could have any car, which one would you choose?",
+    "textEs": "Si pudieras tener cualquier coche, ¿cuál tendrías?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-248",
+    "textEn": "If you could be the CEO of any company, which one would you choose?",
+    "textEs": "Si pudieras ser el CEO de cualquier empresa, ¿cuál elegirías?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-243",
+    "textEn": "What do you think about surrogacy?",
+    "textEs": "¿Qué opinas de los vientres de alquiler?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-242",
+    "textEn": "Would you adopt a child?",
+    "textEs": "¿Adoptarías un hijo?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-260",
+    "textEn": "If you had children, what names would you give them?",
+    "textEs": "Si tuvieras hijos, ¿qué nombres les pondrías?",
+    "moment": [
+      "Table Talks 🍷",
+      "Date Night 🌙"
+    ]
+  },
+  {
+    "id": "ID-267",
+    "textEn": "If you could have been a singer or part of a band, which would you choose?",
+    "textEs": "Si pudieras haber sido cantante o formar parte de un grupo, ¿cuál serías?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-255",
+    "textEn": "(For women) If during childbirth doctors said only one could survive, you or your baby, what decision would you make?",
+    "textEs": "(Solo para mujeres) Si durante el parto te dijeran que solo puede sobrevivir uno, tú o tu bebé, ¿qué decisión tomarías?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-251",
+    "textEn": "Do you believe in the phrase “You can achieve anything you set your mind to”?",
+    "textEs": "¿Crees en la frase: “Puedes conseguir todo lo que te propongas”?",
+    "moment": [
+      "Deep Talk 🧠",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-262",
+    "textEn": "Are you the kind of person you imagined you would be as a child?",
+    "textEs": "¿Eres como te imaginabas cuando eras niño/a?",
+    "moment": [
+      "Table Talks 🍷",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-247",
+    "textEn": "Do you believe in spirits?",
+    "textEs": "¿Crees en los espíritus?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-268",
+    "textEn": "Which travel destination would you avoid going back to?",
+    "textEs": "¿A qué destino de viaje evitarías volver?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-235",
+    "textEn": "What topic could you talk about for hours without getting tired of it?",
+    "textEs": "¿De qué podrías hablar durante 3 horas seguidas?",
+    "moment": [
+      "Ikigai 🌸",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-240",
+    "textEn": "If you were a household appliance, which one would you be and why?",
+    "textEs": "Si fueras un electrodoméstico de tu casa, ¿cuál serías y por qué?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-264",
+    "textEn": "If you could be the child of any famous person, who would you choose as your parent?",
+    "textEs": "Si pudieras ser hijo/a de una persona famosa, ¿a quién elegirías como padre o madre?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-272",
+    "textEn": "Would you like your child to have a personality similar to your partner’s?",
+    "textEs": "¿Te gustaría que tu hijo tuviera una personalidad similar a la de tu pareja?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-276",
+    "textEn": "Describe an important teacher in your school life.",
+    "textEs": "Describe un profesor que fue importante en tu etapa escolar.",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-273",
+    "textEn": "What toxic behavior is socially applauded?",
+    "textEs": "¿Qué comportamiento tóxico está socialmente aplaudido?",
+    "moment": [
+      "Road Trip 🚗",
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-277",
+    "textEn": "What have you done in the past that you’re still embarrassed about?",
+    "textEs": "Cuenta algo que hiciste en el pasado creyendo que era cool pero ahora te da cringe recordarlo",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-278",
+    "textEn": "If you had to write a book, what would it be about?",
+    "textEs": "Si tuvieras que escribir un libro, ¿de qué trataría?\n",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-274",
+    "textEn": "When you look in the mirror, what’s the first thing you check?",
+    "textEs": "Cuando te miras en el espejo, ¿qué es lo primero en lo que te fijas?",
+    "moment": [
+      "Con mi abuela 💌",
+      "Table Talks 🍷",
+      "Road Trip 🚗"
+    ]
+  },
+  {
+    "id": "ID-280",
+    "textEn": "If someone had to write your memoir, who would you choose?",
+    "textEs": "Si alguien tuviera que escribir tus memorias, ¿a quién elegirías?",
+    "moment": [
+      "Table Talks 🍷",
+      "Road Trip 🚗",
+      "Deep Talk 🧠"
+    ]
+  },
+  {
+    "id": "ID-275",
+    "textEn": "What’s the kindest thing anyone has ever done for you?",
+    "textEs": "¿Qué es lo más bonito que alguien ha hecho por ti?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
+    "id": "ID-279",
+    "textEn": "What did you want to be when you were little?",
+    "textEs": "¿Qué querías ser de pequeño?",
+    "moment": [
+      "Table Talks 🍷"
+    ]
+  },
+  {
     "id": "ID-123",
+    "textEn": "What is the first lie you can remember telling?",
+    "textEs": "¿Cuál es la primera mentira que recuerdas haber dicho?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -167,6 +1144,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-121",
+    "textEn": "What is something that has made you happy lately?",
+    "textEs": "¿Cuál es algo que te ha hecho feliz últimamente?",
     "moment": [
       "Table Talks 🍷",
       "Deep Talk 🧠"
@@ -174,48 +1153,64 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-126",
+    "textEn": "Do you like who you are?",
+    "textEs": "¿Te gusta quién eres?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-22",
+    "textEn": "Have you ever thought about dating a really good friend?",
+    "textEs": "¿Alguna vez has pensado en salir con tu mejor amigo/a?",
     "moment": [
       "Table Talks 🍷"
     ]
   },
   {
     "id": "ID-14",
+    "textEn": "Are you a fanatic of anything or anyone?",
+    "textEs": "¿Eres fanático/a de algo o de alguien?",
     "moment": [
       "Road Trip 🚗"
     ]
   },
   {
     "id": "ID-129",
+    "textEn": "What is one thing you wish someone did or will do for you?",
+    "textEs": "¿Cuál es una cosa que desearías que alguien hiciera o haga por ti?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-119",
+    "textEn": "What makes you cry?",
+    "textEs": "¿Qué te hace llorar?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-15",
+    "textEn": "What was the last costume you wore?",
+    "textEs": "¿Cuál fue el último disfraz que usaste?",
     "moment": [
       "Road Trip 🚗"
     ]
   },
   {
     "id": "ID-147",
+    "textEn": "What or who do you need to let go of in life?",
+    "textEs": "¿De qué o de quién necesitas desprenderte en la vida?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-9",
+    "textEn": "Do you talk to yourself?",
+    "textEs": "¿Te hablas a ti mismo cuando estás solo en casa?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -223,12 +1218,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-16",
+    "textEn": "What is the funniest pet name you have ever heard?",
+    "textEs": "¿Cuál es el nombre de mascota más gracioso que has escuchado?",
     "moment": [
       "Road Trip 🚗"
     ]
   },
   {
     "id": "ID-23",
+    "textEn": "What is your ideal place to raise kids or start a family?",
+    "textEs": "¿Cuál es tu lugar ideal para tener hijos o formar una familia?",
     "moment": [
       "Table Talks 🍷",
       "Date Night 🌙"
@@ -236,13 +1235,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-25",
+    "textEn": "How did your parents meet?",
+    "textEs": "¿Cómo se conocieron tus padres?",
     "moment": [
-      "Date Night 🌙",
-      "Table Talks 🍷"
+      "Date Night 🌙"
     ]
   },
   {
     "id": "ID-17",
+    "textEn": "What would be the hardest thing for you to let go of in your current life?",
+    "textEs": "¿Qué te resultaría más difícil soltar en tu vida actual?",
     "moment": [
       "Deep Talk 🧠",
       "Date Night 🌙"
@@ -250,24 +1252,32 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-110",
+    "textEn": "Which experience has given you the most adrenaline?",
+    "textEs": "¿Qué vivencia te ha hecho sentir más adrenalina?",
     "moment": [
       "Road Trip 🚗"
     ]
   },
   {
     "id": "ID-155",
+    "textEn": "Do you think that you take good care of yourself?",
+    "textEs": "¿Crees que te cuidas bien?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-143",
+    "textEn": "Are there any relationships in your life you would like to improve or repair?",
+    "textEs": "¿Hay alguna relación en tu vida que te gustaría mejorar o reparar?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-122",
+    "textEn": "Who would you call if you had something worrying you?",
+    "textEs": "¿A quién llamarías si tuvieras un problema o algo que te angustia?",
     "moment": [
       "Deep Talk 🧠",
       "Date Night 🌙"
@@ -275,12 +1285,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-139",
+    "textEn": "What is your biggest regret in life?",
+    "textEs": "¿Cuál es tu mayor arrepentimiento en la vida?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-34",
+    "textEn": "Are you an introvert or an extrovert?",
+    "textEs": "¿Eres introvertido/a o extrovertido/a?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗",
@@ -289,6 +1303,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-152",
+    "textEn": "What was the most memorable toy you played with when you were little?",
+    "textEs": "¿Cuál fue el juguete más memorable con el que jugaste cuando eras pequeño?",
     "moment": [
       "Road Trip 🚗",
       "Date Night 🌙"
@@ -296,6 +1312,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-135",
+    "textEn": "What does my body language say about me?",
+    "textEs": "¿Qué dice mi lenguaje corporal sobre mí?",
     "moment": [
       "Deep Talk 🧠",
       "Date Night 🌙"
@@ -303,12 +1321,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-154",
+    "textEn": "Do you have an old item you cannot let go of?",
+    "textEs": "¿Tienes algún objeto antiguo que no puedas soltar?",
     "moment": [
       "Table Talks 🍷"
     ]
   },
   {
     "id": "ID-137",
+    "textEn": "What do you value most in a friendship or relationship?",
+    "textEs": "¿Qué valoras más en una amistad o relación?",
     "moment": [
       "Table Talks 🍷",
       "Deep Talk 🧠",
@@ -317,12 +1339,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-31",
+    "textEn": "What makes you lose confidence in yourself?",
+    "textEs": "¿Qué te hace perder la seguridad en ti mismo?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-29",
+    "textEn": "Who was your first crush?",
+    "textEs": "¿Quién fue tu primer crush?",
     "moment": [
       "Date Night 🌙",
       "Table Talks 🍷"
@@ -330,12 +1356,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-12",
+    "textEn": "What kind of life would you try to avoid at all costs?",
+    "textEs": "¿Qué tipo de vida nunca querrías tener?",
     "moment": [
       "Table Talks 🍷"
     ]
   },
   {
     "id": "ID-115",
+    "textEn": "How do you think people see you?",
+    "textEs": "¿Cómo crees que te ven los demás?",
     "moment": [
       "Table Talks 🍷",
       "Deep Talk 🧠"
@@ -343,19 +1373,24 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-113",
+    "textEn": "Where do you find meaning in your life?",
+    "textEs": "¿Dónde encuentras significado en tu vida?",
     "moment": [
-      "Deep Talk 🧠",
-      "Ikigai 🌸"
+      "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-149",
+    "textEn": "Is there something in your life that you ignore because you are not ready to face it?",
+    "textEs": "¿Hay algo en tu vida que ignoras porque no estás listo para enfrentarlo?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-131",
+    "textEn": "When and with whom did you lose your virginity?",
+    "textEs": "¿Cuándo y con quién perdiste tu virginidad?",
     "moment": [
       "Deep Talk 🧠",
       "Date Night 🌙"
@@ -363,12 +1398,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-134",
+    "textEn": "Can you remember a time in your life when you felt the most alive?",
+    "textEs": "¿Recuerdas un momento de tu vida en el que te sentiste más vivo/a?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-10",
+    "textEn": "Out of your five senses, which one is your strongest?",
+    "textEs": "De tus cinco sentidos, ¿cuál crees que tienes más desarrollado?",
     "moment": [
       "Table Talks 🍷",
       "Date Night 🌙"
@@ -376,12 +1415,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-138",
+    "textEn": "What is your definition of success?",
+    "textEs": "¿Cuál es tu definición de éxito?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-13",
+    "textEn": "What is the funniest question you ever asked your parents when you were younger?",
+    "textEs": "¿Cuál es la pregunta más graciosa que hiciste a tus padres cuando eras más pequeño?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -389,6 +1432,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-111",
+    "textEn": "What is an obstacle you’re currently trying to overcome?",
+    "textEs": "¿Cuál es un obstáculo que estás intentando superar actualmente?",
     "moment": [
       "Deep Talk 🧠",
       "Table Talks 🍷"
@@ -396,6 +1441,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-4",
+    "textEn": "If you were in a band, what instrument or role would you play?",
+    "textEs": "Si estuvieras en una banda, ¿qué instrumento tocarías o qué rol desempeñarías?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -403,6 +1450,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-145",
+    "textEn": "What do you think about the most?",
+    "textEs": "¿En qué piensas más frecuentemente?",
     "moment": [
       "Table Talks 🍷",
       "Deep Talk 🧠"
@@ -410,24 +1459,32 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-112",
+    "textEn": "When and why did you last cry?",
+    "textEs": "¿Cuándo y por qué lloraste por última vez?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-26",
+    "textEn": "Do you believe in the validity of IQ tests?",
+    "textEs": "¿Crees en la validez de las pruebas de coeficiente intelectual?",
     "moment": [
       "Table Talks 🍷"
     ]
   },
   {
     "id": "ID-133",
+    "textEn": "What are you most grateful for?",
+    "textEs": "¿Qué es lo que más agradeces en tu vida?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-8",
+    "textEn": "What is your favorite clothing store?",
+    "textEs": "¿Cuál es tu tienda de ropa favorita?",
     "moment": [
       "Road Trip 🚗",
       "Date Night 🌙"
@@ -435,24 +1492,32 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-18",
+    "textEn": "Which would be impossible for you to give up permanently, beer or coffee?",
+    "textEs": "¿Qué te costaría más dejar, el café o la cerveza?",
     "moment": [
       "Road Trip 🚗"
     ]
   },
   {
     "id": "ID-116",
+    "textEn": "What was your honest first impression of me?",
+    "textEs": "¿Cuál fue tu primera impresión honesta sobre mí?",
     "moment": [
       "Date Night 🌙"
     ]
   },
   {
     "id": "ID-125",
+    "textEn": "What makes you sad?",
+    "textEs": "¿Qué te pone triste?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-11",
+    "textEn": "What is something you don't mind paying more money for?",
+    "textEs": "¿Qué es algo por lo que no te importa pagar más dinero?",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -460,6 +1525,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-141",
+    "textEn": "What three qualities make me special?",
+    "textEs": "¿Qué tres cualidades me hacen especial?",
     "moment": [
       "Deep Talk 🧠",
       "Date Night 🌙"
@@ -467,6 +1534,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-3",
+    "textEn": "Would you raise your children the same way your parents raised you?",
+    "textEs": "¿Criarías a tus hijos de la forma en que te criaron tus padres?",
     "moment": [
       "Date Night 🌙",
       "Deep Talk 🧠",
@@ -475,6 +1544,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-5",
+    "textEn": "What is something you are doing now that you have never done before?",
+    "textEs": "¿Qué es algo que estás haciendo ahora y que nunca habías hecho antes?",
     "moment": [
       "Deep Talk 🧠",
       "Table Talks 🍷"
@@ -482,6 +1553,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-28",
+    "textEn": "Which real-life crime would you like to investigate?",
+    "textEs": "¿Qué crimen real te gustaría investigar?",
     "moment": [
       "Road Trip 🚗",
       "Table Talks 🍷"
@@ -489,6 +1562,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-124",
+    "textEn": "Are you living the life of your dreams?",
+    "textEs": "¿Estás viviendo la vida de tus sueños?",
     "moment": [
       "Deep Talk 🧠",
       "Ikigai 🌸"
@@ -496,12 +1571,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-146",
+    "textEn": "When was the last time you have asked for help?",
+    "textEs": "¿Cuándo fue la última vez que pediste ayuda?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-132",
+    "textEn": "What emotion do you experience the most?",
+    "textEs": "¿Qué emoción experimentas con más frecuencia?",
     "moment": [
       "Deep Talk 🧠",
       "Table Talks 🍷"
@@ -509,12 +1588,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-114",
+    "textEn": "What is the first thing you notice about me?",
+    "textEs": "¿Qué es lo primero que te llamó la atención de mí?",
     "moment": [
       "Date Night 🌙"
     ]
   },
   {
     "id": "ID-158",
+    "textEn": "Have you ever stolen anything?",
+    "textEs": "¿Alguna vez has robado algo?",
     "moment": [
       "Road Trip 🚗",
       "Table Talks 🍷"
@@ -522,6 +1605,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-27",
+    "textEn": "What do you think is the biggest violation of privacy?",
+    "textEs": "¿Cuál crees que es la mayor violación de privacidad?",
     "moment": [
       "Deep Talk 🧠",
       "Date Night 🌙"
@@ -529,12 +1614,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-144",
+    "textEn": "What do you miss about being a kid?",
+    "textEs": "¿Qué extrañas de cuando eras pequeño?",
     "moment": [
       "Table Talks 🍷"
     ]
   },
   {
     "id": "ID-148",
+    "textEn": "Activity: On a piece of paper, give each other five specific compliments and then read them out loud to each other. Give the paper to the player.",
+    "textEs": "Juego: En un papel, escribe 5 cumplidos sobre otro jugador y luego léelos en voz alta. Después, regala el papel a esa persona.",
     "moment": [
       "Date Night 🌙",
       "Table Talks 🍷",
@@ -543,12 +1632,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-130",
+    "textEn": "What is your greatest gift or talent?",
+    "textEs": "¿Cuál es tu don o talento especial?",
     "moment": [
       "Table Talks 🍷"
     ]
   },
   {
     "id": "ID-136",
+    "textEn": "What is the most adventurous thing you have ever done?",
+    "textEs": "¿Cuál ha sido la cosa más atrevida o aventurera que has hecho en tu vida? ",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗"
@@ -556,12 +1649,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-150",
+    "textEn": "How would you like to be remembered?",
+    "textEs": "¿Cómo te gustaría ser recordado?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-6",
+    "textEn": "What is the strangest food combination you have ever tried?",
+    "textEs": "¿Cuál es la combinación de alimentos más extraña que has probado?",
     "moment": [
       "Road Trip 🚗",
       "Table Talks 🍷"
@@ -569,12 +1666,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-128",
+    "textEn": "What is the most miraculous thing that has ever happened to you?",
+    "textEs": "¿Cuál es la cosa más milagrosa que te ha pasado?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-109",
+    "textEn": "If you could change your first name, what would you change it to?",
+    "textEs": "Si pudieras cambiar tu nombre, ¿a cuál lo cambiarías?",
     "moment": [
       "Road Trip 🚗",
       "Table Talks 🍷"
@@ -582,12 +1683,16 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-153",
+    "textEn": "What is the nicest thing anyone has done for you?",
+    "textEs": "¿Cuál es la cosa más bonita que alguien ha hecho por ti?",
     "moment": [
       "Deep Talk 🧠"
     ]
   },
   {
     "id": "ID-118",
+    "textEn": "Activity: Each player must come up with three statements about themselves. Two must be truthful and one a lie. Then each player tries to guess which of the three statements is the lie.",
+    "textEs": "Actividad: Cada jugador debe crear tres afirmaciones sobre sí mismo/a. Dos deben ser verdad y una mentira. Luego, cada jugador intenta adivinar cuál de las tres afirmaciones es la mentira.",
     "moment": [
       "Table Talks 🍷",
       "Road Trip 🚗",
@@ -596,6 +1701,8 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-117",
+    "textEn": "What is one thing you would like to change about yourself?",
+    "textEs": "¿Cuál es una cosa que te gustaría cambiar de ti mismo/a?",
     "moment": [
       "Table Talks 🍷",
       "Deep Talk 🧠"
@@ -603,20 +1710,10 @@ export const questions: Question[] = [
   },
   {
     "id": "ID-21",
+    "textEn": "Is it right to lie to avoid hurting someone?",
+    "textEs": "¿Es correcto mentir para no herir a alguien?",
     "moment": [
       "Table Talks 🍷"
     ]
   }
 ];
-
-export const questionTextByLocale: Record<TranslationMapKey, Record<string, string>> = {
-  'en-US': enUS,
-  'es-ES': esES,
-  'en-GB': enGB,
-  'es-MX': esMX,
-  'pt-BR': ptBR,
-  'pt': pt,
-  'de': de,
-  'it': it,
-  'fr': fr,
-};

@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
+    "prestart": "npm run fetch-questions",
+    "prebuild": "npm run fetch-questions",
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
+    "fetch-questions": "tsx scripts/fetch-questions.ts",
+    "eas-build-post-install": "npm run fetch-questions",
     "lint": "tsc --noEmit",
     "build:web": "npx expo export -p web",
     "test": "tsc --noEmit"
