@@ -6,6 +6,13 @@ module.exports = {
   ...base,
   expo: {
     ...base.expo,
+    ios: {
+      ...base.expo.ios,
+      infoPlist: {
+        ...base.expo.ios?.infoPlist,
+        ITSAppUsesNonExemptEncryption: false,
+      },
+    },
     extra: {
       ...base.expo.extra,
       eas: {
