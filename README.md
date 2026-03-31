@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Expo SDK 54 app (Expo Router, React Native). Project structure and data flow are described in [CLAUDE.md](./CLAUDE.md).
 
 ## Localisation (locale and region)
 
@@ -22,37 +22,63 @@ The app uses **ISO-style locales**: language only (`en`, `es`) or language + reg
 
 Question content (from Notion) currently has English and Spanish only; other UI languages show English until you add more fields to the data.
 
-## Getting Started
+## Local development
 
-First, run the development server:
+1. Create `.env` with `NOTION_API_KEY` and `NOTION_DATABASE_ID`. `app.config.js` reads them for `expo.extra` and local tooling.
+2. Install and start:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`prestart` runs `fetch-questions` (Notion → `data/questions.ts`). To start Metro without fetching, run `npx expo start` directly.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts: `npm run ios` / `npm run android` (dev clients via `expo run:*`), `npm run lint`, `npm run build:web` (static web export).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Build and publish (EAS)
 
-## Learn More
+Store binaries are built with [EAS Build](https://docs.expo.dev/build/introduction/). This repo uses **`eas.json`** and links the project via **`expo.extra.eas.projectId`** in `app.config.js` (required when using dynamic config instead of `app.json` only).
 
-To learn more about Next.js, take a look at the following resources:
+### One-time setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Install and log in: `npm install -g eas-cli` then `eas login`.
+2. **iOS:** Apple Developer account; App Store Connect app whose bundle ID matches `app.json` → `expo.ios.bundleIdentifier`. Run `eas credentials` when the CLI prompts you (distribution cert / provisioning).
+3. **Android:** Play Console app; matching `expo.android.package`. Configure upload keystore via `eas credentials` if needed.
+4. **Notion on EAS:** `eas-build-post-install` runs `scripts/eas-post-install.cjs`, which calls `fetch-questions` only when `NOTION_API_KEY` and `NOTION_DATABASE_ID` are set on the worker; otherwise it **exits successfully** and the build uses committed `data/questions.ts`. Set [EAS environment variables / secrets](https://docs.expo.dev/build-reference/variables/) for both that step and `expo.extra` at build time (`app.config.js`). Local `.env` is not uploaded by default.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Version numbers (before each store upload)
 
-## Deploy on Vercel
+- **`expo.version`** in `app.json` — user-facing version (e.g. `1.0.1`).
+- **iOS:** set or bump **`expo.ios.buildNumber`** (string, must increase per TestFlight/App Store upload), or use `ios.autoIncrement` on the EAS build profile ([app versions](https://docs.expo.dev/build-reference/app-versions/)).
+- **Android:** bump **`expo.android.versionCode`** (integer) for each Play upload.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+eas build --platform ios --profile production
+eas build --platform android --profile production
+```
+
+Use `eas build --platform all --profile production` for both. Profiles are defined in `eas.json` (`development` / `preview` / `production`).
+
+### Submit to the stores
+
+After a successful build:
+
+```bash
+eas submit --platform ios --latest
+eas submit --platform android --latest
+```
+
+First run: provide an [App Store Connect API key](https://docs.expo.dev/submit/ios/) and/or [Google Play service account](https://docs.expo.dev/submit/android/) when prompted; later submissions reuse them.
+
+**TestFlight:** when `eas submit` finishes, open [App Store Connect](https://appstoreconnect.apple.com/) → your app → **TestFlight**, wait for processing, complete compliance if asked, then add testers.
+
+**Play internal / production:** use the Play Console once the `.aab` from submit is accepted.
+
+### Useful links
+
+- [EAS Build](https://docs.expo.dev/build/introduction/)
+- [EAS Submit](https://docs.expo.dev/submit/introduction/)
+- [iOS app.json / credentials](https://docs.expo.dev/build-reference/app-versions/)
