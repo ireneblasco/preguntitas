@@ -1,0 +1,47 @@
+"splash.tagline" = "Preguntas que encienden conversaciones de verdad.";
+
+"onboarding.skip" = "Omitir";
+"onboarding.next" = "Siguiente";
+"onboarding.screen0.headline" = "Preguntas que encienden conversaciones de verdad.";
+"onboarding.screen0.subtext" = "Descubre preguntas divertidas, profundas y reflexivas en un solo lugar.";
+"onboarding.screen1.headline" = "Preguntas para el momento en el que estás.";
+"onboarding.screen1.subtext" = "Road trip, cita, conversación profunda — las preguntas están organizadas por contexto para que siempre tengas las adecuadas.";
+"onboarding.screen2.headline" = "Desliza, vuelve, guarda.";
+"onboarding.screen2.subtext" = "Pasa o desliza a la siguiente pregunta, vuelve atrás o toca el corazón para guardar tus favoritas.";
+"onboarding.screen2.cta" = "Empezar";
+
+"home.appName" = "Shallow";
+"home.sectionTitle" = "¿Cuál es el momento?";
+"home.myFavorites" = "Mis favoritas";
+"home.start" = "Empezar →";
+"home.questionCount" = "%lld preguntas";
+
+"dev.menuTitle" = "Menú de desarrollo";
+"dev.usingBundled" = "Usando preguntas empaquetadas";
+"dev.lastUpdatedLabel" = "Última actualización";
+"dev.fetchLatest" = "Obtener preguntas recientes";
+"dev.resetOnboarding" = "Reiniciar onboarding";
+"dev.cancel" = "Cancelar";
+"dev.devMenu" = "Dev";
+
+"alerts.notConfigured" = "No configurado";
+"alerts.notConfiguredMessage" = "Añade NOTION_API_KEY y NOTION_DATABASE_ID (ver Secrets.xcconfig.example).";
+"alerts.questionsUpdated" = "Preguntas actualizadas";
+"alerts.error" = "Error";
+"alerts.fetchFailed" = "Error al obtener";
+
+"favorites.title" = "Mis favoritas";
+"favorites.savedQuestions" = "Preguntas guardadas";
+"favorites.remove" = "Quitar";
+"favorites.emptyHint" = "Guarda preguntas tocando el corazón en cualquier tarjeta";
+
+"questions.previous" = "Anterior";
+"questions.next" = "Siguiente";
+"questions.hint" = "Desliza o toca para cambiar de pregunta";
+"questions.emptySelectMoment" = "Elige un momento desde el inicio para empezar";
+"questions.emptyNoQuestions" = "No hay preguntas para este momento";
+
+"settings.title" = "Ajustes";
+"settings.language" = "Idioma";
+"settings.english" = "English";
+"settings.spanish" = "Español";

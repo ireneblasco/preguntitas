@@ -1,0 +1,47 @@
+"splash.tagline" = "Questions that spark real conversations.";
+
+"onboarding.skip" = "Skip";
+"onboarding.next" = "Next";
+"onboarding.screen0.headline" = "Questions that spark real conversations.";
+"onboarding.screen0.subtext" = "Discover fun, deep, and thoughtful questions in one place.";
+"onboarding.screen1.headline" = "Questions for the moment you're in.";
+"onboarding.screen1.subtext" = "Road trip, date night, deep talk — the questions are organized by context so you always get the right ones for the situation.";
+"onboarding.screen2.headline" = "Swipe, go back, save.";
+"onboarding.screen2.subtext" = "Pass or swipe to the next question, go back to the previous one, and tap the heart to save your favorites.";
+"onboarding.screen2.cta" = "Let's Go";
+
+"home.appName" = "Shallow";
+"home.sectionTitle" = "What's the moment?";
+"home.myFavorites" = "My favorites";
+"home.start" = "Start →";
+"home.questionCount" = "%lld questions";
+
+"dev.menuTitle" = "Developer Menu";
+"dev.usingBundled" = "Using bundled questions";
+"dev.lastUpdatedLabel" = "Last updated";
+"dev.fetchLatest" = "Fetch latest questions";
+"dev.resetOnboarding" = "Reset Onboarding";
+"dev.cancel" = "Cancel";
+"dev.devMenu" = "Dev";
+
+"alerts.notConfigured" = "Not configured";
+"alerts.notConfiguredMessage" = "Add NOTION_API_KEY and NOTION_DATABASE_ID (see Secrets.xcconfig.example).";
+"alerts.questionsUpdated" = "Questions updated";
+"alerts.error" = "Error";
+"alerts.fetchFailed" = "Fetch failed";
+
+"favorites.title" = "My favorites";
+"favorites.savedQuestions" = "Saved questions";
+"favorites.remove" = "Remove";
+"favorites.emptyHint" = "Save questions by tapping the heart on any card";
+
+"questions.previous" = "Previous";
+"questions.next" = "Next";
+"questions.hint" = "Swipe or tap to change question";
+"questions.emptySelectMoment" = "Select a moment from home to start";
+"questions.emptyNoQuestions" = "No questions for this moment";
+
+"settings.title" = "Settings";
+"settings.language" = "Language";
+"settings.english" = "English";
+"settings.spanish" = "Español";
