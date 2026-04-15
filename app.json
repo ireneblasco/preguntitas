@@ -36,13 +36,7 @@
       [
         "expo-font",
         {
-          "fonts": [
-            "node_modules/@expo-google-fonts/playfair-display/400Regular/PlayfairDisplay_400Regular.ttf",
-            "node_modules/@expo-google-fonts/playfair-display/700Bold/PlayfairDisplay_700Bold.ttf",
-            "node_modules/@expo-google-fonts/inter/400Regular/Inter_400Regular.ttf",
-            "node_modules/@expo-google-fonts/inter/700Bold/Inter_700Bold.ttf",
-            "assets/fonts/BrasikaDisplay-Regular.otf"
-          ]
+          "fonts": ["assets/fonts/BrasikaDisplay-Regular.otf"]
         }
       ]
     ],
