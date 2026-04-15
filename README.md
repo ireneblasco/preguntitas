@@ -56,8 +56,7 @@ Store binaries are built with [EAS Build](https://docs.expo.dev/build/introducti
 ### Build
 
 ```bash
-eas build --platform ios --profile production
-eas build --platform android --profile production
+npx eas build --platform ios --profile production
 ```
 
 Use `eas build --platform all --profile production` for both. Profiles are defined in `eas.json` (`development` / `preview` / `production`).
@@ -67,8 +66,7 @@ Use `eas build --platform all --profile production` for both. Profiles are defin
 After a successful build:
 
 ```bash
-eas submit --platform ios --latest
-eas submit --platform android --latest
+npx eas submit --platform ios --latest
 ```
 
 First run: provide an [App Store Connect API key](https://docs.expo.dev/submit/ios/) and/or [Google Play service account](https://docs.expo.dev/submit/android/) when prompted; later submissions reuse them.
