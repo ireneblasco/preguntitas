@@ -1,5 +1,5 @@
-import { useLocale } from '@/contexts/LocaleContext';
-import { getTranslationLocale, type Locale } from '@/i18n';
+import { useLocale } from '../contexts/LocaleContext';
+import { getTranslationLocale, type Locale } from '../i18n';
 
 export type QuestionLanguage = Locale;
 
@@ -12,12 +12,13 @@ export function usePreferredLanguage(): QuestionLanguage {
   return locale;
 }
 
-/** Preguntas tienen textEn y textEs; el locale de traducción determina qué campo usar. */
+/** Devuelve el texto de la pregunta para el locale (textos por locale en questionTextByLocale). */
 export function getQuestionText(
-  question: { textEn: string; textEs: string },
-  lang: QuestionLanguage
+  question: { id: string },
+  lang: QuestionLanguage,
+  questionTextByLocale: Record<string, Record<string, string>>
 ): string {
   const key = getTranslationLocale(lang);
-  const useSpanish = key === 'es' || key === 'es-MX';
-  return useSpanish ? question.textEs : question.textEn;
+  const byLocale = questionTextByLocale[key];
+  return byLocale?.[question.id] ?? questionTextByLocale['es-ES']?.[question.id] ?? questionTextByLocale['en-US']?.[question.id] ?? '';
 }

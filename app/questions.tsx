@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState, useEffect, useMemo } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,24 +12,30 @@ import Animated, {
   runOnJS,
   interpolate,
   Extrapolation,
+  FadeIn,
+  FadeOut,
 } from 'react-native-reanimated';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
-import { useQuestions } from '@/contexts/QuestionsContext';
-import { useFavorites } from '@/utils/useFavorites';
-import { usePreferredLanguage, getQuestionText } from '@/utils/usePreferredLanguage';
-import { useTranslation } from '@/hooks/useTranslation';
+import type { ClosenessLevel } from '../types/questions';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName, FIRST_5_QUESTION_IDS_BY_MOMENT } from '../constants';
+import { useQuestions } from '../contexts/QuestionsContext';
+import { useFavorites } from '../utils/useFavorites';
+import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
+import { useTranslation } from '../hooks/useTranslation';
+import { analytics } from '../utils/analytics';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
 const CARD_MARGIN = SPACING.md;
 
-/** Misma paleta que home por categoría */
-const CARD_THEMES = [
-  { bg: '#BEE656', text: '#3C6112' },
-  { bg: '#EAC1CC', text: '#6B2A2D' },
-  { bg: '#3E614A', text: '#BEE656' },
-  { bg: '#FDCF42', text: '#6B2A2D' },
-] as const;
+const CLOSENESS_LABELS: Record<ClosenessLevel, string> = {
+  1: 'Level 1 Icebreaker',
+  2: 'Level 2 Personal',
+  3: 'Level 3 Vulnerable',
+};
+function getClosenessLabel(level?: ClosenessLevel): string {
+  if (level === 1 || level === 2 || level === 3) return CLOSENESS_LABELS[level];
+  return CLOSENESS_LABELS[1];
+}
 
 export default function Questions() {
   const params = useLocalSearchParams<{ moment?: string; selectedmoment?: string }>();
@@ -39,19 +46,16 @@ export default function Questions() {
       : undefined);
   const router = useRouter();
   const { t } = useTranslation();
-  const { questions, momentOptions } = useQuestions();
+  const { questions, momentOptions, questionTextByLocale } = useQuestions();
   const { toggleFavorite, isFavorite } = useFavorites();
 
+  const momentOption = moment ? momentOptions.find((m) => m.id === moment) : null;
   const momentLabel = moment
-    ? (momentOptions.find((m) => m.id === moment)?.name ?? moment)
+    ? (getCategoryDisplayName(momentOption) || momentOption?.name || moment)
     : '';
-  const momentThemeIndex = moment
-    ? momentOptions.findIndex((m) => m.id === moment)
-    : -1;
-  const momentTheme =
-    momentThemeIndex >= 0
-      ? CARD_THEMES[momentThemeIndex % CARD_THEMES.length]
-      : CARD_THEMES[0];
+  const momentTheme = moment
+    ? getThemeForMomentId(moment, momentOptions)
+    : getThemeForMomentId(momentOptions[0]?.id ?? '', momentOptions);
   const lang = usePreferredLanguage();
 
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -64,20 +68,34 @@ export default function Questions() {
     return questions.filter((q) => q.moment.includes(moment));
   }, [questions, moment]);
 
-  const [shuffledQuestions, setShuffledQuestions] = useState(() => {
-    return [...filteredQuestions].sort(() => Math.random() - 0.5);
-  });
+  const shuffledQuestions = useMemo(() => {
+    if (filteredQuestions.length === 0 || !moment) return [];
+    const firstFiveIds = FIRST_5_QUESTION_IDS_BY_MOMENT[moment] ?? [];
+    const byId = new Map(filteredQuestions.map((q) => [q.id, q]));
+    const fixed: typeof filteredQuestions = [];
+    for (const id of firstFiveIds) {
+      const q = byId.get(id);
+      if (q) fixed.push(q);
+    }
+    const rest = filteredQuestions.filter((q) => !firstFiveIds.includes(q.id));
+    for (let i = rest.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [rest[i], rest[j]] = [rest[j], rest[i]];
+    }
+    return [...fixed, ...rest];
+  }, [filteredQuestions, moment]);
 
-  const currentQuestion = shuffledQuestions[questionIndex % shuffledQuestions.length];
+  const currentQuestion =
+    shuffledQuestions.length > 0
+      ? shuffledQuestions[questionIndex % shuffledQuestions.length]
+      : undefined;
 
   useEffect(() => {
-    if (currentQuestion) setCurrentQuestionId(currentQuestion.id);
+    if (currentQuestion) {
+      setCurrentQuestionId(currentQuestion.id);
+      analytics.questionViewed(currentQuestion.id);
+    }
   }, [currentQuestion]);
-
-  useEffect(() => {
-    setShuffledQuestions([...filteredQuestions].sort(() => Math.random() - 0.5));
-    setQuestionIndex(0);
-  }, [filteredQuestions]);
 
   const handleNext = () => {
     if (filteredQuestions.length === 0) return;
@@ -188,38 +206,44 @@ export default function Questions() {
               ]}
             >
               <View style={styles.cardInner}>
-                <View style={styles.categoryPillWrap}>
-                  <View style={[styles.categoryPill, { borderColor: momentTheme.text }]}>
-                    <Text style={[styles.categoryPillText, { color: momentTheme.text }]}>
-                      {momentLabel}
+                <Animated.View
+                  key={currentQuestion?.id ?? 'empty'}
+                  style={styles.cardContentWrap}
+                  entering={FadeIn.duration(260)}
+                  exiting={FadeOut.duration(200)}
+                >
+                  <View style={styles.categoryPillWrap}>
+                    <View style={[styles.categoryPill, { borderColor: momentTheme.text }]}>
+                      <Text style={[styles.categoryPillText, { color: momentTheme.text }]}>
+                        {currentQuestion
+                          ? getClosenessLabel(currentQuestion.closenessLevel)
+                          : getClosenessLabel(1)}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.questionBlock}>
+                    <Text
+                      style={[
+                        styles.questionText,
+                        { color: momentTheme.text },
+                      ]}
+                    >
+                      {currentQuestion
+                        ? getQuestionText(currentQuestion, lang, questionTextByLocale)
+                        : ''}
                     </Text>
                   </View>
-                </View>
-                <View style={styles.questionBlock}>
-                  <Text
-                    style={[
-                      styles.questionText,
-                      { color: momentTheme.text },
-                    ]}
-                  >
-                    {currentQuestion
-                      ? getQuestionText(currentQuestion, lang)
-                      : ''}
-                  </Text>
-                </View>
+                </Animated.View>
                 <Pressable
                   style={styles.favBtn}
                   onPress={handleFavorite}
                   hitSlop={12}
                 >
-                  <Text
-                    style={[
-                      styles.favIcon,
-                      !isFavorite(currentQuestionId) && styles.favIconInactive,
-                    ]}
-                  >
-                    {isFavorite(currentQuestionId) ? '♥' : '♡'}
-                  </Text>
+                  <Ionicons
+                    name={isFavorite(currentQuestionId) ? 'bookmark' : 'bookmark-outline'}
+                    size={24}
+                    color={isFavorite(currentQuestionId) ? '#1C1C1E' : '#C7C7CC'}
+                  />
                 </Pressable>
               </View>
             </Animated.View>
@@ -231,19 +255,19 @@ export default function Questions() {
           <View style={styles.footerButtons}>
             <Pressable
               style={({ pressed }) => [
-                styles.prevBtn,
-                { borderColor: momentTheme.text },
-                questionIndex === 0 && styles.btnDisabled,
-                pressed && styles.nextBtnPressed,
+                styles.iosBtn,
+                styles.iosBtnSecondary,
+                questionIndex === 0 && styles.iosBtnDisabled,
+                pressed && questionIndex > 0 && styles.iosBtnPressed,
               ]}
               onPress={handlePrevious}
               disabled={questionIndex === 0}
+              hitSlop={12}
             >
               <Text
                 style={[
-                  styles.prevBtnLabel,
-                  { color: momentTheme.text },
-                  questionIndex === 0 && styles.btnDisabledText,
+                  styles.iosBtnSecondaryLabel,
+                  questionIndex === 0 && styles.iosBtnDisabledLabel,
                 ]}
               >
                 {t('questions.previous')}
@@ -251,13 +275,14 @@ export default function Questions() {
             </Pressable>
             <Pressable
               style={({ pressed }) => [
-                styles.nextBtn,
-                { backgroundColor: momentTheme.text },
-                pressed && styles.nextBtnPressed,
+                styles.iosBtn,
+                styles.iosBtnPrimary,
+                pressed && styles.iosBtnPressed,
               ]}
               onPress={handleNext}
+              hitSlop={12}
             >
-              <Text style={[styles.nextBtnLabel, { color: momentTheme.bg }]}>
+              <Text style={styles.iosBtnPrimaryLabel}>
                 {t('questions.next')}
               </Text>
             </Pressable>
@@ -326,6 +351,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: SPACING.xl,
   },
+  cardContentWrap: {
+    flex: 1,
+  },
   categoryPillWrap: {
     position: 'absolute',
     top: SPACING.lg,
@@ -363,13 +391,6 @@ const styles = StyleSheet.create({
     right: SPACING.md,
     padding: SPACING.sm,
   },
-  favIcon: {
-    fontSize: 24,
-    color: '#FF3B30',
-  },
-  favIconInactive: {
-    color: '#C7C7CC',
-  },
   footer: {
     paddingHorizontal: CARD_MARGIN,
     paddingBottom: SPACING['2xl'],
@@ -384,42 +405,49 @@ const styles = StyleSheet.create({
   },
   footerButtons: {
     flexDirection: 'row',
-    gap: SPACING.md,
     alignItems: 'stretch',
-  },
-  prevBtn: {
-    flex: 1,
-    paddingVertical: 16,
-    borderRadius: 14,
-    alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
+    gap: SPACING.lg,
+    paddingHorizontal: SPACING.sm,
   },
-  prevBtnLabel: {
-    fontSize: 17,
-    fontFamily: FONTS.inter.regular,
-    fontWeight: '600',
-  },
-  nextBtn: {
-    flex: 1,
-    paddingVertical: 16,
-    borderRadius: 14,
+  // Base iOS-style button (44pt min height, 10pt radius)
+  iosBtn: {
+    minHeight: 44,
+    minWidth: 120,
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: 12,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  nextBtnPressed: {
-    opacity: 0.85,
+  // Previous: iOS secondary (gray fill)
+  iosBtnSecondary: {
+    backgroundColor: '#E5E5EA',
   },
-  nextBtnLabel: {
+  iosBtnSecondaryLabel: {
     fontSize: 17,
     fontFamily: FONTS.inter.regular,
     fontWeight: '600',
+    color: '#1C1C1E',
   },
-  btnDisabled: {
-    opacity: 0.4,
+  // Next: iOS primary (system blue fill)
+  iosBtnPrimary: {
+    backgroundColor: '#007AFF',
   },
-  btnDisabledText: {
+  iosBtnPrimaryLabel: {
+    fontSize: 17,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
+    color: '#FFFFFF',
+  },
+  iosBtnPressed: {
     opacity: 0.8,
+  },
+  iosBtnDisabled: {
+    opacity: 0.45,
+  },
+  iosBtnDisabledLabel: {
+    color: '#8E8E93',
   },
   emptyState: {
     flex: 1,

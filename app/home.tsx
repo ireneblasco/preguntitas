@@ -1,123 +1,50 @@
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert, Platform } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, SHADOWS } from '@/constants';
-import { useQuestions } from '@/contexts/QuestionsContext';
+import { COLORS, FONTS, FONT_SIZES, SPACING, CARD_THEMES, sortMomentOptions, getCategoryDisplayName } from '../constants';
+import { useQuestions } from '../contexts/QuestionsContext';
 import { useMemo } from 'react';
-import * as onboardingUtils from '@/utils/onboarding';
-import { useTranslation } from '@/hooks/useTranslation';
+import { useTranslation } from '../hooks/useTranslation';
+import { MomentCard } from '../components/MomentCard';
+import { AppLogo } from '../components/AppLogo';
+import { analytics } from '../utils/analytics';
 
-/** Paleta "Crafting a Better World": fondos y texto con buen contraste */
-const CARD_THEMES = [
-  { bg: '#BEE656', text: '#3C6112' },   // Ethical: lima / verde bosque
-  { bg: '#EAC1CC', text: '#6B2A2D' },   // Sophisticated: rosa polvo / burdeos
-  { bg: '#3E614A', text: '#BEE656' },   // Transformative: verde bosque / lima
-  { bg: '#FDCF42', text: '#6B2A2D' },   // Nature-inspired: amarillo dorado / burdeos
-] as const;
-
-function formatLastFetched(iso: string | null, t: (key: string) => string): string {
-  if (!iso) return t('dev.usingBundled');
-  try {
-    const d = new Date(iso);
-    const label = t('dev.lastUpdatedLabel');
-    return `${label}: ${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-  } catch {
-    return t('dev.lastUpdatedLabel') + ': ' + iso;
-  }
-}
-
-type MomentOption = { id: string; name: string; emoji: string };
+/** Short emotional/experiential label per category (no counts). Fallback for unknown categories. */
+const MOMENT_LABELS: Record<string, string> = {
+  'Deep Talk 🧠': 'Deep · Reflective',
+  'Ikigai 🌸': 'Purpose · Values',
+  'Date Night 🌙': 'Emotional · Intimate',
+  'Con mi abuela': 'Stories · Family',
+  'Con mi abuela 👵': 'Stories · Family',
+  'Road Trip 🚗': 'Fun · Stories · Meaningful',
+  'Table Talks 🍷': 'Social · Personal',
+};
+const DEFAULT_MOMENT_LABEL = 'Meaningful';
 
 export default function Home() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { momentOptions, questions, lastFetchedAt, refetch } = useQuestions();
-  const [expandedId, setExpandedId] = useState<string | null>(momentOptions[0]?.id ?? null);
-
-  const questionCountByMoment = useMemo(() => {
-    const count: Record<string, number> = {};
-    momentOptions.forEach((m) => {
-      count[m.id] = questions.filter((q) => q.moment.includes(m.id)).length;
-    });
-    return count;
-  }, [momentOptions, questions]);
-
-  const isDevelopment = __DEV__;
+  const { momentOptions } = useQuestions();
+  const orderedOptions = useMemo(() => sortMomentOptions(momentOptions), [momentOptions]);
+  const [expandedId, setExpandedId] = useState<string | null>(orderedOptions[0]?.id ?? null);
 
   const handleStart = (momentId: string) => {
+    const categoryName = momentOptions.find((m) => m.id === momentId)?.name ?? momentId;
+    analytics.categoryOpened(categoryName);
     router.push({ pathname: '/questions', params: { moment: momentId } });
-  };
-
-  const handleFavorites = () => {
-    router.push('/favorites');
-  };
-
-  const handleDevMenu = () => {
-    const message = formatLastFetched(lastFetchedAt, t);
-    const fetchLatest = () => {
-      refetch()
-        .then((fetchedAt) => {
-          if (fetchedAt == null) {
-            Alert.alert(t('alerts.notConfigured'), t('alerts.notConfiguredMessage'));
-          } else {
-            Alert.alert(t('alerts.questionsUpdated'), formatLastFetched(fetchedAt, t));
-          }
-        })
-        .catch((e: Error) => {
-          Alert.alert(t('alerts.error'), e?.message ?? t('alerts.fetchFailed'));
-        });
-    };
-
-    if (Platform.OS === 'ios') {
-      Alert.alert(
-        t('dev.menuTitle'),
-        message,
-        [
-          {
-            text: t('dev.fetchLatest'),
-            onPress: fetchLatest,
-          },
-          {
-            text: t('dev.resetOnboarding'),
-            onPress: async () => {
-              await onboardingUtils.resetOnboarding();
-              router.replace('/');
-            },
-          },
-          { text: t('dev.cancel'), style: 'cancel' },
-        ],
-        { cancelable: true }
-      );
-    } else {
-      Alert.alert(
-        t('dev.menuTitle'),
-        message,
-        [
-          { text: t('dev.cancel'), style: 'cancel' },
-          { text: t('dev.fetchLatest'), onPress: fetchLatest },
-          {
-            text: t('dev.resetOnboarding'),
-            onPress: async () => {
-              await onboardingUtils.resetOnboarding();
-              router.replace('/');
-            },
-          },
-        ]
-      );
-    }
   };
 
   return (
     <LinearGradient
-      colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
+      colors={[COLORS.background.white, COLORS.background.primary]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
         >
           <View style={styles.header}>
             <View style={styles.headerLeft}>
@@ -128,9 +55,7 @@ export default function Home() {
                 onPress={() => router.push('/settings')}
                 style={({ pressed }) => pressed && { opacity: 0.7 }}
               >
-                <View style={styles.logoPlaceholder}>
-                  <Text style={styles.logoPlaceholderText}>◎</Text>
-                </View>
+                <AppLogo size={40} withCircle />
               </Pressable>
             </View>
           </View>
@@ -139,117 +64,26 @@ export default function Home() {
             <Text style={styles.sectionTitle}>
               {t('home.sectionTitle')}
             </Text>
-            <Pressable onPress={handleFavorites} style={({ pressed }) => pressed && { opacity: 0.7 }}>
-              <Text style={styles.seeAll}>{t('home.myFavorites')}</Text>
-            </Pressable>
           </View>
 
           <View style={styles.cardList}>
-            {momentOptions.map((option, index) => {
+            {orderedOptions.map((option, index) => {
               const theme = CARD_THEMES[index % CARD_THEMES.length];
               return (
                 <MomentCard
                   key={option.id}
-                  option={option}
+                  option={{ ...option, name: getCategoryDisplayName(option) || option.name }}
                   theme={theme}
-                  questionCount={questionCountByMoment[option.id] ?? 0}
+                  subtitleLabel={MOMENT_LABELS[option.id] ?? MOMENT_LABELS[option.name] ?? DEFAULT_MOMENT_LABEL}
                   isExpanded={expandedId === option.id}
-                  onPress={() => setExpandedId(expandedId === option.id ? null : option.id)}
                   onStart={() => handleStart(option.id)}
                 />
               );
             })}
           </View>
         </ScrollView>
-
-        {isDevelopment && (
-          <View style={styles.devButtonContainer}>
-            <Pressable
-              style={({ pressed }) => [
-                styles.devButton,
-                pressed && styles.devButtonPressed,
-              ]}
-              onPress={handleDevMenu}
-            >
-              <Text style={styles.devBadge}>DEV</Text>
-              <Text style={styles.devButtonText}>{t('dev.devMenu')}</Text>
-            </Pressable>
-          </View>
-        )}
       </SafeAreaView>
     </LinearGradient>
-  );
-}
-
-const CARD_HEIGHT = 112;
-
-function MomentCard({
-  option,
-  theme,
-  questionCount,
-  isExpanded,
-  onPress,
-  onStart,
-}: {
-  option: MomentOption;
-  theme: { bg: string; text: string };
-  questionCount: number;
-  isExpanded: boolean;
-  onPress: () => void;
-  onStart: () => void;
-}) {
-  const { t } = useTranslation();
-  return (
-    <Pressable
-      style={[
-        styles.card,
-        {
-          backgroundColor: theme.bg,
-          height: CARD_HEIGHT,
-        },
-      ]}
-      onPress={onPress}
-    >
-      <View style={styles.cardContent}>
-        <Text
-          style={[styles.cardTitle, { color: theme.text }]}
-          numberOfLines={isExpanded ? 2 : 1}
-        >
-          {option.name}
-        </Text>
-        <View style={styles.tagsRow}>
-          <View style={[styles.tagPill, { borderColor: theme.text }]}>
-            <Text style={[styles.tagText, { color: theme.text }]}>
-              {option.emoji} {option.name}
-            </Text>
-          </View>
-          <View style={[styles.tagPill, styles.countPill, { borderColor: theme.text }]}>
-            <Text style={[styles.tagText, { color: theme.text }]}>
-              {questionCount}
-            </Text>
-          </View>
-        </View>
-        {isExpanded && (
-          <View style={styles.cardExpanded}>
-            <Pressable
-              style={({ pressed }) => [
-                styles.startButton,
-                { backgroundColor: theme.text },
-                pressed && styles.startButtonPressed,
-              ]}
-              onPress={(e) => {
-                e.stopPropagation();
-                onStart();
-              }}
-            >
-              <Text style={[styles.startButtonText, { color: theme.bg }]}>
-                {t('home.start')}
-              </Text>
-            </Pressable>
-          </View>
-        )}
-      </View>
-    </Pressable>
   );
 }
 
@@ -272,20 +106,8 @@ const styles = StyleSheet.create({
   headerRight: { justifyContent: 'flex-end' },
   appName: {
     fontSize: FONT_SIZES['3xl'],
-    fontFamily: FONTS.playfair.bold,
+    fontFamily: FONTS.brasikaDisplay,
     color: COLORS.text.primary,
-  },
-  logoPlaceholder: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: COLORS.border.light,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoPlaceholderText: {
-    fontSize: 22,
-    color: COLORS.text.secondary,
   },
   sectionRow: {
     flexDirection: 'row',
@@ -298,103 +120,8 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.inter.regular,
     color: COLORS.text.primary,
   },
-  seeAll: {
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.accent.primary,
-  },
   cardList: {
-    gap: SPACING.md,
-    marginBottom: SPACING['2xl'],
-  },
-  card: {
-    width: '100%',
-    borderRadius: BORDER_RADIUS['2xl'],
-    paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.md,
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-    elevation: 6,
-  },
-  cardContent: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  cardTitle: {
-    fontSize: FONT_SIZES.xl,
-    fontFamily: FONTS.playfair.bold,
-    marginBottom: SPACING.sm,
-  },
-  tagsRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
     gap: SPACING.sm,
-    marginTop: SPACING.xs,
-  },
-  tagPill: {
-    paddingHorizontal: SPACING.sm,
-    paddingVertical: SPACING.xs,
-    borderRadius: BORDER_RADIUS.full,
-    borderWidth: 1,
-  },
-  countPill: {
-    minWidth: 28,
-    alignItems: 'center',
-  },
-  tagText: {
-    fontSize: FONT_SIZES.xs,
-    fontFamily: FONTS.inter.regular,
-  },
-  cardExpanded: {
-    marginTop: SPACING.sm,
-    alignItems: 'flex-end',
-  },
-  startButton: {
-    paddingVertical: SPACING.sm,
-    paddingHorizontal: SPACING.lg,
-    borderRadius: BORDER_RADIUS.full,
-  },
-  startButtonPressed: { opacity: 0.9 },
-  startButtonText: {
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-  },
-  devButtonContainer: {
-    position: 'absolute',
-    bottom: SPACING.md,
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-    zIndex: 200,
-  },
-  devButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderWidth: 1,
-    borderColor: '#E9F0F7',
-    borderRadius: BORDER_RADIUS.full,
-    paddingVertical: SPACING.sm,
-    paddingHorizontal: SPACING.md,
-    ...SHADOWS.sm,
-  },
-  devButtonPressed: {
-    opacity: 0.95,
-    transform: [{ scale: 0.95 }],
-  },
-  devBadge: {
-    fontSize: 10,
-    fontFamily: FONTS.inter.regular,
-    color: '#4A4A4A',
-    marginRight: 6,
-  },
-  devButtonText: {
-    fontSize: 12,
-    fontFamily: FONTS.inter.regular,
-    color: '#4A4A4A',
+    marginBottom: SPACING['2xl'],
   },
 });

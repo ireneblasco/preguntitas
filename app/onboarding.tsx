@@ -7,21 +7,19 @@ import {
   FlatList,
   ViewToken,
 } from 'react-native';
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  interpolate,
-  Extrapolation,
   Easing,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '@/constants';
-import * as onboardingUtils from '@/utils/onboarding';
-import { useTranslation } from '@/hooks/useTranslation';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, CARD_THEMES as APP_CARD_THEMES } from '../constants';
+import * as onboardingUtils from '../utils/onboarding';
+import { useTranslation } from '../hooks/useTranslation';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -48,10 +46,11 @@ function useOnboardingScreens(): OnboardingScreen[] {
   return [
     { headline: t('onboarding.screens.0.headline'), subtext: t('onboarding.screens.0.subtext') },
     { headline: t('onboarding.screens.1.headline'), subtext: t('onboarding.screens.1.subtext') },
+    { headline: t('onboarding.screens.2.headline'), subtext: t('onboarding.screens.2.subtext') },
     {
-      headline: t('onboarding.screens.2.headline'),
-      subtext: t('onboarding.screens.2.subtext'),
-      cta: t('onboarding.screens.2.cta'),
+      headline: t('onboarding.screens.3.headline'),
+      subtext: t('onboarding.screens.3.subtext'),
+      cta: t('onboarding.screens.3.cta'),
     },
   ];
 }
@@ -101,7 +100,7 @@ export default function Onboarding() {
         <View style={styles.visualContainer}>
           {index === 0 && <QuestionCardVisual />}
           {index === 1 && <MomentsVisual />}
-          {index === 2 && <SwipeActionsVisual />}
+          {index === 2 && <ClosenessVisual />}
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.headline}>{item.headline}</Text>
@@ -113,7 +112,7 @@ export default function Onboarding() {
 
   return (
     <LinearGradient
-      colors={[COLORS.background.primary, COLORS.background.warm, COLORS.background.cool]}
+      colors={[COLORS.background.white, COLORS.background.primary]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
@@ -252,21 +251,85 @@ function MomentsVisual() {
   );
 }
 
-/** Ilustración: swipe, volver atrás y favoritos (mismo estilo) */
-function SwipeActionsVisual() {
-  const theme = CARD_THEMES[0];
+/** Ejemplo de pregunta por nivel de closeness (carrusel con transición fluida) */
+const CLOSENESS_EXAMPLES = [
+  { label: 'Level 1 Icebreaker', question: 'Out of your five senses, which one is your strongest?' },
+  { label: 'Level 2 Personal', question: 'What is your ideal place to raise kids or start a family?' },
+  { label: 'Level 3 Vulnerable', question: 'What makes you lose confidence in yourself?' },
+] as const;
+
+const CLOSENESS_ROTATE_MS = 3800;
+const CLOSENESS_CARD_WIDTH = SCREEN_WIDTH - SPACING.lg * 4;
+const CLOSENESS_SLIDE_DURATION = 500;
+
+/** Carrusel horizontal: 3 tarjetas en fila, transición por deslizamiento suave */
+function ClosenessVisual() {
+  const [index, setIndex] = useState(0);
+  const theme = APP_CARD_THEMES[2];
+  const slideX = useSharedValue(0);
+
+  const goNext = useCallback(() => {
+    setIndex((i) => (i + 1) % CLOSENESS_EXAMPLES.length);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(goNext, CLOSENESS_ROTATE_MS);
+    return () => clearInterval(id);
+  }, [goNext]);
+
+  useEffect(() => {
+    slideX.value = withTiming(index, {
+      duration: CLOSENESS_SLIDE_DURATION,
+      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+    });
+  }, [index]);
+
+  const carouselStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: -slideX.value * CLOSENESS_CARD_WIDTH }],
+  }));
+
   return (
-    <View style={styles.actionsWrap}>
-      <View style={[styles.actionCard, { backgroundColor: theme.bg }]}>
-        <View style={styles.actionRow}>
-          <View style={[styles.actionPill, { borderColor: theme.text }]}>
-            <Text style={[styles.actionLabel, { color: theme.text }]}>← Previous</Text>
-          </View>
-          <Text style={[styles.actionIcon, { color: theme.text }]}>♥</Text>
-        </View>
-        <Text style={[styles.actionHint, { color: theme.text }]} numberOfLines={1}>
-          Swipe or tap Next
-        </Text>
+    <View style={styles.closenessWrap}>
+      <View style={[styles.closenessCarouselMask, { width: CLOSENESS_CARD_WIDTH }]}>
+        <Animated.View style={[styles.closenessCarousel, carouselStyle]}>
+          {CLOSENESS_EXAMPLES.map((example) => (
+            <View
+              key={example.label}
+              style={[
+                styles.questionCardWrap,
+                { width: CLOSENESS_CARD_WIDTH, backgroundColor: theme.bg },
+              ]}
+            >
+              <View
+                style={[
+                  styles.closenessLevelPill,
+                  {
+                    borderColor: theme.text,
+                    backgroundColor: `${theme.text}22`,
+                  },
+                ]}
+              >
+                <Text style={[styles.closenessLevelPillText, { color: theme.text }]}>
+                  {example.label}
+                </Text>
+              </View>
+              <Text style={[styles.questionCardText, { color: theme.text }]} numberOfLines={2}>
+                {example.question}
+              </Text>
+            </View>
+          ))}
+        </Animated.View>
+      </View>
+      <View style={styles.closenessDots}>
+        {CLOSENESS_EXAMPLES.map((_, i) => (
+          <View
+            key={i}
+            style={[
+              styles.closenessDot,
+              i === index && styles.closenessDotActive,
+            ]}
+          />
+        ))}
       </View>
     </View>
   );
@@ -318,6 +381,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 1,
   },
+  closenessWrap: {
+    alignItems: 'center',
+    width: '100%',
+  },
+  closenessCarouselMask: {
+    overflow: 'hidden',
+    alignSelf: 'center',
+  },
+  closenessCarousel: {
+    flexDirection: 'row',
+  },
+  closenessDots: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+    marginTop: SPACING.lg,
+  },
+  closenessDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: COLORS.border.light,
+  },
+  closenessDotActive: {
+    width: 20,
+    backgroundColor: COLORS.text.primary,
+  },
   questionCardWrap: {
     width: SCREEN_WIDTH - SPACING.lg * 4,
     borderRadius: BORDER_RADIUS['2xl'],
@@ -341,6 +431,19 @@ const styles = StyleSheet.create({
   questionCardPillText: {
     fontSize: 13,
     fontFamily: FONTS.inter.regular,
+  },
+  closenessLevelPill: {
+    alignSelf: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: BORDER_RADIUS.full,
+    borderWidth: 2,
+    marginBottom: SPACING.lg,
+  },
+  closenessLevelPillText: {
+    fontSize: 14,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
   },
   questionCardText: {
     fontSize: 18,
@@ -380,46 +483,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.inter.regular,
     textAlign: 'center',
   },
-  actionsWrap: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: SPACING.sm,
-  },
-  actionCard: {
-    width: SCREEN_WIDTH - SPACING.lg * 4,
-    borderRadius: BORDER_RADIUS['2xl'],
-    padding: SPACING.lg,
-    minHeight: 120,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  actionRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: SPACING.md,
-  },
-  actionPill: {
-    paddingVertical: 6,
-    paddingHorizontal: SPACING.md,
-    borderRadius: BORDER_RADIUS.full,
-    borderWidth: 1,
-  },
-  actionLabel: {
-    fontSize: 13,
-    fontFamily: FONTS.inter.regular,
-  },
-  actionIcon: {
-    fontSize: 24,
-  },
-  actionHint: {
-    fontSize: 15,
-    fontFamily: FONTS.inter.regular,
-    textAlign: 'center',
-  },
   textContainer: {
     alignItems: 'center',
     maxWidth: 400,
@@ -427,7 +490,6 @@ const styles = StyleSheet.create({
   },
   headline: {
     fontSize: FONT_SIZES['3xl'],
-    fontFamily: FONTS.playfair.regular,
     color: COLORS.text.primary,
     textAlign: 'center',
     marginBottom: SPACING.md,

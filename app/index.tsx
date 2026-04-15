@@ -10,9 +10,11 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES } from '@/constants';
-import * as onboardingUtils from '@/utils/onboarding';
-import { useTranslation } from '@/hooks/useTranslation';
+import { COLORS, FONTS, FONT_SIZES } from '../constants';
+import * as onboardingUtils from '../utils/onboarding';
+import { useTranslation } from '../hooks/useTranslation';
+import { AppLogo } from '../components/AppLogo';
+import { analytics } from '../utils/analytics';
 
 export default function Index() {
   const router = useRouter();
@@ -47,6 +49,7 @@ export default function Index() {
       containerScale.value = withDelay(200, withTiming(1.08, { duration: 700, easing: Easing.inOut(Easing.cubic) }));
 
       setTimeout(async () => {
+        analytics.appOpen();
         const hasSeenOnboarding = await onboardingUtils.hasSeenOnboarding();
         if (hasSeenOnboarding) {
           router.replace('/home');
@@ -80,17 +83,11 @@ export default function Index() {
   return (
     <Animated.View style={[styles.container, containerStyle]}>
       <LinearGradient
-        colors={[
-          COLORS.background.primary,
-          COLORS.background.warm,
-          COLORS.background.cool,
-        ]}
+        colors={[COLORS.background.white, COLORS.background.primary]}
         style={styles.gradient}
       >
         <Animated.View style={[styles.logoWrap, logoStyle]}>
-          <View style={styles.logoCircle}>
-            <Text style={styles.logoIcon}>◎</Text>
-          </View>
+          <AppLogo size={56} withCircle />
         </Animated.View>
         <Animated.Text style={[styles.title, textStyle]}>
           {t('app.title')}
@@ -112,21 +109,9 @@ const styles = StyleSheet.create({
   logoWrap: {
     marginBottom: 24,
   },
-  logoCircle: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: COLORS.border.light,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoIcon: {
-    fontSize: 28,
-    color: COLORS.text.secondary,
-  },
   title: {
     fontSize: FONT_SIZES['4xl'],
-    fontFamily: FONTS.playfair.bold,
+    fontFamily: FONTS.brasikaDisplay,
     color: COLORS.text.primary,
     textAlign: 'center',
     letterSpacing: -0.5,

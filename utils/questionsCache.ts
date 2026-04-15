@@ -1,16 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import type { Question } from '../types/questions';
 
 const QUESTIONS_CACHE_KEY = 'questions_cache';
 
 export interface CachedQuestionsPayload {
-  questions: Array<{
-    id: string;
-    textEn: string;
-    textEs: string;
-    moment: string[];
-  }>;
+  questions: Array<Question | { id: string; textEn?: string; textEs?: string; moment: string[] }>;
   momentOptions: Array<{ id: string; name: string; emoji: string }>;
   fetchedAt: string;
+  /** Optional: when present, overrides bundled questionTextByLocale */
+  questionTextByLocale?: Record<string, Record<string, string>>;
 }
 
 export async function getCachedQuestions(): Promise<CachedQuestionsPayload | null> {
@@ -29,12 +27,14 @@ export async function getCachedQuestions(): Promise<CachedQuestionsPayload | nul
 
 export async function setCachedQuestions(
   questions: CachedQuestionsPayload['questions'],
-  momentOptions: CachedQuestionsPayload['momentOptions']
+  momentOptions: CachedQuestionsPayload['momentOptions'],
+  questionTextByLocale?: CachedQuestionsPayload['questionTextByLocale']
 ): Promise<void> {
   const payload: CachedQuestionsPayload = {
     questions,
     momentOptions,
     fetchedAt: new Date().toISOString(),
+    ...(questionTextByLocale && { questionTextByLocale }),
   };
   await AsyncStorage.setItem(QUESTIONS_CACHE_KEY, JSON.stringify(payload));
 }

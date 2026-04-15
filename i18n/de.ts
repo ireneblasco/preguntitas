@@ -1,6 +1,6 @@
 export const de = {
   app: {
-    title: 'Shallow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Überspringen',
@@ -11,23 +11,28 @@ export const de = {
         subtext: 'Entdecke witzige, tiefgründige und nachdenkliche Fragen an einem Ort.',
       },
       {
-        headline: 'Fragen für den Moment, in dem du bist.',
+        headline: 'Wähl den Moment.',
         subtext:
-          'Roadtrip, Date Night, tiefes Gespräch — die Fragen sind nach Kontext sortiert, damit du immer die passenden hast.',
+          'Roadtrip, Date Night, tiefes Gespräch — die Fragen sind nach Kontext sortiert, damit du immer die passenden für die Situation hast.',
       },
       {
-        headline: 'Wischen, zurück, speichern.',
+        headline: 'Jede Karte zeigt die Tiefe.',
         subtext:
-          'Weiterwischen zur nächsten Frage, zurück zur vorherigen, oder Herz antippen um Favoriten zu speichern.',
+          'Icebreaker für Leichtes, Personal zum Näherkommen, Vulnerable für das Echte.',
+      },
+      {
+        headline: 'Keine langweiligen Gespräche mehr.',
+        subtext: '',
         cta: 'Los geht\'s',
       },
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'mellow',
     sectionTitle: 'Was ist der Moment?',
-    myFavorites: 'Meine Favoriten',
+    myFavorites: 'Gespeichert',
     start: 'Starten →',
+    questionsLabel: 'Fragen',
   },
   dev: {
     menuTitle: 'Entwickler-Menü',
@@ -46,10 +51,10 @@ export const de = {
     fetchFailed: 'Laden fehlgeschlagen',
   },
   favorites: {
-    title: 'Meine Favoriten',
+    title: 'Gespeichert',
     savedQuestions: 'Gespeicherte Fragen',
     remove: 'Entfernen',
-    emptyHint: 'Speichere Fragen, indem du das Herz auf einer Karte antippst',
+    emptyHint: 'Speichere Fragen, indem du das Lesezeichen auf einer Karte antippst',
   },
   questions: {
     previous: 'Zurück',

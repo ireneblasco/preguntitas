@@ -1,6 +1,6 @@
 export const fr = {
   app: {
-    title: 'Shallow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Passer',
@@ -11,23 +11,28 @@ export const fr = {
         subtext: 'Découvre des questions amusantes, profondes et réfléchies en un seul endroit.',
       },
       {
-        headline: 'Des questions pour le moment où tu es.',
+        headline: 'Choisis le moment.',
         subtext:
-          'Road trip, rendez-vous, conversation profonde — les questions sont organisées par contexte pour avoir toujours les bonnes.',
+          'Road trip, soirée en amoureux, conversation profonde — les questions sont organisées par contexte pour que tu aies toujours les bonnes pour la situation.',
       },
       {
-        headline: 'Glisse, reviens, enregistre.',
+        headline: 'Chaque carte affiche le niveau de proximité.',
         subtext:
-          'Passe ou glisse à la question suivante, reviens en arrière ou appuie sur le cœur pour enregistrer tes favoris.',
+          'Icebreaker pour du léger, Personal pour se rapprocher, Vulnerable pour l’essentiel.',
+      },
+      {
+        headline: 'Fini les conversations ennuyeuses.',
+        subtext: '',
         cta: 'C\'est parti',
       },
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'mellow',
     sectionTitle: 'C\'est quoi le moment ?',
-    myFavorites: 'Mes favoris',
+    myFavorites: 'Enregistrés',
     start: 'Commencer →',
+    questionsLabel: 'questions',
   },
   dev: {
     menuTitle: 'Menu développeur',
@@ -46,10 +51,10 @@ export const fr = {
     fetchFailed: 'Échec du chargement',
   },
   favorites: {
-    title: 'Mes favoris',
+    title: 'Enregistrés',
     savedQuestions: 'Questions enregistrées',
     remove: 'Retirer',
-    emptyHint: 'Enregistre des questions en appuyant sur le cœur sur n\'importe quelle carte',
+    emptyHint: 'Enregistre des questions en appuyant sur le signet sur n\'importe quelle carte',
   },
   questions: {
     previous: 'Précédent',

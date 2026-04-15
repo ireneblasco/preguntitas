@@ -1,6 +1,6 @@
 export const pt = {
   app: {
-    title: 'Shallow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Saltar',
@@ -11,23 +11,28 @@ export const pt = {
         subtext: 'Descubra perguntas divertidas, profundas e reflexivas num só lugar.',
       },
       {
-        headline: 'Perguntas para o momento em que estás.',
+        headline: 'Escolhe o momento.',
         subtext:
-          'Viagem, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para teres sempre as certas.',
+          'Road trip, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para teres sempre as certas para a situação.',
       },
       {
-        headline: 'Desliza, volta, guarda.',
+        headline: 'Cada cartão mostra o nível de confiança.',
         subtext:
-          'Passa ou desliza para a próxima pergunta, volta atrás ou toca no coração para guardar as favoritas.',
+          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa.',
+      },
+      {
+        headline: 'Chega de conversas sem graça.',
+        subtext: '',
         cta: 'Começar',
       },
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'mellow',
     sectionTitle: 'Qual é o momento?',
-    myFavorites: 'Os meus favoritos',
+    myFavorites: 'Guardados',
     start: 'Começar →',
+    questionsLabel: 'perguntas',
   },
   dev: {
     menuTitle: 'Menu de programador',
@@ -46,10 +51,10 @@ export const pt = {
     fetchFailed: 'Falha ao obter',
   },
   favorites: {
-    title: 'Os meus favoritos',
+    title: 'Guardados',
     savedQuestions: 'Perguntas guardadas',
     remove: 'Remover',
-    emptyHint: 'Guarda perguntas tocando no coração em qualquer cartão',
+    emptyHint: 'Guarda perguntas tocando no marcador em qualquer cartão',
   },
   questions: {
     previous: 'Anterior',

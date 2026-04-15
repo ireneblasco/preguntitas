@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { getLocales } from 'expo-localization';
-import { getStoredLocale, setStoredLocale, type StoredLocale } from '@/utils/localeStorage';
-import { resolveDeviceLocale } from '@/i18n';
+import { getStoredLocale, setStoredLocale, type StoredLocale } from '../utils/localeStorage';
+import { resolveDeviceLocale } from '../i18n';
 
 type LocaleContextValue = {
   locale: StoredLocale;

@@ -1,7 +1,7 @@
 /** Português do Brasil (pt-BR) – vocabulário e formas do português brasileiro */
 export const ptBR = {
   app: {
-    title: 'Shallow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Pular',
@@ -12,23 +12,28 @@ export const ptBR = {
         subtext: 'Descubra perguntas divertidas, profundas e reflexivas em um só lugar.',
       },
       {
-        headline: 'Perguntas para o momento em que você está.',
+        headline: 'Escolha o momento.',
         subtext:
-          'Viagem, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para você sempre ter as certas.',
+          'Road trip, encontro romântico, papo profundo — as perguntas estão organizadas por contexto para você sempre ter as certas para a situação.',
       },
       {
-        headline: 'Deslize, volte, guarde.',
+        headline: 'Cada cartão mostra o nível de intimidade.',
         subtext:
-          'Passe ou deslize para a próxima pergunta, volte à anterior ou toque no coração para guardar as favoritas.',
+          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa.',
+      },
+      {
+        headline: 'Chega de conversas sem graça.',
+        subtext: '',
         cta: 'Começar',
       },
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'mellow',
     sectionTitle: 'Qual é o momento?',
-    myFavorites: 'Meus favoritos',
+    myFavorites: 'Salvos',
     start: 'Começar →',
+    questionsLabel: 'perguntas',
   },
   dev: {
     menuTitle: 'Menu do desenvolvedor',
@@ -47,10 +52,10 @@ export const ptBR = {
     fetchFailed: 'Falha ao buscar',
   },
   favorites: {
-    title: 'Meus favoritos',
+    title: 'Salvos',
     savedQuestions: 'Perguntas salvas',
     remove: 'Remover',
-    emptyHint: 'Guarde perguntas tocando no coração em qualquer cartão',
+    emptyHint: 'Guarde perguntas tocando no marcador em qualquer cartão',
   },
   questions: {
     previous: 'Anterior',

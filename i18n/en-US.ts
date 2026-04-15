@@ -1,7 +1,7 @@
 /** English (United States) – UI strings for en-US locale */
 export const enUS = {
   app: {
-    title: 'Shallow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Skip',
@@ -12,23 +12,28 @@ export const enUS = {
         subtext: 'Discover fun, deep, and thoughtful questions in one place.',
       },
       {
-        headline: "Questions for the moment you're in.",
+        headline: 'Pick the moment.',
         subtext:
           'Road trip, date night, deep talk — the questions are organized by context so you always get the right ones for the situation.',
       },
       {
-        headline: 'Swipe, go back, save.',
+        headline: 'Each card shows how deep it goes.',
         subtext:
-          'Pass or swipe to the next question, go back to the previous one, and tap the heart to save your favorites.',
-        cta: "Let's Go",
+          'Icebreaker for light fun, Personal for getting closer, and Vulnerable for the real stuff.',
+      },
+      {
+        headline: 'No more boring conversations.',
+        subtext: '',
+        cta: "Let's go",
       },
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'mellow',
     sectionTitle: "What's the moment?",
-    myFavorites: 'My favorites',
+    myFavorites: 'Saved',
     start: 'Start →',
+    questionsLabel: 'questions',
   },
   dev: {
     menuTitle: 'Developer Menu',
@@ -47,10 +52,10 @@ export const enUS = {
     fetchFailed: 'Fetch failed',
   },
   favorites: {
-    title: 'My favorites',
+    title: 'Saved',
     savedQuestions: 'Saved questions',
     remove: 'Remove',
-    emptyHint: 'Save questions by tapping the heart on any card',
+    emptyHint: 'Save questions by tapping the bookmark on any card',
   },
   questions: {
     previous: 'Previous',

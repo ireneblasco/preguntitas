@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { type Locale, isSupportedLocale } from '@/i18n';
+import { type Locale, isSupportedLocale } from '../i18n';
 
 const APP_LANGUAGE_KEY = 'app_language';
 

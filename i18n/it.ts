@@ -1,6 +1,6 @@
 export const it = {
   app: {
-    title: 'Shallow',
+    title: 'mellow',
   },
   onboarding: {
     skip: 'Salta',
@@ -11,23 +11,28 @@ export const it = {
         subtext: 'Scopri domande divertenti, profonde e riflessive in un solo posto.',
       },
       {
-        headline: 'Domande per il momento in cui sei.',
+        headline: 'Scegli il momento.',
         subtext:
-          'Road trip, appuntamento, conversazione profonda — le domande sono organizzate per contesto così hai sempre quelle giuste.',
+          'Road trip, serata romantica, conversazione profonda — le domande sono organizzate per contesto così hai sempre quelle giuste per la situazione.',
       },
       {
-        headline: 'Scorri, torna indietro, salva.',
+        headline: 'Ogni carta mostra il livello di confidenza.',
         subtext:
-          'Passa o scorri alla prossima domanda, torna alla precedente o tocca il cuore per salvare i preferiti.',
+          'Icebreaker per qualcosa di leggero, Personal per avvicinarsi, Vulnerable per ciò che conta.',
+      },
+      {
+        headline: 'Basta conversazioni noiose.',
+        subtext: '',
         cta: 'Inizia',
       },
     ],
   },
   home: {
-    appName: 'Shallow',
+    appName: 'mellow',
     sectionTitle: 'Qual è il momento?',
-    myFavorites: 'I miei preferiti',
+    myFavorites: 'Salvati',
     start: 'Inizia →',
+    questionsLabel: 'domande',
   },
   dev: {
     menuTitle: 'Menu sviluppatore',
@@ -46,10 +51,10 @@ export const it = {
     fetchFailed: 'Caricamento fallito',
   },
   favorites: {
-    title: 'I miei preferiti',
+    title: 'Salvati',
     savedQuestions: 'Domande salvate',
     remove: 'Rimuovi',
-    emptyHint: 'Salva le domande toccando il cuore su qualsiasi carta',
+    emptyHint: 'Salva le domande toccando il segnalibro su qualsiasi carta',
   },
   questions: {
     previous: 'Precedente',
