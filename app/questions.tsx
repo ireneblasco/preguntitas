@@ -16,7 +16,7 @@ import Animated, {
   FadeOut,
 } from 'react-native-reanimated';
 import type { ClosenessLevel } from '../types/questions';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName, FIRST_5_QUESTION_IDS_BY_MOMENT } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName, FIRST_5_QUESTION_IDS_BY_MOMENT, sortMomentOptions } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
@@ -43,6 +43,28 @@ const CLOSENESS_FILTER_LABELS: Record<ClosenessFilter, string> = {
 };
 const CLOSENESS_FILTER_OPTIONS: ClosenessFilter[] = ['all', 1, 2, 3];
 const LEVEL_DROPDOWN_TEXT_COLOR = '#1C1C1E';
+
+// Keep category title colors aligned with Home cards order.
+const HOME_CATEGORY_TITLE_COLORS = [
+  '#0F5F7A', // Break the Ice
+  '#D7773D', // Drinks with Friends
+  '#316D65', // Go Deep
+  '#8E3B66', // Date Night
+  '#2D584F', // On the Road
+  '#7A1F3B', // Ikigai
+  '#6A4A3B', // Grandparents
+] as const;
+
+function getHomeCategoryTitleColor(
+  momentId: string,
+  momentOptions: Array<{ id: string; name: string }>
+): string {
+  const ordered = sortMomentOptions(momentOptions);
+  const index = ordered.findIndex((m) => m.id === momentId);
+  if (index < 0) return '#1C1C1E';
+  return HOME_CATEGORY_TITLE_COLORS[index % HOME_CATEGORY_TITLE_COLORS.length];
+}
+
 function getClosenessLabel(level?: ClosenessLevel): string {
   if (level === 1 || level === 2 || level === 3) return CLOSENESS_LABELS[level];
   return CLOSENESS_LABELS[1];
@@ -90,6 +112,7 @@ export default function Questions() {
   const momentLabel = moment
     ? (getCategoryDisplayName(momentOption) || momentOption?.name || moment)
     : '';
+  const momentTitleColor = moment ? getHomeCategoryTitleColor(moment, momentOptions) : '#1C1C1E';
   const momentTheme = moment
     ? getThemeForMomentId(moment, momentOptions)
     : getThemeForMomentId(momentOptions[0]?.id ?? '', momentOptions);
@@ -244,7 +267,7 @@ export default function Questions() {
           <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
             <Text style={styles.backLabel}>‹</Text>
           </Pressable>
-          <Text style={styles.headerTitle} numberOfLines={1}>
+          <Text style={[styles.headerTitle, { color: momentTitleColor }]} numberOfLines={1}>
             {momentLabel}
           </Text>
           <View style={styles.headerRight} />
@@ -418,8 +441,8 @@ const styles = StyleSheet.create({
   headerTitle: {
     flex: 1,
     fontSize: FONT_SIZES.base,
-    fontFamily: FONTS.inter.regular,
-    color: '#1C1C1E',
+    fontFamily: FONTS.inter.bold,
+    fontWeight: '600',
     textAlign: 'center',
   },
   headerRight: {
