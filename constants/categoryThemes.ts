@@ -21,12 +21,12 @@ export const CARD_THEMES: readonly CategoryTheme[] = [
  * Incluye fallback legacy "Con mi abuela" por cachés antiguas.
  */
 const CARD_ORDER_IDS = [
-  'Deep Stuff 🧠',
-  'Road Trip 🚗',
-  'Drinks with Friends 🍸',
-  'Date Night 🌙',
-  'Ikigai 🌸',
   'Break the Ice 🧊',
+  'Drinks with Friends 🍸',
+  'Deep Stuff 🧠',
+  'Date Night 🌙',
+  'Road Trip 🚗',
+  'Ikigai 🌸',
   'With Grandparents 💌',
   'Con mi abuela',
 ] as const;
@@ -47,7 +47,7 @@ export function sortMomentOptions<T extends { id: string; name: string }>(option
       }
       return o.id === id;
     });
-    if (option) ordered.push(option);
+    if (option && !ordered.includes(option)) ordered.push(option);
   }
   const rest = options.filter((o) => !ordered.includes(o));
   for (const o of rest) ordered.push(o);
