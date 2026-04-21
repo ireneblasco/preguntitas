@@ -1,10 +1,9 @@
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, CARD_THEMES, sortMomentOptions, getCategoryDisplayName } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, sortMomentOptions, getCategoryDisplayName } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useMemo } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
@@ -32,7 +31,6 @@ export default function Home() {
   const { t } = useTranslation();
   const { momentOptions } = useQuestions();
   const orderedOptions = useMemo(() => sortMomentOptions(momentOptions), [momentOptions]);
-  const [expandedId, setExpandedId] = useState<string | null>(orderedOptions[0]?.id ?? null);
 
   const handleStart = (momentId: string) => {
     const categoryName = momentOptions.find((m) => m.id === momentId)?.name ?? momentId;
@@ -48,7 +46,7 @@ export default function Home() {
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={true}
+          showsVerticalScrollIndicator={false}
         >
           <View style={styles.header}>
             <View style={styles.headerLeft}>
@@ -68,21 +66,18 @@ export default function Home() {
           </View>
 
           <View style={styles.sectionRow}>
-            <Text style={styles.sectionTitle}>
-              {t('home.sectionTitle')}
-            </Text>
+            <Text style={styles.sectionTitle}>Pick a mood</Text>
+            <Text style={styles.sectionSubtitle}>Start a conversation</Text>
           </View>
 
           <View style={styles.cardList}>
             {orderedOptions.map((option, index) => {
-              const theme = CARD_THEMES[index % CARD_THEMES.length];
               return (
                 <MomentCard
                   key={option.id}
                   option={{ ...option, name: getCategoryDisplayName(option) || option.name }}
-                  theme={theme}
+                  index={index}
                   subtitleLabel={MOMENT_LABELS[option.id] ?? MOMENT_LABELS[option.name] ?? DEFAULT_MOMENT_LABEL}
-                  isExpanded={expandedId === option.id}
                   onStart={() => handleStart(option.id)}
                 />
               );
@@ -100,26 +95,24 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     paddingHorizontal: SPACING.lg,
-    paddingTop: SPACING.md,
+    paddingTop: SPACING.sm,
     paddingBottom: SPACING['3xl'],
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: SPACING.xl,
+    marginBottom: SPACING.md,
   },
   headerLeft: { flex: 1 },
   headerRight: { justifyContent: 'center' },
   settingsButton: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(45, 90, 71, 0.08)',
-    borderWidth: 1,
-    borderColor: 'rgba(45, 90, 71, 0.18)',
+    backgroundColor: '#EFEFED',
   },
   settingsButtonPressed: {
     opacity: 0.75,
@@ -131,18 +124,22 @@ const styles = StyleSheet.create({
     color: COLORS.text.primary,
   },
   sectionRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: SPACING.md,
+    marginBottom: SPACING.lg,
   },
   sectionTitle: {
-    fontSize: FONT_SIZES.base,
-    fontFamily: FONTS.inter.regular,
+    fontSize: FONT_SIZES.xl,
+    fontFamily: FONTS.inter.bold,
+    fontWeight: '600',
     color: COLORS.text.primary,
   },
+  sectionSubtitle: {
+    marginTop: 2,
+    fontSize: FONT_SIZES.base,
+    fontFamily: FONTS.inter.regular,
+    color: COLORS.text.secondary,
+  },
   cardList: {
-    gap: SPACING.sm,
+    gap: SPACING.md,
     marginBottom: SPACING['2xl'],
   },
 });
