@@ -7,13 +7,20 @@ export const pt = {
     next: 'Seguinte',
     screens: [
       {
-        headline: 'Perguntas que geram conversas de verdade.',
-        subtext: 'Descubra perguntas divertidas, profundas e reflexivas num só lugar.',
+        headline: 'Deixa a conversa fluir.',
+        subtext:
+          'Se uma pergunta despertar o teu interesse, mergulha e explora à vontade.',
+        tileQuestions: [
+          'O que te fez sorrir ultimamente?',
+          'Onde te sentes mais tu mesmo?',
+          'O que desperta a tua curiosidade agora?',
+          'Como passarias um dia livre perfeito?',
+        ],
       },
       {
         headline: 'Escolhe o momento.',
         subtext:
-          'Road trip, jantar a dois, conversa profunda — as perguntas estão organizadas por contexto para teres sempre as certas para a situação.',
+          'No ecrã inicial, escolhe um momento — cada categoria agrupa perguntas para esse tipo de situação.',
       },
       {
         headline: 'Cada cartão mostra o nível de confiança.',

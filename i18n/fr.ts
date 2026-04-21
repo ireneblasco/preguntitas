@@ -7,13 +7,20 @@ export const fr = {
     next: 'Suivant',
     screens: [
       {
-        headline: 'Des questions qui font naître de vraies conversations.',
-        subtext: 'Découvre des questions amusantes, profondes et réfléchies en un seul endroit.',
+        headline: 'Laisse la conversation s\'installer.',
+        subtext:
+          'Si une question t\'intéresse, n\'hésite pas à creuser et explorer.',
+        tileQuestions: [
+          'Qu’est-ce qui t’a fait sourire récemment ?',
+          'Où te sens-tu le plus toi-même ?',
+          'Qu’est-ce qui t’intrigue en ce moment ?',
+          'Comment passerais-tu une journée libre parfaite ?',
+        ],
       },
       {
         headline: 'Choisis le moment.',
         subtext:
-          'Road trip, soirée en amoureux, conversation profonde — les questions sont organisées par contexte pour que tu aies toujours les bonnes pour la situation.',
+          'Sur l’écran d’accueil, choisis un moment — chaque catégorie regroupe des questions adaptées au contexte.',
       },
       {
         headline: 'Chaque carte affiche le niveau de proximité.',

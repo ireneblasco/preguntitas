@@ -7,13 +7,19 @@ export const it = {
     next: 'Avanti',
     screens: [
       {
-        headline: 'Domande che accendono conversazioni vere.',
-        subtext: 'Scopri domande divertenti, profonde e riflessive in un solo posto.',
+        headline: 'Lascia che la conversazione fluisca.',
+        subtext: 'Se una domanda ti incuriosisce, approfondisci ed esplora pure.',
+        tileQuestions: [
+          'Cosa ti ha fatto sorridere di recente?',
+          'Dove ti senti più te stesso?',
+          'Di cosa sei curioso in questo momento?',
+          'Come passeresti una giornata libera perfetta?',
+        ],
       },
       {
         headline: 'Scegli il momento.',
         subtext:
-          'Road trip, serata romantica, conversazione profonda — le domande sono organizzate per contesto così hai sempre quelle giuste per la situazione.',
+          'Nella home scegli un momento: ogni categoria raggruppa domande per quel tipo di situazione.',
       },
       {
         headline: 'Ogni carta mostra il livello di confidenza.',

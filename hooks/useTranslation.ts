@@ -26,5 +26,15 @@ export function useTranslation() {
     };
   }, [dict, locale, translationLocale]);
 
-  return { t };
+  const tArray = useMemo(() => {
+    return (key: string): string[] => {
+      const value = getByPath(dict, key);
+      if (Array.isArray(value) && value.every((item) => typeof item === 'string')) {
+        return value as string[];
+      }
+      return [];
+    };
+  }, [dict, locale, translationLocale]);
+
+  return { t, tArray };
 }

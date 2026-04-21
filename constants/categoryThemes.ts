@@ -16,13 +16,18 @@ export const CARD_THEMES: readonly CategoryTheme[] = [
   { bg: '#E0FF5A', text: '#2D584F' },   // Grandparents — mismos que Deep Talk, invertidos (lima + verde bosque)
 ] as const;
 
-/** Orden deseado: Deep Talk, Road Trip, Table Talk, Date Night, Ikigai, Grandparents (Con mi abuela) */
+/**
+ * Orden en home / onboarding (IDs como en Notion / data/questions).
+ * Incluye fallback legacy "Con mi abuela" por cachés antiguas.
+ */
 const CARD_ORDER_IDS = [
-  'Deep Talk 🧠',
+  'Deep Stuff 🧠',
   'Road Trip 🚗',
-  'Table Talks 🍷',
+  'Drinks with Friends 🍸',
   'Date Night 🌙',
   'Ikigai 🌸',
+  'Break the Ice 🧊',
+  'With Grandparents 💌',
   'Con mi abuela',
 ] as const;
 
@@ -31,7 +36,15 @@ export function sortMomentOptions<T extends { id: string; name: string }>(option
   const ordered: T[] = [];
   for (const id of order) {
     const option = options.find((o) => {
-      if (id === 'Con mi abuela') return o.name === 'Con mi abuela' || o.id === 'Con mi abuela' || o.id.startsWith('Con mi abuela');
+      if (id === 'Con mi abuela') {
+        return (
+          o.name === 'Con mi abuela' ||
+          o.id === 'Con mi abuela' ||
+          o.id.startsWith('Con mi abuela') ||
+          o.id === 'With Grandparents 💌' ||
+          o.name === 'With Grandparents'
+        );
+      }
       return o.id === id;
     });
     if (option) ordered.push(option);
@@ -58,7 +71,13 @@ export function getThemeForMomentId(
 export function getCategoryDisplayName(option: { id: string; name: string } | null | undefined): string {
   if (!option) return '';
   const { id, name } = option;
-  if (name === 'Con mi abuela' || name === 'Con mi abuela 👵' || id === 'Con mi abuela' || id === 'Con mi abuela 👵') {
+  if (
+    name === 'Con mi abuela' ||
+    name === 'Con mi abuela 👵' ||
+    id === 'Con mi abuela' ||
+    id === 'Con mi abuela 👵' ||
+    id === 'With Grandparents 💌'
+  ) {
     return 'Grandparents';
   }
   return name || id || '';

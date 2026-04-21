@@ -8,13 +8,20 @@ export const enGB = {
     next: 'Next',
     screens: [
       {
-        headline: 'Questions that spark real conversations.',
-        subtext: 'Discover fun, deep, and thoughtful questions in one place.',
+        headline: 'Let the conversation flow.',
+        subtext:
+          'If a question catches your interest, feel free to dive deeper and explore.',
+        tileQuestions: [
+          'What made you smile lately?',
+          'Where do you feel most like yourself?',
+          'What are you curious about right now?',
+          'How would you spend a perfect day off?',
+        ],
       },
       {
         headline: 'Pick the moment.',
         subtext:
-          'Road trip, date night, deep talk — the questions are organised by context so you always get the right ones for the situation.',
+          'On the home screen, choose a moment — each category groups questions for that kind of time together.',
       },
       {
         headline: 'Each card shows how deep it goes.',

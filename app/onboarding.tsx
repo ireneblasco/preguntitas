@@ -6,8 +6,11 @@ import {
   Dimensions,
   FlatList,
   ViewToken,
+  ScrollView,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
 } from 'react-native';
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
@@ -17,26 +20,46 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, CARD_THEMES as APP_CARD_THEMES } from '../constants';
+import {
+  COLORS,
+  FONTS,
+  FONT_SIZES,
+  SPACING,
+  BORDER_RADIUS,
+  CARD_THEMES,
+  sortMomentOptions,
+  getCategoryDisplayName,
+} from '../constants';
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
+import { useQuestions, type MomentOption } from '../contexts/QuestionsContext';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-/** Misma paleta que home (categorías / preguntas) */
-const CARD_THEMES = [
-  { bg: '#BEE656', text: '#3C6112' },
-  { bg: '#EAC1CC', text: '#6B2A2D' },
-  { bg: '#3E614A', text: '#BEE656' },
-  { bg: '#FDCF42', text: '#6B2A2D' },
+/** Mismos rótulos de nivel que en la pantalla de preguntas (pill superior). */
+const HERO_PREVIEW_CLOSENESS_PILLS = [
+  'Level 1 Icebreaker',
+  'Level 2 Personal',
+  'Level 3 Vulnerable',
+  'Level 1 Icebreaker',
 ] as const;
 
-/** Categorías como en home (name + emoji) */
-const MOMENT_OPTIONS = [
-  { name: 'Date Night', emoji: '🌙' },
-  { name: 'Deep Talk', emoji: '🧠' },
-  { name: 'Road Trip', emoji: '🌎' },
-  { name: 'Table Talks', emoji: '🍷' },
+/** Vista previa en onboarding (orden fijo; datos reales desde Notion / caché). */
+const ONBOARDING_MOMENT_PREVIEW_IDS = [
+  'Drinks with Friends 🍸',
+  'Deep Stuff 🧠',
+  'Date Night 🌙',
+  'With Grandparents 💌',
+] as const;
+
+const HERO_PREVIEW_COUNT = 4;
+const HERO_AUTO_ADVANCE_MS = 4200;
+
+const ONBOARDING_MOMENT_MOOD_CONTRASTS = [
+  { bg: '#EA4F12', graphic: '#FAD0DC' },
+  { bg: '#4A8D97', graphic: '#BCE7E3' },
+  { bg: '#D8899F', graphic: '#651528' },
+  { bg: '#EDE6DB', graphic: '#5A6341' },
 ] as const;
 
 type OnboardingScreen = { headline: string; subtext: string; cta?: string };
@@ -57,11 +80,11 @@ function useOnboardingScreens(): OnboardingScreen[] {
 
 export default function Onboarding() {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, tArray } = useTranslation();
   const SCREENS = useOnboardingScreens();
+  const heroTileQuestions = tArray('onboarding.screens.0.tileQuestions');
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
-  const scrollX = useSharedValue(0);
 
   const handleNext = async () => {
     if (currentIndex < SCREENS.length - 1) {
@@ -96,10 +119,15 @@ export default function Onboarding() {
   const renderItem = ({ item, index }: { item: OnboardingScreen; index: number }) => {
     return (
       <View style={[styles.slide, { width: SCREEN_WIDTH }]}>
-        {index === 0 && <OnboardingBackgroundPreview />}
-        <View style={styles.visualContainer}>
-          {index === 0 && <QuestionCardVisual />}
-          {index === 1 && <MomentsVisual />}
+        <View
+          style={[
+            styles.visualContainer,
+            index === 0 && styles.visualContainerHero,
+            index === 1 && styles.visualContainerMoments,
+          ]}
+        >
+          {index === 0 && <MoodBoardHeroVisual questions={heroTileQuestions} />}
+          {index === 1 && <MomentsOnboardingVisual />}
           {index === 2 && <ClosenessVisual />}
         </View>
         <View style={styles.textContainer}>
@@ -183,66 +211,130 @@ function PaginationDot({ index, currentIndex }: { index: number; currentIndex: n
   return <Animated.View style={[styles.dot, animatedStyle]} />;
 }
 
-/** Fondo de la primera pantalla: tarjetas alineadas con colores vivos del home */
-function OnboardingBackgroundPreview() {
-  const cardWidth = SCREEN_WIDTH * 0.72;
-  const cardHeight = 64;
-  const offset = 12;
-  const left = (SCREEN_WIDTH - cardWidth) / 2;
-  return (
-    <View style={styles.bgPreview} pointerEvents="none">
-      {CARD_THEMES.map((t, i) => (
-        <View
-          key={i}
-          style={[
-            styles.bgPreviewCard,
-            {
-              backgroundColor: t.bg,
-              top: 88 + i * offset,
-              left,
-              width: cardWidth,
-              height: cardHeight,
-              opacity: 0.72,
-              zIndex: i,
-            },
-          ]}
-        />
-      ))}
-    </View>
-  );
-}
+/** Carrusel horizontal de tarjetas estilo preguntas: swipe + avance automático. */
+function MoodBoardHeroVisual({ questions }: { questions: string[] }) {
+  const scrollRef = useRef<ScrollView>(null);
+  const activeRef = useRef(0);
+  const [activeHero, setActiveHero] = useState(0);
 
-/** Ilustración: tarjeta de pregunta con colores del home (Table Talks) */
-function QuestionCardVisual() {
-  const theme = CARD_THEMES[3];
+  useEffect(() => {
+    const id = setInterval(() => {
+      const next = (activeRef.current + 1) % HERO_PREVIEW_COUNT;
+      activeRef.current = next;
+      setActiveHero(next);
+      scrollRef.current?.scrollTo({ x: next * SCREEN_WIDTH, animated: true });
+    }, HERO_AUTO_ADVANCE_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  const onMomentumScrollEnd = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const x = e.nativeEvent.contentOffset.x;
+    const i = Math.round(x / SCREEN_WIDTH);
+    if (i >= 0 && i < HERO_PREVIEW_COUNT) {
+      activeRef.current = i;
+      setActiveHero(i);
+    }
+  }, []);
+
   return (
-    <View style={[styles.questionCardWrap, { backgroundColor: theme.bg }]}>
-      <View style={[styles.questionCardPill, { borderColor: theme.text }]}>
-        <Text style={[styles.questionCardPillText, { color: theme.text }]}>
-          Table Talks
-        </Text>
+    <View style={styles.heroCarouselWrap}>
+      <ScrollView
+        ref={scrollRef}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={onMomentumScrollEnd}
+        scrollEventThrottle={16}
+        style={styles.heroCarouselScroll}
+        decelerationRate="fast"
+      >
+        {[0, 1, 2, 3].map((i) => {
+          const theme = CARD_THEMES[i % CARD_THEMES.length];
+          const copy = questions[i] ?? '';
+          return (
+            <View key={i} style={styles.heroCarouselPage}>
+              <View style={[styles.heroQuestionCard, { backgroundColor: theme.bg }]}>
+                <View style={styles.heroQuestionCardInner}>
+                  <View style={styles.heroQuestionPillWrap}>
+                    <View style={[styles.heroQuestionPill, { borderColor: theme.text }]}>
+                      <Text style={[styles.heroQuestionPillText, { color: theme.text }]}>
+                        {HERO_PREVIEW_CLOSENESS_PILLS[i]}
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.heroQuestionTextBlock}>
+                    <Text style={[styles.heroQuestionText, { color: theme.text }]}>{copy}</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          );
+        })}
+      </ScrollView>
+      <View style={styles.heroCarouselDots}>
+        {[0, 1, 2, 3].map((i) => (
+          <View
+            key={i}
+            style={[styles.heroCarouselDot, i === activeHero && styles.heroCarouselDotActive]}
+          />
+        ))}
       </View>
-      <Text style={[styles.questionCardText, { color: theme.text }]} numberOfLines={2}>
-        How do you think people see you?
-      </Text>
     </View>
   );
 }
 
-/** Ilustración: categorías del home con emoji + nombre y colores de la paleta */
-function MomentsVisual() {
+/**
+ * Cuatro momentos en rejilla 2×2: colores del mood board + emoji + nombre.
+ */
+function MomentsOnboardingVisual() {
+  const { momentOptions } = useQuestions();
+  const { previewMoments, cellW, gridGap } = useMemo(() => {
+    const ordered = sortMomentOptions(momentOptions);
+    const byId = new Map(ordered.map((o) => [o.id, o]));
+
+    const resolve = (id: (typeof ONBOARDING_MOMENT_PREVIEW_IDS)[number]): MomentOption | undefined => {
+      const direct = byId.get(id);
+      if (direct) return direct;
+      if (id === 'With Grandparents 💌') {
+        return ordered.find(
+          (o) =>
+            o.id === 'With Grandparents 💌' ||
+            o.name === 'With Grandparents' ||
+            o.name.startsWith('Con mi abuela')
+        );
+      }
+      return undefined;
+    };
+
+    const previewMoments = ONBOARDING_MOMENT_PREVIEW_IDS.map((id) => resolve(id)).filter(
+      (o): o is MomentOption => o != null
+    );
+    const gridGap = 12;
+    const maxGrid = Math.min(SCREEN_WIDTH - SPACING.lg * 2, 328);
+    const cellW = (maxGrid - gridGap) / 2;
+    return { previewMoments, cellW, gridGap };
+  }, [momentOptions]);
+
   return (
-    <View style={styles.momentsWrap}>
-      {MOMENT_OPTIONS.map((moment, i) => {
-        const theme = CARD_THEMES[i];
+    <View style={[styles.momentBentoGrid, { width: cellW * 2 + gridGap, gap: gridGap }]}>
+      {previewMoments.map((option, index) => {
+        const contrast = ONBOARDING_MOMENT_MOOD_CONTRASTS[index] ?? ONBOARDING_MOMENT_MOOD_CONTRASTS[0];
+        const label = getCategoryDisplayName(option) || option.name;
         return (
           <View
-            key={moment.name}
-            style={[styles.momentCard, { backgroundColor: theme.bg }]}
+            key={option.id}
+            style={[
+              styles.momentBentoCell,
+              {
+                width: cellW,
+                backgroundColor: contrast.bg,
+                shadowColor: contrast.bg,
+              },
+            ]}
           >
-            <Text style={styles.momentEmoji}>{moment.emoji}</Text>
-            <Text style={[styles.momentName, { color: theme.text }]} numberOfLines={1}>
-              {moment.name}
+            <Text style={styles.momentBentoEmoji}>{option.emoji}</Text>
+            <Text style={[styles.momentBentoLabel, { color: contrast.graphic }]} numberOfLines={2}>
+              {label}
             </Text>
           </View>
         );
@@ -265,7 +357,7 @@ const CLOSENESS_SLIDE_DURATION = 500;
 /** Carrusel horizontal: 3 tarjetas en fila, transición por deslizamiento suave */
 function ClosenessVisual() {
   const [index, setIndex] = useState(0);
-  const theme = APP_CARD_THEMES[2];
+  const theme = CARD_THEMES[2];
   const slideX = useSharedValue(0);
 
   const goNext = useCallback(() => {
@@ -361,25 +453,129 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.lg,
     position: 'relative',
   },
-  bgPreview: {
-    ...StyleSheet.absoluteFillObject,
-    zIndex: 0,
-  },
-  bgPreviewCard: {
-    position: 'absolute',
-    borderRadius: BORDER_RADIUS['2xl'],
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 2,
-  },
   visualContainer: {
     minHeight: 200,
     marginBottom: SPACING['3xl'],
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1,
+  },
+  visualContainerHero: {
+    width: '100%',
+    alignSelf: 'stretch',
+    maxHeight: 420,
+  },
+  visualContainerMoments: {
+    minHeight: 260,
+    alignSelf: 'stretch',
+  },
+  momentBentoGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  momentBentoCell: {
+    minHeight: 118,
+    borderRadius: BORDER_RADIUS['2xl'],
+    paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.lg,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.22,
+    shadowRadius: 14,
+    elevation: 6,
+  },
+  momentBentoEmoji: {
+    fontSize: 36,
+    lineHeight: 42,
+    marginBottom: SPACING.sm,
+  },
+  momentBentoLabel: {
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
+    textAlign: 'center',
+    lineHeight: 19,
+  },
+  heroCarouselWrap: {
+    marginHorizontal: -SPACING.lg,
+    width: SCREEN_WIDTH,
+    alignSelf: 'center',
+  },
+  heroCarouselScroll: {
+    width: SCREEN_WIDTH,
+    flexGrow: 0,
+  },
+  heroCarouselPage: {
+    width: SCREEN_WIDTH,
+    paddingHorizontal: SPACING.lg,
+    justifyContent: 'center',
+    minHeight: 300,
+  },
+  heroCarouselDots: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: SPACING.md,
+    paddingBottom: SPACING.xs,
+  },
+  heroCarouselDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: COLORS.border.light,
+  },
+  heroCarouselDotActive: {
+    width: 22,
+    backgroundColor: PAGINATION_ACTIVE_COLOR,
+  },
+  heroQuestionCard: {
+    width: '100%',
+    maxWidth: 400,
+    alignSelf: 'center',
+    borderRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
+    overflow: 'hidden',
+  },
+  heroQuestionCardInner: {
+    paddingHorizontal: SPACING.lg,
+    paddingTop: SPACING.lg,
+    paddingBottom: SPACING['2xl'],
+  },
+  heroQuestionPillWrap: {
+    alignItems: 'center',
+    marginBottom: SPACING.lg,
+  },
+  heroQuestionPill: {
+    backgroundColor: 'transparent',
+    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.lg,
+    borderRadius: BORDER_RADIUS.full,
+    borderWidth: 1,
+  },
+  heroQuestionPillText: {
+    fontSize: 13,
+    fontFamily: FONTS.inter.regular,
+    textAlign: 'center',
+    lineHeight: 18,
+  },
+  heroQuestionTextBlock: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: SPACING.sm,
+  },
+  heroQuestionText: {
+    fontSize: 18,
+    fontFamily: FONTS.inter.regular,
+    textAlign: 'center',
+    lineHeight: 28,
   },
   closenessWrap: {
     alignItems: 'center',
@@ -419,19 +615,6 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 6,
   },
-  questionCardPill: {
-    alignSelf: 'flex-start',
-    backgroundColor: 'transparent',
-    paddingVertical: 6,
-    paddingHorizontal: SPACING.md,
-    borderRadius: BORDER_RADIUS.full,
-    borderWidth: 1,
-    marginBottom: SPACING.md,
-  },
-  questionCardPillText: {
-    fontSize: 13,
-    fontFamily: FONTS.inter.regular,
-  },
   closenessLevelPill: {
     alignSelf: 'center',
     paddingVertical: 10,
@@ -451,37 +634,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 26,
     paddingHorizontal: SPACING.sm,
-  },
-  momentsWrap: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: SPACING.md,
-    paddingHorizontal: SPACING.sm,
-    maxWidth: 320,
-  },
-  momentCard: {
-    width: '47%',
-    minWidth: 140,
-    borderRadius: BORDER_RADIUS['2xl'],
-    padding: SPACING.lg,
-    minHeight: 88,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  momentEmoji: {
-    fontSize: 28,
-    marginBottom: SPACING.xs,
-  },
-  momentName: {
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    textAlign: 'center',
   },
   textContainer: {
     alignItems: 'center',

@@ -7,13 +7,20 @@ export const de = {
     next: 'Weiter',
     screens: [
       {
-        headline: 'Fragen, die echte Gespräche entfachen.',
-        subtext: 'Entdecke witzige, tiefgründige und nachdenkliche Fragen an einem Ort.',
+        headline: 'Lass das Gespräch fließen.',
+        subtext:
+          'Wenn dich eine Frage neugierig macht, geh ruhig tiefer und entdecke mehr.',
+        tileQuestions: [
+          'Was hat dich in letzter Zeit zum Lächeln gebracht?',
+          'Wo fühlst du dich am meisten du selbst?',
+          'Worüber bist du gerade neugierig?',
+          'Wie würdest du einen perfekten freien Tag verbringen?',
+        ],
       },
       {
         headline: 'Wähl den Moment.',
         subtext:
-          'Roadtrip, Date Night, tiefes Gespräch — die Fragen sind nach Kontext sortiert, damit du immer die passenden für die Situation hast.',
+          'Wähle auf dem Startbildschirm einen Moment — jede Kategorie gruppiert Fragen für diese Art von Situation.',
       },
       {
         headline: 'Jede Karte zeigt die Tiefe.',

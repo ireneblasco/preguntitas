@@ -8,13 +8,19 @@ export const esES = {
     next: 'Siguiente',
     screens: [
       {
-        headline: 'Preguntas que encienden conversaciones de verdad.',
-        subtext: 'Descubre preguntas divertidas, profundas y reflexivas en un solo lugar.',
+        headline: 'Deja que la conversación fluya.',
+        subtext: 'Si una pregunta te interesa, profundiza y explora con libertad.',
+        tileQuestions: [
+          '¿Qué te ha hecho sonreír últimamente?',
+          '¿Dónde te sientes más tú?',
+          '¿Qué te intriga ahora mismo?',
+          '¿Cómo pasarías un día libre perfecto?',
+        ],
       },
       {
         headline: 'Elige el momento.',
         subtext:
-          'Road trip, cita romántica, charla profunda — las preguntas están organizadas por contexto para que siempre tengas las adecuadas para la situación.',
+          'En el inicio, elige un momento: cada categoría agrupa preguntas para ese tipo de situación.',
       },
       {
         headline: 'Cada tarjeta muestra el nivel de confianza.',
