@@ -40,6 +40,7 @@ const CLOSENESS_FILTER_LABELS: Record<ClosenessFilter, string> = {
   3: CLOSENESS_LABELS[3],
 };
 const CLOSENESS_FILTER_OPTIONS: ClosenessFilter[] = ['all', 1, 2, 3];
+const LEVEL_DROPDOWN_TEXT_COLOR = '#1C1C1E';
 function getClosenessLabel(level?: ClosenessLevel): string {
   if (level === 1 || level === 2 || level === 3) return CLOSENESS_LABELS[level];
   return CLOSENESS_LABELS[1];
@@ -239,17 +240,17 @@ export default function Questions() {
                 >
                   <View style={styles.categoryPillWrap}>
                     <Pressable
-                      style={[styles.categoryPill, { borderColor: momentTheme.text }]}
+                      style={[styles.categoryPill, { borderColor: LEVEL_DROPDOWN_TEXT_COLOR }]}
                       onPress={() => setIsClosenessMenuOpen((prev) => !prev)}
                     >
-                      <Text style={[styles.categoryPillText, { color: momentTheme.text }]}>
+                      <Text style={[styles.categoryPillText, { color: LEVEL_DROPDOWN_TEXT_COLOR }]}>
                         {selectedCloseness === 'all'
                           ? currentQuestion
                           ? getClosenessLabel(currentQuestion.closenessLevel)
                           : getClosenessLabel(1)
                           : CLOSENESS_FILTER_LABELS[selectedCloseness]}
                       </Text>
-                      <Text style={[styles.categoryPillArrow, { color: momentTheme.text }]}>
+                      <Text style={[styles.categoryPillArrow, { color: LEVEL_DROPDOWN_TEXT_COLOR }]}>
                         {isClosenessMenuOpen ? '▲' : '▼'}
                       </Text>
                     </Pressable>
@@ -262,14 +263,14 @@ export default function Questions() {
                               key={String(option)}
                               style={[
                                 styles.closenessMenuOption,
-                                isActive && { backgroundColor: momentTheme.bg },
+                                isActive && styles.closenessMenuOptionActive,
                               ]}
                               onPress={() => handleSelectCloseness(option)}
                             >
                               <Text
                                 style={[
                                   styles.closenessMenuText,
-                                  { color: momentTheme.text },
+                                  { color: LEVEL_DROPDOWN_TEXT_COLOR },
                                   isActive && styles.closenessMenuTextActive,
                                 ]}
                               >
@@ -459,6 +460,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     marginHorizontal: 6,
     borderRadius: 8,
+  },
+  closenessMenuOptionActive: {
+    backgroundColor: '#F2F2F7',
   },
   closenessMenuText: {
     fontSize: 14,
