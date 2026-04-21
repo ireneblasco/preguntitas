@@ -160,7 +160,7 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
   const momentOptionsDisplay = useMemo(
     () =>
       momentOptions.map((m) =>
-        m.id.includes('Road Trip') || m.name === 'Road Trip'
+        m.id.includes('Road Trip') || m.name === 'Road Trip' || m.id.includes('On the Road') || m.name === 'On the Road'
           ? { ...m, emoji: '🌎' }
           : m
       ),

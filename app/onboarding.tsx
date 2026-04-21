@@ -47,7 +47,7 @@ const HERO_PREVIEW_CLOSENESS_PILLS = [
 /** Vista previa en onboarding (orden fijo; datos reales desde Notion / caché). */
 const ONBOARDING_MOMENT_PREVIEW_IDS = [
   'Drinks with Friends 🍸',
-  'Deep Stuff 🧠',
+  'Go Deep 🧠',
   'Date Night 🌙',
   'With Grandparents 💌',
 ] as const;
@@ -295,6 +295,9 @@ function MomentsOnboardingVisual() {
     const resolve = (id: (typeof ONBOARDING_MOMENT_PREVIEW_IDS)[number]): MomentOption | undefined => {
       const direct = byId.get(id);
       if (direct) return direct;
+      if (id === 'Go Deep 🧠') {
+        return ordered.find((o) => o.id === 'Deep Stuff 🧠' || o.name === 'Deep Stuff');
+      }
       if (id === 'With Grandparents 💌') {
         return ordered.find(
           (o) =>

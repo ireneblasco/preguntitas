@@ -20,33 +20,20 @@ export const CARD_THEMES: readonly CategoryTheme[] = [
  * Orden en home / onboarding (IDs como en Notion / data/questions).
  * Incluye fallback legacy "Con mi abuela" por cachés antiguas.
  */
-const CARD_ORDER_IDS = [
-  'Break the Ice 🧊',
-  'Drinks with Friends 🍸',
-  'Deep Stuff 🧠',
-  'Date Night 🌙',
-  'Road Trip 🚗',
-  'Ikigai 🌸',
-  'With Grandparents 💌',
-  'Con mi abuela',
+const CARD_ORDER_ID_GROUPS = [
+  ['Break the Ice 🧊'],
+  ['Drinks with Friends 🍸'],
+  ['Go Deep 🧠', 'Deep Stuff 🧠'],
+  ['Date Night 🌙'],
+  ['On the Road 🚗', 'Road Trip 🚗'],
+  ['Ikigai 🌸'],
+  ['With Grandparents 💌', 'Con mi abuela'],
 ] as const;
 
 export function sortMomentOptions<T extends { id: string; name: string }>(options: T[]): T[] {
-  const order = [...CARD_ORDER_IDS];
   const ordered: T[] = [];
-  for (const id of order) {
-    const option = options.find((o) => {
-      if (id === 'Con mi abuela') {
-        return (
-          o.name === 'Con mi abuela' ||
-          o.id === 'Con mi abuela' ||
-          o.id.startsWith('Con mi abuela') ||
-          o.id === 'With Grandparents 💌' ||
-          o.name === 'With Grandparents'
-        );
-      }
-      return o.id === id;
-    });
+  for (const group of CARD_ORDER_ID_GROUPS) {
+    const option = options.find((o) => group.includes(o.id as (typeof group)[number]));
     if (option && !ordered.includes(option)) ordered.push(option);
   }
   const rest = options.filter((o) => !ordered.includes(o));
@@ -71,6 +58,10 @@ export function getThemeForMomentId(
 export function getCategoryDisplayName(option: { id: string; name: string } | null | undefined): string {
   if (!option) return '';
   const { id, name } = option;
+  if (name === 'Deep Stuff' || id === 'Deep Stuff 🧠') return 'Go Deep';
+  if (name === 'Road Trip' || id === 'Road Trip 🚗') return 'On the Road';
+  if (name === 'Go Deep' || id === 'Go Deep 🧠') return 'Go Deep';
+  if (name === 'On the Road' || id === 'On the Road 🚗') return 'On the Road';
   if (
     name === 'Con mi abuela' ||
     name === 'Con mi abuela 👵' ||

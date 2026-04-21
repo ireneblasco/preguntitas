@@ -13,6 +13,7 @@ import { analytics } from '../utils/analytics';
 /** Short emotional/experiential label per category (no counts). Fallback for unknown categories. */
 const MOMENT_LABELS: Record<string, string> = {
   'Deep Stuff 🧠': 'Deep · Reflective',
+  'Go Deep 🧠': 'Deep · Reflective',
   'Deep Talk 🧠': 'Deep · Reflective',
   'Ikigai 🌸': 'Purpose · Values',
   'Date Night 🌙': 'Emotional · Intimate',
@@ -20,6 +21,7 @@ const MOMENT_LABELS: Record<string, string> = {
   'Con mi abuela 👵': 'Stories · Family',
   'With Grandparents 💌': 'Stories · Family',
   'Road Trip 🚗': 'Fun · Stories · Meaningful',
+  'On the Road 🚗': 'Fun · Stories · Meaningful',
   'Drinks with Friends 🍸': 'Social · Personal',
   'Table Talks 🍷': 'Social · Personal',
   'Break the Ice 🧊': 'Light · Easy',

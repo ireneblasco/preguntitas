@@ -26,6 +26,8 @@ import { analytics } from '../utils/analytics';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
 const CARD_MARGIN = SPACING.md;
+const CARD_TEXT_COLOR = '#203246';
+const CARD_META_COLOR = '#7E8C9D';
 
 const CLOSENESS_LABELS: Record<ClosenessLevel, string> = {
   1: 'Level 1 Icebreaker',
@@ -44,6 +46,32 @@ const LEVEL_DROPDOWN_TEXT_COLOR = '#1C1C1E';
 function getClosenessLabel(level?: ClosenessLevel): string {
   if (level === 1 || level === 2 || level === 3) return CLOSENESS_LABELS[level];
   return CLOSENESS_LABELS[1];
+}
+
+function toSoftCardColor(hex: string): string {
+  const source = hex.replace('#', '');
+  if (source.length !== 6) return '#E9EEF7';
+  const r = parseInt(source.slice(0, 2), 16);
+  const g = parseInt(source.slice(2, 4), 16);
+  const b = parseInt(source.slice(4, 6), 16);
+  const mix = (value: number) => Math.round(value * 0.2 + 255 * 0.8);
+  const sr = mix(r).toString(16).padStart(2, '0');
+  const sg = mix(g).toString(16).padStart(2, '0');
+  const sb = mix(b).toString(16).padStart(2, '0');
+  return `#${sr}${sg}${sb}`;
+}
+
+function toTextBadgeColor(hex: string): string {
+  const source = hex.replace('#', '');
+  if (source.length !== 6) return '#E5ECF5';
+  const r = parseInt(source.slice(0, 2), 16);
+  const g = parseInt(source.slice(2, 4), 16);
+  const b = parseInt(source.slice(4, 6), 16);
+  const mix = (value: number) => Math.round(value * 0.12 + 255 * 0.88);
+  const sr = mix(r).toString(16).padStart(2, '0');
+  const sg = mix(g).toString(16).padStart(2, '0');
+  const sb = mix(b).toString(16).padStart(2, '0');
+  return `#${sr}${sg}${sb}`;
 }
 
 export default function Questions() {
@@ -228,7 +256,7 @@ export default function Questions() {
               style={[
                 styles.card,
                 animatedCardStyle,
-                { backgroundColor: momentTheme.bg },
+                { backgroundColor: toSoftCardColor(momentTheme.bg) },
               ]}
             >
               <View style={styles.cardInner}>
@@ -240,17 +268,17 @@ export default function Questions() {
                 >
                   <View style={styles.categoryPillWrap}>
                     <Pressable
-                      style={[styles.categoryPill, { borderColor: LEVEL_DROPDOWN_TEXT_COLOR }]}
+                      style={styles.categoryPill}
                       onPress={() => setIsClosenessMenuOpen((prev) => !prev)}
                     >
-                      <Text style={[styles.categoryPillText, { color: LEVEL_DROPDOWN_TEXT_COLOR }]}>
+                      <Text style={styles.categoryPillText}>
                         {selectedCloseness === 'all'
                           ? currentQuestion
                           ? getClosenessLabel(currentQuestion.closenessLevel)
                           : getClosenessLabel(1)
                           : CLOSENESS_FILTER_LABELS[selectedCloseness]}
                       </Text>
-                      <Text style={[styles.categoryPillArrow, { color: LEVEL_DROPDOWN_TEXT_COLOR }]}>
+                      <Text style={styles.categoryPillArrow}>
                         {isClosenessMenuOpen ? '▲' : '▼'}
                       </Text>
                     </Pressable>
@@ -270,7 +298,7 @@ export default function Questions() {
                               <Text
                                 style={[
                                   styles.closenessMenuText,
-                                  { color: LEVEL_DROPDOWN_TEXT_COLOR },
+                                  { color: CARD_TEXT_COLOR },
                                   isActive && styles.closenessMenuTextActive,
                                 ]}
                               >
@@ -286,7 +314,7 @@ export default function Questions() {
                     <Text
                       style={[
                         styles.questionText,
-                        { color: momentTheme.text },
+                        { color: CARD_TEXT_COLOR },
                       ]}
                     >
                       {currentQuestion
@@ -303,9 +331,21 @@ export default function Questions() {
                   <Ionicons
                     name={isFavorite(currentQuestionId) ? 'bookmark' : 'bookmark-outline'}
                     size={24}
-                    color={isFavorite(currentQuestionId) ? '#1C1C1E' : '#C7C7CC'}
+                    color={isFavorite(currentQuestionId) ? CARD_TEXT_COLOR : '#6D7B89'}
                   />
                 </Pressable>
+                <View style={styles.questionPager}>
+                  {[0, 1, 2].map((dotIndex) => (
+                    <View
+                      key={dotIndex}
+                      style={[
+                        styles.questionPagerDot,
+                        questionIndex % 3 === dotIndex && styles.questionPagerDotActive,
+                      ]}
+                    />
+                  ))}
+                </View>
+                <Text style={styles.cardBrandMark}>m</Text>
               </View>
             </Animated.View>
           </GestureDetector>
@@ -318,6 +358,7 @@ export default function Questions() {
               style={({ pressed }) => [
                 styles.iosBtn,
                 styles.iosBtnSecondary,
+                { backgroundColor: toSoftCardColor(momentTheme.bg) },
                 questionIndex === 0 && styles.iosBtnDisabled,
                 pressed && questionIndex > 0 && styles.iosBtnPressed,
               ]}
@@ -328,8 +369,10 @@ export default function Questions() {
               <Text
                 style={[
                   styles.iosBtnSecondaryLabel,
+                  { backgroundColor: toTextBadgeColor(momentTheme.bg) },
                   questionIndex === 0 && styles.iosBtnDisabledLabel,
                 ]}
+                numberOfLines={1}
               >
                 {t('questions.previous')}
               </Text>
@@ -338,12 +381,13 @@ export default function Questions() {
               style={({ pressed }) => [
                 styles.iosBtn,
                 styles.iosBtnPrimary,
+                { backgroundColor: toSoftCardColor(momentTheme.bg) },
                 pressed && styles.iosBtnPressed,
               ]}
               onPress={handleNext}
               hitSlop={12}
             >
-              <Text style={styles.iosBtnPrimaryLabel}>
+              <Text style={[styles.iosBtnPrimaryLabel, { backgroundColor: toTextBadgeColor(momentTheme.bg) }]} numberOfLines={1}>
                 {t('questions.next')}
               </Text>
             </Pressable>
@@ -424,11 +468,12 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   categoryPill: {
-    backgroundColor: 'transparent',
+    backgroundColor: '#F4F7FB',
     paddingVertical: 8,
     paddingHorizontal: SPACING.lg,
     borderRadius: BORDER_RADIUS.full,
     borderWidth: 1,
+    borderColor: '#DFE6F0',
     flexDirection: 'row',
     alignItems: 'center',
     gap: SPACING.sm,
@@ -436,10 +481,12 @@ const styles = StyleSheet.create({
   categoryPillText: {
     fontSize: 14,
     fontFamily: FONTS.inter.regular,
+    color: CARD_TEXT_COLOR,
   },
   categoryPillArrow: {
     fontSize: 10,
     fontFamily: FONTS.inter.regular,
+    color: CARD_TEXT_COLOR,
   },
   closenessMenu: {
     marginTop: SPACING.sm,
@@ -490,6 +537,32 @@ const styles = StyleSheet.create({
     right: SPACING.md,
     padding: SPACING.sm,
   },
+  questionPager: {
+    position: 'absolute',
+    bottom: SPACING.lg,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+  },
+  questionPagerDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#C7D3E0',
+  },
+  questionPagerDotActive: {
+    backgroundColor: CARD_TEXT_COLOR,
+  },
+  cardBrandMark: {
+    position: 'absolute',
+    right: SPACING.lg,
+    bottom: SPACING.md,
+    fontFamily: FONTS.brasikaDisplay,
+    fontSize: 32,
+    color: '#C6D4E4',
+  },
   footer: {
     paddingHorizontal: CARD_MARGIN,
     paddingBottom: SPACING['2xl'],
@@ -498,46 +571,65 @@ const styles = StyleSheet.create({
   hint: {
     fontSize: 13,
     fontFamily: FONTS.inter.regular,
-    color: '#8E8E93',
+    color: CARD_META_COLOR,
     textAlign: 'center',
     marginBottom: SPACING.md,
   },
   footerButtons: {
     flexDirection: 'row',
-    alignItems: 'stretch',
+    alignItems: 'center',
     justifyContent: 'center',
-    gap: SPACING.lg,
-    paddingHorizontal: SPACING.sm,
+    gap: 14,
+    paddingHorizontal: 0,
   },
   // Base iOS-style button (44pt min height, 10pt radius)
   iosBtn: {
-    minHeight: 44,
-    minWidth: 120,
-    paddingHorizontal: SPACING.lg,
-    paddingVertical: 12,
-    borderRadius: 10,
+    height: 60,
+    width: '48%',
+    minWidth: 150,
+    maxWidth: 188,
+    paddingHorizontal: 14,
+    borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
   },
   // Previous: iOS secondary (gray fill)
   iosBtnSecondary: {
-    backgroundColor: '#E5E5EA',
+    borderWidth: 1,
+    borderColor: '#D7DCE3',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 1,
   },
   iosBtnSecondaryLabel: {
-    fontSize: 17,
+    fontSize: 18,
     fontFamily: FONTS.inter.regular,
     fontWeight: '600',
-    color: '#1C1C1E',
+    color: CARD_TEXT_COLOR,
+    textAlign: 'center',
+    flexShrink: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 9,
+    borderRadius: 14,
   },
   // Next: iOS primary (system blue fill)
   iosBtnPrimary: {
-    backgroundColor: '#007AFF',
+    borderWidth: 1,
+    borderColor: '#C8DBF7',
   },
   iosBtnPrimaryLabel: {
-    fontSize: 17,
+    fontSize: 18,
     fontFamily: FONTS.inter.regular,
     fontWeight: '600',
-    color: '#FFFFFF',
+    color: CARD_TEXT_COLOR,
+    textAlign: 'center',
+    flexShrink: 1,
+    paddingHorizontal: 16,
+    paddingVertical: 9,
+    borderRadius: 14,
   },
   iosBtnPressed: {
     opacity: 0.8,
