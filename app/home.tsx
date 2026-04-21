@@ -53,10 +53,11 @@ export default function Home() {
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.header}>
-            <View style={styles.headerLeft}>
+            <View style={styles.headerSide} />
+            <View style={styles.headerCenter}>
               <Text style={styles.appName}>{t('home.appName')}</Text>
             </View>
-            <View style={styles.headerRight}>
+            <View style={styles.headerSide}>
               <Pressable
                 onPress={() => router.push('/settings')}
                 style={({ pressed }) => [
@@ -67,11 +68,6 @@ export default function Home() {
                 <Ionicons name="settings-outline" size={20} color={COLORS.text.primary} />
               </Pressable>
             </View>
-          </View>
-
-          <View style={styles.sectionRow}>
-            <Text style={styles.sectionTitle}>Pick a mood</Text>
-            <Text style={styles.sectionSubtitle}>Start a conversation</Text>
           </View>
 
           <View style={styles.cardList}>
@@ -115,12 +111,19 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: SPACING.md,
   },
-  headerLeft: { flex: 1 },
-  headerRight: { justifyContent: 'center' },
+  headerSide: {
+    width: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerCenter: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   settingsButton: {
     width: 44,
     height: 44,
@@ -137,23 +140,6 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES['3xl'],
     fontFamily: FONTS.brasikaDisplay,
     color: '#055361',
-  },
-  sectionRow: {
-    marginBottom: SPACING.md,
-  },
-  sectionTitle: {
-    fontSize: FONT_SIZES.lg,
-    fontFamily: FONTS.inter.regular,
-    fontWeight: '600',
-    lineHeight: 22,
-    color: COLORS.text.primary,
-  },
-  sectionSubtitle: {
-    marginTop: 0,
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    lineHeight: 18,
-    color: COLORS.text.secondary,
   },
   cardList: {
     gap: SPACING.md,
