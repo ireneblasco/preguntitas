@@ -1,4 +1,4 @@
-// Auto-generated from Notion on 2026-04-21T05:29:01.922Z
+// Auto-generated from Notion on 2026-04-21T17:31:34.293Z
 // Do not edit manually - changes will be overwritten
 
 export type MomentType = "Break the Ice 🧊" | "Date Night 🌙" | "Deep Stuff 🧠" | "Drinks with Friends 🍸" | "Ikigai 🌸" | "Road Trip 🚗" | "With Grandparents 💌";
@@ -1536,13 +1536,12 @@ export const questions: Question[] = [
   {
     "id": "ID-281",
     "moment": [
-      "Drinks with Friends 🍸",
       "Break the Ice 🧊"
     ],
     "closenessLevel": 2,
     "text": {
       "en-US": "If you had to switch lives with one of your friends, who would you pick?",
-      "es-ES": "\n\n• Dime algo que quieres que recuerde de ti.\n\n"
+      "es-ES": "Si tuvieras que intercambiar tu vida con la de uno de tus amigos, ¿a quién elegirías?"
     }
   },
   {
@@ -1564,13 +1563,13 @@ export const questions: Question[] = [
     "closenessLevel": 1,
     "text": {
       "en-US": "If you could live anywhere for a year, where would it be?",
-      "es-ES": "Si pudieras vivir en cualquier lugar durante un año, ¿dónde irías?\n"
+      "es-ES": "Si pudieras vivir en cualquier lugar durante un año, ¿dónde irías?"
     }
   },
   {
     "id": "ID-287",
     "moment": [
-      "Break the Ice 🧊"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 1,
     "text": {

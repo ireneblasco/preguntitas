@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,7 +9,6 @@ import { useQuestions } from '../contexts/QuestionsContext';
 import { useMemo } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import { MomentCard } from '../components/MomentCard';
-import { AppLogo } from '../components/AppLogo';
 import { analytics } from '../utils/analytics';
 
 /** Short emotional/experiential label per category (no counts). Fallback for unknown categories. */
@@ -57,9 +57,12 @@ export default function Home() {
             <View style={styles.headerRight}>
               <Pressable
                 onPress={() => router.push('/settings')}
-                style={({ pressed }) => pressed && { opacity: 0.7 }}
+                style={({ pressed }) => [
+                  styles.settingsButton,
+                  pressed && styles.settingsButtonPressed,
+                ]}
               >
-                <AppLogo size={40} withCircle />
+                <Ionicons name="settings-outline" size={20} color={COLORS.text.primary} />
               </Pressable>
             </View>
           </View>
@@ -103,11 +106,25 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     marginBottom: SPACING.xl,
   },
   headerLeft: { flex: 1 },
-  headerRight: { justifyContent: 'flex-end' },
+  headerRight: { justifyContent: 'center' },
+  settingsButton: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(45, 90, 71, 0.08)',
+    borderWidth: 1,
+    borderColor: 'rgba(45, 90, 71, 0.18)',
+  },
+  settingsButtonPressed: {
+    opacity: 0.75,
+    transform: [{ scale: 0.97 }],
+  },
   appName: {
     fontSize: FONT_SIZES['3xl'],
     fontFamily: FONTS.brasikaDisplay,

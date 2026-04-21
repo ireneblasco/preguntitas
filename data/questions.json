@@ -1505,13 +1505,12 @@
     {
       "id": "ID-281",
       "moment": [
-        "Drinks with Friends 🍸",
         "Break the Ice 🧊"
       ],
       "closenessLevel": 2,
       "text": {
         "en-US": "If you had to switch lives with one of your friends, who would you pick?",
-        "es-ES": "\n\n• Dime algo que quieres que recuerde de ti.\n\n"
+        "es-ES": "Si tuvieras que intercambiar tu vida con la de uno de tus amigos, ¿a quién elegirías?"
       }
     },
     {
@@ -1533,13 +1532,13 @@
       "closenessLevel": 1,
       "text": {
         "en-US": "If you could live anywhere for a year, where would it be?",
-        "es-ES": "Si pudieras vivir en cualquier lugar durante un año, ¿dónde irías?\n"
+        "es-ES": "Si pudieras vivir en cualquier lugar durante un año, ¿dónde irías?"
       }
     },
     {
       "id": "ID-287",
       "moment": [
-        "Break the Ice 🧊"
+        "Deep Stuff 🧠"
       ],
       "closenessLevel": 1,
       "text": {
