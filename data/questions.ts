@@ -1,19 +1,20 @@
-// Auto-generated from Notion on 2026-04-16T19:24:13.872Z
+// Auto-generated from Notion on 2026-04-21T04:22:48.425Z
 // Do not edit manually - changes will be overwritten
 
-export type MomentType = "Con mi abuela 💌" | "Date Night 🌙" | "Deep Talk 🧠" | "Ikigai 🌸" | "Road Trip 🚗" | "Table Talks 🍷";
+export type MomentType = "Break the Ice 🧊" | "Date Night 🌙" | "Deep Stuff 🧠" | "Drinks with Friends 🍸" | "Ikigai 🌸" | "Road Trip 🚗" | "With Grandparents 💌";
 
 export const momentOptions: Array<{
   id: MomentType;
   name: string;
   emoji: string;
 }> = [
-  { id: "Con mi abuela 💌", name: "Con mi abuela", emoji: "💌" },
+  { id: "Break the Ice 🧊", name: "Break the Ice", emoji: "🧊" },
   { id: "Date Night 🌙", name: "Date Night", emoji: "🌙" },
-  { id: "Deep Talk 🧠", name: "Deep Talk", emoji: "🧠" },
+  { id: "Deep Stuff 🧠", name: "Deep Stuff", emoji: "🧠" },
+  { id: "Drinks with Friends 🍸", name: "Drinks with Friends", emoji: "🍸" },
   { id: "Ikigai 🌸", name: "Ikigai", emoji: "🌸" },
   { id: "Road Trip 🚗", name: "Road Trip", emoji: "🚗" },
-  { id: "Table Talks 🍷", name: "Table Talks", emoji: "🍷" }
+  { id: "With Grandparents 💌", name: "With Grandparents", emoji: "💌" }
 ];
 
 export interface QuestionText {
@@ -33,7 +34,7 @@ export const questions: Question[] = [
   {
     "id": "ID-156",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -44,7 +45,7 @@ export const questions: Question[] = [
   {
     "id": "ID-157",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -55,7 +56,7 @@ export const questions: Question[] = [
   {
     "id": "ID-120",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -67,7 +68,7 @@ export const questions: Question[] = [
   {
     "id": "ID-142",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -79,8 +80,8 @@ export const questions: Question[] = [
   {
     "id": "ID-30",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠"
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -91,7 +92,7 @@ export const questions: Question[] = [
   {
     "id": "ID-24",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -125,7 +126,7 @@ export const questions: Question[] = [
   {
     "id": "ID-7",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -136,7 +137,7 @@ export const questions: Question[] = [
   {
     "id": "ID-35",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -148,8 +149,8 @@ export const questions: Question[] = [
   {
     "id": "ID-33",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠",
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -161,7 +162,7 @@ export const questions: Question[] = [
   {
     "id": "ID-151",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 3,
@@ -173,8 +174,8 @@ export const questions: Question[] = [
   {
     "id": "ID-20",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -196,8 +197,8 @@ export const questions: Question[] = [
   {
     "id": "ID-127",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 3,
     "text": {
@@ -208,7 +209,7 @@ export const questions: Question[] = [
   {
     "id": "ID-2",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -220,7 +221,7 @@ export const questions: Question[] = [
     "id": "ID-19",
     "moment": [
       "Date Night 🌙",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -231,7 +232,7 @@ export const questions: Question[] = [
   {
     "id": "ID-159",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -242,7 +243,7 @@ export const questions: Question[] = [
   {
     "id": "ID-177",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -253,7 +254,7 @@ export const questions: Question[] = [
   {
     "id": "ID-181",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -264,7 +265,7 @@ export const questions: Question[] = [
   {
     "id": "ID-189",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -275,7 +276,7 @@ export const questions: Question[] = [
   {
     "id": "ID-190",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -286,8 +287,8 @@ export const questions: Question[] = [
   {
     "id": "ID-178",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -298,8 +299,8 @@ export const questions: Question[] = [
   {
     "id": "ID-186",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -310,7 +311,7 @@ export const questions: Question[] = [
   {
     "id": "ID-184",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -321,8 +322,8 @@ export const questions: Question[] = [
   {
     "id": "ID-191",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 3,
     "text": {
@@ -342,7 +343,7 @@ export const questions: Question[] = [
   {
     "id": "ID-165",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -353,8 +354,8 @@ export const questions: Question[] = [
   {
     "id": "ID-187",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -365,7 +366,7 @@ export const questions: Question[] = [
   {
     "id": "ID-163",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -377,8 +378,8 @@ export const questions: Question[] = [
   {
     "id": "ID-164",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -389,7 +390,7 @@ export const questions: Question[] = [
   {
     "id": "ID-172",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -400,8 +401,8 @@ export const questions: Question[] = [
   {
     "id": "ID-182",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -412,7 +413,7 @@ export const questions: Question[] = [
   {
     "id": "ID-169",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -423,7 +424,7 @@ export const questions: Question[] = [
   {
     "id": "ID-170",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -434,8 +435,8 @@ export const questions: Question[] = [
   {
     "id": "ID-183",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -455,7 +456,7 @@ export const questions: Question[] = [
   {
     "id": "ID-193",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -466,7 +467,7 @@ export const questions: Question[] = [
   {
     "id": "ID-167",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -486,8 +487,8 @@ export const questions: Question[] = [
   {
     "id": "ID-185",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -498,7 +499,7 @@ export const questions: Question[] = [
   {
     "id": "ID-179",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -509,8 +510,8 @@ export const questions: Question[] = [
   {
     "id": "ID-188",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -521,7 +522,7 @@ export const questions: Question[] = [
   {
     "id": "ID-166",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -532,7 +533,7 @@ export const questions: Question[] = [
   {
     "id": "ID-180",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -543,7 +544,7 @@ export const questions: Question[] = [
   {
     "id": "ID-168",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -554,7 +555,7 @@ export const questions: Question[] = [
   {
     "id": "ID-175",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -565,7 +566,7 @@ export const questions: Question[] = [
   {
     "id": "ID-171",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 3,
@@ -577,7 +578,7 @@ export const questions: Question[] = [
   {
     "id": "ID-173",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -588,7 +589,7 @@ export const questions: Question[] = [
   {
     "id": "ID-174",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -599,7 +600,7 @@ export const questions: Question[] = [
   {
     "id": "ID-176",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -610,7 +611,7 @@ export const questions: Question[] = [
   {
     "id": "ID-216",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 2,
     "text": {
@@ -621,7 +622,7 @@ export const questions: Question[] = [
   {
     "id": "ID-214",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 2,
     "text": {
@@ -632,7 +633,7 @@ export const questions: Question[] = [
   {
     "id": "ID-218",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
@@ -643,7 +644,7 @@ export const questions: Question[] = [
   {
     "id": "ID-217",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
@@ -654,7 +655,7 @@ export const questions: Question[] = [
   {
     "id": "ID-208",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
@@ -665,7 +666,7 @@ export const questions: Question[] = [
   {
     "id": "ID-227",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 2,
     "text": {
@@ -676,7 +677,7 @@ export const questions: Question[] = [
   {
     "id": "ID-204",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -688,7 +689,7 @@ export const questions: Question[] = [
   {
     "id": "ID-228",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
@@ -699,7 +700,7 @@ export const questions: Question[] = [
   {
     "id": "ID-207",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
@@ -710,7 +711,7 @@ export const questions: Question[] = [
   {
     "id": "ID-206",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -722,7 +723,7 @@ export const questions: Question[] = [
   {
     "id": "ID-226",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 2,
     "text": {
@@ -733,8 +734,8 @@ export const questions: Question[] = [
   {
     "id": "ID-225",
     "moment": [
-      "Con mi abuela 💌",
-      "Table Talks 🍷"
+      "With Grandparents 💌",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -745,8 +746,8 @@ export const questions: Question[] = [
   {
     "id": "ID-219",
     "moment": [
-      "Con mi abuela 💌",
-      "Table Talks 🍷"
+      "With Grandparents 💌",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -757,7 +758,7 @@ export const questions: Question[] = [
   {
     "id": "ID-201",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -769,8 +770,8 @@ export const questions: Question[] = [
   {
     "id": "ID-221",
     "moment": [
-      "Con mi abuela 💌",
-      "Deep Talk 🧠"
+      "With Grandparents 💌",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -782,7 +783,7 @@ export const questions: Question[] = [
     "id": "ID-195",
     "moment": [
       "Ikigai 🌸",
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -793,8 +794,8 @@ export const questions: Question[] = [
   {
     "id": "ID-222",
     "moment": [
-      "Con mi abuela 💌",
-      "Deep Talk 🧠"
+      "With Grandparents 💌",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -805,7 +806,7 @@ export const questions: Question[] = [
   {
     "id": "ID-199",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -839,7 +840,7 @@ export const questions: Question[] = [
   {
     "id": "ID-197",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -851,8 +852,8 @@ export const questions: Question[] = [
   {
     "id": "ID-224",
     "moment": [
-      "Con mi abuela 💌",
-      "Deep Talk 🧠"
+      "With Grandparents 💌",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -863,7 +864,7 @@ export const questions: Question[] = [
   {
     "id": "ID-198",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -875,7 +876,7 @@ export const questions: Question[] = [
   {
     "id": "ID-215",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
@@ -886,7 +887,7 @@ export const questions: Question[] = [
   {
     "id": "ID-200",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -898,7 +899,7 @@ export const questions: Question[] = [
   {
     "id": "ID-205",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -910,8 +911,8 @@ export const questions: Question[] = [
   {
     "id": "ID-220",
     "moment": [
-      "Con mi abuela 💌",
-      "Deep Talk 🧠"
+      "With Grandparents 💌",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -922,7 +923,7 @@ export const questions: Question[] = [
   {
     "id": "ID-229",
     "moment": [
-      "Con mi abuela 💌"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
@@ -933,8 +934,8 @@ export const questions: Question[] = [
   {
     "id": "ID-223",
     "moment": [
-      "Con mi abuela 💌",
-      "Deep Talk 🧠"
+      "With Grandparents 💌",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -945,7 +946,7 @@ export const questions: Question[] = [
   {
     "id": "ID-202",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 3,
@@ -957,7 +958,7 @@ export const questions: Question[] = [
   {
     "id": "ID-232",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -969,8 +970,8 @@ export const questions: Question[] = [
   {
     "id": "ID-213",
     "moment": [
-      "Con mi abuela 💌",
-      "Deep Talk 🧠"
+      "With Grandparents 💌",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -982,7 +983,7 @@ export const questions: Question[] = [
     "id": "ID-233",
     "moment": [
       "Road Trip 🚗",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1004,7 +1005,7 @@ export const questions: Question[] = [
   {
     "id": "ID-266",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 1,
@@ -1016,8 +1017,8 @@ export const questions: Question[] = [
   {
     "id": "ID-263",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠"
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1028,7 +1029,7 @@ export const questions: Question[] = [
   {
     "id": "ID-239",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1039,7 +1040,7 @@ export const questions: Question[] = [
   {
     "id": "ID-253",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
@@ -1051,7 +1052,7 @@ export const questions: Question[] = [
   {
     "id": "ID-258",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -1063,7 +1064,7 @@ export const questions: Question[] = [
   {
     "id": "ID-265",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 1,
@@ -1075,7 +1076,7 @@ export const questions: Question[] = [
   {
     "id": "ID-257",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1086,7 +1087,7 @@ export const questions: Question[] = [
   {
     "id": "ID-241",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1097,7 +1098,7 @@ export const questions: Question[] = [
   {
     "id": "ID-237",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1108,7 +1109,7 @@ export const questions: Question[] = [
   {
     "id": "ID-236",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Date Night 🌙"
     ],
     "closenessLevel": 3,
@@ -1120,7 +1121,7 @@ export const questions: Question[] = [
   {
     "id": "ID-269",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1131,7 +1132,7 @@ export const questions: Question[] = [
   {
     "id": "ID-271",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Date Night 🌙",
       "Road Trip 🚗"
     ],
@@ -1144,7 +1145,7 @@ export const questions: Question[] = [
   {
     "id": "ID-261",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1155,7 +1156,7 @@ export const questions: Question[] = [
   {
     "id": "ID-250",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1166,7 +1167,7 @@ export const questions: Question[] = [
   {
     "id": "ID-238",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1177,7 +1178,7 @@ export const questions: Question[] = [
   {
     "id": "ID-246",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1188,7 +1189,7 @@ export const questions: Question[] = [
   {
     "id": "ID-244",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1199,7 +1200,7 @@ export const questions: Question[] = [
   {
     "id": "ID-259",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -1211,7 +1212,7 @@ export const questions: Question[] = [
   {
     "id": "ID-245",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1222,7 +1223,7 @@ export const questions: Question[] = [
   {
     "id": "ID-254",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -1234,7 +1235,7 @@ export const questions: Question[] = [
   {
     "id": "ID-270",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -1246,7 +1247,7 @@ export const questions: Question[] = [
   {
     "id": "ID-252",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1257,7 +1258,7 @@ export const questions: Question[] = [
   {
     "id": "ID-256",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1268,7 +1269,7 @@ export const questions: Question[] = [
   {
     "id": "ID-249",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1279,7 +1280,7 @@ export const questions: Question[] = [
   {
     "id": "ID-248",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1290,7 +1291,7 @@ export const questions: Question[] = [
   {
     "id": "ID-243",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1301,7 +1302,7 @@ export const questions: Question[] = [
   {
     "id": "ID-242",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1312,7 +1313,7 @@ export const questions: Question[] = [
   {
     "id": "ID-260",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -1324,7 +1325,7 @@ export const questions: Question[] = [
   {
     "id": "ID-267",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 1,
@@ -1336,7 +1337,7 @@ export const questions: Question[] = [
   {
     "id": "ID-255",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 3,
@@ -1348,8 +1349,8 @@ export const questions: Question[] = [
   {
     "id": "ID-251",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1360,8 +1361,8 @@ export const questions: Question[] = [
   {
     "id": "ID-262",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠"
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1372,7 +1373,7 @@ export const questions: Question[] = [
   {
     "id": "ID-247",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1383,7 +1384,7 @@ export const questions: Question[] = [
   {
     "id": "ID-268",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 1,
@@ -1396,7 +1397,7 @@ export const questions: Question[] = [
     "id": "ID-235",
     "moment": [
       "Ikigai 🌸",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1407,7 +1408,7 @@ export const questions: Question[] = [
   {
     "id": "ID-240",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1418,7 +1419,7 @@ export const questions: Question[] = [
   {
     "id": "ID-264",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -1430,8 +1431,8 @@ export const questions: Question[] = [
   {
     "id": "ID-272",
     "moment": [
-      "Con mi abuela 💌",
-      "Deep Talk 🧠"
+      "With Grandparents 💌",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1442,7 +1443,7 @@ export const questions: Question[] = [
   {
     "id": "ID-276",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1454,7 +1455,7 @@ export const questions: Question[] = [
     "id": "ID-273",
     "moment": [
       "Road Trip 🚗",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1465,7 +1466,7 @@ export const questions: Question[] = [
   {
     "id": "ID-277",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1476,7 +1477,7 @@ export const questions: Question[] = [
   {
     "id": "ID-278",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1487,8 +1488,8 @@ export const questions: Question[] = [
   {
     "id": "ID-274",
     "moment": [
-      "Con mi abuela 💌",
-      "Table Talks 🍷",
+      "With Grandparents 💌",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 3,
@@ -1500,9 +1501,9 @@ export const questions: Question[] = [
   {
     "id": "ID-280",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗",
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1513,7 +1514,7 @@ export const questions: Question[] = [
   {
     "id": "ID-275",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1524,7 +1525,7 @@ export const questions: Question[] = [
   {
     "id": "ID-279",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1533,9 +1534,153 @@ export const questions: Question[] = [
     }
   },
   {
+    "id": "ID-281",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you had to switch lives with one of your friends, who would you pick?",
+      "es-ES": "\n\n• Dime algo que quieres que recuerde de ti.\n\n"
+    }
+  },
+  {
+    "id": "ID-292",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Window or aisle?",
+      "es-ES": "¿Ventana o pasillo?"
+    }
+  },
+  {
+    "id": "ID-285",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you could live anywhere for a year, where would it be?",
+      "es-ES": "Si pudieras vivir en cualquier lugar durante un año, ¿dónde irías?\n"
+    }
+  },
+  {
+    "id": "ID-287",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s something small that makes your day better?",
+      "es-ES": "¿Qué pequeño detalle o cosa te alegra el día?"
+    }
+  },
+  {
+    "id": "ID-283",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What’s something you pretend to understand but don’t?",
+      "es-ES": "¿Qué es algo que haces como que entiendes, pero no tienes ni idea?"
+    }
+  },
+  {
+    "id": "ID-284",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What household task are you embarrassed to admit you don’t know how to do?",
+      "es-ES": "¿Qué tarea del hogar te da vergüenza admitir que no sabes hacer?"
+    }
+  },
+  {
+    "id": "ID-293",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s your go-to late-night snack?",
+      "es-ES": "¿Qué te pides de comer al volver de fiesta?"
+    }
+  },
+  {
+    "id": "ID-290",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s a small win you’ve had recently?",
+      "es-ES": "¿Cuál es un pequeño logro que has hecho hace poco?"
+    }
+  },
+  {
+    "id": "ID-294",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you were gay, who would your crush be?",
+      "es-ES": "Si fueras gay, ¿quién sería tu crush?"
+    }
+  },
+  {
+    "id": "ID-288",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s something you’ve always wanted to try but haven’t yet?",
+      "es-ES": "¿Qué es algo que siempre has querido probar pero aún no has hecho?"
+    }
+  },
+  {
+    "id": "ID-289",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s something people assume about you that isn’t true?",
+      "es-ES": "¿Qué es algo que la gente asume sobre ti y no es cierto?"
+    }
+  },
+  {
+    "id": "ID-291",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Always late or always early?",
+      "es-ES": "¿Llegar siempre tarde o siempre pronto?"
+    }
+  },
+  {
+    "id": "ID-286",
+    "moment": [
+      "Break the Ice 🧊"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you could instantly master something, what would it be?",
+      "es-ES": "Si pudieras ser un maestro en cualquier cosa, ¿qué sería?"
+    }
+  },
+  {
     "id": "ID-123",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -1547,8 +1692,8 @@ export const questions: Question[] = [
   {
     "id": "ID-121",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠"
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1559,7 +1704,7 @@ export const questions: Question[] = [
   {
     "id": "ID-126",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1570,7 +1715,7 @@ export const questions: Question[] = [
   {
     "id": "ID-22",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1592,7 +1737,7 @@ export const questions: Question[] = [
   {
     "id": "ID-129",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1603,7 +1748,7 @@ export const questions: Question[] = [
   {
     "id": "ID-119",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1625,7 +1770,7 @@ export const questions: Question[] = [
   {
     "id": "ID-147",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1636,7 +1781,7 @@ export const questions: Question[] = [
   {
     "id": "ID-9",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 1,
@@ -1659,7 +1804,7 @@ export const questions: Question[] = [
   {
     "id": "ID-23",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -1682,7 +1827,7 @@ export const questions: Question[] = [
   {
     "id": "ID-17",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 3,
@@ -1705,7 +1850,7 @@ export const questions: Question[] = [
   {
     "id": "ID-155",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1716,7 +1861,7 @@ export const questions: Question[] = [
   {
     "id": "ID-143",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1727,7 +1872,7 @@ export const questions: Question[] = [
   {
     "id": "ID-122",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -1739,7 +1884,7 @@ export const questions: Question[] = [
   {
     "id": "ID-139",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1750,7 +1895,7 @@ export const questions: Question[] = [
   {
     "id": "ID-34",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗",
       "Date Night 🌙"
     ],
@@ -1775,7 +1920,7 @@ export const questions: Question[] = [
   {
     "id": "ID-135",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -1787,7 +1932,7 @@ export const questions: Question[] = [
   {
     "id": "ID-154",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1798,8 +1943,8 @@ export const questions: Question[] = [
   {
     "id": "ID-137",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠",
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -1811,7 +1956,7 @@ export const questions: Question[] = [
   {
     "id": "ID-31",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1823,7 +1968,7 @@ export const questions: Question[] = [
     "id": "ID-29",
     "moment": [
       "Date Night 🌙",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1834,7 +1979,7 @@ export const questions: Question[] = [
   {
     "id": "ID-12",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1845,8 +1990,8 @@ export const questions: Question[] = [
   {
     "id": "ID-115",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠"
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1857,7 +2002,7 @@ export const questions: Question[] = [
   {
     "id": "ID-113",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1868,7 +2013,7 @@ export const questions: Question[] = [
   {
     "id": "ID-149",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1879,7 +2024,7 @@ export const questions: Question[] = [
   {
     "id": "ID-131",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 3,
@@ -1891,7 +2036,7 @@ export const questions: Question[] = [
   {
     "id": "ID-134",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1902,7 +2047,7 @@ export const questions: Question[] = [
   {
     "id": "ID-10",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Date Night 🌙"
     ],
     "closenessLevel": 1,
@@ -1914,7 +2059,7 @@ export const questions: Question[] = [
   {
     "id": "ID-138",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1925,7 +2070,7 @@ export const questions: Question[] = [
   {
     "id": "ID-13",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -1937,8 +2082,8 @@ export const questions: Question[] = [
   {
     "id": "ID-111",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1949,7 +2094,7 @@ export const questions: Question[] = [
   {
     "id": "ID-4",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 1,
@@ -1961,8 +2106,8 @@ export const questions: Question[] = [
   {
     "id": "ID-145",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠"
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1973,7 +2118,7 @@ export const questions: Question[] = [
   {
     "id": "ID-112",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1984,7 +2129,7 @@ export const questions: Question[] = [
   {
     "id": "ID-26",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1995,7 +2140,7 @@ export const questions: Question[] = [
   {
     "id": "ID-133",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 2,
     "text": {
@@ -2040,7 +2185,7 @@ export const questions: Question[] = [
   {
     "id": "ID-125",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -2051,7 +2196,7 @@ export const questions: Question[] = [
   {
     "id": "ID-11",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -2063,7 +2208,7 @@ export const questions: Question[] = [
   {
     "id": "ID-141",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -2076,8 +2221,8 @@ export const questions: Question[] = [
     "id": "ID-3",
     "moment": [
       "Date Night 🌙",
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -2088,8 +2233,8 @@ export const questions: Question[] = [
   {
     "id": "ID-5",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -2101,7 +2246,7 @@ export const questions: Question[] = [
     "id": "ID-28",
     "moment": [
       "Road Trip 🚗",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -2112,7 +2257,7 @@ export const questions: Question[] = [
   {
     "id": "ID-124",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 3,
@@ -2124,7 +2269,7 @@ export const questions: Question[] = [
   {
     "id": "ID-146",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -2135,8 +2280,8 @@ export const questions: Question[] = [
   {
     "id": "ID-132",
     "moment": [
-      "Deep Talk 🧠",
-      "Table Talks 🍷"
+      "Deep Stuff 🧠",
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -2159,7 +2304,7 @@ export const questions: Question[] = [
     "id": "ID-158",
     "moment": [
       "Road Trip 🚗",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -2170,7 +2315,7 @@ export const questions: Question[] = [
   {
     "id": "ID-27",
     "moment": [
-      "Deep Talk 🧠",
+      "Deep Stuff 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 3,
@@ -2182,7 +2327,7 @@ export const questions: Question[] = [
   {
     "id": "ID-144",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -2194,8 +2339,8 @@ export const questions: Question[] = [
     "id": "ID-148",
     "moment": [
       "Date Night 🌙",
-      "Table Talks 🍷",
-      "Deep Talk 🧠"
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 1,
     "text": {
@@ -2206,7 +2351,7 @@ export const questions: Question[] = [
   {
     "id": "ID-130",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
@@ -2217,7 +2362,7 @@ export const questions: Question[] = [
   {
     "id": "ID-136",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗"
     ],
     "closenessLevel": 2,
@@ -2229,7 +2374,7 @@ export const questions: Question[] = [
   {
     "id": "ID-150",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -2241,7 +2386,7 @@ export const questions: Question[] = [
     "id": "ID-6",
     "moment": [
       "Road Trip 🚗",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -2252,7 +2397,7 @@ export const questions: Question[] = [
   {
     "id": "ID-128",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -2264,7 +2409,7 @@ export const questions: Question[] = [
     "id": "ID-109",
     "moment": [
       "Road Trip 🚗",
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 1,
     "text": {
@@ -2275,7 +2420,7 @@ export const questions: Question[] = [
   {
     "id": "ID-153",
     "moment": [
-      "Deep Talk 🧠"
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -2286,7 +2431,7 @@ export const questions: Question[] = [
   {
     "id": "ID-118",
     "moment": [
-      "Table Talks 🍷",
+      "Drinks with Friends 🍸",
       "Road Trip 🚗",
       "Date Night 🌙"
     ],
@@ -2299,8 +2444,8 @@ export const questions: Question[] = [
   {
     "id": "ID-117",
     "moment": [
-      "Table Talks 🍷",
-      "Deep Talk 🧠"
+      "Drinks with Friends 🍸",
+      "Deep Stuff 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -2311,7 +2456,7 @@ export const questions: Question[] = [
   {
     "id": "ID-21",
     "moment": [
-      "Table Talks 🍷"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {

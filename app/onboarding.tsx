@@ -112,7 +112,7 @@ export default function Onboarding() {
 
   return (
     <LinearGradient
-      colors={[COLORS.background.white, COLORS.background.primary]}
+      colors={[COLORS.background.white, '#FAFAFA']}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
