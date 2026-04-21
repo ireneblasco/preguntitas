@@ -133,21 +133,23 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: FONT_SIZES['3xl'],
     fontFamily: FONTS.brasikaDisplay,
-    color: COLORS.text.primary,
+    color: '#055361',
   },
   sectionRow: {
-    marginBottom: SPACING.lg,
+    marginBottom: SPACING.md,
   },
   sectionTitle: {
-    fontSize: FONT_SIZES.xl,
-    fontFamily: FONTS.inter.bold,
+    fontSize: FONT_SIZES.lg,
+    fontFamily: FONTS.inter.regular,
     fontWeight: '600',
+    lineHeight: 22,
     color: COLORS.text.primary,
   },
   sectionSubtitle: {
-    marginTop: 2,
-    fontSize: FONT_SIZES.base,
+    marginTop: 0,
+    fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
+    lineHeight: 18,
     color: COLORS.text.secondary,
   },
   cardList: {

@@ -29,6 +29,7 @@ import {
   CARD_THEMES,
   sortMomentOptions,
   getCategoryDisplayName,
+  getThemeForMomentId,
 } from '../constants';
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
@@ -54,13 +55,6 @@ const ONBOARDING_MOMENT_PREVIEW_IDS = [
 
 const HERO_PREVIEW_COUNT = 4;
 const HERO_AUTO_ADVANCE_MS = 4200;
-
-const ONBOARDING_MOMENT_MOOD_CONTRASTS = [
-  { bg: '#EA4F12', graphic: '#FAD0DC' },
-  { bg: '#4A8D97', graphic: '#BCE7E3' },
-  { bg: '#D8899F', graphic: '#651528' },
-  { bg: '#EDE6DB', graphic: '#5A6341' },
-] as const;
 
 type OnboardingScreen = { headline: string; subtext: string; cta?: string };
 
@@ -215,13 +209,11 @@ function PaginationDot({ index, currentIndex }: { index: number; currentIndex: n
 function MoodBoardHeroVisual({ questions }: { questions: string[] }) {
   const scrollRef = useRef<ScrollView>(null);
   const activeRef = useRef(0);
-  const [activeHero, setActiveHero] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
       const next = (activeRef.current + 1) % HERO_PREVIEW_COUNT;
       activeRef.current = next;
-      setActiveHero(next);
       scrollRef.current?.scrollTo({ x: next * SCREEN_WIDTH, animated: true });
     }, HERO_AUTO_ADVANCE_MS);
     return () => clearInterval(id);
@@ -232,7 +224,6 @@ function MoodBoardHeroVisual({ questions }: { questions: string[] }) {
     const i = Math.round(x / SCREEN_WIDTH);
     if (i >= 0 && i < HERO_PREVIEW_COUNT) {
       activeRef.current = i;
-      setActiveHero(i);
     }
   }, []);
 
@@ -271,14 +262,6 @@ function MoodBoardHeroVisual({ questions }: { questions: string[] }) {
           );
         })}
       </ScrollView>
-      <View style={styles.heroCarouselDots}>
-        {[0, 1, 2, 3].map((i) => (
-          <View
-            key={i}
-            style={[styles.heroCarouselDot, i === activeHero && styles.heroCarouselDotActive]}
-          />
-        ))}
-      </View>
     </View>
   );
 }
@@ -321,7 +304,7 @@ function MomentsOnboardingVisual() {
   return (
     <View style={[styles.momentBentoGrid, { width: cellW * 2 + gridGap, gap: gridGap }]}>
       {previewMoments.map((option, index) => {
-        const contrast = ONBOARDING_MOMENT_MOOD_CONTRASTS[index] ?? ONBOARDING_MOMENT_MOOD_CONTRASTS[0];
+        const theme = getThemeForMomentId(option.id, momentOptions);
         const label = getCategoryDisplayName(option) || option.name;
         return (
           <View
@@ -330,13 +313,13 @@ function MomentsOnboardingVisual() {
               styles.momentBentoCell,
               {
                 width: cellW,
-                backgroundColor: contrast.bg,
-                shadowColor: contrast.bg,
+                backgroundColor: theme.bg,
+                shadowColor: theme.bg,
               },
             ]}
           >
             <Text style={styles.momentBentoEmoji}>{option.emoji}</Text>
-            <Text style={[styles.momentBentoLabel, { color: contrast.graphic }]} numberOfLines={2}>
+            <Text style={[styles.momentBentoLabel, { color: theme.text }]} numberOfLines={2}>
               {label}
             </Text>
           </View>
@@ -516,24 +499,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.lg,
     justifyContent: 'center',
     minHeight: 300,
-  },
-  heroCarouselDots: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
-    marginTop: SPACING.md,
-    paddingBottom: SPACING.xs,
-  },
-  heroCarouselDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: COLORS.border.light,
-  },
-  heroCarouselDotActive: {
-    width: 22,
-    backgroundColor: PAGINATION_ACTIVE_COLOR,
   },
   heroQuestionCard: {
     width: '100%',

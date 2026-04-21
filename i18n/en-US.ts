@@ -8,9 +8,9 @@ export const enUS = {
     next: 'Next',
     screens: [
       {
-        headline: 'Let the conversation flow.',
+        headline: 'Questions that spark real conversations.',
         subtext:
-          'If a question catches your interest, feel free to dive deeper and explore.',
+          'Let the conversation flow, and if a question clicks, dive deeper and see where it takes you.',
         tileQuestions: [
           'What made you smile lately?',
           'Where do you feel most like yourself?',
@@ -20,8 +20,7 @@ export const enUS = {
       },
       {
         headline: 'Pick the moment.',
-        subtext:
-          'On the home screen, choose a moment — each category groups questions for that kind of time together.',
+        subtext: 'Each category groups questions for that kind of time together.',
       },
       {
         headline: 'Each card shows how deep it goes.',
