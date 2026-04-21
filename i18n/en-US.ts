@@ -25,8 +25,7 @@ export const enUS = {
       },
       {
         headline: 'Each card shows how deep it goes.',
-        subtext:
-          'Icebreaker for light fun, Personal for getting closer, and Vulnerable for the real stuff.',
+        subtext: 'Tap the level to filter, or leave it as Random.',
       },
       {
         headline: 'No more boring conversations.',

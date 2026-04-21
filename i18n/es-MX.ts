@@ -24,8 +24,7 @@ export const esMX = {
       },
       {
         headline: 'Cada tarjeta muestra el nivel de confianza.',
-        subtext:
-          'Icebreaker para algo ligero, Personal para conectar más y Vulnerable para lo que de verdad importa.',
+        subtext: 'Toca el level para filtrar o dejalo en Random.',
       },
       {
         headline: 'No más conversaciones aburridas.',
