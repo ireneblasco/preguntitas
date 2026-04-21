@@ -64,13 +64,6 @@ export function MomentCard({
             <Text style={[styles.categoryTitle, { color: visualTheme.title }]} numberOfLines={1}>
               {option.name}
             </Text>
-            {badgeLabel ? (
-              <View style={styles.badge}>
-                <Text style={styles.badgeText} numberOfLines={1}>
-                  {badgeLabel}
-                </Text>
-              </View>
-            ) : null}
           </View>
           <Text style={[styles.cardSubtitle, { color: visualTheme.subtitle }]} numberOfLines={1}>
             {subtitleLabel}
@@ -80,6 +73,13 @@ export function MomentCard({
           <Text style={[styles.arrowIcon, { color: visualTheme.arrow }]}>→</Text>
         </View>
       </View>
+      {badgeLabel ? (
+        <View style={styles.badgeCorner}>
+          <Text style={styles.badgeText} numberOfLines={1}>
+            {badgeLabel}
+          </Text>
+        </View>
+      ) : null}
     </Pressable>
   );
 }
@@ -131,7 +131,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flexShrink: 1,
   },
-  badge: {
+  badgeCorner: {
+    position: 'absolute',
+    top: 10,
+    right: 12,
     backgroundColor: '#FFE58F',
     borderRadius: 999,
     paddingHorizontal: 8,

@@ -79,6 +79,9 @@ export default function Home() {
               const displayName = getCategoryDisplayName(option) || option.name;
               const isNewCategory =
                 NEW_CATEGORY_MATCHER.test(option.id) || NEW_CATEGORY_MATCHER.test(option.name);
+              const subtitleLabel = isNewCategory
+                ? 'Fun · Light'
+                : MOMENT_LABELS[option.id] ?? MOMENT_LABELS[option.name] ?? DEFAULT_MOMENT_LABEL;
               const emoji = BREAK_THE_ICE_MATCHER.test(option.id) || BREAK_THE_ICE_MATCHER.test(option.name)
                 ? '🧊'
                 : option.emoji;
@@ -88,7 +91,7 @@ export default function Home() {
                   key={option.id}
                   option={{ ...option, name: displayName, emoji }}
                   index={index}
-                  subtitleLabel={MOMENT_LABELS[option.id] ?? MOMENT_LABELS[option.name] ?? DEFAULT_MOMENT_LABEL}
+                  subtitleLabel={subtitleLabel}
                   badgeLabel={isNewCategory ? 'NEW' : undefined}
                   onStart={() => handleStart(option.id)}
                 />
