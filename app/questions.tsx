@@ -401,7 +401,7 @@ export default function Questions() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#F2F2F7',
+    backgroundColor: '#FFFFFF',
   },
   container: {
     flex: 1,

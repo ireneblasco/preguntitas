@@ -93,7 +93,7 @@ export default function Settings() {
 
   return (
     <LinearGradient
-      colors={[COLORS.background.white, COLORS.background.primary]}
+      colors={[COLORS.background.white, COLORS.background.white]}
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
