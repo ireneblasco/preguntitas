@@ -11,9 +11,9 @@ export const CARD_THEMES: readonly CategoryTheme[] = [
   { bg: '#2D584F', text: '#E0FF5A' },   // Deep Talk — Verde bosque + lima (Values/Beliefs)
   { bg: '#FCE29A', text: '#F08051' },   // Road Trip — Melocotón + naranja-rojo (Emotions)
   { bg: '#94D8C8', text: '#37706A' },   // Table Talk — Teal claro + teal oscuro (Stories)
-  { bg: '#7A1F3B', text: '#EFC9D6' },   // Date Night — Burdeos + rosa claro (Stories)
-  { bg: '#EAC1CC', text: '#6B2A2D' },   // Ikigai
-  { bg: '#E0FF5A', text: '#2D584F' },   // Grandparents — mismos que Deep Talk, invertidos (lima + verde bosque)
+  { bg: '#EAC1CC', text: '#6B2A2D' },   // Date Night (colores antes en On the Road)
+  { bg: '#E0FF5A', text: '#2D584F' },   // On the Road (colores antes en Ikigai)
+  { bg: '#7A1F3B', text: '#EFC9D6' },   // Ikigai (colores antes en Date Night)
 ] as const;
 
 /**

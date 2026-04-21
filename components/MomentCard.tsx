@@ -8,11 +8,20 @@ const ARROW_ICON_SIZE = 36;
 const CARD_HEIGHT = 98;
 
 const HOME_CARD_STYLES = [
-  { cardBg: '#F1F5F3', title: '#244D45', subtitle: '#5D6D66', emblemBg: '#2D584F', emblemText: '#D9ED82', arrow: '#2D584F' },
+  // Break the Ice
+  { cardBg: '#EAF6FF', title: '#0F5F7A', subtitle: '#4F7484', emblemBg: '#0B7E9E', emblemText: '#D6F6FF', arrow: '#0F5F7A' },
+  // Drinks with Friends
   { cardBg: '#FBF4E8', title: '#D7773D', subtitle: '#7F7060', emblemBg: '#FCE29A', emblemText: '#F08051', arrow: '#D7773D' },
+  // Go Deep
   { cardBg: '#E3F0EF', title: '#316D65', subtitle: '#5C726E', emblemBg: '#A2DBD0', emblemText: '#3E7C74', arrow: '#316D65' },
-  { cardBg: '#F0E7ED', title: '#7A1F3B', subtitle: '#75606D', emblemBg: '#7A1F3B', emblemText: '#EFC9D6', arrow: '#7A1F3B' },
+  // Date Night (ahora con colores de On the Road)
   { cardBg: '#F6E9F0', title: '#8E3B66', subtitle: '#7D6675', emblemBg: '#E9BFD0', emblemText: '#B74B7B', arrow: '#8E3B66' },
+  // On the Road (ahora con colores de Ikigai)
+  { cardBg: '#ECF5D6', title: '#2D584F', subtitle: '#63705A', emblemBg: '#EEF7B8', emblemText: '#2D584F', arrow: '#2D584F' },
+  // Ikigai (ahora con colores de Date Night)
+  { cardBg: '#F0E7ED', title: '#7A1F3B', subtitle: '#75606D', emblemBg: '#7A1F3B', emblemText: '#EFC9D6', arrow: '#7A1F3B' },
+  // Grandparents
+  { cardBg: '#F7EFE6', title: '#6A4A3B', subtitle: '#8A7164', emblemBg: '#F3D8BC', emblemText: '#6A4A3B', arrow: '#6A4A3B' },
 ] as const;
 
 type MomentCardProps = {
