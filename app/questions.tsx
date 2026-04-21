@@ -334,17 +334,6 @@ export default function Questions() {
                     color={isFavorite(currentQuestionId) ? CARD_TEXT_COLOR : '#6D7B89'}
                   />
                 </Pressable>
-                <View style={styles.questionPager}>
-                  {[0, 1, 2].map((dotIndex) => (
-                    <View
-                      key={dotIndex}
-                      style={[
-                        styles.questionPagerDot,
-                        questionIndex % 3 === dotIndex && styles.questionPagerDotActive,
-                      ]}
-                    />
-                  ))}
-                </View>
                 <Text style={styles.cardBrandMark}>m</Text>
               </View>
             </Animated.View>
@@ -536,24 +525,6 @@ const styles = StyleSheet.create({
     top: SPACING.md,
     right: SPACING.md,
     padding: SPACING.sm,
-  },
-  questionPager: {
-    position: 'absolute',
-    bottom: SPACING.lg,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 10,
-  },
-  questionPagerDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: '#C7D3E0',
-  },
-  questionPagerDotActive: {
-    backgroundColor: CARD_TEXT_COLOR,
   },
   cardBrandMark: {
     position: 'absolute',
