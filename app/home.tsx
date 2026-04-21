@@ -27,6 +27,8 @@ const MOMENT_LABELS: Record<string, string> = {
   'Break the Ice 🧊': 'Light · Easy',
 };
 const DEFAULT_MOMENT_LABEL = 'Meaningful';
+const NEW_CATEGORY_MATCHER = /who is most likely to/i;
+const BREAK_THE_ICE_MATCHER = /break the ice/i;
 
 export default function Home() {
   const router = useRouter();
@@ -74,12 +76,20 @@ export default function Home() {
 
           <View style={styles.cardList}>
             {orderedOptions.map((option, index) => {
+              const displayName = getCategoryDisplayName(option) || option.name;
+              const isNewCategory =
+                NEW_CATEGORY_MATCHER.test(option.id) || NEW_CATEGORY_MATCHER.test(option.name);
+              const emoji = BREAK_THE_ICE_MATCHER.test(option.id) || BREAK_THE_ICE_MATCHER.test(option.name)
+                ? '🧊'
+                : option.emoji;
+
               return (
                 <MomentCard
                   key={option.id}
-                  option={{ ...option, name: getCategoryDisplayName(option) || option.name }}
+                  option={{ ...option, name: displayName, emoji }}
                   index={index}
                   subtitleLabel={MOMENT_LABELS[option.id] ?? MOMENT_LABELS[option.name] ?? DEFAULT_MOMENT_LABEL}
+                  badgeLabel={isNewCategory ? 'NEW' : undefined}
                   onStart={() => handleStart(option.id)}
                 />
               );

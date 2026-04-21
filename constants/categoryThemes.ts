@@ -32,8 +32,26 @@ const CARD_ORDER_ID_GROUPS = [
 
 export function sortMomentOptions<T extends { id: string; name: string }>(options: T[]): T[] {
   const ordered: T[] = [];
+
+  const findInGroup = (group: readonly string[]) =>
+    options.find((o) => {
+      if (group.includes(o.id)) return true;
+      const normalizedId = o.id.toLowerCase();
+      const normalizedName = o.name.toLowerCase();
+      return group.some((candidate) => {
+        const normalizedCandidate = candidate.toLowerCase();
+        const normalizedCandidateNoEmoji = normalizedCandidate.replace(/[^\w\s]/g, '').trim();
+        return (
+          normalizedId === normalizedCandidate ||
+          normalizedName === normalizedCandidate ||
+          normalizedId.includes(normalizedCandidateNoEmoji) ||
+          normalizedName.includes(normalizedCandidateNoEmoji)
+        );
+      });
+    });
+
   for (const group of CARD_ORDER_ID_GROUPS) {
-    const option = options.find((o) => group.includes(o.id as (typeof group)[number]));
+    const option = findInGroup(group);
     if (option && !ordered.includes(option)) ordered.push(option);
   }
   const rest = options.filter((o) => !ordered.includes(o));

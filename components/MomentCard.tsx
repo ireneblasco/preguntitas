@@ -4,8 +4,8 @@ import { useTranslation } from '../hooks/useTranslation';
 
 export type MomentOption = { id: string; name: string; emoji: string };
 
-const ARROW_ICON_SIZE = 42;
-const CARD_HEIGHT = 116;
+const ARROW_ICON_SIZE = 36;
+const CARD_HEIGHT = 98;
 
 const HOME_CARD_STYLES = [
   { cardBg: '#F1F5F3', title: '#244D45', subtitle: '#5D6D66', emblemBg: '#2D584F', emblemText: '#D9ED82', arrow: '#2D584F' },
@@ -19,6 +19,7 @@ type MomentCardProps = {
   option: MomentOption;
   index: number;
   subtitleLabel: string;
+  badgeLabel?: string;
   onStart: () => void;
 };
 
@@ -26,6 +27,7 @@ export function MomentCard({
   option,
   index,
   subtitleLabel,
+  badgeLabel,
   onStart,
 }: MomentCardProps) {
   const { t } = useTranslation();
@@ -49,9 +51,18 @@ export function MomentCard({
           <Text style={[styles.emblemText, { color: visualTheme.emblemText }]}>{option.emoji || '✨'}</Text>
         </View>
         <View style={styles.textWrap}>
-          <Text style={[styles.categoryTitle, { color: visualTheme.title }]} numberOfLines={1}>
-            {option.name}
-          </Text>
+          <View style={styles.titleRow}>
+            <Text style={[styles.categoryTitle, { color: visualTheme.title }]} numberOfLines={1}>
+              {option.name}
+            </Text>
+            {badgeLabel ? (
+              <View style={styles.badge}>
+                <Text style={styles.badgeText} numberOfLines={1}>
+                  {badgeLabel}
+                </Text>
+              </View>
+            ) : null}
+          </View>
           <Text style={[styles.cardSubtitle, { color: visualTheme.subtitle }]} numberOfLines={1}>
             {subtitleLabel}
           </Text>
@@ -68,8 +79,8 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     borderRadius: BORDER_RADIUS['2xl'],
-    paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.md,
+    paddingVertical: SPACING.sm,
     justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 6 },
@@ -83,33 +94,53 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   emblemWrap: {
-    width: 72,
-    height: 72,
-    borderRadius: 20,
+    width: 56,
+    height: 56,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: SPACING.md,
   },
   emblemText: {
-    fontSize: 36,
-    lineHeight: 40,
+    fontSize: 28,
+    lineHeight: 32,
   },
   textWrap: {
     flex: 1,
     justifyContent: 'center',
   },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
   categoryTitle: {
-    fontSize: 34 / 2,
-    lineHeight: 24,
+    fontSize: FONT_SIZES.base,
+    lineHeight: 22,
     fontFamily: FONTS.inter.bold,
     fontWeight: '600',
     textAlign: 'left',
+    flexShrink: 1,
+  },
+  badge: {
+    backgroundColor: '#FFE58F',
+    borderRadius: 999,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+  },
+  badgeText: {
+    fontSize: 10,
+    lineHeight: 12,
+    fontFamily: FONTS.inter.bold,
+    fontWeight: '700',
+    color: '#8A5A00',
+    letterSpacing: 0.3,
   },
   cardSubtitle: {
-    marginTop: 4,
-    fontSize: FONT_SIZES.base,
+    marginTop: 2,
+    fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
-    lineHeight: 22,
+    lineHeight: 18,
     textAlign: 'left',
   },
   arrowButton: {
@@ -117,12 +148,12 @@ const styles = StyleSheet.create({
     height: ARROW_ICON_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 21,
+    borderRadius: 18,
     backgroundColor: '#FFFFFF',
     marginLeft: SPACING.sm,
   },
   arrowIcon: {
-    fontSize: 22,
-    lineHeight: 22,
+    fontSize: 18,
+    lineHeight: 18,
   },
 });
