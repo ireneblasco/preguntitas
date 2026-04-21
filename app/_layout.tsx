@@ -34,6 +34,7 @@ export default function RootLayout() {
           screenOptions={{
             headerShown: false,
             animation: 'slide_from_right',
+            contentStyle: { backgroundColor: '#FFFFFF' },
           }}
         >
           <Stack.Screen name="index" />
@@ -52,6 +53,6 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background.white,
+    backgroundColor: '#FFFFFF',
   },
 });

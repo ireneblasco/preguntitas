@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { useEffect } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'expo-router';
 import Animated, {
   useSharedValue,
@@ -9,16 +9,26 @@ import Animated, {
   withDelay,
   Easing,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES } from '../constants';
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
-import { AppLogo } from '../components/AppLogo';
 import { analytics } from '../utils/analytics';
 
 export default function Index() {
   const router = useRouter();
   const { t } = useTranslation();
+  const splashIcons = useMemo(
+    () => [
+      require('../assets/adaptive-icon.png'),
+      require('../assets/favicon.png'),
+      require('../assets/splash-icon.png'),
+      require('../assets/app-logo.png'),
+    ],
+    []
+  );
+  const finalIcon = require('../assets/icon.png');
+  const [currentIconIndex, setCurrentIconIndex] = useState(0);
+  const [showFinalIcon, setShowFinalIcon] = useState(false);
 
   const containerOpacity = useSharedValue(1);
   const containerScale = useSharedValue(1);
@@ -37,6 +47,16 @@ export default function Index() {
     textOpacity.value = withDelay(600, withTiming(1, { duration: 600, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }));
     textScale.value = withDelay(600, withSpring(1, { damping: 14, stiffness: 100 }));
     textY.value = withDelay(600, withTiming(0, { duration: 600, easing: Easing.bezier(0.25, 0.1, 0.25, 1) }));
+
+    const iconInterval = setInterval(() => {
+      setCurrentIconIndex((previous) => (previous + 1) % splashIcons.length);
+    }, 160);
+
+    const showFinalIconTimer = setTimeout(() => {
+      setShowFinalIcon(true);
+      clearInterval(iconInterval);
+      logoScale.value = withSpring(1.05, { damping: 12, stiffness: 140 });
+    }, 1100);
 
     const timer = setTimeout(() => {
       logoOpacity.value = withTiming(0, { duration: 400 });
@@ -57,10 +77,14 @@ export default function Index() {
           router.replace('/onboarding');
         }
       }, 720);
-    }, 2200);
+    }, 2400);
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => {
+      clearInterval(iconInterval);
+      clearTimeout(showFinalIconTimer);
+      clearTimeout(timer);
+    };
+  }, [splashIcons.length]);
 
   const containerStyle = useAnimatedStyle(() => ({
     opacity: containerOpacity.value,
@@ -82,17 +106,18 @@ export default function Index() {
 
   return (
     <Animated.View style={[styles.container, containerStyle]}>
-      <LinearGradient
-        colors={[COLORS.background.white, COLORS.background.primary]}
-        style={styles.gradient}
-      >
+      <View style={styles.gradient}>
         <Animated.View style={[styles.logoWrap, logoStyle]}>
-          <AppLogo size={56} withCircle />
+          <Image
+            source={showFinalIcon ? finalIcon : splashIcons[currentIconIndex]}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
         </Animated.View>
         <Animated.Text style={[styles.title, textStyle]}>
           {t('app.title')}
         </Animated.Text>
-      </LinearGradient>
+      </View>
     </Animated.View>
   );
 }
@@ -100,14 +125,24 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
   gradient: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
   },
   logoWrap: {
     marginBottom: 24,
+    width: 96,
+    height: 96,
+    borderRadius: 24,
+    overflow: 'hidden',
+  },
+  logoImage: {
+    width: '100%',
+    height: '100%',
   },
   title: {
     fontSize: FONT_SIZES['4xl'],
