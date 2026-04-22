@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from '../hooks/useTranslation';
 import { SPACING } from '../constants';
 
-const IOS_LINK = '#007AFF';
+const IOS_LINK = '#3A3A3C';
 const IOS_TAB_INACTIVE = '#8E8E93';
 
 /** Altura fija de la fila de iconos (sin safe area inferior). */
