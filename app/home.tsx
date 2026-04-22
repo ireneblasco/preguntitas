@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    backgroundColor: COLORS.brand.forest,
+    backgroundColor: '#2F5D62',
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: BORDER_RADIUS.full,
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
   seeAll: {
     fontSize: FONT_SIZES.sm,
     fontWeight: '600',
-    color: HOME_LINK,
+    color: HOME_LABEL,
   },
   cardList: {
     gap: SPACING.md,
@@ -433,7 +433,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    backgroundColor: COLORS.brand.forest,
+    backgroundColor: '#2F5D62',
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: BORDER_RADIUS.full,
