@@ -191,12 +191,16 @@ export default function Home() {
             >
               <Text style={styles.premiumMark}>m</Text>
               <View style={styles.premiumCopy}>
-                <Text style={styles.premiumTitle}>{t('home.premiumTitle')}</Text>
-                <Text style={styles.premiumSubtitle}>{t('home.premiumSubtitle')}</Text>
+                <Text style={styles.premiumTitle} numberOfLines={2}>
+                  {t('home.premiumTitle')}
+                </Text>
+                <Text style={styles.premiumSubtitle} numberOfLines={1}>
+                  {t('home.premiumSubtitle')}
+                </Text>
               </View>
               <View style={styles.premiumCta}>
                 <Text style={styles.premiumCtaText}>{t('home.goPremium')}</Text>
-                <Ionicons name="arrow-forward" size={16} color={IOS_LINK} />
+                <Ionicons name="arrow-forward" size={14} color="#FFFFFF" />
               </View>
             </ImageBackground>
           </Pressable>
@@ -347,7 +351,7 @@ const styles = StyleSheet.create({
   premiumInner: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: SPACING.lg,
+    paddingVertical: SPACING.md,
     paddingHorizontal: SPACING.md,
     gap: SPACING.md,
     overflow: 'hidden',
@@ -360,49 +364,43 @@ const styles = StyleSheet.create({
   },
   premiumMark: {
     fontFamily: FONTS.brasikaDisplay,
-    fontSize: 36,
-    color: '#FFFFFF',
+    fontSize: 44,
+    color: '#FF5A24',
     width: 44,
     textAlign: 'center',
-    textShadowColor: 'rgba(0, 0, 0, 0.35)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 5,
   },
   premiumCopy: {
     flex: 1,
+    minWidth: 0,
+    gap: 2,
   },
   premiumTitle: {
-    color: '#FFFFFF',
-    fontSize: FONT_SIZES.base,
+    color: '#17171A',
+    fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.bold,
     fontWeight: '700',
-    textShadowColor: 'rgba(0, 0, 0, 0.35)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 5,
   },
   premiumSubtitle: {
-    color: 'rgba(255, 255, 255, 0.92)',
-    fontSize: FONT_SIZES.sm,
-    marginTop: 4,
+    color: 'rgba(23, 23, 26, 0.78)',
+    fontSize: FONT_SIZES.xs,
     fontFamily: FONTS.inter.regular,
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 4,
+    lineHeight: 16,
   },
   premiumCta: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     gap: 6,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#0B1D43',
     paddingVertical: 10,
-    paddingHorizontal: 14,
+    paddingHorizontal: 12,
     borderRadius: BORDER_RADIUS.full,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(60, 60, 67, 0.12)',
+    alignSelf: 'center',
+    flexShrink: 0,
   },
   premiumCtaText: {
-    color: IOS_LINK,
-    fontSize: FONT_SIZES.sm,
+    color: '#FFFFFF',
+    fontSize: FONT_SIZES.xs,
     fontWeight: '700',
     fontFamily: FONTS.inter.bold,
   },
