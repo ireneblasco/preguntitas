@@ -7,21 +7,21 @@ export type MomentOption = { id: string; name: string; emoji: string };
 const ARROW_ICON_SIZE = 36;
 const CARD_HEIGHT = 98;
 
+/** Neutro estilo iOS (systemGray6 + chevron de lista). */
+const IOS_GROUPED_FILL = '#F2F2F7';
+const IOS_LIST_CHEVRON = '#C7C7CC';
+
+/** Etiqueta NEW: visible y acorde al radio de la tarjeta en la esquina. */
+const NEW_BADGE_BG = '#E8456B';
+
 const HOME_CARD_STYLES = [
-  // Break the Ice
-  { cardBg: '#EAF6FF', title: '#0F5F7A', subtitle: '#4F7484', emblemBg: '#0B7E9E', emblemText: '#D6F6FF', arrow: '#0F5F7A' },
-  // Drinks with Friends
-  { cardBg: '#FBF4E8', title: '#D7773D', subtitle: '#7F7060', emblemBg: '#FCE29A', emblemText: '#F08051', arrow: '#D7773D' },
-  // Go Deep
-  { cardBg: '#E3F0EF', title: '#316D65', subtitle: '#5C726E', emblemBg: '#A2DBD0', emblemText: '#3E7C74', arrow: '#316D65' },
-  // Date Night (ahora con colores de On the Road)
-  { cardBg: '#F6E9F0', title: '#8E3B66', subtitle: '#7D6675', emblemBg: '#E9BFD0', emblemText: '#B74B7B', arrow: '#8E3B66' },
-  // On the Road (ahora con colores de Ikigai)
-  { cardBg: '#ECF5D6', title: '#2D584F', subtitle: '#63705A', emblemBg: '#EEF7B8', emblemText: '#2D584F', arrow: '#2D584F' },
-  // Ikigai (ahora con colores de Date Night)
-  { cardBg: '#F0E7ED', title: '#7A1F3B', subtitle: '#75606D', emblemBg: '#7A1F3B', emblemText: '#EFC9D6', arrow: '#7A1F3B' },
-  // Grandparents
-  { cardBg: '#F7EFE6', title: '#6A4A3B', subtitle: '#8A7164', emblemBg: '#F3D8BC', emblemText: '#6A4A3B', arrow: '#6A4A3B' },
+  {
+    cardBg: '#FFFFFF',
+    title: '#1C1C1E',
+    subtitle: 'rgba(60, 60, 67, 0.6)',
+    emblemBg: IOS_GROUPED_FILL,
+    emblemText: '#1C1C1E',
+  },
 ] as const;
 
 type MomentCardProps = {
@@ -30,6 +30,12 @@ type MomentCardProps = {
   subtitleLabel: string;
   badgeLabel?: string;
   onStart: () => void;
+  /** Optional icon tile colors (e.g. category theme on Explore home). */
+  emblemBg?: string;
+  emblemFg?: string;
+  titleColor?: string;
+  subtitleColor?: string;
+  arrowCircleBg?: string;
 };
 
 export function MomentCard({
@@ -38,9 +44,19 @@ export function MomentCard({
   subtitleLabel,
   badgeLabel,
   onStart,
+  emblemBg,
+  emblemFg,
+  titleColor,
+  subtitleColor,
+  arrowCircleBg,
 }: MomentCardProps) {
   const { t } = useTranslation();
   const visualTheme = HOME_CARD_STYLES[index % HOME_CARD_STYLES.length];
+  const resolvedEmblemBg = emblemBg ?? visualTheme.emblemBg;
+  const resolvedEmblemFg = emblemFg ?? visualTheme.emblemText;
+  const resolvedTitle = titleColor ?? visualTheme.title;
+  const resolvedSubtitle = subtitleColor ?? visualTheme.subtitle;
+  const resolvedArrowBg = arrowCircleBg ?? '#F8F8FA';
   return (
     <Pressable
       style={[
@@ -56,21 +72,27 @@ export function MomentCard({
       accessibilityHint={t('home.start')}
     >
       <View style={styles.cardContent}>
-        <View style={[styles.emblemWrap, { backgroundColor: visualTheme.emblemBg }]}>
-          <Text style={[styles.emblemText, { color: visualTheme.emblemText }]}>{option.emoji || '✨'}</Text>
+        <View
+          style={[
+            styles.emblemWrap,
+            { backgroundColor: resolvedEmblemBg },
+            emblemBg != null && styles.emblemWrapThemed,
+          ]}
+        >
+          <Text style={[styles.emblemText, { color: resolvedEmblemFg }]}>{option.emoji || '✨'}</Text>
         </View>
         <View style={styles.textWrap}>
           <View style={styles.titleRow}>
-            <Text style={[styles.categoryTitle, { color: visualTheme.title }]} numberOfLines={1}>
+            <Text style={[styles.categoryTitle, { color: resolvedTitle }]} numberOfLines={1}>
               {option.name}
             </Text>
           </View>
-          <Text style={[styles.cardSubtitle, { color: visualTheme.subtitle }]} numberOfLines={1}>
+          <Text style={[styles.cardSubtitle, { color: resolvedSubtitle }]} numberOfLines={1}>
             {subtitleLabel}
           </Text>
         </View>
-        <View style={styles.arrowButton}>
-          <Text style={[styles.arrowIcon, { color: visualTheme.arrow }]}>→</Text>
+        <View style={[styles.arrowButton, { backgroundColor: resolvedArrowBg }]}>
+          <Text style={[styles.arrowIcon, { color: IOS_LIST_CHEVRON }]}>→</Text>
         </View>
       </View>
       {badgeLabel ? (
@@ -91,10 +113,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.sm,
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#ECECF0',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.04,
+    shadowRadius: 8,
     elevation: 2,
   },
   cardContent: {
@@ -105,10 +129,15 @@ const styles = StyleSheet.create({
   emblemWrap: {
     width: 56,
     height: 56,
-    borderRadius: 16,
+    borderRadius: 12,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(60, 60, 67, 0.12)',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: SPACING.md,
+  },
+  emblemWrapThemed: {
+    borderWidth: 0,
   },
   emblemText: {
     fontSize: 28,
@@ -133,20 +162,29 @@ const styles = StyleSheet.create({
   },
   badgeCorner: {
     position: 'absolute',
-    top: 10,
-    right: 12,
-    backgroundColor: '#FFE58F',
-    borderRadius: 999,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
+    top: 0,
+    right: 0,
+    backgroundColor: NEW_BADGE_BG,
+    borderTopRightRadius: BORDER_RADIUS['2xl'],
+    borderBottomLeftRadius: BORDER_RADIUS.xl,
+    paddingTop: 6,
+    paddingRight: 10,
+    paddingBottom: 6,
+    paddingLeft: 12,
+    shadowColor: NEW_BADGE_BG,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
+    elevation: 6,
   },
   badgeText: {
-    fontSize: 10,
-    lineHeight: 12,
+    fontSize: 11,
+    lineHeight: 13,
     fontFamily: FONTS.inter.bold,
-    fontWeight: '700',
-    color: '#8A5A00',
-    letterSpacing: 0.3,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    letterSpacing: 1.1,
+    textTransform: 'uppercase',
   },
   cardSubtitle: {
     marginTop: 2,
@@ -161,11 +199,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: IOS_GROUPED_FILL,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(60, 60, 67, 0.12)',
     marginLeft: SPACING.sm,
   },
   arrowIcon: {
     fontSize: 18,
     lineHeight: 18,
+    fontWeight: '700',
   },
 });

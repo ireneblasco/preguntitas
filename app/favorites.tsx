@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import { useMemo } from 'react';
-import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName } from '../constants';
@@ -9,9 +8,10 @@ import { useQuestions, type Question } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
 import { useTranslation } from '../hooks/useTranslation';
+import { MainTabBar, mainTabBarBottomInset } from '../components/MainTabBar';
 
 export default function Favorites() {
-  const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const { questions, momentOptions, questionTextByLocale } = useQuestions();
   const { favorites, removeFavorite } = useFavorites();
@@ -57,19 +57,20 @@ export default function Favorites() {
     );
   };
 
+  const tabInset = mainTabBarBottomInset(insets.bottom);
+
   return (
-    <LinearGradient
-      colors={[COLORS.background.white, COLORS.background.white]}
-      style={styles.gradient}
-    >
-      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
-        <View style={styles.header}>
-          <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
-            <Text style={styles.backLabel}>‹</Text>
-          </Pressable>
-          <Text style={styles.headerTitle}>{t('favorites.title')}</Text>
-          <View style={styles.headerRight} />
-        </View>
+    <View style={styles.root}>
+      <LinearGradient
+        colors={[COLORS.background.white, COLORS.background.white]}
+        style={styles.gradient}
+      >
+        <SafeAreaView style={styles.container} edges={['top']}>
+          <View style={styles.header}>
+            <View style={styles.headerSide} />
+            <Text style={styles.headerTitle}>{t('favorites.title')}</Text>
+            <View style={styles.headerSide} />
+          </View>
 
         <View style={styles.sectionRow}>
           <Text style={styles.sectionTitle}>{t('favorites.savedQuestions')}</Text>
@@ -79,26 +80,30 @@ export default function Favorites() {
         </View>
 
         {favoriteQuestions.length === 0 ? (
-          <View style={styles.emptyWrap}>
+          <View style={[styles.emptyWrap, { paddingBottom: tabInset }]}>
             <Text style={styles.emptyText}>
               {t('favorites.emptyHint')}
             </Text>
           </View>
         ) : (
           <FlatList
+            style={styles.listFlex}
             data={favoriteQuestions}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
-            contentContainerStyle={styles.listContent}
+            contentContainerStyle={[styles.listContent, { paddingBottom: tabInset + SPACING.lg }]}
             showsVerticalScrollIndicator={false}
           />
         )}
-      </SafeAreaView>
-    </LinearGradient>
+        </SafeAreaView>
+      </LinearGradient>
+      <MainTabBar />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  root: { flex: 1, backgroundColor: '#FFFFFF' },
   gradient: { flex: 1 },
   container: { flex: 1 },
   header: {
@@ -110,17 +115,7 @@ const styles = StyleSheet.create({
     paddingBottom: SPACING.md,
     minHeight: 44,
   },
-  backBtn: {
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backLabel: {
-    fontSize: 32,
-    fontWeight: '300',
-    color: '#007AFF',
-  },
+  headerSide: { width: 44, height: 44 },
   headerTitle: {
     flex: 1,
     fontSize: FONT_SIZES.base,
@@ -128,7 +123,6 @@ const styles = StyleSheet.create({
     color: COLORS.text.primary,
     textAlign: 'center',
   },
-  headerRight: { width: 44 },
   sectionRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -146,9 +140,9 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.inter.regular,
     color: COLORS.text.secondary,
   },
+  listFlex: { flex: 1 },
   listContent: {
     paddingHorizontal: SPACING.lg,
-    paddingBottom: SPACING['2xl'],
     gap: SPACING.md,
   },
   card: {

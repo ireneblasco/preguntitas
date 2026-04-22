@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Modal, Alert, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
 import { useLocale } from '../contexts/LocaleContext';
@@ -14,6 +14,7 @@ import {
   type Locale,
 } from '../i18n';
 import * as onboardingUtils from '../utils/onboarding';
+import { MainTabBar, mainTabBarBottomInset } from '../components/MainTabBar';
 
 function formatLastFetched(iso: string | null, t: (key: string) => string): string {
   if (!iso) return t('dev.usingBundled');
@@ -28,6 +29,7 @@ function formatLastFetched(iso: string | null, t: (key: string) => string): stri
 
 export default function Settings() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const { locale, setLocale } = useLocale();
   const { lastFetchedAt, refetch } = useQuestions();
@@ -91,28 +93,29 @@ export default function Settings() {
     }
   };
 
-  return (
-    <LinearGradient
-      colors={[COLORS.background.white, COLORS.background.white]}
-      style={styles.gradient}
-    >
-      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
-        <View style={styles.header}>
-          <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
-            <Text style={styles.backLabel}>‹</Text>
-          </Pressable>
-          <Text style={styles.headerTitle}>{t('settings.title')}</Text>
-          <View style={styles.headerRight} />
-        </View>
+  const tabInset = mainTabBarBottomInset(insets.bottom);
 
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-        >
+  return (
+    <View style={styles.root}>
+      <LinearGradient
+        colors={[COLORS.background.white, COLORS.background.white]}
+        style={styles.gradient}
+      >
+        <SafeAreaView style={styles.container} edges={['top']}>
+          <View style={styles.header}>
+            <View style={styles.headerSide} />
+            <Text style={styles.headerTitle}>{t('settings.title')}</Text>
+            <View style={styles.headerSide} />
+          </View>
+
+          <ScrollView
+            contentContainerStyle={[styles.scrollContent, { paddingBottom: tabInset + SPACING.lg }]}
+            showsVerticalScrollIndicator={false}
+          >
           <View style={styles.section}>
             <Pressable
               style={styles.dropdownTrigger}
-              onPress={() => router.push('/favorites')}
+              onPress={() => router.replace('/favorites')}
             >
               <Text style={styles.dropdownTriggerText}>{t('favorites.savedQuestions')}</Text>
               <Text style={styles.dropdownChevron}>›</Text>
@@ -182,13 +185,16 @@ export default function Settings() {
               </Pressable>
             </View>
           )}
-        </ScrollView>
-      </SafeAreaView>
-    </LinearGradient>
+          </ScrollView>
+        </SafeAreaView>
+      </LinearGradient>
+      <MainTabBar />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  root: { flex: 1, backgroundColor: '#FFFFFF' },
   gradient: { flex: 1 },
   container: { flex: 1 },
   header: {
@@ -200,17 +206,7 @@ const styles = StyleSheet.create({
     paddingBottom: SPACING.md,
     minHeight: 44,
   },
-  backBtn: {
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backLabel: {
-    fontSize: 32,
-    fontWeight: '300',
-    color: '#007AFF',
-  },
+  headerSide: { width: 44, height: 44 },
   headerTitle: {
     flex: 1,
     fontSize: FONT_SIZES.base,
@@ -218,7 +214,6 @@ const styles = StyleSheet.create({
     color: COLORS.text.primary,
     textAlign: 'center',
   },
-  headerRight: { width: 44 },
   scrollContent: {
     paddingHorizontal: SPACING.lg,
     paddingTop: SPACING.xl,
