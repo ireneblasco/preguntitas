@@ -113,16 +113,6 @@ export default function Settings() {
             showsVerticalScrollIndicator={false}
           >
           <View style={styles.section}>
-            <Pressable
-              style={styles.dropdownTrigger}
-              onPress={() => router.replace('/favorites')}
-            >
-              <Text style={styles.dropdownTriggerText}>{t('favorites.savedQuestions')}</Text>
-              <Text style={styles.dropdownChevron}>›</Text>
-            </Pressable>
-          </View>
-
-          <View style={styles.section}>
             <Text style={styles.sectionLabel}>{t('settings.language')}</Text>
             <Pressable
               style={styles.dropdownTrigger}
