@@ -43,6 +43,7 @@ const CLOSENESS_FILTER_LABELS: Record<ClosenessFilter, string> = {
 };
 const CLOSENESS_FILTER_OPTIONS: ClosenessFilter[] = ['all', 1, 2, 3];
 const LEVEL_DROPDOWN_TEXT_COLOR = '#1C1C1E';
+const WHO_IS_MOST_LIKELY_TO_MATCHER = /who is most likely to/i;
 
 function getClosenessLabel(level?: ClosenessLevel): string {
   if (level === 1 || level === 2 || level === 3) return CLOSENESS_LABELS[level];
@@ -92,6 +93,10 @@ export default function Questions() {
     ? (getCategoryDisplayName(momentOption) || momentOption?.name || moment)
     : '';
   const momentTitleColor = '#1C1C1E';
+  const isWhoIsMostLikelyTo =
+    !!moment &&
+    (WHO_IS_MOST_LIKELY_TO_MATCHER.test(moment) ||
+      WHO_IS_MOST_LIKELY_TO_MATCHER.test(momentOption?.name ?? ''));
   const momentTheme = moment
     ? getThemeForMomentId(moment, momentOptions)
     : getThemeForMomentId(momentOptions[0]?.id ?? '', momentOptions);
@@ -101,6 +106,7 @@ export default function Questions() {
   const [currentQuestionId, setCurrentQuestionId] = useState<string>('');
   const [selectedCloseness, setSelectedCloseness] = useState<ClosenessFilter>('all');
   const [isClosenessMenuOpen, setIsClosenessMenuOpen] = useState(false);
+  const effectiveCloseness = isWhoIsMostLikelyTo ? 'all' : selectedCloseness;
 
   const translateX = useSharedValue(0);
 
@@ -108,10 +114,10 @@ export default function Questions() {
     if (!moment) return [];
     return questions.filter((q) => {
       if (!q.moment.includes(moment)) return false;
-      if (selectedCloseness === 'all') return true;
-      return q.closenessLevel === selectedCloseness;
+      if (effectiveCloseness === 'all') return true;
+      return q.closenessLevel === effectiveCloseness;
     });
-  }, [questions, moment, selectedCloseness]);
+  }, [questions, moment, effectiveCloseness]);
 
   const shuffledQuestions = useMemo(() => {
     if (filteredQuestions.length === 0 || !moment) return [];
@@ -268,50 +274,52 @@ export default function Questions() {
                   entering={FadeIn.duration(260)}
                   exiting={FadeOut.duration(200)}
                 >
-                  <View style={styles.categoryPillWrap}>
-                    <Pressable
-                      style={styles.categoryPill}
-                      onPress={() => setIsClosenessMenuOpen((prev) => !prev)}
-                    >
-                      <Text style={styles.categoryPillText}>
-                        {selectedCloseness === 'all'
-                          ? currentQuestion
-                          ? getClosenessLabel(currentQuestion.closenessLevel)
-                          : getClosenessLabel(1)
-                          : CLOSENESS_FILTER_LABELS[selectedCloseness]}
-                      </Text>
-                      <Text style={styles.categoryPillArrow}>
-                        {isClosenessMenuOpen ? '▲' : '▼'}
-                      </Text>
-                    </Pressable>
-                    {isClosenessMenuOpen && (
-                      <View style={styles.closenessMenu}>
-                        {CLOSENESS_FILTER_OPTIONS.map((option) => {
-                          const isActive = selectedCloseness === option;
-                          return (
-                            <Pressable
-                              key={String(option)}
-                              style={[
-                                styles.closenessMenuOption,
-                                isActive && styles.closenessMenuOptionActive,
-                              ]}
-                              onPress={() => handleSelectCloseness(option)}
-                            >
-                              <Text
+                  {!isWhoIsMostLikelyTo && (
+                    <View style={styles.categoryPillWrap}>
+                      <Pressable
+                        style={styles.categoryPill}
+                        onPress={() => setIsClosenessMenuOpen((prev) => !prev)}
+                      >
+                        <Text style={styles.categoryPillText}>
+                          {selectedCloseness === 'all'
+                            ? currentQuestion
+                            ? getClosenessLabel(currentQuestion.closenessLevel)
+                            : getClosenessLabel(1)
+                            : CLOSENESS_FILTER_LABELS[selectedCloseness]}
+                        </Text>
+                        <Text style={styles.categoryPillArrow}>
+                          {isClosenessMenuOpen ? '▲' : '▼'}
+                        </Text>
+                      </Pressable>
+                      {isClosenessMenuOpen && (
+                        <View style={styles.closenessMenu}>
+                          {CLOSENESS_FILTER_OPTIONS.map((option) => {
+                            const isActive = selectedCloseness === option;
+                            return (
+                              <Pressable
+                                key={String(option)}
                                 style={[
-                                  styles.closenessMenuText,
-                                  { color: CARD_TEXT_COLOR },
-                                  isActive && styles.closenessMenuTextActive,
+                                  styles.closenessMenuOption,
+                                  isActive && styles.closenessMenuOptionActive,
                                 ]}
+                                onPress={() => handleSelectCloseness(option)}
                               >
-                                {CLOSENESS_FILTER_LABELS[option]}
-                              </Text>
-                            </Pressable>
-                          );
-                        })}
-                      </View>
-                    )}
-                  </View>
+                                <Text
+                                  style={[
+                                    styles.closenessMenuText,
+                                    { color: CARD_TEXT_COLOR },
+                                    isActive && styles.closenessMenuTextActive,
+                                  ]}
+                                >
+                                  {CLOSENESS_FILTER_LABELS[option]}
+                                </Text>
+                              </Pressable>
+                            );
+                          })}
+                        </View>
+                      )}
+                    </View>
+                  )}
                   <View style={styles.questionBlock}>
                     <Text
                       style={[

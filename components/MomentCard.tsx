@@ -9,7 +9,7 @@ const CARD_HEIGHT = 98;
 
 /** Neutro estilo iOS (systemGray6 + chevron de lista). */
 const IOS_GROUPED_FILL = '#F2F2F7';
-const IOS_LIST_CHEVRON = '#C7C7CC';
+const IOS_LIST_CHEVRON = '#2C2C2E';
 
 /** Etiqueta NEW: visible y acorde al radio de la tarjeta en la esquina. */
 const NEW_BADGE_BG = '#E8456B';
@@ -205,8 +205,8 @@ const styles = StyleSheet.create({
     marginLeft: SPACING.sm,
   },
   arrowIcon: {
-    fontSize: 18,
-    lineHeight: 18,
-    fontWeight: '700',
+    fontSize: 19,
+    lineHeight: 19,
+    fontWeight: '800',
   },
 });

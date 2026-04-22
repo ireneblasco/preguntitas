@@ -33,7 +33,7 @@ import { analytics } from '../utils/analytics';
 const HOME_LABEL = COLORS.text.primary;
 const HOME_SECONDARY_LABEL = COLORS.text.secondary;
 const HOME_LINK = COLORS.ui.link;
-const HOME_FILL_QUATERNARY = 'rgba(36, 61, 51, 0.08)';
+const HOME_FILL_QUATERNARY = 'rgba(36, 61, 51, 0.14)';
 const ARROW_SLOT = 36;
 
 /** Short emotional/experiential label per category (no counts). Fallback for unknown categories. */
