@@ -14,18 +14,26 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMemo, useRef, useCallback } from 'react';
-import { FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, sortMomentOptions, getCategoryDisplayName } from '../constants';
+import {
+  COLORS,
+  FONTS,
+  FONT_SIZES,
+  SPACING,
+  BORDER_RADIUS,
+  sortMomentOptions,
+  getCategoryDisplayName,
+} from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { MomentCard } from '../components/MomentCard';
 import { MainTabBar, mainTabBarBottomInset } from '../components/MainTabBar';
 import { analytics } from '../utils/analytics';
 
-/** Colores de texto / tinte estilo iOS (modo claro). */
-const IOS_LABEL = '#1C1C1E';
-const IOS_SECONDARY_LABEL = 'rgba(60, 60, 67, 0.6)';
-const IOS_LINK = '#007AFF';
-const IOS_FILL_QUATERNARY = 'rgba(116, 116, 128, 0.08)';
+/** Tokens de marca para mantener Home alineado con onboarding. */
+const HOME_LABEL = COLORS.text.primary;
+const HOME_SECONDARY_LABEL = COLORS.text.secondary;
+const HOME_LINK = COLORS.ui.link;
+const HOME_FILL_QUATERNARY = 'rgba(36, 61, 51, 0.08)';
 const ARROW_SLOT = 36;
 
 /** Short emotional/experiential label per category (no counts). Fallback for unknown categories. */
@@ -109,10 +117,8 @@ export default function Home() {
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.topBar}>
-            <Text style={styles.wordmark}>{t('home.appName')}</Text>
+              <Text style={styles.wordmark}>{t('home.appName')}</Text>
           </View>
-
-          <Text style={styles.sectionHeading}>{t('home.entrySectionTitle')}</Text>
           <Pressable
             style={({ pressed }) => [
               styles.breakIceOuter,
@@ -133,13 +139,16 @@ export default function Home() {
               resizeMode="cover"
             >
               <LinearGradient
-                colors={['rgba(255, 188, 128, 0.58)', 'rgba(255, 138, 76, 0.50)']}
+                colors={['rgba(244, 196, 168, 0.82)', 'rgba(242, 153, 93, 0.72)']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.breakIceScrim}
               >
                 <View style={styles.breakIceRow}>
                   <View style={styles.breakIceCopy}>
+                    <View style={styles.breakIceBadge}>
+                      <Text style={styles.breakIceBadgeText}>Brand Pick</Text>
+                    </View>
                     <Text style={styles.breakIceTitle}>{t('home.surpriseMe')}</Text>
                     <Text style={styles.breakIceDesc} numberOfLines={3}>
                       {t('home.surpriseMeDesc')}
@@ -178,9 +187,9 @@ export default function Home() {
                   subtitleLabel={subtitleLabel}
                   badgeLabel={isNewCategory ? 'NEW' : undefined}
                   onStart={() => handleStart(option.id)}
-                  titleColor={IOS_LABEL}
-                  subtitleColor={IOS_SECONDARY_LABEL}
-                  arrowCircleBg={IOS_FILL_QUATERNARY}
+                  titleColor={HOME_LABEL}
+                  subtitleColor={HOME_SECONDARY_LABEL}
+                  arrowCircleBg={HOME_FILL_QUATERNARY}
                 />
               );
             })}
@@ -230,7 +239,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background.primary,
   },
   safeTop: {
     flex: 1,
@@ -248,7 +257,7 @@ const styles = StyleSheet.create({
   wordmark: {
     fontFamily: FONTS.brasikaDisplay,
     fontSize: FONT_SIZES['2xl'],
-    color: IOS_LABEL,
+    color: HOME_LABEL,
     textAlign: 'center',
   },
   pressed: {
@@ -260,7 +269,7 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS['2xl'],
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: 'rgba(28, 28, 30, 0.08)',
+    borderColor: COLORS.border.light,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.08,
@@ -300,11 +309,27 @@ const styles = StyleSheet.create({
     paddingRight: SPACING.sm,
     paddingLeft: SPACING.xs,
   },
+  breakIceBadge: {
+    alignSelf: 'flex-start',
+    marginBottom: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: BORDER_RADIUS.full,
+    backgroundColor: 'rgba(255, 255, 255, 0.55)',
+  },
+  breakIceBadgeText: {
+    fontSize: 10,
+    fontFamily: FONTS.inter.bold,
+    color: HOME_LABEL,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase',
+    fontWeight: '700',
+  },
   breakIceTitle: {
     fontSize: FONT_SIZES.base,
     fontFamily: FONTS.inter.bold,
     fontWeight: '600',
-    color: IOS_LABEL,
+    color: HOME_LABEL,
     lineHeight: 22,
     marginBottom: 4,
   },
@@ -312,14 +337,14 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
     lineHeight: 18,
-    color: IOS_SECONDARY_LABEL,
+    color: HOME_SECONDARY_LABEL,
   },
   breakIceCta: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    backgroundColor: '#0B1D43',
+    backgroundColor: COLORS.brand.forest,
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: BORDER_RADIUS.full,
@@ -331,18 +356,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontFamily: FONTS.inter.bold,
   },
-  sectionHeading: {
-    fontSize: FONT_SIZES.lg,
-    fontFamily: FONTS.inter.bold,
-    fontWeight: '700',
-    color: IOS_LABEL,
-    marginBottom: SPACING.md,
-  },
   sectionHeadingFlat: {
     fontSize: FONT_SIZES.lg,
     fontFamily: FONTS.inter.bold,
     fontWeight: '700',
-    color: IOS_LABEL,
+    color: HOME_LABEL,
   },
   browseHeader: {
     flexDirection: 'row',
@@ -354,7 +372,7 @@ const styles = StyleSheet.create({
   seeAll: {
     fontSize: FONT_SIZES.sm,
     fontWeight: '600',
-    color: IOS_LINK,
+    color: HOME_LINK,
   },
   cardList: {
     gap: SPACING.md,
@@ -364,6 +382,8 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS['2xl'],
     overflow: 'hidden',
     marginBottom: SPACING.md,
+    borderWidth: 1,
+    borderColor: COLORS.border.light,
   },
   premiumInner: {
     flexDirection: 'row',
@@ -397,13 +417,13 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   premiumTitle: {
-    color: '#17171A',
+    color: HOME_LABEL,
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.bold,
     fontWeight: '700',
   },
   premiumSubtitle: {
-    color: 'rgba(23, 23, 26, 0.78)',
+    color: HOME_SECONDARY_LABEL,
     fontSize: FONT_SIZES.xs,
     fontFamily: FONTS.inter.regular,
     lineHeight: 16,
@@ -413,7 +433,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    backgroundColor: '#0B1D43',
+    backgroundColor: COLORS.brand.forest,
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: BORDER_RADIUS.full,
