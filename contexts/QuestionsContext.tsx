@@ -3,7 +3,6 @@ import Constants from 'expo-constants';
 import {
   questions as bundledQuestions,
   momentOptions as bundledMomentOptions,
-  questionTextByLocale as bundledQuestionTextByLocale,
 } from '../data/questions';
 import { getCachedQuestions, setCachedQuestions } from '../utils/questionsCache';
 import { fetchQuestionsFromNotion, type FetchedQuestion } from '../utils/notionQuestions';
@@ -28,6 +27,15 @@ type QuestionsContextValue = {
 };
 
 const QuestionsContext = createContext<QuestionsContextValue | null>(null);
+
+const bundledQuestionTextByLocale: Record<string, Record<string, string>> = {
+  'en-US': Object.fromEntries(
+    bundledQuestions.map((q) => [q.id, q.text?.['en-US'] ?? q.text?.['es-ES'] ?? ''])
+  ),
+  'es-ES': Object.fromEntries(
+    bundledQuestions.map((q) => [q.id, q.text?.['es-ES'] ?? q.text?.['en-US'] ?? ''])
+  ),
+};
 
 export function QuestionsProvider({ children }: { children: React.ReactNode }) {
   const [questions, setQuestions] = useState<Question[]>(bundledQuestions);
