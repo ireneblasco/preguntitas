@@ -6,11 +6,8 @@ import {
   Dimensions,
   FlatList,
   ViewToken,
-  ScrollView,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
 } from 'react-native';
-import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import { useState, useRef, useCallback, useMemo } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
@@ -34,16 +31,9 @@ import {
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
 import { useQuestions, type MomentOption } from '../contexts/QuestionsContext';
+import { useLocale } from '../contexts/LocaleContext';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-
-/** Mismos rótulos de nivel que en la pantalla de preguntas (pill superior). */
-const HERO_PREVIEW_CLOSENESS_PILLS = [
-  'Level 1 Icebreaker',
-  'Level 2 Personal',
-  'Level 3 Vulnerable',
-  'Level 1 Icebreaker',
-] as const;
 
 /** Vista previa en onboarding (orden fijo; datos reales desde Notion / caché). */
 const ONBOARDING_MOMENT_PREVIEW_IDS = [
@@ -53,8 +43,9 @@ const ONBOARDING_MOMENT_PREVIEW_IDS = [
   'With Grandparents 💌',
 ] as const;
 
-const HERO_PREVIEW_COUNT = 4;
-const HERO_AUTO_ADVANCE_MS = 4200;
+const HERO_PREVIEW_POOL_SIZE = 8;
+const HERO_STACK_CARD_COUNT = 4;
+const HERO_FORCED_QUESTION = 'If you had to switch lives with one of your friends, who would you pick?';
 
 type OnboardingScreen = { headline: string; subtext: string; cta?: string };
 
@@ -74,9 +65,26 @@ function useOnboardingScreens(): OnboardingScreen[] {
 
 export default function Onboarding() {
   const router = useRouter();
-  const { t, tArray } = useTranslation();
+  const { t } = useTranslation();
+  const { locale } = useLocale();
+  const { questions, questionTextByLocale } = useQuestions();
   const SCREENS = useOnboardingScreens();
-  const heroTileQuestions = tArray('onboarding.screens.0.tileQuestions');
+  const heroQuestion = useMemo(() => {
+    if (HERO_FORCED_QUESTION.trim().length > 0) {
+      return HERO_FORCED_QUESTION;
+    }
+    const byLocale = questionTextByLocale[locale] ?? questionTextByLocale['en-US'] ?? {};
+    const available = questions
+      .map((q) => byLocale[q.id] ?? '')
+      .filter(
+        (text): text is string =>
+          typeof text === 'string' &&
+          text.trim().length > 0 &&
+          !/^do you think everything happened/i.test(text.trim())
+      );
+    const shuffled = [...available].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, HERO_PREVIEW_POOL_SIZE)[0] ?? '';
+  }, [locale, questionTextByLocale, questions]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
@@ -120,7 +128,7 @@ export default function Onboarding() {
             index === 1 && styles.visualContainerMoments,
           ]}
         >
-          {index === 0 && <MoodBoardHeroVisual questions={heroTileQuestions} />}
+          {index === 0 && <MoodBoardHeroVisual question={heroQuestion} />}
           {index === 1 && <MomentsOnboardingVisual />}
           {index === 2 && <ClosenessVisual />}
         </View>
@@ -205,63 +213,47 @@ function PaginationDot({ index, currentIndex }: { index: number; currentIndex: n
   return <Animated.View style={[styles.dot, animatedStyle]} />;
 }
 
-/** Carrusel horizontal de tarjetas estilo preguntas: swipe + avance automático. */
-function MoodBoardHeroVisual({ questions }: { questions: string[] }) {
-  const scrollRef = useRef<ScrollView>(null);
-  const activeRef = useRef(0);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      const next = (activeRef.current + 1) % HERO_PREVIEW_COUNT;
-      activeRef.current = next;
-      scrollRef.current?.scrollTo({ x: next * SCREEN_WIDTH, animated: true });
-    }, HERO_AUTO_ADVANCE_MS);
-    return () => clearInterval(id);
-  }, []);
-
-  const onMomentumScrollEnd = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const x = e.nativeEvent.contentOffset.x;
-    const i = Math.round(x / SCREEN_WIDTH);
-    if (i >= 0 && i < HERO_PREVIEW_COUNT) {
-      activeRef.current = i;
-    }
-  }, []);
-
+function MoodBoardHeroVisual({ question }: { question: string }) {
+  const stackThemes = useMemo(
+    () => Array.from({ length: HERO_STACK_CARD_COUNT }, (_, i) => CARD_THEMES[i % CARD_THEMES.length]),
+    []
+  );
+  const frontTheme = stackThemes[stackThemes.length - 1];
   return (
     <View style={styles.heroCarouselWrap}>
-      <ScrollView
-        ref={scrollRef}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onMomentumScrollEnd={onMomentumScrollEnd}
-        scrollEventThrottle={16}
-        style={styles.heroCarouselScroll}
-        decelerationRate="fast"
-      >
-        {[0, 1, 2, 3].map((i) => {
-          const theme = CARD_THEMES[i % CARD_THEMES.length];
-          const copy = questions[i] ?? '';
+      <View style={styles.heroStackWrap}>
+        {stackThemes.map((theme, index) => {
+          const isFront = index === stackThemes.length - 1;
           return (
-            <View key={i} style={styles.heroCarouselPage}>
-              <View style={[styles.heroQuestionCard, { backgroundColor: theme.bg }]}>
+            <View
+              key={index}
+              style={[
+                styles.heroStackCard,
+                {
+                  backgroundColor: `${theme.bg}F0`,
+                  borderColor: `${theme.text}26`,
+                  top: index * 10,
+                  zIndex: index + 1,
+                },
+                isFront && styles.heroStackCardFront,
+              ]}
+            >
+              {isFront && (
                 <View style={styles.heroQuestionCardInner}>
-                  <View style={styles.heroQuestionPillWrap}>
-                    <View style={[styles.heroQuestionPill, { borderColor: theme.text }]}>
-                      <Text style={[styles.heroQuestionPillText, { color: theme.text }]}>
-                        {HERO_PREVIEW_CLOSENESS_PILLS[i]}
-                      </Text>
-                    </View>
-                  </View>
                   <View style={styles.heroQuestionTextBlock}>
-                    <Text style={[styles.heroQuestionText, { color: theme.text }]}>{copy}</Text>
+                    <Text style={[styles.heroQuestionPromptLabel, { color: `${frontTheme.text}CC` }]}>
+                      Question
+                    </Text>
+                    <Text style={[styles.heroQuestionText, { color: frontTheme.text }]} numberOfLines={3}>
+                      {question}
+                    </Text>
                   </View>
                 </View>
-              </View>
+              )}
             </View>
           );
         })}
-      </ScrollView>
+      </View>
     </View>
   );
 }
@@ -449,7 +441,8 @@ const styles = StyleSheet.create({
   visualContainerHero: {
     width: '100%',
     alignSelf: 'stretch',
-    maxHeight: 420,
+    minHeight: 240,
+    maxHeight: 300,
   },
   visualContainerMoments: {
     minHeight: 260,
@@ -486,64 +479,60 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
   heroCarouselWrap: {
-    marginHorizontal: -SPACING.lg,
-    width: SCREEN_WIDTH,
-    alignSelf: 'center',
-  },
-  heroCarouselScroll: {
-    width: SCREEN_WIDTH,
-    flexGrow: 0,
-  },
-  heroCarouselPage: {
-    width: SCREEN_WIDTH,
-    paddingHorizontal: SPACING.lg,
-    justifyContent: 'center',
-    minHeight: 300,
-  },
-  heroQuestionCard: {
     width: '100%',
-    maxWidth: 400,
     alignSelf: 'center',
-    borderRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    elevation: 4,
+  },
+  heroStackWrap: {
+    width: '100%',
+    maxWidth: 340,
+    height: 220,
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    position: 'relative',
+  },
+  heroStackCard: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    width: '100%',
+    borderRadius: 22,
+    borderWidth: 1,
+    shadowColor: '#0A0A0A',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 5,
     overflow: 'hidden',
+    minHeight: 150,
+  },
+  heroStackCardFront: {
+    minHeight: 170,
   },
   heroQuestionCardInner: {
     paddingHorizontal: SPACING.lg,
-    paddingTop: SPACING.lg,
-    paddingBottom: SPACING['2xl'],
-  },
-  heroQuestionPillWrap: {
-    alignItems: 'center',
-    marginBottom: SPACING.lg,
-  },
-  heroQuestionPill: {
-    backgroundColor: 'transparent',
-    paddingVertical: SPACING.sm,
-    paddingHorizontal: SPACING.lg,
-    borderRadius: BORDER_RADIUS.full,
-    borderWidth: 1,
-  },
-  heroQuestionPillText: {
-    fontSize: 13,
-    fontFamily: FONTS.inter.regular,
-    textAlign: 'center',
-    lineHeight: 18,
+    paddingVertical: SPACING.xl,
+    minHeight: 170,
   },
   heroQuestionTextBlock: {
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: SPACING.sm,
+  },
+  heroQuestionPromptLabel: {
+    fontSize: 11,
+    fontFamily: FONTS.inter.regular,
+    color: COLORS.text.secondary,
+    marginBottom: SPACING.sm,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    opacity: 0.8,
   },
   heroQuestionText: {
-    fontSize: 18,
+    fontSize: FONT_SIZES.xl,
     fontFamily: FONTS.inter.regular,
     textAlign: 'center',
-    lineHeight: 28,
+    lineHeight: 32,
+    fontWeight: '500',
+    letterSpacing: 0.1,
   },
   closenessWrap: {
     alignItems: 'center',
