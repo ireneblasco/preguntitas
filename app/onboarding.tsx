@@ -263,6 +263,7 @@ function MoodBoardHeroVisual({ question }: { question: string }) {
  */
 function MomentsOnboardingVisual() {
   const { momentOptions } = useQuestions();
+  const { locale } = useLocale();
   const { previewMoments, cellW, gridGap } = useMemo(() => {
     const ordered = sortMomentOptions(momentOptions);
     const byId = new Map(ordered.map((o) => [o.id, o]));
@@ -292,31 +293,44 @@ function MomentsOnboardingVisual() {
     const cellW = (maxGrid - gridGap) / 2;
     return { previewMoments, cellW, gridGap };
   }, [momentOptions]);
+  const totalCategories = momentOptions.length;
+  const remainingCategories = Math.max(totalCategories - previewMoments.length, 0);
+  const categoriesHint =
+    locale.startsWith('es')
+      ? remainingCategories > 0
+        ? `+${remainingCategories} categorías más →`
+        : `${totalCategories} categorías`
+      : remainingCategories > 0
+        ? `+${remainingCategories} more categories →`
+        : `${totalCategories} categories`;
 
   return (
-    <View style={[styles.momentBentoGrid, { width: cellW * 2 + gridGap, gap: gridGap }]}>
-      {previewMoments.map((option, index) => {
-        const theme = getThemeForMomentId(option.id, momentOptions);
-        const label = getCategoryDisplayName(option) || option.name;
-        return (
-          <View
-            key={option.id}
-            style={[
-              styles.momentBentoCell,
-              {
-                width: cellW,
-                backgroundColor: theme.bg,
-                shadowColor: theme.bg,
-              },
-            ]}
-          >
-            <Text style={styles.momentBentoEmoji}>{option.emoji}</Text>
-            <Text style={[styles.momentBentoLabel, { color: theme.text }]} numberOfLines={2}>
-              {label}
-            </Text>
-          </View>
-        );
-      })}
+    <View style={styles.momentBentoWrap}>
+      <View style={[styles.momentBentoGrid, { width: cellW * 2 + gridGap, gap: gridGap }]}>
+        {previewMoments.map((option, index) => {
+          const theme = getThemeForMomentId(option.id, momentOptions);
+          const label = getCategoryDisplayName(option) || option.name;
+          return (
+            <View
+              key={option.id}
+              style={[
+                styles.momentBentoCell,
+                {
+                  width: cellW,
+                  backgroundColor: theme.bg,
+                  shadowColor: theme.bg,
+                },
+              ]}
+            >
+              <Text style={styles.momentBentoEmoji}>{option.emoji}</Text>
+              <Text style={[styles.momentBentoLabel, { color: theme.text }]} numberOfLines={2}>
+                {label}
+              </Text>
+            </View>
+          );
+        })}
+      </View>
+      <Text style={styles.momentBentoHintText}>{categoriesHint}</Text>
     </View>
   );
 }
@@ -448,6 +462,9 @@ const styles = StyleSheet.create({
     minHeight: 260,
     alignSelf: 'stretch',
   },
+  momentBentoWrap: {
+    alignItems: 'center',
+  },
   momentBentoGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -477,6 +494,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     lineHeight: 19,
+  },
+  momentBentoHintText: {
+    marginTop: SPACING.md,
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.regular,
+    color: COLORS.text.secondary,
+    fontWeight: '500',
+    letterSpacing: 0.1,
   },
   heroCarouselWrap: {
     width: '100%',
