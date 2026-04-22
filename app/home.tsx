@@ -8,6 +8,7 @@ import {
   LayoutChangeEvent,
   ImageBackground,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -130,7 +131,12 @@ export default function Home() {
               imageStyle={styles.breakIcePatternImage}
               resizeMode="cover"
             >
-              <View style={styles.breakIceScrim}>
+              <LinearGradient
+                colors={['rgba(255, 188, 128, 0.58)', 'rgba(255, 138, 76, 0.50)']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.breakIceScrim}
+              >
                 <View style={styles.breakIceRow}>
                   <View style={styles.breakIceCopy}>
                     <Text style={styles.breakIceTitle}>{t('home.surpriseMe')}</Text>
@@ -138,11 +144,12 @@ export default function Home() {
                       {t('home.surpriseMeDesc')}
                     </Text>
                   </View>
-                  <View style={styles.breakIceChevronWrap}>
-                    <Ionicons name="chevron-forward" size={22} color={IOS_LINK} />
+                  <View style={styles.breakIceCta}>
+                    <Text style={styles.breakIceCtaText}>{t('home.startHere')}</Text>
+                    <Ionicons name="arrow-forward" size={14} color="#FFFFFF" />
                   </View>
                 </View>
-              </View>
+              </LinearGradient>
             </ImageBackground>
           </Pressable>
 
@@ -244,13 +251,13 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: BORDER_RADIUS['2xl'],
     overflow: 'hidden',
-    borderWidth: 2,
-    borderColor: '#F2CE2E',
-    shadowColor: '#F2CE2E',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.35,
-    shadowRadius: 20,
-    elevation: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(28, 28, 30, 0.08)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 6,
   },
   breakIceImageBg: {
     width: '100%',
@@ -265,7 +272,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: SPACING.md,
     paddingHorizontal: SPACING.md,
-    backgroundColor: 'rgba(255, 244, 196, 0.62)',
+    borderRadius: BORDER_RADIUS['2xl'],
   },
   breakIceDisabled: {
     opacity: 0.45,
@@ -299,20 +306,22 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     color: IOS_SECONDARY_LABEL,
   },
-  breakIceChevronWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: 'rgba(28, 28, 30, 0.08)',
+  breakIceCta: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.16,
-    shadowRadius: 8,
-    elevation: 5,
+    gap: 6,
+    backgroundColor: '#0B1D43',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: BORDER_RADIUS.full,
+    flexShrink: 0,
+  },
+  breakIceCtaText: {
+    color: '#FFFFFF',
+    fontSize: FONT_SIZES.xs,
+    fontWeight: '700',
+    fontFamily: FONTS.inter.bold,
   },
   sectionHeading: {
     fontSize: FONT_SIZES.lg,
