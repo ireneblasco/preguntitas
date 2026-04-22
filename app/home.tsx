@@ -7,6 +7,7 @@ import {
   Alert,
   LayoutChangeEvent,
   ImageBackground,
+  Image,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -196,7 +197,14 @@ export default function Home() {
               imageStyle={styles.premiumPatternImage}
               resizeMode="cover"
             >
-              <Text style={styles.premiumMark}>m</Text>
+              <View style={styles.premiumMarkMask}>
+                <Image
+                  source={require('../assets/icon.png')}
+                  style={styles.premiumMarkIcon}
+                  resizeMode="cover"
+                  accessibilityIgnoresInvertColors
+                />
+              </View>
               <View style={styles.premiumCopy}>
                 <Text style={styles.premiumTitle} numberOfLines={2}>
                   {t('home.premiumTitle')}
@@ -371,12 +379,17 @@ const styles = StyleSheet.create({
   premiumPatternImage: {
     borderRadius: BORDER_RADIUS['2xl'],
   },
-  premiumMark: {
-    fontFamily: FONTS.brasikaDisplay,
-    fontSize: 44,
-    color: '#FF5A24',
+  premiumMarkMask: {
     width: 44,
-    textAlign: 'center',
+    height: 44,
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  premiumMarkIcon: {
+    width: 62,
+    height: 62,
+    marginLeft: -9,
+    marginTop: -9,
   },
   premiumCopy: {
     flex: 1,
