@@ -239,7 +239,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: COLORS.background.primary,
+    backgroundColor: '#FFFFFF',
   },
   safeTop: {
     flex: 1,
