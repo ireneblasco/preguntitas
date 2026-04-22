@@ -132,9 +132,6 @@ export default function Home() {
             >
               <View style={styles.breakIceScrim}>
                 <View style={styles.breakIceRow}>
-                  <Text style={styles.breakIceEmojiLarge} accessible={false}>
-                    🧊
-                  </Text>
                   <View style={styles.breakIceCopy}>
                     <Text style={styles.breakIceTitle}>{t('home.surpriseMe')}</Text>
                     <Text style={styles.breakIceDesc} numberOfLines={3}>
@@ -243,26 +240,28 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: BORDER_RADIUS['2xl'],
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 3,
+    borderWidth: 2,
+    borderColor: '#F2CE2E',
+    shadowColor: '#F2CE2E',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.35,
+    shadowRadius: 20,
+    elevation: 12,
   },
   breakIceImageBg: {
     width: '100%',
-    minHeight: 112,
+    minHeight: 128,
   },
   breakIcePatternImage: {
     borderRadius: BORDER_RADIUS['2xl'],
   },
   breakIceScrim: {
     flex: 1,
-    minHeight: 112,
+    minHeight: 128,
     justifyContent: 'center',
     paddingVertical: SPACING.md,
     paddingHorizontal: SPACING.md,
-    backgroundColor: 'rgba(255, 244, 196, 0.78)',
+    backgroundColor: 'rgba(255, 244, 196, 0.62)',
   },
   breakIceDisabled: {
     opacity: 0.45,
@@ -280,6 +279,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingRight: SPACING.sm,
+    paddingLeft: SPACING.xs,
   },
   breakIceTitle: {
     fontSize: FONT_SIZES.base,
@@ -296,14 +296,19 @@ const styles = StyleSheet.create({
     color: IOS_SECONDARY_LABEL,
   },
   breakIceChevronWrap: {
-    width: ARROW_SLOT,
-    height: ARROW_SLOT,
-    borderRadius: 18,
-    backgroundColor: IOS_FILL_QUATERNARY,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(60, 60, 67, 0.12)',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: 'rgba(28, 28, 30, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.16,
+    shadowRadius: 8,
+    elevation: 5,
   },
   sectionHeading: {
     fontSize: FONT_SIZES.lg,

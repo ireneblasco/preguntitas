@@ -32,12 +32,16 @@ export function MainTabBar() {
   const isHome = pathname === '/home';
   const isFavorites = pathname === '/favorites';
   const isSettings = pathname === '/settings';
+  const goToTab = (path: '/home' | '/favorites' | '/settings', isActive: boolean) => {
+    if (isActive) return;
+    router.navigate(path);
+  };
 
   return (
     <View style={[styles.tabBar, { paddingBottom: Math.max(insets.bottom, 10) }]}>
       <Pressable
         style={styles.tabItem}
-        onPress={() => router.replace('/favorites')}
+        onPress={() => goToTab('/favorites', isFavorites)}
         accessibilityRole="tab"
         accessibilityState={{ selected: isFavorites }}
         accessibilityLabel={t('home.tabSaved')}
@@ -56,7 +60,7 @@ export function MainTabBar() {
 
       <Pressable
         style={styles.tabItem}
-        onPress={() => router.replace('/home')}
+        onPress={() => goToTab('/home', isHome)}
         accessibilityRole="tab"
         accessibilityState={{ selected: isHome }}
         accessibilityLabel={t('home.tabHome')}
@@ -75,7 +79,7 @@ export function MainTabBar() {
 
       <Pressable
         style={styles.tabItem}
-        onPress={() => router.replace('/settings')}
+        onPress={() => goToTab('/settings', isSettings)}
         accessibilityRole="tab"
         accessibilityState={{ selected: isSettings }}
         accessibilityLabel={t('home.tabSettings')}

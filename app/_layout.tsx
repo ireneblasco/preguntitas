@@ -39,10 +39,25 @@ export default function RootLayout() {
         >
           <Stack.Screen name="index" />
           <Stack.Screen name="onboarding" />
-          <Stack.Screen name="home" />
+          <Stack.Screen
+            name="home"
+            options={{
+              animation: 'fade',
+            }}
+          />
           <Stack.Screen name="questions" />
-          <Stack.Screen name="favorites" />
-          <Stack.Screen name="settings" />
+          <Stack.Screen
+            name="favorites"
+            options={{
+              animation: 'fade',
+            }}
+          />
+          <Stack.Screen
+            name="settings"
+            options={{
+              animation: 'fade',
+            }}
+          />
         </Stack>
         </QuestionsProvider>
       </LocaleProvider>
