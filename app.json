@@ -7,7 +7,11 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "preguntitas",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/icon.png",
@@ -15,8 +19,9 @@
       "backgroundColor": "#FFFFFF"
     },
     "ios": {
+      "icon": "./assets/icon.png",
       "supportsTablet": false,
-      "buildNumber": "1",
+      "buildNumber": "2",
       "bundleIdentifier": "com.preguntitas.app"
     },
     "android": {
@@ -37,7 +42,9 @@
       [
         "expo-font",
         {
-          "fonts": ["assets/fonts/BrasikaDisplay-Regular.otf"]
+          "fonts": [
+            "assets/fonts/BrasikaDisplay-Regular.otf"
+          ]
         }
       ]
     ],

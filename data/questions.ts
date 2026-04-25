@@ -1,14 +1,14 @@
-// Auto-generated from Notion on 2026-04-21T18:51:16.504Z
+// Auto-generated from Notion on 2026-04-22T23:44:11.049Z
 // Do not edit manually - changes will be overwritten
 
-export type MomentType = "Break the Ice 🧊" | "Date Night 🌙" | "Drinks with Friends 🍸" | "Go Deep 🧠" | "Ikigai 🌸" | "On the Road 🚗" | "Who is most likely to" | "With Grandparents 💌";
+export type MomentType = "Break the Ice 👀" | "Date Night 🌙" | "Drinks with Friends 🍸" | "Go Deep 🧠" | "Ikigai 🌸" | "On the Road 🚗" | "Who is most likely to" | "With Grandparents 💌";
 
 export const momentOptions: Array<{
   id: MomentType;
   name: string;
   emoji: string;
 }> = [
-  { id: "Break the Ice 🧊", name: "Break the Ice", emoji: "🧊" },
+  { id: "Break the Ice 👀", name: "Break the Ice", emoji: "👀" },
   { id: "Date Night 🌙", name: "Date Night", emoji: "🌙" },
   { id: "Drinks with Friends 🍸", name: "Drinks with Friends", emoji: "🍸" },
   { id: "Go Deep 🧠", name: "Go Deep", emoji: "🧠" },
@@ -69,7 +69,6 @@ export const questions: Question[] = [
   {
     "id": "ID-142",
     "moment": [
-      "Go Deep 🧠",
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
@@ -701,7 +700,8 @@ export const questions: Question[] = [
   {
     "id": "ID-207",
     "moment": [
-      "With Grandparents 💌"
+      "With Grandparents 💌",
+      "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
@@ -1489,7 +1489,6 @@ export const questions: Question[] = [
   {
     "id": "ID-274",
     "moment": [
-      "With Grandparents 💌",
       "Drinks with Friends 🍸",
       "On the Road 🚗"
     ],
@@ -1537,7 +1536,7 @@ export const questions: Question[] = [
   {
     "id": "ID-281",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1548,7 +1547,7 @@ export const questions: Question[] = [
   {
     "id": "ID-292",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1559,7 +1558,7 @@ export const questions: Question[] = [
   {
     "id": "ID-285",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1581,7 +1580,7 @@ export const questions: Question[] = [
   {
     "id": "ID-283",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1592,7 +1591,7 @@ export const questions: Question[] = [
   {
     "id": "ID-284",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 2,
     "text": {
@@ -1603,7 +1602,7 @@ export const questions: Question[] = [
   {
     "id": "ID-293",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1614,7 +1613,7 @@ export const questions: Question[] = [
   {
     "id": "ID-290",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1625,7 +1624,7 @@ export const questions: Question[] = [
   {
     "id": "ID-294",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1636,7 +1635,7 @@ export const questions: Question[] = [
   {
     "id": "ID-288",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1647,7 +1646,7 @@ export const questions: Question[] = [
   {
     "id": "ID-289",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1658,7 +1657,7 @@ export const questions: Question[] = [
   {
     "id": "ID-291",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -1669,7 +1668,7 @@ export const questions: Question[] = [
   {
     "id": "ID-286",
     "moment": [
-      "Break the Ice 🧊"
+      "Break the Ice 👀"
     ],
     "closenessLevel": 2,
     "text": {
