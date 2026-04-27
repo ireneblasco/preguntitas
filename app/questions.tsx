@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState, useEffect, useMemo } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -274,7 +274,13 @@ export default function Questions() {
                     color={isFavorite(currentQuestionId) ? CARD_TEXT_COLOR : '#6D7B89'}
                   />
                 </Pressable>
-                <Text style={styles.cardBrandMark}>m</Text>
+                <Image
+                  source={require('../assets/mellow-card-m-mark.png')}
+                  style={styles.cardBrandMark}
+                  resizeMode="contain"
+                  accessible={false}
+                  accessibilityIgnoresInvertColors
+                />
               </View>
             </Animated.View>
           </GestureDetector>
@@ -426,9 +432,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: SPACING.lg,
     bottom: SPACING.md,
-    fontFamily: FONTS.brasikaDisplay,
-    fontSize: 32,
-    color: '#C6D4E4',
+    width: 48,
+    height: 40,
   },
   footer: {
     paddingHorizontal: CARD_MARGIN,
