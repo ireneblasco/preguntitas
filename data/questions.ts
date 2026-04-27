@@ -1,4 +1,4 @@
-// Auto-generated from Notion on 2026-04-22T23:44:11.049Z
+// Auto-generated from Notion on 2026-04-27T22:02:07.693Z
 // Do not edit manually - changes will be overwritten
 
 export type MomentType = "Break the Ice 👀" | "Date Night 🌙" | "Drinks with Friends 🍸" | "Go Deep 🧠" | "Ikigai 🌸" | "On the Road 🚗" | "Who is most likely to" | "With Grandparents 💌";
@@ -254,12 +254,13 @@ export const questions: Question[] = [
   {
     "id": "ID-181",
     "moment": [
-      "Go Deep 🧠"
+      "Go Deep 🧠",
+      "Date Night 🌙"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "What part of you has changed the most over the past few years?",
-      "es-ES": "¿Qué parte de ti ha cambiado más en los últimos años?"
+      "en-US": "What part of your personality do you think has changed the most in the last few years?",
+      "es-ES": "¿Qué parte de tu personalidad crees que ha cambiado más en los últimos años?"
     }
   },
   {
@@ -776,7 +777,7 @@ export const questions: Question[] = [
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "What matters more than people think?",
+      "en-US": "What do you value most that other people overlook?",
       "es-ES": "¿Qué importa más de lo que la gente cree?"
     }
   },
@@ -2018,6 +2019,18 @@ export const questions: Question[] = [
     }
   },
   {
+    "id": "ID-327",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What’s the biggest mistake you’ve ever made?",
+      "es-ES": "¿Cuál ha sido el mayor error que has cometido?"
+    }
+  },
+  {
     "id": "ID-123",
     "moment": [
       "Drinks with Friends 🍸",
@@ -2537,7 +2550,8 @@ export const questions: Question[] = [
     "id": "ID-11",
     "moment": [
       "Drinks with Friends 🍸",
-      "On the Road 🚗"
+      "On the Road 🚗",
+      "Break the Ice 👀"
     ],
     "closenessLevel": 2,
     "text": {
@@ -2749,7 +2763,8 @@ export const questions: Question[] = [
     "id": "ID-109",
     "moment": [
       "On the Road 🚗",
-      "Drinks with Friends 🍸"
+      "Drinks with Friends 🍸",
+      "Break the Ice 👀"
     ],
     "closenessLevel": 1,
     "text": {
@@ -2802,6 +2817,50 @@ export const questions: Question[] = [
     "text": {
       "en-US": "Is it right to lie to avoid hurting someone?",
       "es-ES": "¿Es correcto mentir para no herir a alguien?"
+    }
+  },
+  {
+    "id": "ID-328",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What is your favorite little moment of your everyday routine?",
+      "es-ES": "¿Cuál es tu ratito favorito del día a día?"
+    }
+  },
+  {
+    "id": "ID-329",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you had to steal a friend's wardrobe, whose would you steal?",
+      "es-ES": "Si tuvieras que robarle el armario a un amigo, ¿a quién se lo robarías?"
+    }
+  },
+  {
+    "id": "ID-330",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Are you more of a wing-it person or someone who likes everything planned?",
+      "es-ES": "¿Eres más de improvisar o de tener todo planeado?"
+    }
+  },
+  {
+    "id": "ID-331",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What are you afraid of losing, even if you don’t talk about it much?",
+      "es-ES": "¿Qué te da miedo perder, aunque no lo digas mucho?"
     }
   }
 ];

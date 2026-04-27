@@ -1,20 +1,37 @@
 /**
- * Primeras 5 preguntas por categoría: siempre en este orden al abrir la categoría;
- * el resto de preguntas salen en orden aleatorio.
+ * Primeras preguntas por categoría (orden fijo al abrir); el resto va en orden aleatorio.
+ * Puedes listar más de cinco IDs por momento si quieres.
  *
- * Edita cada array con los IDs de las preguntas que quieras como primeras
- * (máximo 5; si pones menos, solo esas irán fijas al inicio).
- * Usa el id del momento tal como en Notion / data/questions (ej. "Deep Stuff 🧠").
+ * Las claves deben coincidir exactamente con el id del momento en Notion / momentOptions.
  */
 export const FIRST_5_QUESTION_IDS_BY_MOMENT: Record<string, string[]> = {
-  'Deep Stuff 🧠': ['ID-224', 'ID-139', 'ID-149', 'ID-153', 'ID-181'],
-  'Deep Talk 🧠': ['ID-224', 'ID-139', 'ID-149', 'ID-153', 'ID-181'],
-  'Ikigai 🌸': ['ID-195', 'ID-199', 'ID-235', 'ID-204', 'ID-203'],
-  'Date Night 🌙': ['ID-116', 'ID-10', 'ID-231', 'ID-34', 'ID-29'],
-  'Con mi abuela': [],
-  'With Grandparents 💌': [],
-  'Road Trip 🚗': ['ID-11', 'ID-35', 'ID-109', 'ID-110', 'ID-8'],
-  'Drinks with Friends 🍸': ['ID-265', 'ID-248', 'ID-241', 'ID-236', 'ID-21'],
-  'Table Talks 🍷': ['ID-265', 'ID-248', 'ID-241', 'ID-236', 'ID-21'],
-  'Break the Ice 🧊': [],
+  'Go Deep 🧠': [
+    'ID-115',
+    'ID-184',
+    'ID-149',
+    'ID-133',
+    'ID-31',
+    'ID-139',
+    'ID-191',
+    'ID-159',
+    'ID-195',
+  ],
+  'Drinks with Friends 🍸': [
+    'ID-280',
+    'ID-248',
+    'ID-241',
+    'ID-235',
+    'ID-182',
+    'ID-23',
+    'ID-29',
+    'ID-328',
+    'ID-329',
+    'ID-148',
+  ],
+  'On the Road 🚗': ['ID-120', 'ID-24', 'ID-108', 'ID-35', 'ID-32'],
+  'Date Night 🌙': ['ID-330', 'ID-181', 'ID-331', 'ID-231', 'ID-260'],
+  'Ikigai 🌸': ['ID-196', 'ID-200', 'ID-201', 'ID-202', 'ID-205', 'ID-195'],
+  'With Grandparents 💌': ['ID-216', 'ID-214', 'ID-218', 'ID-217', 'ID-208'],
+  'Break the Ice 👀': ['ID-281', 'ID-11', 'ID-286', 'ID-285', 'ID-109'],
+  'Who is most likely to': ['ID-311', 'ID-304', 'ID-301', 'ID-307', 'ID-300'],
 };
