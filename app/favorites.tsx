@@ -3,12 +3,18 @@ import { useMemo } from 'react';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName } from '../constants';
+import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getCategoryDisplayName } from '../constants';
 import { useQuestions, type Question } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
 import { useTranslation } from '../hooks/useTranslation';
 import { MainTabBar, mainTabBarBottomInset } from '../components/MainTabBar';
+
+/** Misma paleta que `MomentCard` en home (fondo blanco, tipografía marca). */
+const HOME_CARD_BG = '#FFFFFF';
+const HOME_CARD_BORDER = '#ECECF0';
+const PILL_BG = 'rgba(45, 90, 71, 0.08)';
+const PILL_BORDER = 'rgba(45, 90, 71, 0.12)';
 
 export default function Favorites() {
   const insets = useSafeAreaInsets();
@@ -36,7 +42,6 @@ export default function Favorites() {
 
   const renderItem = ({ item }: { item: Question }) => {
     const momentId = item.moment[0] ?? '';
-    const theme = getThemeForMomentId(momentId, momentOptions);
     const momentOption = momentOptions.find((m) => m.id === momentId);
     const momentLabel = getCategoryDisplayName(momentOption) || momentOption?.name || momentId;
 
@@ -45,11 +50,11 @@ export default function Favorites() {
         renderRightActions={() => renderRightActions(item.id)}
         overshootRight={false}
       >
-        <View style={[styles.card, { backgroundColor: theme.bg }]}>
-          <View style={[styles.pill, { borderColor: theme.text }]}>
-            <Text style={[styles.pillText, { color: theme.text }]}>{momentLabel}</Text>
+        <View style={styles.card}>
+          <View style={styles.pill}>
+            <Text style={styles.pillText}>{momentLabel}</Text>
           </View>
-          <Text style={[styles.questionText, { color: theme.text }]} numberOfLines={3}>
+          <Text style={styles.questionText} numberOfLines={3}>
             {getQuestionText(item, lang, questionTextByLocale)}
           </Text>
         </View>
@@ -131,14 +136,15 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.md,
   },
   sectionTitle: {
-    fontSize: FONT_SIZES.base,
-    fontFamily: FONTS.inter.regular,
+    fontSize: FONT_SIZES.lg,
+    fontFamily: FONTS.inter.bold,
+    fontWeight: '700',
     color: COLORS.text.primary,
   },
   sectionCount: {
     fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
+    fontWeight: '600',
+    color: COLORS.text.primary,
   },
   listFlex: { flex: 1 },
   listContent: {
@@ -147,32 +153,40 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '100%',
+    backgroundColor: HOME_CARD_BG,
     borderRadius: BORDER_RADIUS['2xl'],
     padding: SPACING.lg,
     minHeight: 100,
+    borderWidth: 1,
+    borderColor: HOME_CARD_BORDER,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
+    shadowOpacity: 0.04,
     shadowRadius: 8,
-    elevation: 6,
+    elevation: 2,
   },
   pill: {
     alignSelf: 'flex-start',
-    backgroundColor: 'transparent',
+    backgroundColor: PILL_BG,
     paddingVertical: 6,
     paddingHorizontal: SPACING.md,
     borderRadius: BORDER_RADIUS.full,
     borderWidth: 1,
+    borderColor: PILL_BORDER,
     marginBottom: SPACING.sm,
   },
   pillText: {
     fontSize: FONT_SIZES.xs,
-    fontFamily: FONTS.inter.regular,
+    fontFamily: FONTS.inter.bold,
+    fontWeight: '700',
+    color: COLORS.text.secondary,
+    letterSpacing: 0.3,
   },
   questionText: {
     fontSize: FONT_SIZES.lg,
     fontFamily: FONTS.inter.regular,
     lineHeight: FONT_SIZES.lg * 1.45,
+    color: COLORS.text.primary,
   },
   deleteWrap: {
     justifyContent: 'center',
