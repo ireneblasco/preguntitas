@@ -202,30 +202,39 @@ export default function Home() {
           >
             <ImageBackground
               source={require('../assets/premium-unlock-pattern.png')}
-              style={[styles.premiumInner, styles.premiumInnerTouchable]}
+              style={styles.premiumImageBg}
               imageStyle={styles.premiumPatternImage}
               resizeMode="cover"
             >
-              <View style={styles.premiumMarkMask}>
-                <Image
-                  source={require('../assets/icon.png')}
-                  style={styles.premiumMarkIcon}
-                  resizeMode="cover"
-                  accessibilityIgnoresInvertColors
-                />
-              </View>
-              <View style={styles.premiumCopy}>
-                <Text style={styles.premiumTitle} numberOfLines={2}>
-                  {t('home.premiumTitle')}
-                </Text>
-                <Text style={styles.premiumSubtitle} numberOfLines={1}>
-                  {t('home.premiumSubtitle')}
-                </Text>
-              </View>
-              <View style={styles.premiumCta}>
-                <Text style={styles.premiumCtaText}>{t('home.goPremium')}</Text>
-                <Ionicons name="arrow-forward" size={14} color="#FFFFFF" />
-              </View>
+              <LinearGradient
+                colors={['rgba(252, 244, 236, 0.94)', 'rgba(248, 228, 208, 0.88)']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.premiumScrim}
+              >
+                <View style={[styles.premiumInner, styles.premiumInnerTouchable]}>
+                  <View style={styles.premiumMarkMask}>
+                    <Image
+                      source={require('../assets/icon.png')}
+                      style={styles.premiumMarkIcon}
+                      resizeMode="contain"
+                      accessibilityIgnoresInvertColors
+                    />
+                  </View>
+                  <View style={styles.premiumCopy}>
+                    <Text style={styles.premiumTitle} numberOfLines={2}>
+                      {t('home.premiumTitle')}
+                    </Text>
+                    <Text style={styles.premiumSubtitle} numberOfLines={1}>
+                      {t('home.premiumSubtitle')}
+                    </Text>
+                  </View>
+                  <View style={styles.premiumCta}>
+                    <Text style={styles.premiumCtaText}>{t('home.goPremium')}</Text>
+                    <Ionicons name="arrow-forward" size={14} color="#FFFFFF" />
+                  </View>
+                </View>
+              </LinearGradient>
             </ImageBackground>
           </Pressable>
         </ScrollView>
@@ -386,12 +395,23 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.md,
     borderWidth: 1,
     borderColor: COLORS.border.light,
+    shadowColor: COLORS.brand.forest,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    elevation: 3,
+  },
+  premiumImageBg: {
+    width: '100%',
+  },
+  premiumScrim: {
+    borderRadius: BORDER_RADIUS['2xl'],
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.md,
   },
   premiumInner: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: SPACING.md,
-    paddingHorizontal: SPACING.md,
     gap: SPACING.md,
     overflow: 'hidden',
   },
@@ -402,16 +422,19 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS['2xl'],
   },
   premiumMarkMask: {
-    width: 44,
-    height: 44,
+    width: 48,
+    height: 48,
     borderRadius: 12,
     overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.45)',
+    borderWidth: 1,
+    borderColor: 'rgba(45, 90, 71, 0.1)',
   },
   premiumMarkIcon: {
-    width: 62,
-    height: 62,
-    marginLeft: -9,
-    marginTop: -9,
+    width: 40,
+    height: 40,
   },
   premiumCopy: {
     flex: 1,
@@ -435,7 +458,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    backgroundColor: '#2F5D62',
+    backgroundColor: COLORS.interactive.active,
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: BORDER_RADIUS.full,
