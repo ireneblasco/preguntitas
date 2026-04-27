@@ -1,4 +1,4 @@
-import { Text, StyleSheet, Pressable, View } from 'react-native';
+import { Text, StyleSheet, Pressable, View, Image, type ImageSourcePropType } from 'react-native';
 import { FONTS, FONT_SIZES, SPACING, BORDER_RADIUS } from '../constants';
 import { useTranslation } from '../hooks/useTranslation';
 
@@ -36,6 +36,7 @@ type MomentCardProps = {
   titleColor?: string;
   subtitleColor?: string;
   arrowCircleBg?: string;
+  emblemImage?: ImageSourcePropType;
 };
 
 export function MomentCard({
@@ -49,6 +50,7 @@ export function MomentCard({
   titleColor,
   subtitleColor,
   arrowCircleBg,
+  emblemImage,
 }: MomentCardProps) {
   const { t } = useTranslation();
   const visualTheme = HOME_CARD_STYLES[index % HOME_CARD_STYLES.length];
@@ -57,6 +59,7 @@ export function MomentCard({
   const resolvedTitle = titleColor ?? visualTheme.title;
   const resolvedSubtitle = subtitleColor ?? visualTheme.subtitle;
   const resolvedArrowBg = arrowCircleBg ?? '#F8F8FA';
+  const useEmblemImage = emblemImage != null;
   return (
     <Pressable
       style={[
@@ -75,11 +78,15 @@ export function MomentCard({
         <View
           style={[
             styles.emblemWrap,
-            { backgroundColor: resolvedEmblemBg },
-            emblemBg != null && styles.emblemWrapThemed,
+            useEmblemImage ? styles.emblemWrapImageTile : { backgroundColor: resolvedEmblemBg },
+            !useEmblemImage && emblemBg != null && styles.emblemWrapThemed,
           ]}
         >
-          <Text style={[styles.emblemText, { color: resolvedEmblemFg }]}>{option.emoji || '✨'}</Text>
+          {useEmblemImage ? (
+            <Image source={emblemImage} style={styles.emblemImage} resizeMode="cover" />
+          ) : (
+            <Text style={[styles.emblemText, { color: resolvedEmblemFg }]}>{option.emoji || '✨'}</Text>
+          )}
         </View>
         <View style={styles.textWrap}>
           <View style={styles.titleRow}>
@@ -139,9 +146,19 @@ const styles = StyleSheet.create({
   emblemWrapThemed: {
     borderWidth: 0,
   },
+  /** Imagen con fondo propio (p. ej. squircle naranja): sin relleno gris detrás, a tamaño completo del tile. */
+  emblemWrapImageTile: {
+    backgroundColor: 'transparent',
+    overflow: 'hidden',
+    padding: 0,
+  },
   emblemText: {
     fontSize: 28,
     lineHeight: 32,
+  },
+  emblemImage: {
+    width: '100%',
+    height: '100%',
   },
   textWrap: {
     flex: 1,

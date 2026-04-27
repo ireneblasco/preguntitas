@@ -22,6 +22,7 @@ import {
   BORDER_RADIUS,
   sortMomentOptions,
   getCategoryDisplayName,
+  getMomentEmblemSource,
 } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useTranslation } from '../hooks/useTranslation';
@@ -179,6 +180,8 @@ export default function Home() {
                 ? 'Fun · Light'
                 : MOMENT_LABELS[option.id] ?? MOMENT_LABELS[option.name] ?? DEFAULT_MOMENT_LABEL;
               const emoji = option.emoji;
+              const emblemImage =
+                getMomentEmblemSource(option.id) ?? getMomentEmblemSource(option.name);
               return (
                 <MomentCard
                   key={option.id}
@@ -190,6 +193,7 @@ export default function Home() {
                   titleColor={HOME_LABEL}
                   subtitleColor={HOME_SECONDARY_LABEL}
                   arrowCircleBg={HOME_FILL_QUATERNARY}
+                  emblemImage={emblemImage}
                 />
               );
             })}
