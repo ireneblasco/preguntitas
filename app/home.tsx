@@ -139,7 +139,7 @@ export default function Home() {
               resizeMode="cover"
             >
               <LinearGradient
-                colors={['rgba(244, 196, 168, 0.82)', 'rgba(242, 153, 93, 0.72)']}
+                colors={['rgba(250, 243, 235, 0.94)', 'rgba(238, 246, 226, 0.88)']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.breakIceScrim}
@@ -270,11 +270,11 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: COLORS.border.light,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    elevation: 6,
+    shadowColor: COLORS.brand.forest,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.05,
+    shadowRadius: 12,
+    elevation: 3,
   },
   breakIceImageBg: {
     width: '100%',
@@ -315,12 +315,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: BORDER_RADIUS.full,
-    backgroundColor: 'rgba(255, 255, 255, 0.55)',
+    backgroundColor: 'rgba(45, 90, 71, 0.08)',
+    borderWidth: 1,
+    borderColor: 'rgba(45, 90, 71, 0.12)',
   },
   breakIceBadgeText: {
     fontSize: 10,
     fontFamily: FONTS.inter.bold,
-    color: HOME_LABEL,
+    color: COLORS.text.secondary,
     letterSpacing: 0.4,
     textTransform: 'uppercase',
     fontWeight: '700',
@@ -344,7 +346,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    backgroundColor: '#2F5D62',
+    backgroundColor: COLORS.interactive.active,
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: BORDER_RADIUS.full,
