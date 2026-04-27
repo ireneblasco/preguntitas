@@ -23,8 +23,9 @@ export const esES = {
           'En el inicio, elige un momento: cada categoría agrupa preguntas para ese tipo de situación.',
       },
       {
-        headline: 'Cada tarjeta muestra el nivel de confianza.',
-        subtext: 'Toca el level para filtrar o dejalo en Random.',
+        headline: 'Cada tarjeta indica qué tan profunda es la pregunta.',
+        subtext:
+          'Verás una etiqueta discreta con el nivel. Al deslizar aparecen todas las preguntas de ese momento.',
       },
       {
         headline: 'No más conversaciones aburridas.',
@@ -84,6 +85,11 @@ export const esES = {
     hint: 'Desliza o toca para cambiar de pregunta',
     emptySelectMoment: 'Elige un momento desde el inicio para empezar',
     emptyNoQuestions: 'No hay preguntas para este momento',
+    closenessLabels: {
+      level1: 'Nivel 1 · Rompehielos',
+      level2: 'Nivel 2 · Personal',
+      level3: 'Nivel 3 · Íntima',
+    },
   },
   settings: {
     title: 'Ajustes',

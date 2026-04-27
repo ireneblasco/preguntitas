@@ -16,7 +16,7 @@ import Animated, {
   FadeOut,
 } from 'react-native-reanimated';
 import type { ClosenessLevel } from '../types/questions';
-import { COLORS, FONTS, FONT_SIZES, SPACING, BORDER_RADIUS, getThemeForMomentId, getCategoryDisplayName, FIRST_5_QUESTION_IDS_BY_MOMENT } from '../constants';
+import { FONTS, FONT_SIZES, SPACING, getThemeForMomentId, getCategoryDisplayName, FIRST_5_QUESTION_IDS_BY_MOMENT } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
@@ -29,25 +29,12 @@ const CARD_MARGIN = SPACING.md;
 const CARD_TEXT_COLOR = '#203246';
 const CARD_META_COLOR = '#7E8C9D';
 
-const CLOSENESS_LABELS: Record<ClosenessLevel, string> = {
-  1: 'Level 1 Icebreaker',
-  2: 'Level 2 Personal',
-  3: 'Level 3 Vulnerable',
-};
-type ClosenessFilter = 'all' | ClosenessLevel;
-const CLOSENESS_FILTER_LABELS: Record<ClosenessFilter, string> = {
-  all: 'Random',
-  1: CLOSENESS_LABELS[1],
-  2: CLOSENESS_LABELS[2],
-  3: CLOSENESS_LABELS[3],
-};
-const CLOSENESS_FILTER_OPTIONS: ClosenessFilter[] = ['all', 1, 2, 3];
-const LEVEL_DROPDOWN_TEXT_COLOR = '#1C1C1E';
 const WHO_IS_MOST_LIKELY_TO_MATCHER = /who is most likely to/i;
 
-function getClosenessLabel(level?: ClosenessLevel): string {
-  if (level === 1 || level === 2 || level === 3) return CLOSENESS_LABELS[level];
-  return CLOSENESS_LABELS[1];
+function closenessLabelKey(level: ClosenessLevel): string {
+  if (level === 1) return 'questions.closenessLabels.level1';
+  if (level === 2) return 'questions.closenessLabels.level2';
+  return 'questions.closenessLabels.level3';
 }
 
 function toSoftCardColor(hex: string): string {
@@ -104,20 +91,13 @@ export default function Questions() {
 
   const [questionIndex, setQuestionIndex] = useState(0);
   const [currentQuestionId, setCurrentQuestionId] = useState<string>('');
-  const [selectedCloseness, setSelectedCloseness] = useState<ClosenessFilter>('all');
-  const [isClosenessMenuOpen, setIsClosenessMenuOpen] = useState(false);
-  const effectiveCloseness = isWhoIsMostLikelyTo ? 'all' : selectedCloseness;
 
   const translateX = useSharedValue(0);
 
   const filteredQuestions = useMemo(() => {
     if (!moment) return [];
-    return questions.filter((q) => {
-      if (!q.moment.includes(moment)) return false;
-      if (effectiveCloseness === 'all') return true;
-      return q.closenessLevel === effectiveCloseness;
-    });
-  }, [questions, moment, effectiveCloseness]);
+    return questions.filter((q) => q.moment.includes(moment));
+  }, [questions, moment]);
 
   const shuffledQuestions = useMemo(() => {
     if (filteredQuestions.length === 0 || !moment) return [];
@@ -148,28 +128,17 @@ export default function Questions() {
     }
   }, [currentQuestion]);
 
-  useEffect(() => {
-    setQuestionIndex(0);
-  }, [selectedCloseness]);
-
   const handleNext = () => {
     if (filteredQuestions.length === 0) return;
-    setIsClosenessMenuOpen(false);
     setQuestionIndex((prev) => prev + 1);
   };
 
   const handlePrevious = () => {
-    setIsClosenessMenuOpen(false);
     setQuestionIndex((prev) => Math.max(0, prev - 1));
   };
 
   const handleFavorite = async () => {
     if (currentQuestion) await toggleFavorite(currentQuestion.id);
-  };
-
-  const handleSelectCloseness = (value: ClosenessFilter) => {
-    setSelectedCloseness(value);
-    setIsClosenessMenuOpen(false);
   };
 
   const pan = Gesture.Pan()
@@ -274,50 +243,11 @@ export default function Questions() {
                   entering={FadeIn.duration(260)}
                   exiting={FadeOut.duration(200)}
                 >
-                  {!isWhoIsMostLikelyTo && (
-                    <View style={styles.categoryPillWrap}>
-                      <Pressable
-                        style={styles.categoryPill}
-                        onPress={() => setIsClosenessMenuOpen((prev) => !prev)}
-                      >
-                        <Text style={styles.categoryPillText}>
-                          {selectedCloseness === 'all'
-                            ? currentQuestion
-                            ? getClosenessLabel(currentQuestion.closenessLevel)
-                            : getClosenessLabel(1)
-                            : CLOSENESS_FILTER_LABELS[selectedCloseness]}
-                        </Text>
-                        <Text style={styles.categoryPillArrow}>
-                          {isClosenessMenuOpen ? '▲' : '▼'}
-                        </Text>
-                      </Pressable>
-                      {isClosenessMenuOpen && (
-                        <View style={styles.closenessMenu}>
-                          {CLOSENESS_FILTER_OPTIONS.map((option) => {
-                            const isActive = selectedCloseness === option;
-                            return (
-                              <Pressable
-                                key={String(option)}
-                                style={[
-                                  styles.closenessMenuOption,
-                                  isActive && styles.closenessMenuOptionActive,
-                                ]}
-                                onPress={() => handleSelectCloseness(option)}
-                              >
-                                <Text
-                                  style={[
-                                    styles.closenessMenuText,
-                                    { color: CARD_TEXT_COLOR },
-                                    isActive && styles.closenessMenuTextActive,
-                                  ]}
-                                >
-                                  {CLOSENESS_FILTER_LABELS[option]}
-                                </Text>
-                              </Pressable>
-                            );
-                          })}
-                        </View>
-                      )}
+                  {!isWhoIsMostLikelyTo && currentQuestion?.closenessLevel != null && (
+                    <View style={styles.closenessLabelWrap}>
+                      <Text style={styles.closenessLabelText}>
+                        {t(closenessLabelKey(currentQuestion.closenessLevel))}
+                      </Text>
                     </View>
                   )}
                   <View style={styles.questionBlock}>
@@ -458,7 +388,7 @@ const styles = StyleSheet.create({
   cardContentWrap: {
     flex: 1,
   },
-  categoryPillWrap: {
+  closenessLabelWrap: {
     position: 'absolute',
     top: SPACING.lg,
     left: 0,
@@ -466,57 +396,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 1,
   },
-  categoryPill: {
-    backgroundColor: '#F4F7FB',
-    paddingVertical: 8,
-    paddingHorizontal: SPACING.lg,
-    borderRadius: BORDER_RADIUS.full,
-    borderWidth: 1,
-    borderColor: '#DFE6F0',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: SPACING.sm,
-  },
-  categoryPillText: {
-    fontSize: 14,
+  closenessLabelText: {
+    fontSize: 12,
     fontFamily: FONTS.inter.regular,
-    color: CARD_TEXT_COLOR,
-  },
-  categoryPillArrow: {
-    fontSize: 10,
-    fontFamily: FONTS.inter.regular,
-    color: CARD_TEXT_COLOR,
-  },
-  closenessMenu: {
-    marginTop: SPACING.sm,
-    width: 220,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    paddingVertical: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
-    borderWidth: 1,
-    borderColor: '#E5E5EA',
-  },
-  closenessMenuOption: {
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    marginHorizontal: 6,
-    borderRadius: 8,
-  },
-  closenessMenuOptionActive: {
-    backgroundColor: '#F2F2F7',
-  },
-  closenessMenuText: {
-    fontSize: 14,
-    fontFamily: FONTS.inter.regular,
+    color: CARD_META_COLOR,
+    letterSpacing: 0.2,
     textAlign: 'center',
-  },
-  closenessMenuTextActive: {
-    fontWeight: '600',
+    opacity: 0.9,
   },
   questionBlock: {
     flex: 1,

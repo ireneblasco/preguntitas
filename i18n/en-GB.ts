@@ -24,7 +24,8 @@ export const enGB = {
       },
       {
         headline: 'Each card shows how deep it goes.',
-        subtext: 'Tap the level to filter, or leave it as Random.',
+        subtext:
+          'A subtle label shows the level. As you swipe, you will see every question in that moment.',
       },
       {
         headline: 'No more boring conversations.',
@@ -84,6 +85,11 @@ export const enGB = {
     hint: 'Swipe or tap to change question',
     emptySelectMoment: 'Select a moment from home to start',
     emptyNoQuestions: 'No questions for this moment',
+    closenessLabels: {
+      level1: 'Level 1 · Icebreaker',
+      level2: 'Level 2 · Personal',
+      level3: 'Level 3 · Vulnerable',
+    },
   },
   settings: {
     title: 'Settings',

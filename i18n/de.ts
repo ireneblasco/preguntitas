@@ -23,9 +23,9 @@ export const de = {
           'Wähle auf dem Startbildschirm einen Moment — jede Kategorie gruppiert Fragen für diese Art von Situation.',
       },
       {
-        headline: 'Jede Karte zeigt die Tiefe.',
+        headline: 'Jede Karte zeigt, wie tief die Frage geht.',
         subtext:
-          'Icebreaker für Leichtes, Personal zum Näherkommen, Vulnerable für das Echte.',
+          'Eine dezente Beschriftung zeigt die Stufe. Beim Wischen siehst du alle Fragen dieses Moments.',
       },
       {
         headline: 'Keine langweiligen Gespräche mehr.',
@@ -85,6 +85,11 @@ export const de = {
     hint: 'Wische oder tippe, um die Frage zu wechseln',
     emptySelectMoment: 'Wähle zuerst einen Moment auf der Startseite',
     emptyNoQuestions: 'Keine Fragen für diesen Moment',
+    closenessLabels: {
+      level1: 'Stufe 1 · Eisbrecher',
+      level2: 'Stufe 2 · Persönlich',
+      level3: 'Stufe 3 · Verletzlich',
+    },
   },
   settings: {
     title: 'Einstellungen',

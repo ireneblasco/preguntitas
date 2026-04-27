@@ -335,74 +335,22 @@ function MomentsOnboardingVisual() {
   );
 }
 
-const CLOSENESS_FILTER_PREVIEW = ['Random', 'Icebreaker', 'Personal', 'Vulnerable'] as const;
-
-/** Visual simple del filtro por level (pill + desplegable). */
+/** Tarjeta de ejemplo con etiqueta de nivel (solo informativa, sin filtro). */
 function ClosenessVisual() {
+  const { t, tArray } = useTranslation();
   const theme = CARD_THEMES[2];
+  const sampleQs = tArray('onboarding.screens.0.tileQuestions');
+  const sample = sampleQs[0] ?? '…';
 
   return (
     <View style={styles.closenessWrap}>
       <View style={[styles.questionCardWrap, { width: SCREEN_WIDTH - SPACING.lg * 4, backgroundColor: theme.bg }]}>
-        <View
-          style={[
-            styles.closenessLevelPill,
-            {
-              borderColor: theme.text,
-              backgroundColor: `${theme.text}22`,
-            },
-          ]}
-        >
-          <Text style={[styles.closenessLevelPillText, { color: theme.text }]}>
-            Level 2 Personal
-          </Text>
-          <Text style={[styles.closenessLevelPillArrow, { color: theme.text }]}>▼</Text>
-        </View>
-        <View style={styles.closenessFilterRow}>
-          {CLOSENESS_FILTER_PREVIEW.map((option, optionIndex) => (
-            <View
-              key={option}
-              style={[
-                styles.closenessFilterChip,
-                {
-                  borderColor: theme.text,
-                  backgroundColor: optionIndex === 2 ? `${theme.text}22` : 'transparent',
-                },
-              ]}
-            >
-              <Text
-                style={[
-                  styles.closenessFilterChipText,
-                  { color: theme.text },
-                  optionIndex === 2 && styles.closenessFilterChipTextActive,
-                ]}
-              >
-                {option}
-              </Text>
-            </View>
-          ))}
-        </View>
-        <View style={styles.closenessMenuMock}>
-          {CLOSENESS_FILTER_PREVIEW.map((option, optionIndex) => (
-            <View
-              key={`${option}-menu`}
-              style={[
-                styles.closenessMenuOption,
-                optionIndex === 2 && { backgroundColor: `${theme.text}12` },
-              ]}
-            >
-              <Text
-                style={[
-                  styles.closenessMenuOptionText,
-                  { color: theme.text },
-                  optionIndex === 2 && styles.closenessMenuOptionTextActive,
-                ]}
-              >
-                {option}
-              </Text>
-            </View>
-          ))}
-        </View>
+        <Text style={[styles.closenessDiscreteLabel, { color: theme.text }]}>
+          {t('questions.closenessLabels.level2')}
+        </Text>
+        <Text style={[styles.closenessExampleQuestion, { color: theme.text }]} numberOfLines={3}>
+          {sample}
+        </Text>
       </View>
       <View style={styles.closenessDots}>
         {[0, 1, 2].map((i) => (
@@ -584,73 +532,29 @@ const styles = StyleSheet.create({
     borderRadius: BORDER_RADIUS['2xl'],
     padding: SPACING.lg,
     minHeight: 180,
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.12,
     shadowRadius: 8,
     elevation: 6,
   },
-  closenessLevelPill: {
-    alignSelf: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: SPACING.lg,
-    borderRadius: BORDER_RADIUS.full,
-    borderWidth: 2,
-    marginBottom: SPACING.lg,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: SPACING.sm,
-  },
-  closenessLevelPillText: {
-    fontSize: 14,
-    fontFamily: FONTS.inter.regular,
-    fontWeight: '600',
-  },
-  closenessLevelPillArrow: {
-    fontSize: 10,
-    fontFamily: FONTS.inter.regular,
-  },
-  closenessFilterRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    gap: SPACING.xs,
-    marginBottom: SPACING.lg,
-    paddingHorizontal: SPACING.xs,
-  },
-  closenessFilterChip: {
-    paddingVertical: 5,
-    paddingHorizontal: 9,
-    borderRadius: BORDER_RADIUS.full,
-    borderWidth: 1,
-  },
-  closenessFilterChipText: {
-    fontSize: 11,
-    fontFamily: FONTS.inter.regular,
-  },
-  closenessFilterChipTextActive: {
-    fontWeight: '600',
-  },
-  closenessMenuMock: {
-    marginTop: SPACING.sm,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#E5E5EA',
-    backgroundColor: '#FFFFFF',
-    padding: SPACING.xs,
-  },
-  closenessMenuOption: {
-    paddingVertical: 8,
-    paddingHorizontal: SPACING.md,
-    borderRadius: 8,
-  },
-  closenessMenuOptionText: {
-    fontSize: 13,
+  closenessDiscreteLabel: {
+    fontSize: 12,
     fontFamily: FONTS.inter.regular,
     textAlign: 'center',
+    opacity: 0.72,
+    letterSpacing: 0.2,
+    marginBottom: SPACING.md,
   },
-  closenessMenuOptionTextActive: {
-    fontWeight: '600',
+  closenessExampleQuestion: {
+    fontSize: FONT_SIZES.xl,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '500',
+    textAlign: 'center',
+    lineHeight: 30,
+    paddingHorizontal: SPACING.sm,
   },
   textContainer: {
     alignItems: 'center',

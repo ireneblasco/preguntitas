@@ -23,9 +23,9 @@ export const pt = {
           'No ecrã inicial, escolhe um momento — cada categoria agrupa perguntas para esse tipo de situação.',
       },
       {
-        headline: 'Cada cartão mostra o nível de confiança.',
+        headline: 'Cada cartão indica a profundidade da pergunta.',
         subtext:
-          'Icebreaker para algo leve, Personal para aproximar e Vulnerable para o que importa.',
+          'Há uma etiqueta discreta com o nível. Ao deslizar vês todas as perguntas desse momento.',
       },
       {
         headline: 'Chega de conversas sem graça.',
@@ -85,6 +85,11 @@ export const pt = {
     hint: 'Desliza ou toca para mudar de pergunta',
     emptySelectMoment: 'Escolhe um momento no início para começar',
     emptyNoQuestions: 'Não há perguntas para este momento',
+    closenessLabels: {
+      level1: 'Nível 1 · Quebra-gelo',
+      level2: 'Nível 2 · Pessoal',
+      level3: 'Nível 3 · Íntimo',
+    },
   },
   settings: {
     title: 'Definições',

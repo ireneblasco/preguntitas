@@ -22,9 +22,9 @@ export const it = {
           'Nella home scegli un momento: ogni categoria raggruppa domande per quel tipo di situazione.',
       },
       {
-        headline: 'Ogni carta mostra il livello di confidenza.',
+        headline: 'Ogni carta indica quanto è profonda la domanda.',
         subtext:
-          'Icebreaker per qualcosa di leggero, Personal per avvicinarsi, Vulnerable per ciò che conta.',
+          'Un’etichetta discreta mostra il livello. Scorrendo vedrai tutte le domande di quel momento.',
       },
       {
         headline: 'Basta conversazioni noiose.',
@@ -84,6 +84,11 @@ export const it = {
     hint: 'Scorri o tocca per cambiare domanda',
     emptySelectMoment: 'Scegli un momento dalla home per iniziare',
     emptyNoQuestions: 'Nessuna domanda per questo momento',
+    closenessLabels: {
+      level1: 'Livello 1 · Rompighiaccio',
+      level2: 'Livello 2 · Personale',
+      level3: 'Livello 3 · Intimo',
+    },
   },
   settings: {
     title: 'Impostazioni',

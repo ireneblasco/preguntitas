@@ -23,9 +23,9 @@ export const fr = {
           'Sur l’écran d’accueil, choisis un moment — chaque catégorie regroupe des questions adaptées au contexte.',
       },
       {
-        headline: 'Chaque carte affiche le niveau de proximité.',
+        headline: 'Chaque carte indique la profondeur de la question.',
         subtext:
-          'Icebreaker pour du léger, Personal pour se rapprocher, Vulnerable pour l’essentiel.',
+          'Une petite étiquette indique le niveau. En faisant défiler, tu verras toutes les questions de ce moment.',
       },
       {
         headline: 'Fini les conversations ennuyeuses.',
@@ -85,6 +85,11 @@ export const fr = {
     hint: 'Glisse ou appuie pour changer de question',
     emptySelectMoment: 'Choisis un moment depuis l\'accueil pour commencer',
     emptyNoQuestions: 'Aucune question pour ce moment',
+    closenessLabels: {
+      level1: 'Niveau 1 · Brise-glace',
+      level2: 'Niveau 2 · Personnel',
+      level3: 'Niveau 3 · Vulnérable',
+    },
   },
   settings: {
     title: 'Paramètres',
