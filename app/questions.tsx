@@ -596,7 +596,7 @@ export default function Questions() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: COLORS.background.primary,
+    backgroundColor: '#FFFFFF',
   },
   screenWhite: {
     backgroundColor: '#FFFFFF',
@@ -686,6 +686,10 @@ const styles = StyleSheet.create({
   },
   fullCardLayer: {
     ...StyleSheet.absoluteFillObject,
+    top: SPACING.sm,
+    bottom: SPACING.lg,
+    left: SPACING.md,
+    right: SPACING.md,
   },
   cardOuter: {
     flex: 1,

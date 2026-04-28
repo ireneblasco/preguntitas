@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   brandName: {
     fontSize: FONT_SIZES['4xl'],
     fontFamily: FONTS.brasikaDisplay,
-    color: COLORS.text.primary,
+    color: '#000000',
     textAlign: 'center',
     letterSpacing: -0.5,
   },

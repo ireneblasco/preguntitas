@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   wordmark: {
     fontFamily: FONTS.brasikaDisplay,
     fontSize: FONT_SIZES['2xl'],
-    color: HOME_LABEL,
+    color: '#000000',
     textAlign: 'center',
   },
   pressed: {
