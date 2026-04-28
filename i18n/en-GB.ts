@@ -8,7 +8,7 @@ export const enGB = {
     next: 'Next',
     screens: [
       {
-        headline: 'Questions that spark real conversations.',
+        headline: 'Questions that spark real conversations',
         subtext:
           'Let the conversation flow, and if a question clicks, dive deeper and see where it takes you.',
         tileQuestions: [
@@ -19,7 +19,7 @@ export const enGB = {
         ],
       },
       {
-        headline: 'Pick the moment.',
+        headline: 'Pick the moment',
         subtext: 'Each category groups questions for that kind of time together.',
       },
       {

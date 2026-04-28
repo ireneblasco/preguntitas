@@ -15,6 +15,7 @@ import Animated, {
   Extrapolation,
   FadeIn,
   FadeOut,
+  Easing,
 } from 'react-native-reanimated';
 import type { ClosenessLevel, Question } from '../types/questions';
 import {
@@ -42,6 +43,13 @@ const WHO_IS_MOST_LIKELY_TO_MATCHER = /who is most likely to/i;
 
 /** Tras onboarding: solo estas preguntas de Break the ice antes de ir a inicio. */
 const ONBOARDING_BREAK_ICE_COUNT = 3;
+const ONBOARDING_READY_MESSAGE = "You're ready";
+const ONBOARDING_READY_DELAY_MS = 1200;
+const ONBOARDING_BREAK_ICE_PRIORITY_EN_US = [
+  'If you could live anywhere for a year, where would it be?',
+  'If you could instantly master something, what would it be?',
+  'If you had to switch lives with one of your friends, who would you pick?',
+] as const;
 
 function closenessLabelKey(level: ClosenessLevel): string {
   if (level === 1) return 'questions.closenessLabels.level1';
@@ -134,6 +142,7 @@ export default function Questions() {
    * retroceder hace pop y vuelve exactamente a la carta que acababas de ver.
    */
   const [viewPath, setViewPath] = useState<number[]>([0]);
+  const [isCompletingOnboarding, setIsCompletingOnboarding] = useState(false);
   const [currentQuestionId, setCurrentQuestionId] = useState<string>('');
   /** Evita doble “siguiente” (p. ej. tap + desliz o doble registro) en pocos ms. */
   const lastNextAtRef = useRef(0);
@@ -144,6 +153,7 @@ export default function Questions() {
   const suppressNextUntilRef = useRef(0);
 
   const translateX = useSharedValue(0);
+  const completionProgress = useSharedValue(0);
 
   const filteredQuestions = useMemo(() => {
     if (!moment) return [];
@@ -191,13 +201,26 @@ export default function Questions() {
 
   useEffect(() => {
     setViewPath([0]);
+    setIsCompletingOnboarding(false);
   }, [filteredQuestionSetKey, moment]);
 
   const onboardingDeck = useMemo(() => {
     if (!entryFromOnboarding || shuffledQuestions.length === 0) return [];
-    const n = Math.min(ONBOARDING_BREAK_ICE_COUNT, shuffledQuestions.length);
-    return shuffledQuestions.slice(0, n);
-  }, [entryFromOnboarding, shuffledQuestions]);
+    const preferredOrder = new Map(
+      ONBOARDING_BREAK_ICE_PRIORITY_EN_US.map((text, index) => [text, index])
+    );
+    const enUsById = questionTextByLocale['en-US'] ?? {};
+    const orderedOnboardingQuestions = [...shuffledQuestions].sort((a, b) => {
+      const aRank = preferredOrder.get(enUsById[a.id] ?? '');
+      const bRank = preferredOrder.get(enUsById[b.id] ?? '');
+      if (aRank == null && bRank == null) return 0;
+      if (aRank == null) return 1;
+      if (bRank == null) return -1;
+      return aRank - bRank;
+    });
+    const n = Math.min(ONBOARDING_BREAK_ICE_COUNT, orderedOnboardingQuestions.length);
+    return orderedOnboardingQuestions.slice(0, n);
+  }, [entryFromOnboarding, questionTextByLocale, shuffledQuestions]);
 
   const activeDeck = entryFromOnboarding ? onboardingDeck : shuffledQuestions;
   const isOnboardingLimited = entryFromOnboarding && onboardingDeck.length > 0;
@@ -223,11 +246,23 @@ export default function Questions() {
     }
   }, [currentQuestion]);
 
-  const goHomeFromIntro = useCallback(() => {
-    router.replace('/home');
-  }, [router]);
+  useEffect(() => {
+    if (!isCompletingOnboarding) return;
+    const timeout = setTimeout(() => {
+      router.replace('/home');
+    }, ONBOARDING_READY_DELAY_MS);
+    return () => clearTimeout(timeout);
+  }, [isCompletingOnboarding, router]);
+
+  useEffect(() => {
+    completionProgress.value = withTiming(isCompletingOnboarding ? 1 : 0, {
+      duration: 620,
+      easing: Easing.bezier(0.22, 1, 0.36, 1),
+    });
+  }, [completionProgress, isCompletingOnboarding]);
 
   const handleNext = useCallback(() => {
+    if (isCompletingOnboarding) return;
     if (Date.now() < suppressNextUntilRef.current) {
       return;
     }
@@ -242,7 +277,7 @@ export default function Questions() {
         if (dlen === 0) return path;
         const last = path[path.length - 1] ?? 0;
         if (last >= dlen - 1) {
-          queueMicrotask(goHomeFromIntro);
+          setIsCompletingOnboarding(true);
           return path;
         }
         return [...path, last + 1];
@@ -258,21 +293,24 @@ export default function Questions() {
       return [...path, (last + 1) % n];
     });
     lastNextAtRef.current = Date.now();
-  }, [goHomeFromIntro, isOnboardingLimited, onboardingDeck.length, shuffledQuestions.length]);
+  }, [isCompletingOnboarding, isOnboardingLimited, onboardingDeck.length, shuffledQuestions.length]);
 
   const handlePrevious = useCallback(() => {
+    if (isCompletingOnboarding) return;
     setViewPath((path) => (path.length > 1 ? path.slice(0, -1) : path));
     suppressNextUntilRef.current = Date.now() + 550;
-  }, []);
+  }, [isCompletingOnboarding]);
 
   const handleFavorite = async () => {
+    if (isCompletingOnboarding) return;
     if (currentQuestion) await toggleFavorite(currentQuestion.id);
   };
 
   const handleFavoritePressIn = useCallback(() => {
+    if (isCompletingOnboarding) return;
     // Evita que el tap global de la carta avance justo al tocar el favorito.
     suppressNextUntilRef.current = Date.now() + 450;
-  }, []);
+  }, [isCompletingOnboarding]);
 
   const pan = Gesture.Pan()
     .minDistance(10)
@@ -326,6 +364,29 @@ export default function Questions() {
     };
   });
 
+  const onboardingCardTransitionStyle = useAnimatedStyle(() => {
+    if (!isOnboardingLimited) return {};
+    const progress = completionProgress.value;
+    return {
+      opacity: 1 - progress,
+      transform: [
+        { translateY: interpolate(progress, [0, 1], [0, -14], Extrapolation.CLAMP) },
+        { scale: interpolate(progress, [0, 1], [1, 0.985], Extrapolation.CLAMP) },
+      ],
+    };
+  });
+
+  const completionMessageStyle = useAnimatedStyle(() => {
+    const progress = completionProgress.value;
+    return {
+      opacity: interpolate(progress, [0, 0.45, 1], [0, 0, 1], Extrapolation.CLAMP),
+      transform: [
+        { translateY: interpolate(progress, [0, 1], [18, 0], Extrapolation.CLAMP) },
+        { scale: interpolate(progress, [0, 1], [0.98, 1], Extrapolation.CLAMP) },
+      ],
+    };
+  });
+
   if (!moment) {
     return (
       <View style={styles.screen}>
@@ -361,7 +422,7 @@ export default function Questions() {
   }
 
   return (
-    <View style={styles.screen}>
+    <View style={[styles.screen, isCompletingOnboarding && styles.screenWhite]}>
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <View style={styles.header}>
           <Pressable style={styles.backBtn} onPress={handleLeave} hitSlop={12}>
@@ -410,113 +471,118 @@ export default function Questions() {
         ) : null}
 
         <View style={styles.cardWrap}>
-          <GestureDetector gesture={cardGesture}>
-            <Animated.View style={[styles.cardOuter, animatedCardStyle]}>
-              <View style={styles.cardSurface}>
-                <LinearGradient
-                  colors={[...cardFaceGradient(momentTheme)]}
-                  locations={[0, 0.26, 0.55, 0.82, 1]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 0.75, y: 1 }}
-                  style={StyleSheet.absoluteFill}
-                  pointerEvents="none"
-                />
-                {/*
-                 * "transparent" en muchos móviles interpola con negro; terminar en #RRGGBB00
-                 * con el RGB del inicio de la carta (toSoft) evita banda/raya bajo el brillo.
-                 */}
-                <LinearGradient
-                  colors={[
-                    `${momentTheme.text}36`,
-                    `${toTextBadgeColor(momentTheme.bg)}6E`,
-                    `${toSoftCardColor(momentTheme.bg)}00`,
-                  ]}
-                  locations={[0, 0.42, 1]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 0.55, y: 1 }}
-                  style={styles.cardTopShine}
-                  pointerEvents="none"
-                />
-                <View style={styles.cardInner}>
-                  {momentLabel ? (
-                    <View style={styles.momentPillRow} pointerEvents="none">
-                      <View
-                        style={[
-                          styles.momentPill,
-                          { borderColor: `${momentTheme.text}55` },
-                        ]}
-                      >
-                        <Text
-                          style={styles.momentPillText}
-                          numberOfLines={1}
-                        >
-                          {momentLabel}
-                        </Text>
-                      </View>
-                    </View>
-                  ) : null}
-                <Animated.View
-                  key={currentQuestion?.id ?? 'empty'}
-                  style={styles.cardContentWrap}
-                  entering={FadeIn.duration(260)}
-                  exiting={FadeOut.duration(200)}
-                >
-                  {!isWhoIsMostLikelyTo && currentQuestion?.closenessLevel != null && (
-                    <View style={styles.closenessLabelWrap}>
-                      <View
-                        style={[
-                          styles.closenessPill,
-                          { backgroundColor: `${COLORS.brand.forest}1A` },
-                        ]}
-                      >
-                        <Text
-                          style={[styles.closenessPillText, { color: COLORS.brand.forest }]}
-                        >
-                          {t(closenessLabelKey(currentQuestion.closenessLevel))}
-                        </Text>
-                      </View>
-                    </View>
-                  )}
-                  <View style={styles.questionBlock}>
-                    <Text
-                      style={styles.questionText}
-                    >
-                      {currentQuestion
-                        ? getQuestionText(currentQuestion, lang, questionTextByLocale)
-                        : ''}
-                    </Text>
-                  </View>
-                </Animated.View>
-                <Pressable
-                  style={({ pressed }) => [styles.favBtn, pressed && styles.favBtnPressed]}
-                  onPress={handleFavorite}
-                  onPressIn={handleFavoritePressIn}
-                  hitSlop={18}
-                  pressRetentionOffset={18}
-                  accessibilityRole="button"
-                  accessibilityLabel={t('questions.favorite')}
-                >
-                  <Ionicons
-                    name={isFavorite(currentQuestionId) ? 'heart' : 'heart-outline'}
-                    size={24}
-                    color={
-                      isFavorite(currentQuestionId)
-                        ? COLORS.brand.terracotta
-                        : `${COLORS.text.primary}6E`
-                    }
+          <Animated.View style={[styles.completionWrap, completionMessageStyle]} pointerEvents="none">
+            <Text style={styles.completionTitle}>{ONBOARDING_READY_MESSAGE}</Text>
+          </Animated.View>
+          <Animated.View style={[styles.fullCardLayer, onboardingCardTransitionStyle]}>
+            <GestureDetector gesture={cardGesture}>
+              <Animated.View style={[styles.cardOuter, animatedCardStyle]}>
+                <View style={styles.cardSurface}>
+                  <LinearGradient
+                    colors={[...cardFaceGradient(momentTheme)]}
+                    locations={[0, 0.26, 0.55, 0.82, 1]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0.75, y: 1 }}
+                    style={StyleSheet.absoluteFill}
+                    pointerEvents="none"
                   />
-                </Pressable>
-                <Image
-                  source={require('../assets/mellow-card-m-mark.png')}
-                  style={styles.cardBrandMark}
-                  resizeMode="contain"
-                  accessible={false}
-                  accessibilityIgnoresInvertColors
-                />
+                  {/*
+                   * "transparent" en muchos móviles interpola con negro; terminar en #RRGGBB00
+                   * con el RGB del inicio de la carta (toSoft) evita banda/raya bajo el brillo.
+                   */}
+                  <LinearGradient
+                    colors={[
+                      `${momentTheme.text}36`,
+                      `${toTextBadgeColor(momentTheme.bg)}6E`,
+                      `${toSoftCardColor(momentTheme.bg)}00`,
+                    ]}
+                    locations={[0, 0.42, 1]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0.55, y: 1 }}
+                    style={styles.cardTopShine}
+                    pointerEvents="none"
+                  />
+                  <View style={styles.cardInner}>
+                    {momentLabel ? (
+                      <View style={styles.momentPillRow} pointerEvents="none">
+                        <View
+                          style={[
+                            styles.momentPill,
+                            { borderColor: `${momentTheme.text}55` },
+                          ]}
+                        >
+                          <Text
+                            style={styles.momentPillText}
+                            numberOfLines={1}
+                          >
+                            {momentLabel}
+                          </Text>
+                        </View>
+                      </View>
+                    ) : null}
+                  <Animated.View
+                    key={currentQuestion?.id ?? 'empty'}
+                    style={styles.cardContentWrap}
+                    entering={FadeIn.duration(260)}
+                    exiting={FadeOut.duration(200)}
+                  >
+                    {!isWhoIsMostLikelyTo && currentQuestion?.closenessLevel != null && (
+                      <View style={styles.closenessLabelWrap}>
+                        <View
+                          style={[
+                            styles.closenessPill,
+                            { backgroundColor: `${COLORS.brand.forest}1A` },
+                          ]}
+                        >
+                          <Text
+                            style={[styles.closenessPillText, { color: COLORS.brand.forest }]}
+                          >
+                            {t(closenessLabelKey(currentQuestion.closenessLevel))}
+                          </Text>
+                        </View>
+                      </View>
+                    )}
+                    <View style={styles.questionBlock}>
+                      <Text
+                        style={styles.questionText}
+                      >
+                        {currentQuestion
+                          ? getQuestionText(currentQuestion, lang, questionTextByLocale)
+                          : ''}
+                      </Text>
+                    </View>
+                  </Animated.View>
+                  <Pressable
+                    style={({ pressed }) => [styles.favBtn, pressed && styles.favBtnPressed]}
+                    onPress={handleFavorite}
+                    onPressIn={handleFavoritePressIn}
+                    hitSlop={18}
+                    pressRetentionOffset={18}
+                    accessibilityRole="button"
+                    accessibilityLabel={t('questions.favorite')}
+                  >
+                    <Ionicons
+                      name={isFavorite(currentQuestionId) ? 'heart' : 'heart-outline'}
+                      size={24}
+                      color={
+                        isFavorite(currentQuestionId)
+                          ? COLORS.brand.terracotta
+                          : `${COLORS.text.primary}6E`
+                      }
+                    />
+                  </Pressable>
+                  <Image
+                    source={require('../assets/mellow-card-m-mark.png')}
+                    style={styles.cardBrandMark}
+                    resizeMode="contain"
+                    accessible={false}
+                    accessibilityIgnoresInvertColors
+                  />
+                  </View>
                 </View>
-              </View>
-            </Animated.View>
-          </GestureDetector>
+              </Animated.View>
+            </GestureDetector>
+          </Animated.View>
         </View>
 
         <View style={styles.footer}>
@@ -531,6 +597,9 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: COLORS.background.primary,
+  },
+  screenWhite: {
+    backgroundColor: '#FFFFFF',
   },
   container: {
     flex: 1,
@@ -613,6 +682,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: CARD_MARGIN,
     paddingTop: SPACING.sm,
     paddingBottom: SPACING.sm,
+    position: 'relative',
+  },
+  fullCardLayer: {
+    ...StyleSheet.absoluteFillObject,
   },
   cardOuter: {
     flex: 1,
@@ -721,6 +794,20 @@ const styles = StyleSheet.create({
     width: 56,
     height: 46,
     opacity: 0.92,
+  },
+  completionWrap: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: SPACING.xl,
+  },
+  completionTitle: {
+    fontSize: FONT_SIZES['3xl'],
+    fontFamily: FONTS.inter.bold,
+    fontWeight: '700',
+    color: COLORS.brand.forest,
+    textAlign: 'center',
   },
   footer: {
     paddingHorizontal: CARD_MARGIN,

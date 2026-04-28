@@ -6,6 +6,7 @@ import {
   Dimensions,
   FlatList,
   ViewToken,
+  Image,
 } from 'react-native';
 import { useState, useRef, useCallback, useMemo } from 'react';
 import { findBreakTheIceMomentId } from '../constants';
@@ -26,28 +27,17 @@ import {
   SPACING,
   BORDER_RADIUS,
   CARD_THEMES,
-  sortMomentOptions,
-  getCategoryDisplayName,
-  getThemeForMomentId,
 } from '../constants';
 import * as onboardingUtils from '../utils/onboarding';
 import { useTranslation } from '../hooks/useTranslation';
-import { useQuestions, type MomentOption } from '../contexts/QuestionsContext';
+import { useQuestions } from '../contexts/QuestionsContext';
 import { useLocale } from '../contexts/LocaleContext';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-/** Vista previa en onboarding (orden fijo; datos reales desde Notion / caché). */
-const ONBOARDING_MOMENT_PREVIEW_IDS = [
-  'Drinks with Friends 🍸',
-  'Go Deep 🧠',
-  'Date Night 🌙',
-  'With Grandparents 💌',
-] as const;
-
 const HERO_PREVIEW_POOL_SIZE = 8;
 const HERO_STACK_CARD_COUNT = 4;
-const HERO_FORCED_QUESTION = 'If you had to switch lives with one of your friends, who would you pick?';
+const HERO_FORCED_QUESTION = 'What was harder than you expected in life?';
 
 type OnboardingScreen = { headline: string; subtext: string; cta?: string };
 
@@ -275,79 +265,14 @@ function MoodBoardHeroVisual({ question }: { question: string }) {
   );
 }
 
-/**
- * Cuatro momentos en rejilla 2×2: colores del mood board + emoji + nombre.
- */
 function MomentsOnboardingVisual() {
-  const { momentOptions } = useQuestions();
-  const { locale } = useLocale();
-  const { previewMoments, cellW, gridGap } = useMemo(() => {
-    const ordered = sortMomentOptions(momentOptions);
-    const byId = new Map(ordered.map((o) => [o.id, o]));
-
-    const resolve = (id: (typeof ONBOARDING_MOMENT_PREVIEW_IDS)[number]): MomentOption | undefined => {
-      const direct = byId.get(id);
-      if (direct) return direct;
-      if (id === 'Go Deep 🧠') {
-        return ordered.find((o) => o.id === 'Deep Stuff 🧠' || o.name === 'Deep Stuff');
-      }
-      if (id === 'With Grandparents 💌') {
-        return ordered.find(
-          (o) =>
-            o.id === 'With Grandparents 💌' ||
-            o.name === 'With Grandparents' ||
-            o.name.startsWith('Con mi abuela')
-        );
-      }
-      return undefined;
-    };
-
-    const previewMoments = ONBOARDING_MOMENT_PREVIEW_IDS.map((id) => resolve(id)).filter(
-      (o): o is MomentOption => o != null
-    );
-    const gridGap = 12;
-    const maxGrid = Math.min(SCREEN_WIDTH - SPACING.lg * 2, 328);
-    const cellW = (maxGrid - gridGap) / 2;
-    return { previewMoments, cellW, gridGap };
-  }, [momentOptions]);
-  const totalCategories = momentOptions.length;
-  const remainingCategories = Math.max(totalCategories - previewMoments.length, 0);
-  const categoriesHint =
-    locale.startsWith('es')
-      ? remainingCategories > 0
-        ? `+${remainingCategories} categorías más →`
-        : `${totalCategories} categorías`
-      : remainingCategories > 0
-        ? `+${remainingCategories} more categories →`
-        : `${totalCategories} categories`;
-
   return (
     <View style={styles.momentBentoWrap}>
-      <View style={[styles.momentBentoGrid, { width: cellW * 2 + gridGap, gap: gridGap }]}>
-        {previewMoments.map((option, index) => {
-          const theme = getThemeForMomentId(option.id, momentOptions);
-          const label = getCategoryDisplayName(option) || option.name;
-          return (
-            <View
-              key={option.id}
-              style={[
-                styles.momentBentoCell,
-                {
-                  width: cellW,
-                  backgroundColor: theme.bg,
-                  shadowColor: theme.bg,
-                },
-              ]}
-            >
-              <Text style={styles.momentBentoEmoji}>{option.emoji}</Text>
-              <Text style={[styles.momentBentoLabel, { color: theme.text }]} numberOfLines={2}>
-                {label}
-              </Text>
-            </View>
-          );
-        })}
-      </View>
-      <Text style={styles.momentBentoHintText}>{categoriesHint}</Text>
+      <Image
+        source={require('../assets/moments-pick-grid.png')}
+        style={styles.momentPreviewImage}
+        resizeMode="contain"
+      />
     </View>
   );
 }
@@ -392,7 +317,8 @@ const styles = StyleSheet.create({
     maxHeight: 300,
   },
   visualContainerMoments: {
-    minHeight: 260,
+    minHeight: 180,
+    marginBottom: SPACING.lg,
     alignSelf: 'stretch',
   },
   /** Pantallas 2–3: sin ilustración; menos aire para que el titular respire. */
@@ -402,44 +328,11 @@ const styles = StyleSheet.create({
   },
   momentBentoWrap: {
     alignItems: 'center',
+    width: '100%',
   },
-  momentBentoGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignSelf: 'center',
-    justifyContent: 'center',
-  },
-  momentBentoCell: {
-    minHeight: 118,
-    borderRadius: BORDER_RADIUS['2xl'],
-    paddingHorizontal: SPACING.md,
-    paddingVertical: SPACING.lg,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.22,
-    shadowRadius: 14,
-    elevation: 6,
-  },
-  momentBentoEmoji: {
-    fontSize: 36,
-    lineHeight: 42,
-    marginBottom: SPACING.sm,
-  },
-  momentBentoLabel: {
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    fontWeight: '600',
-    textAlign: 'center',
-    lineHeight: 19,
-  },
-  momentBentoHintText: {
-    marginTop: SPACING.md,
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    color: COLORS.text.secondary,
-    fontWeight: '500',
-    letterSpacing: 0.1,
+  momentPreviewImage: {
+    width: Math.min(SCREEN_WIDTH - SPACING.lg * 2, 360),
+    height: Math.min(SCREEN_WIDTH - SPACING.lg * 2, 360),
   },
   heroCarouselWrap: {
     width: '100%',
