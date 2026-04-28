@@ -17,23 +17,22 @@ export function useFavorites() {
   }, [loadFavorites]);
 
   const addFavorite = useCallback(async (questionId: string) => {
+    setFavorites((prev) => (prev.includes(questionId) ? prev : [...prev, questionId]));
     await favoritesUtils.addFavorite(questionId);
-    await loadFavorites();
-  }, [loadFavorites]);
+  }, []);
 
   const removeFavorite = useCallback(async (questionId: string) => {
+    setFavorites((prev) => prev.filter((id) => id !== questionId));
     await favoritesUtils.removeFavorite(questionId);
-    await loadFavorites();
-  }, [loadFavorites]);
+  }, []);
 
   const toggleFavorite = useCallback(async (questionId: string) => {
-    const isFav = await favoritesUtils.isFavorite(questionId);
-    if (isFav) {
-      await removeFavorite(questionId);
-    } else {
-      await addFavorite(questionId);
-    }
-  }, [addFavorite, removeFavorite]);
+    setFavorites((prev) => {
+      const isFav = prev.includes(questionId);
+      return isFav ? prev.filter((id) => id !== questionId) : [...prev, questionId];
+    });
+    await favoritesUtils.toggleFavorite(questionId);
+  }, []);
 
   const isFavorite = useCallback((questionId: string) => {
     return favorites.includes(questionId);

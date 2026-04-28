@@ -269,6 +269,11 @@ export default function Questions() {
     if (currentQuestion) await toggleFavorite(currentQuestion.id);
   };
 
+  const handleFavoritePressIn = useCallback(() => {
+    // Evita que el tap global de la carta avance justo al tocar el favorito.
+    suppressNextUntilRef.current = Date.now() + 450;
+  }, []);
+
   const pan = Gesture.Pan()
     .minDistance(10)
     .onUpdate((event) => {
@@ -485,10 +490,14 @@ export default function Questions() {
                 <Pressable
                   style={({ pressed }) => [styles.favBtn, pressed && styles.favBtnPressed]}
                   onPress={handleFavorite}
-                  hitSlop={12}
+                  onPressIn={handleFavoritePressIn}
+                  hitSlop={18}
+                  pressRetentionOffset={18}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('questions.favorite')}
                 >
                   <Ionicons
-                    name={isFavorite(currentQuestionId) ? 'bookmark' : 'bookmark-outline'}
+                    name={isFavorite(currentQuestionId) ? 'heart' : 'heart-outline'}
                     size={24}
                     color={
                       isFavorite(currentQuestionId)

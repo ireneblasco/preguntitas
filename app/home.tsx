@@ -5,7 +5,6 @@ import {
   Pressable,
   ScrollView,
   Alert,
-  LayoutChangeEvent,
   ImageBackground,
   Image,
 } from 'react-native';
@@ -13,7 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useMemo, useRef, useCallback } from 'react';
+import { useMemo, useCallback } from 'react';
 import {
   COLORS,
   FONTS,
@@ -68,8 +67,6 @@ export default function Home() {
     () => orderedOptions.filter((o) => !isBreakTheIceMoment(o)),
     [orderedOptions]
   );
-  const scrollRef = useRef<ScrollView>(null);
-  const browseSectionY = useRef(0);
 
   const handleStart = useCallback(
     (momentId: string) => {
@@ -92,21 +89,12 @@ export default function Home() {
     Alert.alert(t('home.premiumTitle'), t('home.premiumSoon'));
   }, [t]);
 
-  const onSeeAll = useCallback(() => {
-    scrollRef.current?.scrollTo({ y: Math.max(0, browseSectionY.current - 8), animated: true });
-  }, []);
-
-  const onBrowseLayout = useCallback((e: LayoutChangeEvent) => {
-    browseSectionY.current = e.nativeEvent.layout.y;
-  }, []);
-
   const tabBarInset = mainTabBarBottomInset(insets.bottom);
 
   return (
     <View style={styles.root}>
       <SafeAreaView style={styles.safeTop} edges={['top']}>
         <ScrollView
-          ref={scrollRef}
           contentContainerStyle={[styles.scrollContent, { paddingBottom: tabBarInset + SPACING.lg }]}
           showsVerticalScrollIndicator={false}
         >
@@ -157,11 +145,8 @@ export default function Home() {
             </ImageBackground>
           </Pressable>
 
-          <View style={styles.browseHeader} onLayout={onBrowseLayout}>
+          <View style={styles.browseHeader}>
             <Text style={styles.sectionHeadingFlat}>{t('home.browseByCategory')}</Text>
-            <Pressable onPress={onSeeAll} hitSlop={12} accessibilityRole="button" accessibilityLabel={t('home.seeAll')}>
-              <Text style={styles.seeAll}>{t('home.seeAll')}</Text>
-            </Pressable>
           </View>
 
           <View style={styles.cardList}>
@@ -223,7 +208,7 @@ export default function Home() {
                       {t('home.premiumTitle')}
                     </Text>
                     <Text style={styles.premiumSubtitle} numberOfLines={1}>
-                      {t('home.premiumSubtitle')}
+                      Unlimited access
                     </Text>
                   </View>
                   <View style={styles.premiumCta}>
@@ -377,11 +362,6 @@ const styles = StyleSheet.create({
     marginTop: SPACING.xl,
     marginBottom: SPACING.md,
   },
-  seeAll: {
-    fontSize: FONT_SIZES.sm,
-    fontWeight: '600',
-    color: HOME_LABEL,
-  },
   cardList: {
     gap: SPACING.md,
     marginBottom: SPACING.xl,
@@ -446,9 +426,9 @@ const styles = StyleSheet.create({
   },
   premiumSubtitle: {
     color: HOME_SECONDARY_LABEL,
-    fontSize: FONT_SIZES.xs,
+    fontSize: 11,
     fontFamily: FONTS.inter.regular,
-    lineHeight: 16,
+    lineHeight: 14,
   },
   premiumCta: {
     flexDirection: 'row',
