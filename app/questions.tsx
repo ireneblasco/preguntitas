@@ -572,7 +572,7 @@ export default function Questions() {
                     />
                   </Pressable>
                   <Image
-                    source={require('../assets/mellow-card-m-mark.png')}
+                    source={require('../assets/icon.png')}
                     style={styles.cardBrandMark}
                     resizeMode="contain"
                     accessible={false}
