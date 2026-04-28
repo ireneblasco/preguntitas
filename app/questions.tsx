@@ -511,9 +511,7 @@ export default function Questions() {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.hint}>
-            {isOnboardingLimited ? t('questions.onboardingHint') : t('questions.hint')}
-          </Text>
+          {!isOnboardingLimited ? <Text style={styles.hint}>{t('questions.hint')}</Text> : null}
         </View>
       </SafeAreaView>
     </View>
