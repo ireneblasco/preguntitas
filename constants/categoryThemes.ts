@@ -59,6 +59,20 @@ export function sortMomentOptions<T extends { id: string; name: string }>(option
   return ordered;
 }
 
+const BREAK_THE_ICE_MATCHER = /break the ice/i;
+
+/** True when this option is the light "Break the ice" starter category (any emoji / Notion id). */
+export function isBreakTheIceMoment(o: { id: string; name: string }): boolean {
+  return BREAK_THE_ICE_MATCHER.test(o.id) || BREAK_THE_ICE_MATCHER.test(o.name);
+}
+
+/** Moment id for Break the ice in home sort order, or null if the dataset has no such category. */
+export function findBreakTheIceMomentId<T extends { id: string; name: string }>(options: T[]): string | null {
+  const ordered = sortMomentOptions(options);
+  const found = ordered.find(isBreakTheIceMoment);
+  return found?.id ?? null;
+}
+
 /**
  * Returns the same theme used for this category on the homepage.
  * Use this for question cards and saved screen so colors match the category card.

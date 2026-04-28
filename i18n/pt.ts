@@ -23,13 +23,9 @@ export const pt = {
           'No ecrã inicial, escolhe um momento — cada categoria agrupa perguntas para esse tipo de situação.',
       },
       {
-        headline: 'Cada cartão indica a profundidade da pergunta.',
+        headline: 'Prontos — começamos leve.',
         subtext:
-          'Há uma etiqueta discreta com o nível. Ao deslizar vês todas as perguntas desse momento.',
-      },
-      {
-        headline: 'Chega de conversas sem graça.',
-        subtext: '',
+          'Abrimos perguntas fáceis para começar. Desliza ou toca quando quiseres passar à seguinte.',
         cta: 'Começar',
       },
     ],
@@ -82,6 +78,10 @@ export const pt = {
   questions: {
     previous: 'Anterior',
     next: 'Seguinte',
+    onboardingProgress: 'Pergunta {{current}} de {{total}}',
+    onboardingSkip: 'Saltar',
+    onboardingDone: 'Pronto',
+    onboardingHint: 'Três perguntas rápidas — depois vais ao início.',
     hint: 'Desliza ou toca para mudar de pergunta',
     emptySelectMoment: 'Escolhe um momento no início para começar',
     emptyNoQuestions: 'Não há perguntas para este momento',

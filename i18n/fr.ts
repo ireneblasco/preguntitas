@@ -23,14 +23,10 @@ export const fr = {
           'Sur l’écran d’accueil, choisis un moment — chaque catégorie regroupe des questions adaptées au contexte.',
       },
       {
-        headline: 'Chaque carte indique la profondeur de la question.',
+        headline: 'C’est bon — on commence doucement.',
         subtext:
-          'Une petite étiquette indique le niveau. En faisant défiler, tu verras toutes les questions de ce moment.',
-      },
-      {
-        headline: 'Fini les conversations ennuyeuses.',
-        subtext: '',
-        cta: 'C\'est parti',
+          'On t’ouvre des questions faciles pour lancer la discussion. Glisse ou touche pour la suivante.',
+        cta: 'Commencer',
       },
     ],
   },
@@ -82,6 +78,10 @@ export const fr = {
   questions: {
     previous: 'Précédent',
     next: 'Suivant',
+    onboardingProgress: 'Question {{current}} sur {{total}}',
+    onboardingSkip: 'Passer',
+    onboardingDone: 'OK',
+    onboardingHint: 'Trois questions rapides — puis l’accueil.',
     hint: 'Glisse ou appuie pour changer de question',
     emptySelectMoment: 'Choisis un moment depuis l\'accueil pour commencer',
     emptyNoQuestions: 'Aucune question pour ce moment',

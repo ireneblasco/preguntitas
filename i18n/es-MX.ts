@@ -23,14 +23,10 @@ export const esMX = {
           'En el inicio, elige un momento: cada categoría agrupa preguntas para ese tipo de situación.',
       },
       {
-        headline: 'Cada tarjeta indica qué tan profunda es la pregunta.',
+        headline: 'Listos: empezamos suave.',
         subtext:
-          'Verás una etiqueta discreta con el nivel. Al deslizar aparecen todas las preguntas de ese momento.',
-      },
-      {
-        headline: 'No más conversaciones aburridas.',
-        subtext: '',
-        cta: 'Vamos',
+          'Te llevamos a preguntas ligeras para arrancar. Desliza o toca cuando quieras la siguiente.',
+        cta: 'Empezar',
       },
     ],
   },
@@ -82,6 +78,10 @@ export const esMX = {
   questions: {
     previous: 'Anterior',
     next: 'Siguiente',
+    onboardingProgress: 'Pregunta {{current}} de {{total}}',
+    onboardingSkip: 'Saltar',
+    onboardingDone: 'Listo',
+    onboardingHint: 'Tres preguntas rápidas; después vas al inicio.',
     hint: 'Desliza o toca para cambiar de pregunta',
     emptySelectMoment: 'Elige un momento desde el inicio para empezar',
     emptyNoQuestions: 'No hay preguntas para este momento',

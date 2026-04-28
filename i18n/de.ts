@@ -23,14 +23,10 @@ export const de = {
           'Wähle auf dem Startbildschirm einen Moment — jede Kategorie gruppiert Fragen für diese Art von Situation.',
       },
       {
-        headline: 'Jede Karte zeigt, wie tief die Frage geht.',
+        headline: 'Du bist startklar — wir fangen locker an.',
         subtext:
-          'Eine dezente Beschriftung zeigt die Stufe. Beim Wischen siehst du alle Fragen dieses Moments.',
-      },
-      {
-        headline: 'Keine langweiligen Gespräche mehr.',
-        subtext: '',
-        cta: 'Los geht\'s',
+          'Wir öffnen leichte Einstiegsfragen für dich. Wische oder tippe, wenn du zur nächsten willst.',
+        cta: 'Starten',
       },
     ],
   },
@@ -82,6 +78,10 @@ export const de = {
   questions: {
     previous: 'Zurück',
     next: 'Weiter',
+    onboardingProgress: 'Frage {{current}} von {{total}}',
+    onboardingSkip: 'Überspringen',
+    onboardingDone: 'Fertig',
+    onboardingHint: 'Drei kurze Fragen — danach geht es zur Startseite.',
     hint: 'Wische oder tippe, um die Frage zu wechseln',
     emptySelectMoment: 'Wähle zuerst einen Moment auf der Startseite',
     emptyNoQuestions: 'Keine Fragen für diesen Moment',

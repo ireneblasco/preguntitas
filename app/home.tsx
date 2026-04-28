@@ -23,6 +23,8 @@ import {
   sortMomentOptions,
   getCategoryDisplayName,
   getMomentEmblemSource,
+  findBreakTheIceMomentId,
+  isBreakTheIceMoment,
 } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useTranslation } from '../hooks/useTranslation';
@@ -55,7 +57,6 @@ const MOMENT_LABELS: Record<string, string> = {
 };
 const DEFAULT_MOMENT_LABEL = 'Meaningful';
 const NEW_CATEGORY_MATCHER = /who is most likely to/i;
-const BREAK_THE_ICE_MATCHER = /break the ice/i;
 export default function Home() {
   const router = useRouter();
   const { t } = useTranslation();
@@ -64,10 +65,7 @@ export default function Home() {
   const orderedOptions = useMemo(() => sortMomentOptions(momentOptions), [momentOptions]);
   /** Sin Rompe el hielo: ya está en la tarjeta superior. */
   const browseMomentOptions = useMemo(
-    () =>
-      orderedOptions.filter(
-        (o) => !BREAK_THE_ICE_MATCHER.test(o.id) && !BREAK_THE_ICE_MATCHER.test(o.name)
-      ),
+    () => orderedOptions.filter((o) => !isBreakTheIceMoment(o)),
     [orderedOptions]
   );
   const scrollRef = useRef<ScrollView>(null);
@@ -82,12 +80,7 @@ export default function Home() {
     [momentOptions, router]
   );
 
-  const breakTheIceId = useMemo(() => {
-    const found = orderedOptions.find(
-      (o) => BREAK_THE_ICE_MATCHER.test(o.id) || BREAK_THE_ICE_MATCHER.test(o.name)
-    );
-    return found?.id ?? null;
-  }, [orderedOptions]);
+  const breakTheIceId = useMemo(() => findBreakTheIceMomentId(momentOptions), [momentOptions]);
 
   const onSurpriseMe = useCallback(() => {
     if (breakTheIceId) {

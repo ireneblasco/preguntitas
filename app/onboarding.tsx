@@ -8,6 +8,8 @@ import {
   ViewToken,
 } from 'react-native';
 import { useState, useRef, useCallback, useMemo } from 'react';
+import { findBreakTheIceMomentId } from '../constants';
+import { analytics } from '../utils/analytics';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Animated, {
@@ -54,11 +56,10 @@ function useOnboardingScreens(): OnboardingScreen[] {
   return [
     { headline: t('onboarding.screens.0.headline'), subtext: t('onboarding.screens.0.subtext') },
     { headline: t('onboarding.screens.1.headline'), subtext: t('onboarding.screens.1.subtext') },
-    { headline: t('onboarding.screens.2.headline'), subtext: t('onboarding.screens.2.subtext') },
     {
-      headline: t('onboarding.screens.3.headline'),
-      subtext: t('onboarding.screens.3.subtext'),
-      cta: t('onboarding.screens.3.cta'),
+      headline: t('onboarding.screens.2.headline'),
+      subtext: t('onboarding.screens.2.subtext'),
+      cta: t('onboarding.screens.2.cta'),
     },
   ];
 }
@@ -67,7 +68,7 @@ export default function Onboarding() {
   const router = useRouter();
   const { t } = useTranslation();
   const { locale } = useLocale();
-  const { questions, questionTextByLocale } = useQuestions();
+  const { questions, questionTextByLocale, momentOptions } = useQuestions();
   const SCREENS = useOnboardingScreens();
   const heroQuestion = useMemo(() => {
     if (HERO_FORCED_QUESTION.trim().length > 0) {
@@ -88,6 +89,21 @@ export default function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
+  const finishOnboarding = useCallback(async () => {
+    await onboardingUtils.markOnboardingSeen();
+    const iceId = findBreakTheIceMomentId(momentOptions);
+    if (iceId) {
+      const categoryName = momentOptions.find((m) => m.id === iceId)?.name ?? iceId;
+      analytics.categoryOpened(categoryName);
+      router.replace({
+        pathname: '/questions',
+        params: { moment: iceId, entry: 'onboarding' },
+      });
+    } else {
+      router.replace('/home');
+    }
+  }, [momentOptions, router]);
+
   const handleNext = async () => {
     if (currentIndex < SCREENS.length - 1) {
       flatListRef.current?.scrollToIndex({
@@ -95,14 +111,12 @@ export default function Onboarding() {
         animated: true,
       });
     } else {
-      await onboardingUtils.markOnboardingSeen();
-      router.replace('/home');
+      await finishOnboarding();
     }
   };
 
   const handleSkip = async () => {
-    await onboardingUtils.markOnboardingSeen();
-    router.replace('/home');
+    await finishOnboarding();
   };
 
   const onViewableItemsChanged = useCallback(
@@ -130,7 +144,6 @@ export default function Onboarding() {
         >
           {index === 0 && <MoodBoardHeroVisual question={heroQuestion} />}
           {index === 1 && <MomentsOnboardingVisual />}
-          {index === 2 && <ClosenessVisual />}
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.headline}>{item.headline}</Text>
@@ -335,38 +348,6 @@ function MomentsOnboardingVisual() {
   );
 }
 
-/** Tarjeta de ejemplo con etiqueta de nivel (solo informativa, sin filtro). */
-function ClosenessVisual() {
-  const { t, tArray } = useTranslation();
-  const theme = CARD_THEMES[2];
-  const sampleQs = tArray('onboarding.screens.0.tileQuestions');
-  const sample = sampleQs[0] ?? '…';
-
-  return (
-    <View style={styles.closenessWrap}>
-      <View style={[styles.questionCardWrap, { width: SCREEN_WIDTH - SPACING.lg * 4, backgroundColor: theme.bg }]}>
-        <Text style={[styles.closenessDiscreteLabel, { color: theme.text }]}>
-          {t('questions.closenessLabels.level2')}
-        </Text>
-        <Text style={[styles.closenessExampleQuestion, { color: theme.text }]} numberOfLines={3}>
-          {sample}
-        </Text>
-      </View>
-      <View style={styles.closenessDots}>
-        {[0, 1, 2].map((i) => (
-          <View
-            key={i}
-            style={[
-              styles.closenessDot,
-              i === 1 && styles.closenessDotActive,
-            ]}
-          />
-        ))}
-      </View>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   gradient: {
     flex: 1,
@@ -506,55 +487,6 @@ const styles = StyleSheet.create({
     lineHeight: 32,
     fontWeight: '500',
     letterSpacing: 0.1,
-  },
-  closenessWrap: {
-    alignItems: 'center',
-    width: '100%',
-  },
-  closenessDots: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 8,
-    marginTop: SPACING.lg,
-  },
-  closenessDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: COLORS.border.light,
-  },
-  closenessDotActive: {
-    width: 20,
-    backgroundColor: COLORS.text.primary,
-  },
-  questionCardWrap: {
-    width: SCREEN_WIDTH - SPACING.lg * 4,
-    borderRadius: BORDER_RADIUS['2xl'],
-    padding: SPACING.lg,
-    minHeight: 180,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-    elevation: 6,
-  },
-  closenessDiscreteLabel: {
-    fontSize: 12,
-    fontFamily: FONTS.inter.regular,
-    textAlign: 'center',
-    opacity: 0.72,
-    letterSpacing: 0.2,
-    marginBottom: SPACING.md,
-  },
-  closenessExampleQuestion: {
-    fontSize: FONT_SIZES.xl,
-    fontFamily: FONTS.inter.regular,
-    fontWeight: '500',
-    textAlign: 'center',
-    lineHeight: 30,
-    paddingHorizontal: SPACING.sm,
   },
   textContainer: {
     alignItems: 'center',

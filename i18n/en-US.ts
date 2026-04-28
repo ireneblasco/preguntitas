@@ -23,14 +23,10 @@ export const enUS = {
         subtext: 'Each category groups questions for that kind of time together.',
       },
       {
-        headline: 'Each card shows how deep it goes.',
+        headline: "You're ready—let's start light.",
         subtext:
-          'A subtle label shows the level. As you swipe, you will see every question in that moment.',
-      },
-      {
-        headline: 'No more boring conversations.',
-        subtext: '',
-        cta: "Let's go",
+          "We'll open easy starter questions for you. Swipe or tap when you're ready for the next one.",
+        cta: 'Start',
       },
     ],
   },
@@ -82,6 +78,10 @@ export const enUS = {
   questions: {
     previous: 'Previous',
     next: 'Next',
+    onboardingProgress: 'Question {{current}} of {{total}}',
+    onboardingSkip: 'Skip',
+    onboardingDone: 'Done',
+    onboardingHint: 'Three quick questions — then you will be on the home screen.',
     hint: 'Swipe or tap to change question',
     emptySelectMoment: 'Select a moment from home to start',
     emptyNoQuestions: 'No questions for this moment',

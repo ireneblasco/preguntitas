@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet, Pressable, Dimensions } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -30,6 +30,9 @@ const CARD_TEXT_COLOR = '#203246';
 const CARD_META_COLOR = '#7E8C9D';
 
 const WHO_IS_MOST_LIKELY_TO_MATCHER = /who is most likely to/i;
+
+/** Tras onboarding: solo estas preguntas de Break the ice antes de ir a inicio. */
+const ONBOARDING_BREAK_ICE_COUNT = 3;
 
 function closenessLabelKey(level: ClosenessLevel): string {
   if (level === 1) return 'questions.closenessLabels.level1';
@@ -63,14 +66,28 @@ function toTextBadgeColor(hex: string): string {
   return `#${sr}${sg}${sb}`;
 }
 
+function firstParam(value: string | string[] | undefined): string | undefined {
+  if (typeof value === 'string') return value;
+  if (Array.isArray(value) && value.length > 0) return value[0];
+  return undefined;
+}
+
 export default function Questions() {
-  const params = useLocalSearchParams<{ moment?: string; selectedmoment?: string }>();
+  const params = useLocalSearchParams<{ moment?: string; selectedmoment?: string; entry?: string }>();
   const moment =
-    (typeof params.moment === 'string' ? params.moment : null) ??
+    firstParam(params.moment) ??
     (typeof (params as Record<string, unknown>).selectedmoment === 'string'
       ? ((params as Record<string, unknown>).selectedmoment as string)
       : undefined);
+  const entryFromOnboarding = firstParam(params.entry) === 'onboarding';
   const router = useRouter();
+  const handleLeave = useCallback(() => {
+    if (entryFromOnboarding) {
+      router.replace('/home');
+    } else {
+      router.back();
+    }
+  }, [entryFromOnboarding, router]);
   const { t } = useTranslation();
   const { questions, momentOptions, questionTextByLocale } = useQuestions();
   const { toggleFavorite, isFavorite } = useFavorites();
@@ -116,9 +133,22 @@ export default function Questions() {
     return [...fixed, ...rest];
   }, [filteredQuestions, moment]);
 
+  const onboardingDeck = useMemo(() => {
+    if (!entryFromOnboarding || shuffledQuestions.length === 0) return [];
+    const n = Math.min(ONBOARDING_BREAK_ICE_COUNT, shuffledQuestions.length);
+    return shuffledQuestions.slice(0, n);
+  }, [entryFromOnboarding, shuffledQuestions]);
+
+  const activeDeck = entryFromOnboarding ? onboardingDeck : shuffledQuestions;
+  const isOnboardingLimited = entryFromOnboarding && onboardingDeck.length > 0;
+
   const currentQuestion =
-    shuffledQuestions.length > 0
-      ? shuffledQuestions[questionIndex % shuffledQuestions.length]
+    activeDeck.length > 0
+      ? activeDeck[
+          isOnboardingLimited
+            ? Math.min(questionIndex, activeDeck.length - 1)
+            : questionIndex % activeDeck.length
+        ]
       : undefined;
 
   useEffect(() => {
@@ -128,10 +158,25 @@ export default function Questions() {
     }
   }, [currentQuestion]);
 
-  const handleNext = () => {
+  const goHomeFromIntro = useCallback(() => {
+    router.replace('/home');
+  }, [router]);
+
+  const handleNext = useCallback(() => {
+    if (isOnboardingLimited) {
+      setQuestionIndex((prev) => {
+        if (onboardingDeck.length === 0) return prev;
+        if (prev >= onboardingDeck.length - 1) {
+          queueMicrotask(goHomeFromIntro);
+          return prev;
+        }
+        return prev + 1;
+      });
+      return;
+    }
     if (filteredQuestions.length === 0) return;
     setQuestionIndex((prev) => prev + 1);
-  };
+  }, [filteredQuestions.length, goHomeFromIntro, isOnboardingLimited, onboardingDeck.length]);
 
   const handlePrevious = () => {
     setQuestionIndex((prev) => Math.max(0, prev - 1));
@@ -185,7 +230,7 @@ export default function Questions() {
       <View style={styles.screen}>
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
           <View style={styles.header}>
-            <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
+            <Pressable style={styles.backBtn} onPress={handleLeave} hitSlop={12}>
               <Text style={styles.backLabel}>‹</Text>
             </Pressable>
           </View>
@@ -202,7 +247,7 @@ export default function Questions() {
       <View style={styles.screen}>
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
           <View style={styles.header}>
-            <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
+            <Pressable style={styles.backBtn} onPress={handleLeave} hitSlop={12}>
               <Text style={styles.backLabel}>‹</Text>
             </Pressable>
           </View>
@@ -218,14 +263,50 @@ export default function Questions() {
     <View style={styles.screen}>
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <View style={styles.header}>
-          <Pressable style={styles.backBtn} onPress={() => router.back()} hitSlop={12}>
+          <Pressable style={styles.backBtn} onPress={handleLeave} hitSlop={12}>
             <Text style={styles.backLabel}>‹</Text>
           </Pressable>
           <Text style={[styles.headerTitle, { color: momentTitleColor }]} numberOfLines={1}>
             {momentLabel}
           </Text>
-          <View style={styles.headerRight} />
+          {isOnboardingLimited ? (
+            <Pressable
+              style={styles.skipBtn}
+              onPress={handleLeave}
+              hitSlop={12}
+              accessibilityRole="button"
+              accessibilityLabel={t('questions.onboardingSkip')}
+            >
+              <Text style={styles.skipBtnText}>{t('questions.onboardingSkip')}</Text>
+            </Pressable>
+          ) : (
+            <View style={styles.headerRight} />
+          )}
         </View>
+
+        {isOnboardingLimited ? (
+          <View
+            style={styles.onboardingProgress}
+            accessible
+            accessibilityLabel={t('questions.onboardingProgress')
+              .replace('{{current}}', String(questionIndex + 1))
+              .replace('{{total}}', String(onboardingDeck.length))}
+          >
+            <Text style={styles.onboardingProgressText}>
+              {t('questions.onboardingProgress')
+                .replace('{{current}}', String(questionIndex + 1))
+                .replace('{{total}}', String(onboardingDeck.length))}
+            </Text>
+            <View style={styles.onboardingDots} importantForAccessibility="no-hide-descendants">
+              {onboardingDeck.map((_, i) => (
+                <View
+                  key={i}
+                  style={[styles.onboardingDot, i === questionIndex && styles.onboardingDotActive]}
+                />
+              ))}
+            </View>
+          </View>
+        ) : null}
 
         <View style={styles.cardWrap}>
           <GestureDetector gesture={pan}>
@@ -287,7 +368,9 @@ export default function Questions() {
         </View>
 
         <View style={styles.footer}>
-          <Text style={styles.hint}>{t('questions.hint')}</Text>
+          <Text style={styles.hint}>
+            {isOnboardingLimited ? t('questions.onboardingHint') : t('questions.hint')}
+          </Text>
           <View style={styles.footerButtons}>
             <Pressable
               style={({ pressed }) => [
@@ -323,7 +406,9 @@ export default function Questions() {
               hitSlop={12}
             >
               <Text style={[styles.iosBtnPrimaryLabel, { backgroundColor: toTextBadgeColor(momentTheme.bg) }]} numberOfLines={1}>
-                {t('questions.next')}
+                {isOnboardingLimited && questionIndex >= onboardingDeck.length - 1
+                  ? t('questions.onboardingDone')
+                  : t('questions.next')}
               </Text>
             </Pressable>
           </View>
@@ -370,6 +455,49 @@ const styles = StyleSheet.create({
   },
   headerRight: {
     width: 44,
+  },
+  skipBtn: {
+    minWidth: 44,
+    maxWidth: 100,
+    paddingHorizontal: SPACING.sm,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  skipBtnText: {
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
+    color: '#007AFF',
+  },
+  onboardingProgress: {
+    alignItems: 'center',
+    paddingBottom: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    gap: SPACING.sm,
+  },
+  onboardingProgressText: {
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
+    color: CARD_META_COLOR,
+    letterSpacing: 0.3,
+  },
+  onboardingDots: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  onboardingDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#D7DCE3',
+  },
+  onboardingDotActive: {
+    width: 22,
+    borderRadius: 4,
+    backgroundColor: '#1C1C1E',
   },
   cardWrap: {
     flex: 1,

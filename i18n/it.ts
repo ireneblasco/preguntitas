@@ -22,13 +22,9 @@ export const it = {
           'Nella home scegli un momento: ogni categoria raggruppa domande per quel tipo di situazione.',
       },
       {
-        headline: 'Ogni carta indica quanto è profonda la domanda.',
+        headline: 'Ci siamo — partiamo leggeri.',
         subtext:
-          'Un’etichetta discreta mostra il livello. Scorrendo vedrai tutte le domande di quel momento.',
-      },
-      {
-        headline: 'Basta conversazioni noiose.',
-        subtext: '',
+          'Ti portiamo su domande facili per iniziare. Scorri o tocca quando vuoi passare alla successiva.',
         cta: 'Inizia',
       },
     ],
@@ -81,6 +77,10 @@ export const it = {
   questions: {
     previous: 'Precedente',
     next: 'Avanti',
+    onboardingProgress: 'Domanda {{current}} di {{total}}',
+    onboardingSkip: 'Salta',
+    onboardingDone: 'Fatto',
+    onboardingHint: 'Tre domande veloci — poi torni alla home.',
     hint: 'Scorri o tocca per cambiare domanda',
     emptySelectMoment: 'Scegli un momento dalla home per iniziare',
     emptyNoQuestions: 'Nessuna domanda per questo momento',
