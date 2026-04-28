@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -16,7 +16,7 @@ import Animated, {
   FadeIn,
   FadeOut,
 } from 'react-native-reanimated';
-import type { ClosenessLevel } from '../types/questions';
+import type { ClosenessLevel, Question } from '../types/questions';
 import {
   COLORS,
   type CategoryTheme,
@@ -129,8 +129,19 @@ export default function Questions() {
     : getThemeForMomentId(momentOptions[0]?.id ?? '', momentOptions);
   const lang = usePreferredLanguage();
 
-  const [questionIndex, setQuestionIndex] = useState(0);
+  /**
+   * Secuencia de posiciones en `activeDeck` (0..len-1). La actual es la última;
+   * retroceder hace pop y vuelve exactamente a la carta que acababas de ver.
+   */
+  const [viewPath, setViewPath] = useState<number[]>([0]);
   const [currentQuestionId, setCurrentQuestionId] = useState<string>('');
+  /** Evita doble “siguiente” (p. ej. tap + desliz o doble registro) en pocos ms. */
+  const lastNextAtRef = useRef(0);
+  /**
+   * Tras un swipe “atrás”, el Tap del mismo toque aún podía reconocerse (Simultaneous) y
+   * llamar a handleNext, anulando el pop. Hasta que pase esto, ignoramos el siguiente.
+   */
+  const suppressNextUntilRef = useRef(0);
 
   const translateX = useSharedValue(0);
 
@@ -139,22 +150,48 @@ export default function Questions() {
     return questions.filter((q) => q.moment.includes(moment));
   }, [questions, moment]);
 
-  const shuffledQuestions = useMemo(() => {
-    if (filteredQuestions.length === 0 || !moment) return [];
+  /**
+   * Solo depende de los ids del momento, no de la referencia de `questions`.
+   * Así el mazo con shuffle no se regenera al refrescar el contexto, y
+   * retroceder (índice − 1) vuelve a la misma pregunta que te acababa de tocar.
+   */
+  const filteredQuestionSetKey = useMemo(() => {
+    if (!moment || filteredQuestions.length === 0) return '';
+    return filteredQuestions
+      .map((q) => q.id)
+      .sort()
+      .join('\0');
+  }, [filteredQuestions, moment]);
+
+  const shuffledOrderStable = useMemo(() => {
+    if (!filteredQuestionSetKey || !moment) return [] as Question[];
+    const snapshot = questions.filter((q) => q.moment.includes(moment));
+    if (snapshot.length === 0) return [];
     const firstFiveIds = FIRST_5_QUESTION_IDS_BY_MOMENT[moment] ?? [];
-    const byId = new Map(filteredQuestions.map((q) => [q.id, q]));
-    const fixed: typeof filteredQuestions = [];
+    const byId = new Map(snapshot.map((q) => [q.id, q]));
+    const fixed: typeof snapshot = [];
     for (const id of firstFiveIds) {
       const q = byId.get(id);
       if (q) fixed.push(q);
     }
-    const rest = filteredQuestions.filter((q) => !firstFiveIds.includes(q.id));
+    const rest = snapshot.filter((q) => !firstFiveIds.includes(q.id));
     for (let i = rest.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [rest[i], rest[j]] = [rest[j], rest[i]];
     }
     return [...fixed, ...rest];
-  }, [filteredQuestions, moment]);
+  }, [filteredQuestionSetKey, moment]);
+
+  /** Mismos ids/orden; datos devueltos por el contexto siempre al día. */
+  const shuffledQuestions = useMemo(() => {
+    if (shuffledOrderStable.length === 0) return shuffledOrderStable;
+    const byId = new Map(questions.map((q) => [q.id, q]));
+    return shuffledOrderStable.map((q) => byId.get(q.id) ?? q);
+  }, [questions, shuffledOrderStable]);
+
+  useEffect(() => {
+    setViewPath([0]);
+  }, [filteredQuestionSetKey, moment]);
 
   const onboardingDeck = useMemo(() => {
     if (!entryFromOnboarding || shuffledQuestions.length === 0) return [];
@@ -165,14 +202,19 @@ export default function Questions() {
   const activeDeck = entryFromOnboarding ? onboardingDeck : shuffledQuestions;
   const isOnboardingLimited = entryFromOnboarding && onboardingDeck.length > 0;
 
-  const currentQuestion =
+  const currentDeckPosition =
     activeDeck.length > 0
-      ? activeDeck[
-          isOnboardingLimited
-            ? Math.min(questionIndex, activeDeck.length - 1)
-            : questionIndex % activeDeck.length
-        ]
-      : undefined;
+      ? Math.max(
+          0,
+          Math.min(
+            viewPath[viewPath.length - 1] ?? 0,
+            activeDeck.length - 1
+          )
+        )
+      : 0;
+
+  const currentQuestion =
+    activeDeck.length > 0 ? activeDeck[currentDeckPosition] : undefined;
 
   useEffect(() => {
     if (currentQuestion) {
@@ -186,34 +228,55 @@ export default function Questions() {
   }, [router]);
 
   const handleNext = useCallback(() => {
-    if (isOnboardingLimited) {
-      setQuestionIndex((prev) => {
-        if (onboardingDeck.length === 0) return prev;
-        if (prev >= onboardingDeck.length - 1) {
-          queueMicrotask(goHomeFromIntro);
-          return prev;
-        }
-        return prev + 1;
-      });
+    if (Date.now() < suppressNextUntilRef.current) {
       return;
     }
-    if (filteredQuestions.length === 0) return;
-    setQuestionIndex((prev) => prev + 1);
-  }, [filteredQuestions.length, goHomeFromIntro, isOnboardingLimited, onboardingDeck.length]);
+    const now = Date.now();
+    if (now - lastNextAtRef.current < 300) {
+      return;
+    }
 
-  const handlePrevious = () => {
-    setQuestionIndex((prev) => Math.max(0, prev - 1));
-  };
+    if (isOnboardingLimited) {
+      setViewPath((path) => {
+        const dlen = onboardingDeck.length;
+        if (dlen === 0) return path;
+        const last = path[path.length - 1] ?? 0;
+        if (last >= dlen - 1) {
+          queueMicrotask(goHomeFromIntro);
+          return path;
+        }
+        return [...path, last + 1];
+      });
+      lastNextAtRef.current = Date.now();
+      return;
+    }
+    if (shuffledQuestions.length === 0) return;
+    const n = shuffledQuestions.length;
+    if (n <= 1) return;
+    setViewPath((path) => {
+      const last = path[path.length - 1] ?? 0;
+      return [...path, (last + 1) % n];
+    });
+    lastNextAtRef.current = Date.now();
+  }, [goHomeFromIntro, isOnboardingLimited, onboardingDeck.length, shuffledQuestions.length]);
+
+  const handlePrevious = useCallback(() => {
+    setViewPath((path) => (path.length > 1 ? path.slice(0, -1) : path));
+    suppressNextUntilRef.current = Date.now() + 550;
+  }, []);
 
   const handleFavorite = async () => {
     if (currentQuestion) await toggleFavorite(currentQuestion.id);
   };
 
   const pan = Gesture.Pan()
+    .minDistance(10)
     .onUpdate((event) => {
+      'worklet';
       translateX.value = event.translationX;
     })
     .onEnd((event) => {
+      'worklet';
       if (Math.abs(event.translationX) > SWIPE_THRESHOLD) {
         const goRight = event.translationX > 0;
         translateX.value = withTiming(
@@ -232,6 +295,16 @@ export default function Questions() {
         translateX.value = withSpring(0, { damping: 20, stiffness: 200 });
       }
     });
+
+  const tap = Gesture.Tap().onEnd((_e, didRecognize) => {
+    'worklet';
+    if (didRecognize) {
+      runOnJS(handleNext)();
+    }
+  });
+
+  // Pan con prioridad: un desliz no activa el tap; un tap puro (sin el umbral de pan) sí.
+  const cardGesture = Gesture.Exclusive(pan, tap);
 
   const animatedCardStyle = useAnimatedStyle(() => {
     const rotate = interpolate(
@@ -312,19 +385,19 @@ export default function Questions() {
             style={styles.onboardingProgress}
             accessible
             accessibilityLabel={t('questions.onboardingProgress')
-              .replace('{{current}}', String(questionIndex + 1))
+              .replace('{{current}}', String(currentDeckPosition + 1))
               .replace('{{total}}', String(onboardingDeck.length))}
           >
             <Text style={styles.onboardingProgressText}>
               {t('questions.onboardingProgress')
-                .replace('{{current}}', String(questionIndex + 1))
+                .replace('{{current}}', String(currentDeckPosition + 1))
                 .replace('{{total}}', String(onboardingDeck.length))}
             </Text>
             <View style={styles.onboardingDots} importantForAccessibility="no-hide-descendants">
               {onboardingDeck.map((_, i) => (
                 <View
                   key={i}
-                  style={[styles.onboardingDot, i === questionIndex && styles.onboardingDotActive]}
+                  style={[styles.onboardingDot, i === currentDeckPosition && styles.onboardingDotActive]}
                 />
               ))}
             </View>
@@ -332,7 +405,7 @@ export default function Questions() {
         ) : null}
 
         <View style={styles.cardWrap}>
-          <GestureDetector gesture={pan}>
+          <GestureDetector gesture={cardGesture}>
             <Animated.View style={[styles.cardOuter, animatedCardStyle]}>
               <View style={styles.cardSurface}>
                 <LinearGradient
@@ -441,47 +514,6 @@ export default function Questions() {
           <Text style={styles.hint}>
             {isOnboardingLimited ? t('questions.onboardingHint') : t('questions.hint')}
           </Text>
-          <View style={styles.footerButtons}>
-            <Pressable
-              style={({ pressed }) => [
-                styles.iosBtn,
-                styles.iosBtnSecondary,
-                { backgroundColor: toSoftCardColor(momentTheme.bg) },
-                questionIndex === 0 && styles.iosBtnDisabled,
-                pressed && questionIndex > 0 && styles.iosBtnPressed,
-              ]}
-              onPress={handlePrevious}
-              disabled={questionIndex === 0}
-              hitSlop={12}
-            >
-              <Text
-                style={[
-                  styles.iosBtnSecondaryLabel,
-                  { backgroundColor: toTextBadgeColor(momentTheme.bg) },
-                  questionIndex === 0 && styles.iosBtnDisabledLabel,
-                ]}
-                numberOfLines={1}
-              >
-                {t('questions.previous')}
-              </Text>
-            </Pressable>
-            <Pressable
-              style={({ pressed }) => [
-                styles.iosBtn,
-                styles.iosBtnPrimary,
-                { backgroundColor: toSoftCardColor(momentTheme.bg) },
-                pressed && styles.iosBtnPressed,
-              ]}
-              onPress={handleNext}
-              hitSlop={12}
-            >
-              <Text style={[styles.iosBtnPrimaryLabel, { backgroundColor: toTextBadgeColor(momentTheme.bg) }]} numberOfLines={1}>
-                {isOnboardingLimited && questionIndex >= onboardingDeck.length - 1
-                  ? t('questions.onboardingDone')
-                  : t('questions.next')}
-              </Text>
-            </Pressable>
-          </View>
         </View>
       </SafeAreaView>
     </View>
@@ -654,6 +686,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: SPACING.sm,
     minHeight: 120,
+    transform: [{ translateY: -SPACING.md }],
   },
   questionText: {
     fontSize: 28,
@@ -692,72 +725,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.inter.regular,
     color: COLORS.text.light,
     textAlign: 'center',
-    marginBottom: SPACING.md,
-  },
-  footerButtons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 14,
-    paddingHorizontal: 0,
-  },
-  // Base iOS-style button (44pt min height, 10pt radius)
-  iosBtn: {
-    height: 68,
-    width: '48%',
-    minWidth: 164,
-    maxWidth: 210,
-    paddingHorizontal: 18,
-    borderRadius: 34,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  // Previous: iOS secondary (gray fill)
-  iosBtnSecondary: {
-    borderWidth: 1,
-    borderColor: COLORS.border.light,
-    shadowColor: COLORS.brand.forest,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 6,
-    elevation: 1,
-  },
-  iosBtnSecondaryLabel: {
-    fontSize: 20,
-    fontFamily: FONTS.inter.regular,
-    fontWeight: '600',
-    color: COLORS.text.primary,
-    textAlign: 'center',
-    flexShrink: 1,
-    paddingHorizontal: 18,
-    paddingVertical: 10,
-    borderRadius: 16,
-  },
-  // Next: acento lima en el borde (iOS "filled" coherente con Mellow)
-  iosBtnPrimary: {
-    borderWidth: 1,
-    borderColor: `${COLORS.brand.lime}B3`,
-  },
-  iosBtnPrimaryLabel: {
-    fontSize: 20,
-    fontFamily: FONTS.inter.regular,
-    fontWeight: '600',
-    color: COLORS.text.primary,
-    textAlign: 'center',
-    flexShrink: 1,
-    paddingHorizontal: 18,
-    paddingVertical: 10,
-    borderRadius: 16,
-  },
-  iosBtnPressed: {
-    opacity: 0.8,
-  },
-  iosBtnDisabled: {
-    opacity: 0.45,
-  },
-  iosBtnDisabledLabel: {
-    color: COLORS.text.light,
   },
   emptyState: {
     flex: 1,

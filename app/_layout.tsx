@@ -45,7 +45,12 @@ export default function RootLayout() {
               animation: 'fade',
             }}
           />
-          <Stack.Screen name="questions" />
+          <Stack.Screen
+            name="questions"
+            options={{
+              animation: 'fade',
+            }}
+          />
           <Stack.Screen
             name="favorites"
             options={{
