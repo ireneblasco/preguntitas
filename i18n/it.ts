@@ -22,7 +22,11 @@ export const it = {
           'Nella home scegli un momento: ogni categoria raggruppa domande per quel tipo di situazione.',
       },
       {
-        headline: 'Ci siamo — partiamo leggeri.',
+        headline: 'Basta conversazioni noiose.',
+        subtext: '',
+      },
+      {
+        headline: 'Partiamo leggeri',
         subtext:
           'Ti portiamo su domande facili per iniziare. Scorri o tocca quando vuoi passare alla successiva.',
         cta: 'Inizia',

@@ -23,7 +23,11 @@ export const pt = {
           'No ecrã inicial, escolhe um momento — cada categoria agrupa perguntas para esse tipo de situação.',
       },
       {
-        headline: 'Prontos — começamos leve.',
+        headline: 'Chega de conversas aborrecidas.',
+        subtext: '',
+      },
+      {
+        headline: 'Vamos começar leve',
         subtext:
           'Abrimos perguntas fáceis para começar. Desliza ou toca quando quiseres passar à seguinte.',
         cta: 'Começar',

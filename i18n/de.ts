@@ -23,7 +23,11 @@ export const de = {
           'Wähle auf dem Startbildschirm einen Moment — jede Kategorie gruppiert Fragen für diese Art von Situation.',
       },
       {
-        headline: 'Du bist startklar — wir fangen locker an.',
+        headline: 'Keine langweiligen Gespräche mehr.',
+        subtext: '',
+      },
+      {
+        headline: 'Fangen wir locker an.',
         subtext:
           'Wir öffnen leichte Einstiegsfragen für dich. Wische oder tippe, wenn du zur nächsten willst.',
         cta: 'Starten',

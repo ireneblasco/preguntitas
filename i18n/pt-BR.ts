@@ -24,7 +24,11 @@ export const ptBR = {
           'Na tela inicial, escolha um momento — cada categoria agrupa perguntas para aquele tipo de situação.',
       },
       {
-        headline: 'Prontos — começamos leve.',
+        headline: 'Chega de conversas sem graça.',
+        subtext: '',
+      },
+      {
+        headline: 'Vamos começar leve',
         subtext:
           'Abrimos perguntas fáceis para começar. Deslize ou toque quando quiser passar para a próxima.',
         cta: 'Começar',

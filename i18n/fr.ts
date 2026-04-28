@@ -23,7 +23,11 @@ export const fr = {
           'Sur l’écran d’accueil, choisis un moment — chaque catégorie regroupe des questions adaptées au contexte.',
       },
       {
-        headline: 'C’est bon — on commence doucement.',
+        headline: 'Fini les conversations ennuyeuses.',
+        subtext: '',
+      },
+      {
+        headline: 'On commence doucement',
         subtext:
           'On t’ouvre des questions faciles pour lancer la discussion. Glisse ou touche pour la suivante.',
         cta: 'Commencer',

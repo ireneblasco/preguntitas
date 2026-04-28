@@ -23,7 +23,11 @@ export const enUS = {
         subtext: 'Each category groups questions for that kind of time together.',
       },
       {
-        headline: "You're ready—let's start light.",
+        headline: 'No more boring conversations.',
+        subtext: '',
+      },
+      {
+        headline: "Let's start light",
         subtext:
           "We'll open easy starter questions for you. Swipe or tap when you're ready for the next one.",
         cta: 'Start',

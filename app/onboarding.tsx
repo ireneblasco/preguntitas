@@ -56,10 +56,11 @@ function useOnboardingScreens(): OnboardingScreen[] {
   return [
     { headline: t('onboarding.screens.0.headline'), subtext: t('onboarding.screens.0.subtext') },
     { headline: t('onboarding.screens.1.headline'), subtext: t('onboarding.screens.1.subtext') },
+    { headline: t('onboarding.screens.2.headline'), subtext: t('onboarding.screens.2.subtext') },
     {
-      headline: t('onboarding.screens.2.headline'),
-      subtext: t('onboarding.screens.2.subtext'),
-      cta: t('onboarding.screens.2.cta'),
+      headline: t('onboarding.screens.3.headline'),
+      subtext: t('onboarding.screens.3.subtext'),
+      cta: t('onboarding.screens.3.cta'),
     },
   ];
 }
@@ -140,6 +141,7 @@ export default function Onboarding() {
             styles.visualContainer,
             index === 0 && styles.visualContainerHero,
             index === 1 && styles.visualContainerMoments,
+            index >= 2 && styles.visualContainerTextOnly,
           ]}
         >
           {index === 0 && <MoodBoardHeroVisual question={heroQuestion} />}
@@ -147,7 +149,9 @@ export default function Onboarding() {
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.headline}>{item.headline}</Text>
-          <Text style={styles.subtext}>{item.subtext}</Text>
+          {item.subtext.trim().length > 0 ? (
+            <Text style={styles.subtext}>{item.subtext}</Text>
+          ) : null}
         </View>
       </View>
     );
@@ -390,6 +394,11 @@ const styles = StyleSheet.create({
   visualContainerMoments: {
     minHeight: 260,
     alignSelf: 'stretch',
+  },
+  /** Pantallas 2–3: sin ilustración; menos aire para que el titular respire. */
+  visualContainerTextOnly: {
+    minHeight: 72,
+    marginBottom: SPACING.xl,
   },
   momentBentoWrap: {
     alignItems: 'center',

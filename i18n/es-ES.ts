@@ -23,7 +23,11 @@ export const esES = {
           'En el inicio, elige un momento: cada categoría agrupa preguntas para ese tipo de situación.',
       },
       {
-        headline: 'Listos: empezamos suave.',
+        headline: 'No más conversaciones aburridas.',
+        subtext: '',
+      },
+      {
+        headline: 'Empecemos suave.',
         subtext:
           'Te llevamos a preguntas ligeras para arrancar. Desliza o toca cuando quieras la siguiente.',
         cta: 'Empezar',
