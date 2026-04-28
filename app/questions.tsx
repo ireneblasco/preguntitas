@@ -1,4 +1,5 @@
 import { View, Text, Image, StyleSheet, Pressable, Dimensions } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -16,7 +17,16 @@ import Animated, {
   FadeOut,
 } from 'react-native-reanimated';
 import type { ClosenessLevel } from '../types/questions';
-import { FONTS, FONT_SIZES, SPACING, getThemeForMomentId, getCategoryDisplayName, FIRST_5_QUESTION_IDS_BY_MOMENT } from '../constants';
+import {
+  COLORS,
+  type CategoryTheme,
+  FONTS,
+  FONT_SIZES,
+  SPACING,
+  getThemeForMomentId,
+  getCategoryDisplayName,
+  FIRST_5_QUESTION_IDS_BY_MOMENT,
+} from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
@@ -26,8 +36,7 @@ import { analytics } from '../utils/analytics';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
 const CARD_MARGIN = SPACING.md;
-const CARD_TEXT_COLOR = '#203246';
-const CARD_META_COLOR = '#7E8C9D';
+const CARD_RADIUS = 32;
 
 const WHO_IS_MOST_LIKELY_TO_MATCHER = /who is most likely to/i;
 
@@ -66,6 +75,20 @@ function toTextBadgeColor(hex: string): string {
   return `#${sr}${sg}${sb}`;
 }
 
+/** Misma referencia al final: evita costura entre capas; blanco puro al borde. */
+const GRADIENT_END = COLORS.background.white;
+
+function cardFaceGradient(theme: CategoryTheme) {
+  return [
+    toSoftCardColor(theme.bg),
+    toTextBadgeColor(theme.bg),
+    COLORS.background.warm,
+    // Repetir el último color en la cola alarga la zona lisa (menos “corte” visual)
+    GRADIENT_END,
+    GRADIENT_END,
+  ] as const;
+}
+
 function firstParam(value: string | string[] | undefined): string | undefined {
   if (typeof value === 'string') return value;
   if (Array.isArray(value) && value.length > 0) return value[0];
@@ -96,7 +119,7 @@ export default function Questions() {
   const momentLabel = moment
     ? (getCategoryDisplayName(momentOption) || momentOption?.name || moment)
     : '';
-  const momentTitleColor = '#1C1C1E';
+  const momentTitleColor = COLORS.text.primary;
   const isWhoIsMostLikelyTo =
     !!moment &&
     (WHO_IS_MOST_LIKELY_TO_MATCHER.test(moment) ||
@@ -310,14 +333,50 @@ export default function Questions() {
 
         <View style={styles.cardWrap}>
           <GestureDetector gesture={pan}>
-            <Animated.View
-              style={[
-                styles.card,
-                animatedCardStyle,
-                { backgroundColor: toSoftCardColor(momentTheme.bg) },
-              ]}
-            >
-              <View style={styles.cardInner}>
+            <Animated.View style={[styles.cardOuter, animatedCardStyle]}>
+              <View style={styles.cardSurface}>
+                <LinearGradient
+                  colors={[...cardFaceGradient(momentTheme)]}
+                  locations={[0, 0.26, 0.55, 0.82, 1]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 0.75, y: 1 }}
+                  style={StyleSheet.absoluteFill}
+                  pointerEvents="none"
+                />
+                {/*
+                 * "transparent" en muchos móviles interpola con negro; terminar en #RRGGBB00
+                 * con el RGB del inicio de la carta (toSoft) evita banda/raya bajo el brillo.
+                 */}
+                <LinearGradient
+                  colors={[
+                    `${momentTheme.text}36`,
+                    `${toTextBadgeColor(momentTheme.bg)}6E`,
+                    `${toSoftCardColor(momentTheme.bg)}00`,
+                  ]}
+                  locations={[0, 0.42, 1]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 0.55, y: 1 }}
+                  style={styles.cardTopShine}
+                  pointerEvents="none"
+                />
+                <View style={styles.cardInner}>
+                  {momentLabel ? (
+                    <View style={styles.momentPillRow} pointerEvents="none">
+                      <View
+                        style={[
+                          styles.momentPill,
+                          { borderColor: `${momentTheme.text}55` },
+                        ]}
+                      >
+                        <Text
+                          style={styles.momentPillText}
+                          numberOfLines={1}
+                        >
+                          {momentLabel}
+                        </Text>
+                      </View>
+                    </View>
+                  ) : null}
                 <Animated.View
                   key={currentQuestion?.id ?? 'empty'}
                   style={styles.cardContentWrap}
@@ -326,17 +385,23 @@ export default function Questions() {
                 >
                   {!isWhoIsMostLikelyTo && currentQuestion?.closenessLevel != null && (
                     <View style={styles.closenessLabelWrap}>
-                      <Text style={styles.closenessLabelText}>
-                        {t(closenessLabelKey(currentQuestion.closenessLevel))}
-                      </Text>
+                      <View
+                        style={[
+                          styles.closenessPill,
+                          { backgroundColor: `${COLORS.brand.forest}1A` },
+                        ]}
+                      >
+                        <Text
+                          style={[styles.closenessPillText, { color: COLORS.brand.forest }]}
+                        >
+                          {t(closenessLabelKey(currentQuestion.closenessLevel))}
+                        </Text>
+                      </View>
                     </View>
                   )}
                   <View style={styles.questionBlock}>
                     <Text
-                      style={[
-                        styles.questionText,
-                        { color: CARD_TEXT_COLOR },
-                      ]}
+                      style={styles.questionText}
                     >
                       {currentQuestion
                         ? getQuestionText(currentQuestion, lang, questionTextByLocale)
@@ -345,14 +410,18 @@ export default function Questions() {
                   </View>
                 </Animated.View>
                 <Pressable
-                  style={styles.favBtn}
+                  style={({ pressed }) => [styles.favBtn, pressed && styles.favBtnPressed]}
                   onPress={handleFavorite}
                   hitSlop={12}
                 >
                   <Ionicons
                     name={isFavorite(currentQuestionId) ? 'bookmark' : 'bookmark-outline'}
                     size={24}
-                    color={isFavorite(currentQuestionId) ? CARD_TEXT_COLOR : '#6D7B89'}
+                    color={
+                      isFavorite(currentQuestionId)
+                        ? COLORS.brand.terracotta
+                        : `${COLORS.text.primary}6E`
+                    }
                   />
                 </Pressable>
                 <Image
@@ -362,6 +431,7 @@ export default function Questions() {
                   accessible={false}
                   accessibilityIgnoresInvertColors
                 />
+                </View>
               </View>
             </Animated.View>
           </GestureDetector>
@@ -421,7 +491,7 @@ export default function Questions() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.background.primary,
   },
   container: {
     flex: 1,
@@ -444,7 +514,7 @@ const styles = StyleSheet.create({
   backLabel: {
     fontSize: 32,
     fontWeight: '300',
-    color: '#007AFF',
+    color: COLORS.brand.forest,
   },
   headerTitle: {
     flex: 1,
@@ -468,7 +538,7 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
     fontWeight: '600',
-    color: '#007AFF',
+    color: COLORS.brand.forest,
   },
   onboardingProgress: {
     alignItems: 'center',
@@ -480,7 +550,7 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.sm,
     fontFamily: FONTS.inter.regular,
     fontWeight: '600',
-    color: CARD_META_COLOR,
+    color: COLORS.text.secondary,
     letterSpacing: 0.3,
   },
   onboardingDots: {
@@ -492,12 +562,12 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#D7DCE3',
+    backgroundColor: COLORS.border.light,
   },
   onboardingDotActive: {
     width: 22,
     borderRadius: 4,
-    backgroundColor: '#1C1C1E',
+    backgroundColor: COLORS.brand.forest,
   },
   cardWrap: {
     flex: 1,
@@ -505,63 +575,112 @@ const styles = StyleSheet.create({
     paddingTop: SPACING.sm,
     paddingBottom: SPACING.sm,
   },
-  card: {
+  cardOuter: {
     flex: 1,
     width: '100%',
-    borderRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    elevation: 4,
+    borderRadius: CARD_RADIUS,
+    shadowColor: COLORS.brand.forest,
+    shadowOffset: { width: 0, height: 20 },
+    shadowOpacity: 0.14,
+    shadowRadius: 40,
+    elevation: 10,
+  },
+  cardSurface: {
+    flex: 1,
+    width: '100%',
+    borderRadius: CARD_RADIUS,
+    overflow: 'hidden',
+    // Fondo = última parada del gradiente: si el relleno antialias se corta 1px, no se nota
+    backgroundColor: GRADIENT_END,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(255, 255, 255, 0.55)',
+  },
+  cardTopShine: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '50%',
   },
   cardInner: {
     flex: 1,
-    padding: SPACING.xl,
+    paddingHorizontal: SPACING['2xl'],
+    paddingTop: SPACING.lg,
+    paddingBottom: SPACING['2xl'],
+  },
+  momentPillRow: {
+    alignItems: 'center',
+    marginBottom: SPACING.lg,
+  },
+  momentPill: {
+    maxWidth: '100%',
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.sm,
+    borderRadius: 100,
+    borderWidth: StyleSheet.hairlineWidth * 1.5,
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+  },
+  momentPillText: {
+    fontSize: 12,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '700',
+    color: COLORS.text.primary,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    textAlign: 'center',
   },
   cardContentWrap: {
     flex: 1,
   },
   closenessLabelWrap: {
-    position: 'absolute',
-    top: SPACING.lg,
-    left: 0,
-    right: 0,
     alignItems: 'center',
-    zIndex: 1,
+    marginBottom: SPACING.lg,
   },
-  closenessLabelText: {
+  closenessPill: {
+    paddingHorizontal: SPACING.md,
+    paddingVertical: 6,
+    borderRadius: 100,
+  },
+  closenessPillText: {
     fontSize: 12,
-    fontFamily: FONTS.inter.regular,
-    color: CARD_META_COLOR,
-    letterSpacing: 0.2,
+    fontFamily: FONTS.inter.bold,
+    fontWeight: '600',
+    letterSpacing: 0.25,
     textAlign: 'center',
-    opacity: 0.9,
   },
   questionBlock: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: SPACING.md,
+    paddingHorizontal: SPACING.sm,
+    minHeight: 120,
   },
   questionText: {
-    fontSize: 26,
+    fontSize: 28,
     fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
     textAlign: 'center',
-    lineHeight: 38,
+    lineHeight: 40,
+    color: COLORS.text.primary,
+    letterSpacing: 0.2,
   },
   favBtn: {
     position: 'absolute',
-    top: SPACING.md,
-    right: SPACING.md,
+    top: SPACING.lg,
+    right: SPACING.lg,
     padding: SPACING.sm,
+    borderRadius: 20,
+  },
+  favBtnPressed: {
+    opacity: 0.7,
   },
   cardBrandMark: {
     position: 'absolute',
-    right: SPACING.lg,
-    bottom: SPACING.md,
-    width: 48,
-    height: 40,
+    right: SPACING['2xl'],
+    bottom: SPACING.lg,
+    width: 56,
+    height: 46,
+    opacity: 0.92,
   },
   footer: {
     paddingHorizontal: CARD_MARGIN,
@@ -571,7 +690,7 @@ const styles = StyleSheet.create({
   hint: {
     fontSize: 13,
     fontFamily: FONTS.inter.regular,
-    color: CARD_META_COLOR,
+    color: COLORS.text.light,
     textAlign: 'center',
     marginBottom: SPACING.md,
   },
@@ -597,34 +716,34 @@ const styles = StyleSheet.create({
   // Previous: iOS secondary (gray fill)
   iosBtnSecondary: {
     borderWidth: 1,
-    borderColor: '#D7DCE3',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
+    borderColor: COLORS.border.light,
+    shadowColor: COLORS.brand.forest,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 6,
     elevation: 1,
   },
   iosBtnSecondaryLabel: {
     fontSize: 20,
     fontFamily: FONTS.inter.regular,
     fontWeight: '600',
-    color: CARD_TEXT_COLOR,
+    color: COLORS.text.primary,
     textAlign: 'center',
     flexShrink: 1,
     paddingHorizontal: 18,
     paddingVertical: 10,
     borderRadius: 16,
   },
-  // Next: iOS primary (system blue fill)
+  // Next: acento lima en el borde (iOS "filled" coherente con Mellow)
   iosBtnPrimary: {
     borderWidth: 1,
-    borderColor: '#C8DBF7',
+    borderColor: `${COLORS.brand.lime}B3`,
   },
   iosBtnPrimaryLabel: {
     fontSize: 20,
     fontFamily: FONTS.inter.regular,
     fontWeight: '600',
-    color: CARD_TEXT_COLOR,
+    color: COLORS.text.primary,
     textAlign: 'center',
     flexShrink: 1,
     paddingHorizontal: 18,
@@ -638,7 +757,7 @@ const styles = StyleSheet.create({
     opacity: 0.45,
   },
   iosBtnDisabledLabel: {
-    color: '#8E8E93',
+    color: COLORS.text.light,
   },
   emptyState: {
     flex: 1,
@@ -649,7 +768,7 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 17,
     fontFamily: FONTS.inter.regular,
-    color: '#8E8E93',
+    color: COLORS.text.light,
     textAlign: 'center',
   },
 });
