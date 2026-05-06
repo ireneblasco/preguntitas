@@ -37,7 +37,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const HERO_PREVIEW_POOL_SIZE = 8;
 const HERO_STACK_CARD_COUNT = 4;
-const HERO_FORCED_QUESTION = 'What was harder than you expected in life?';
+const HERO_FORCED_QUESTION = 'If you could ask your future self one question, what would it be?';
 
 type OnboardingScreen = { headline: string; subtext: string; cta?: string };
 
