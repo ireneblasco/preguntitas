@@ -42,12 +42,11 @@ const CARD_RADIUS = 32;
 const WHO_IS_MOST_LIKELY_TO_MATCHER = /who is most likely to/i;
 
 /** Tras onboarding: solo estas preguntas de Break the ice antes de ir a inicio. */
-const ONBOARDING_BREAK_ICE_COUNT = 3;
+const ONBOARDING_BREAK_ICE_COUNT = 2;
 const ONBOARDING_READY_MESSAGE = "You're ready";
 const ONBOARDING_READY_DELAY_MS = 1200;
 const ONBOARDING_BREAK_ICE_PRIORITY_EN_US = [
   'If you could live anywhere for a year, where would it be?',
-  'If you could instantly master something, what would it be?',
   'If you had to switch lives with one of your friends, who would you pick?',
 ] as const;
 
