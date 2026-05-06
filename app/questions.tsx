@@ -235,6 +235,9 @@ export default function Questions() {
           )
         )
       : 0;
+  const progressTotal = activeDeck.length;
+  const progressCurrent = progressTotal > 0 ? currentDeckPosition + 1 : 0;
+  const progressRatio = progressTotal > 0 ? progressCurrent / progressTotal : 0;
 
   const currentQuestion =
     activeDeck.length > 0 ? activeDeck[currentDeckPosition] : undefined;
@@ -446,29 +449,24 @@ export default function Questions() {
           )}
         </View>
 
-        {isOnboardingLimited ? (
-          <View
-            style={styles.onboardingProgress}
-            accessible
-            accessibilityLabel={t('questions.onboardingProgress')
-              .replace('{{current}}', String(currentDeckPosition + 1))
-              .replace('{{total}}', String(onboardingDeck.length))}
-          >
-            <Text style={styles.onboardingProgressText}>
-              {t('questions.onboardingProgress')
-                .replace('{{current}}', String(currentDeckPosition + 1))
-                .replace('{{total}}', String(onboardingDeck.length))}
-            </Text>
-            <View style={styles.onboardingDots} importantForAccessibility="no-hide-descendants">
-              {onboardingDeck.map((_, i) => (
-                <View
-                  key={i}
-                  style={[styles.onboardingDot, i === currentDeckPosition && styles.onboardingDotActive]}
-                />
-              ))}
-            </View>
+        <View
+          style={styles.deckProgress}
+          accessible
+          accessibilityRole="progressbar"
+          accessibilityValue={{
+            min: 0,
+            max: progressTotal,
+            now: progressCurrent,
+          }}
+          accessibilityLabel={`${progressCurrent}/${progressTotal}`}
+        >
+          <View style={styles.deckProgressTrack}>
+            <View style={[styles.deckProgressFill, { width: `${progressRatio * 100}%` }]} />
           </View>
-        ) : null}
+          <Text style={styles.deckProgressText}>
+            {progressCurrent}/{progressTotal}
+          </Text>
+        </View>
 
         <View style={styles.cardWrap}>
           <Animated.View style={[styles.completionWrap, completionMessageStyle]} pointerEvents="none">
@@ -654,6 +652,29 @@ const styles = StyleSheet.create({
     width: 22,
     borderRadius: 4,
     backgroundColor: COLORS.brand.forest,
+  },
+  deckProgress: {
+    paddingHorizontal: SPACING.lg,
+    paddingBottom: SPACING.md,
+    gap: 8,
+  },
+  deckProgressTrack: {
+    height: 6,
+    borderRadius: 999,
+    backgroundColor: COLORS.border.light,
+    overflow: 'hidden',
+  },
+  deckProgressFill: {
+    height: '100%',
+    borderRadius: 999,
+    backgroundColor: COLORS.brand.forest,
+  },
+  deckProgressText: {
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
+    color: COLORS.text.secondary,
+    textAlign: 'center',
   },
   cardWrap: {
     flex: 1,
