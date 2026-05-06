@@ -460,12 +460,24 @@ export default function Questions() {
           }}
           accessibilityLabel={`${progressCurrent}/${progressTotal}`}
         >
-          <View style={styles.deckProgressTrack}>
-            <View style={[styles.deckProgressFill, { width: `${progressRatio * 100}%` }]} />
+          <View style={styles.deckProgressShell}>
+            <View style={styles.deckProgressTrack}>
+              <LinearGradient
+                colors={[`${COLORS.brand.forest}D9`, COLORS.brand.forest]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={[
+                  styles.deckProgressFill,
+                  { width: `${Math.max(0.06, progressRatio) * 100}%` },
+                ]}
+              />
+            </View>
+            <View style={styles.deckProgressBadge}>
+              <Text style={styles.deckProgressText}>
+                {progressCurrent}/{progressTotal}
+              </Text>
+            </View>
           </View>
-          <Text style={styles.deckProgressText}>
-            {progressCurrent}/{progressTotal}
-          </Text>
         </View>
 
         <View style={styles.cardWrap}>
@@ -553,7 +565,7 @@ export default function Questions() {
                       }
                     />
                   </Pressable>
-                  <Text style={styles.cardBrandText}>Mellow the App</Text>
+                  <Text style={styles.cardBrandText}>{t('home.appName')}</Text>
                   </View>
                 </View>
               </Animated.View>
@@ -656,25 +668,52 @@ const styles = StyleSheet.create({
   deckProgress: {
     paddingHorizontal: SPACING.lg,
     paddingBottom: SPACING.md,
-    gap: 8,
+  },
+  deckProgressShell: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: `${COLORS.brand.forest}1F`,
+    backgroundColor: 'rgba(255, 255, 255, 0.72)',
+    shadowColor: COLORS.brand.forest,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 2,
   },
   deckProgressTrack: {
-    height: 6,
+    flex: 1,
+    height: 8,
     borderRadius: 999,
-    backgroundColor: COLORS.border.light,
+    backgroundColor: `${COLORS.brand.forest}1F`,
     overflow: 'hidden',
   },
   deckProgressFill: {
     height: '100%',
     borderRadius: 999,
-    backgroundColor: COLORS.brand.forest,
+  },
+  deckProgressBadge: {
+    minWidth: 56,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 999,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: `${COLORS.brand.forest}26`,
+    backgroundColor: `${COLORS.background.warm}CC`,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   deckProgressText: {
-    fontSize: FONT_SIZES.sm,
+    fontSize: 12,
     fontFamily: FONTS.inter.regular,
-    fontWeight: '600',
-    color: COLORS.text.secondary,
+    fontWeight: '700',
+    color: COLORS.brand.forest,
     textAlign: 'center',
+    letterSpacing: 0.2,
   },
   cardWrap: {
     flex: 1,
@@ -725,22 +764,22 @@ const styles = StyleSheet.create({
   },
   momentPillRow: {
     alignItems: 'center',
-    marginBottom: SPACING.lg,
+    marginBottom: SPACING.md,
   },
   momentPill: {
     maxWidth: '100%',
-    paddingHorizontal: SPACING.lg,
-    paddingVertical: SPACING.sm,
+    paddingHorizontal: SPACING.md,
+    paddingVertical: 5,
     borderRadius: 100,
-    borderWidth: StyleSheet.hairlineWidth * 1.5,
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    borderWidth: StyleSheet.hairlineWidth,
+    backgroundColor: 'rgba(255, 255, 255, 0.42)',
   },
   momentPillText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: FONTS.inter.regular,
-    fontWeight: '700',
-    color: COLORS.text.primary,
-    letterSpacing: 0.6,
+    fontWeight: '600',
+    color: `${COLORS.text.secondary}D6`,
+    letterSpacing: 0.35,
     textTransform: 'uppercase',
     textAlign: 'center',
   },
@@ -796,11 +835,9 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: SPACING.lg,
     textAlign: 'center',
-    fontSize: FONT_SIZES.sm,
-    fontFamily: FONTS.inter.regular,
-    fontWeight: '600',
-    color: `${COLORS.text.primary}99`,
-    letterSpacing: 0.4,
+    fontSize: 18,
+    fontFamily: FONTS.brasikaDisplay,
+    color: '#000000',
   },
   completionWrap: {
     ...StyleSheet.absoluteFillObject,
