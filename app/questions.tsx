@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Pressable, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
@@ -503,19 +503,19 @@ export default function Questions() {
                     pointerEvents="none"
                   />
                   <View style={styles.cardInner}>
-                    {momentLabel ? (
+                    {!isWhoIsMostLikelyTo && currentQuestion?.closenessLevel != null ? (
                       <View style={styles.momentPillRow} pointerEvents="none">
                         <View
                           style={[
                             styles.momentPill,
-                            { borderColor: `${momentTheme.text}55` },
+                            { borderColor: `${COLORS.brand.forest}55` },
                           ]}
                         >
                           <Text
                             style={styles.momentPillText}
                             numberOfLines={1}
                           >
-                            {momentLabel}
+                            {t(closenessLabelKey(currentQuestion.closenessLevel))}
                           </Text>
                         </View>
                       </View>
@@ -526,22 +526,6 @@ export default function Questions() {
                     entering={FadeIn.duration(260)}
                     exiting={FadeOut.duration(200)}
                   >
-                    {!isWhoIsMostLikelyTo && currentQuestion?.closenessLevel != null && (
-                      <View style={styles.closenessLabelWrap}>
-                        <View
-                          style={[
-                            styles.closenessPill,
-                            { backgroundColor: `${COLORS.brand.forest}1A` },
-                          ]}
-                        >
-                          <Text
-                            style={[styles.closenessPillText, { color: COLORS.brand.forest }]}
-                          >
-                            {t(closenessLabelKey(currentQuestion.closenessLevel))}
-                          </Text>
-                        </View>
-                      </View>
-                    )}
                     <View style={styles.questionBlock}>
                       <Text
                         style={styles.questionText}
@@ -571,13 +555,7 @@ export default function Questions() {
                       }
                     />
                   </Pressable>
-                  <Image
-                    source={require('../assets/icon.png')}
-                    style={styles.cardBrandMark}
-                    resizeMode="contain"
-                    accessible={false}
-                    accessibilityIgnoresInvertColors
-                  />
+                  <Text style={styles.cardBrandText}>Mellow the App</Text>
                   </View>
                 </View>
               </Animated.View>
@@ -791,13 +769,17 @@ const styles = StyleSheet.create({
   favBtnPressed: {
     opacity: 0.7,
   },
-  cardBrandMark: {
+  cardBrandText: {
     position: 'absolute',
-    right: SPACING['2xl'],
+    left: 0,
+    right: 0,
     bottom: SPACING.lg,
-    width: 56,
-    height: 46,
-    opacity: 0.92,
+    textAlign: 'center',
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.regular,
+    fontWeight: '600',
+    color: `${COLORS.text.primary}99`,
+    letterSpacing: 0.4,
   },
   completionWrap: {
     ...StyleSheet.absoluteFillObject,
