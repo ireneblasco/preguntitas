@@ -546,25 +546,27 @@ export default function Questions() {
                       </Text>
                     </View>
                   </Animated.View>
-                  <Pressable
-                    style={({ pressed }) => [styles.favBtn, pressed && styles.favBtnPressed]}
-                    onPress={handleFavorite}
-                    onPressIn={handleFavoritePressIn}
-                    hitSlop={18}
-                    pressRetentionOffset={18}
-                    accessibilityRole="button"
-                    accessibilityLabel={t('questions.favorite')}
-                  >
-                    <Ionicons
-                      name={isFavorite(currentQuestionId) ? 'heart' : 'heart-outline'}
-                      size={24}
-                      color={
-                        isFavorite(currentQuestionId)
-                          ? COLORS.brand.terracotta
-                          : `${COLORS.text.primary}6E`
-                      }
-                    />
-                  </Pressable>
+                  <View style={styles.cardActions}>
+                    <Pressable
+                      style={({ pressed }) => [styles.favBtn, pressed && styles.favBtnPressed]}
+                      onPress={handleFavorite}
+                      onPressIn={handleFavoritePressIn}
+                      hitSlop={18}
+                      pressRetentionOffset={18}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('questions.favorite')}
+                    >
+                      <Ionicons
+                        name={isFavorite(currentQuestionId) ? 'heart' : 'heart-outline'}
+                        size={24}
+                        color={
+                          isFavorite(currentQuestionId)
+                            ? COLORS.brand.terracotta
+                            : `${COLORS.text.primary}6E`
+                        }
+                      />
+                    </Pressable>
+                  </View>
                   <Text style={styles.cardBrandText}>{t('home.appName')}</Text>
                   </View>
                 </View>
@@ -819,15 +821,27 @@ const styles = StyleSheet.create({
     color: COLORS.text.primary,
     letterSpacing: 0.2,
   },
-  favBtn: {
+  cardActions: {
     position: 'absolute',
-    top: SPACING.lg,
+    left: SPACING.lg,
     right: SPACING.lg,
-    padding: SPACING.sm,
+    bottom: SPACING.lg,
+    alignItems: 'flex-end',
+    zIndex: 2,
+  },
+  favBtn: {
+    width: 40,
+    height: 40,
     borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.52)',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(255, 255, 255, 0.72)',
   },
   favBtnPressed: {
-    opacity: 0.7,
+    opacity: 0.78,
+    transform: [{ scale: 0.96 }],
   },
   cardBrandText: {
     position: 'absolute',
