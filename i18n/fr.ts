@@ -73,6 +73,19 @@ export const fr = {
     error: 'Erreur',
     fetchFailed: 'Échec du chargement',
   },
+  players: {
+    title: 'Avec qui joues-tu ?',
+    subtitle:
+      'Chaque question sera adressée à une personne, pour savoir qui doit répondre.',
+    momentLabel: 'Moment',
+    sectionLabel: 'Joueurs',
+    count: '{{count}} personnes',
+    namePlaceholder: 'Personne {{n}}',
+    addPlayer: 'Ajouter une personne',
+    start: 'Commencer',
+    skip: 'Passer',
+    remove: 'Retirer',
+  },
   favorites: {
     title: 'Enregistrés',
     savedQuestions: 'Questions enregistrées',
@@ -87,6 +100,7 @@ export const fr = {
     onboardingDone: 'OK',
     onboardingHint: 'Trois questions rapides — puis l’accueil.',
     hint: 'Glisse ou appuie pour changer de question',
+    directedTo: 'Pour {{name}}',
     emptySelectMoment: 'Choisis un moment depuis l\'accueil pour commencer',
     emptyNoQuestions: 'Aucune question pour ce moment',
     closenessLabels: {

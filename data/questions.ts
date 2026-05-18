@@ -1,4 +1,4 @@
-// Auto-generated from Notion on 2026-05-06T19:31:47.878Z
+// Auto-generated from Notion on 2026-05-18T15:42:17.684Z
 // Do not edit manually - changes will be overwritten
 
 export type MomentType = "Break the Ice 👀" | "Date Night 🌙" | "Drinks with Friends 🍸" | "Go Deep 🧠" | "Ikigai 🌸" | "On the Road 🚗" | "Who is most likely to" | "With Grandparents 💌";
@@ -33,515 +33,1669 @@ export interface Question {
 
 export const questions: Question[] = [
   {
-    "id": "ID-156",
+    "id": "ID-374",
     "moment": [
-      "Go Deep 🧠"
+      "Date Night 🌙",
+      "Drinks with Friends 🍸"
     ],
-    "closenessLevel": 3,
+    "closenessLevel": 1,
     "text": {
-      "en-US": "What is the greatest accomplishment of your life?",
-      "es-ES": "¿Cuál es el logro más grande de tu vida?"
+      "en-US": "What’s your favorite accent?",
+      "es-ES": "¿Cuál es tu acento favorito?"
     }
   },
   {
-    "id": "ID-157",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What is something you would like to do but are too scared to try?",
-      "es-ES": "¿Qué es algo que te gustaría hacer pero tienes demasiado miedo de intentarlo?"
-    }
-  },
-  {
-    "id": "ID-120",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Have you ever seen something you cannot explain?",
-      "es-ES": "¿Alguna vez has visto algo que no puedes explicar?"
-    }
-  },
-  {
-    "id": "ID-142",
+    "id": "ID-373",
     "moment": [
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What characteristics do you admire most in others?",
-      "es-ES": "¿Qué características admiras más en los demás?"
+      "en-US": "What do you love most about yourself?",
+      "es-ES": "¿Qué es lo que más te gusta de ti?"
     }
   },
   {
-    "id": "ID-30",
+    "id": "ID-372",
     "moment": [
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
+      "Date Night 🌙"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What or who inspires you to be a better person?",
-      "es-ES": "¿Qué o quién te inspira a ser una mejor persona?"
+      "en-US": "Who is your favorite superhero?",
+      "es-ES": "¿Quién es tu superhero?"
     }
   },
   {
-    "id": "ID-24",
+    "id": "ID-371",
     "moment": [
-      "Drinks with Friends 🍸",
+      "Date Night 🌙",
       "On the Road 🚗"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "How much money would make you happy?",
-      "es-ES": "¿Cuánto dinero te haría feliz?"
+      "en-US": "What do people say you’re good at?",
+      "es-ES": "¿En qué te dicen que eres bueno/a?"
     }
   },
   {
-    "id": "ID-108",
+    "id": "ID-370",
     "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you like to do when you’re alone?",
+      "es-ES": "¿Qué te gusta hacer cuando estás solo/a?"
+    }
+  },
+  {
+    "id": "ID-369",
+    "moment": [
+      "Date Night 🌙",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you could experience something again for the first time, what would it be?",
+      "es-ES": "Si pudieras vivir algo por primera vez otra vez, ¿qué sería?"
+    }
+  },
+  {
+    "id": "ID-368",
+    "moment": [
+      "Date Night 🌙",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What would you prefer: to completely forget something or to remember it forever in full detail?",
+      "es-ES": "¿Qué preferirías: olvidar algo por completo o recordarlo siempre con todo detalle?"
+    }
+  },
+  {
+    "id": "ID-367",
+    "moment": [
+      "Date Night 🌙",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Do you consider yourself a lucky person?",
+      "es-ES": "¿Crees que eres una persona con suerte?"
+    }
+  },
+  {
+    "id": "ID-366",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Are you more of a morning person or a night person?",
+      "es-ES": "¿Eres morning person o night person?"
+    }
+  },
+  {
+    "id": "ID-365",
+    "moment": [
+      "Date Night 🌙",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "If you could ask your future self one question, what would it be?",
+      "es-ES": "Si pudieras hacerle una pregunta a tu yo del futuro, ¿cuál sería?"
+    }
+  },
+  {
+    "id": "ID-364",
+    "moment": [
+      "Date Night 🌙",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "If you could change anything about your current life, what would it be?",
+      "es-ES": "Si pudieras cambiar algo de tu vida actual, ¿qué cambiarías?"
+    }
+  },
+  {
+    "id": "ID-363",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Describe your ideal home",
+      "es-ES": "Describe tu casa ideal"
+    }
+  },
+  {
+    "id": "ID-362",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Would you like to be a parent someday?",
+      "es-ES": "¿Te gustaría ser padre o madre algún día?"
+    }
+  },
+  {
+    "id": "ID-361",
+    "moment": [
+      "Date Night 🌙",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What pattern do you see in your family that you wouldn’t want to repeat?",
+      "es-ES": "¿Qué patrón ves en tu familia que no te gustaría repetir?"
+    }
+  },
+  {
+    "id": "ID-360",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What physical aspect do you find most attractive in a person?",
+      "es-ES": "¿Qué rasgo fisico te parece más atractivo en una persona?"
+    }
+  },
+  {
+    "id": "ID-359",
+    "moment": [
+      "Date Night 🌙",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s your favorite smell? It can be something everyday.",
+      "es-ES": "¿Cuál es tu olor favorito? Puede ser algo cotidiano"
+    }
+  },
+  {
+    "id": "ID-358",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Have you ever broken a bone?",
+      "es-ES": "¿Alguna vez te has roto un hueso?"
+    }
+  },
+  {
+    "id": "ID-357",
+    "moment": [
+      "Date Night 🌙",
       "On the Road 🚗"
     ],
     "closenessLevel": 1,
     "text": {
-      "en-US": "What do you think my closet looks like?",
-      "es-ES": "¿Cómo crees que es mi armario: organizado o caótico?"
+      "en-US": "What hobby have you spent the most time on?",
+      "es-ES": "¿Cuál es el hobby al que más tiempo has dedicado?"
     }
   },
   {
-    "id": "ID-35",
+    "id": "ID-356",
     "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you were to get a tattoo tomorrow, what would it be?",
-      "es-ES": "Si fueras a hacerte un tatuaje mañana, ¿qué te tatuarías?"
-    }
-  },
-  {
-    "id": "ID-33",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What are you really intense about?",
-      "es-ES": "¿En qué cosas eres realmente intenso/a?"
-    }
-  },
-  {
-    "id": "ID-151",
-    "moment": [
-      "Go Deep 🧠",
       "Date Night 🌙"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Name three countries you’d love to visit soon",
+      "es-ES": "Dime tus tres países que más te gustaría visitar próximamente"
+    }
+  },
+  {
+    "id": "ID-355",
+    "moment": [
+      "Date Night 🌙",
+      "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Have you ever broken anyone’s heart?",
-      "es-ES": "¿Has roto el corazón de alguien?"
+      "en-US": "Who is your biggest fan?",
+      "es-ES": "¿Quién es tu mayor fan?"
     }
   },
   {
-    "id": "ID-20",
+    "id": "ID-354",
     "moment": [
-      "Go Deep 🧠",
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What’s the biggest age gap you’ve had with someone you’ve dated?",
+      "es-ES": "¿Cuál es la mayor diferencia de edad que has tenido con una pareja?"
+    }
+  },
+  {
+    "id": "ID-353",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What compliment do you get most often?",
+      "es-ES": "¿Cuál es el piropo o halago que más te dicen?"
+    }
+  },
+  {
+    "id": "ID-352",
+    "moment": [
+      "Date Night 🌙",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What makes you feel insecure?",
+      "es-ES": "¿Qué te hace sentir inseguro/a?"
+    }
+  },
+  {
+    "id": "ID-351",
+    "moment": [
+      "Date Night 🌙",
       "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What's the best thing about your life?",
-      "es-ES": "¿Qué es lo que más te gusta de tu vida?"
+      "en-US": "If you had to start a business, what would it be?",
+      "es-ES": "Si tuvieras que emprender, ¿qué negocio abrirías?"
     }
   },
   {
-    "id": "ID-32",
+    "id": "ID-350",
+    "moment": [
+      "Date Night 🌙",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you only had 5 minutes left to live and could listen to one song, which would you choose?",
+      "es-ES": "Si solo te quedaran 5 minutos de vida y pudieras escuchar una canción, ¿cuál elegirías?"
+    }
+  },
+  {
+    "id": "ID-349",
+    "moment": [
+      "Date Night 🌙",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What would you do if you won the lottery?",
+      "es-ES": "¿Qué harías si te tocara la lotería?"
+    }
+  },
+  {
+    "id": "ID-348",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What’s an irrational fear or a strange phobia you have?",
+      "es-ES": "¿Cuál es tu miedo irracional o fobia extraña?"
+    }
+  },
+  {
+    "id": "ID-347",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What is one of your goals for this year?",
+      "es-ES": "¿Cuál es uno de tus objetivos para este año?"
+    }
+  },
+  {
+    "id": "ID-346",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Would you rather stay in a luxury hotel with bad food or a hostel with Michelin-star food?",
+      "es-ES": "¿Prefieres un hotel lujoso con mala comida o un hostal con comida de estrella Michelin?"
+    }
+  },
+  {
+    "id": "ID-345",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Who do you take after more, your father or your mother?",
+      "es-ES": "¿A quién te pareces más, a tu padre o a tu madre?"
+    }
+  },
+  {
+    "id": "ID-344",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Who is your favorite family member?",
+      "es-ES": "¿Quién es tu miembro favorito de la familia?"
+    }
+  },
+  {
+    "id": "ID-342",
+    "moment": [
+      "Date Night 🌙",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Is there something you’re afraid of losing?",
+      "es-ES": "¿Qué te da miedo perder, aunque no lo digas mucho?"
+    }
+  },
+  {
+    "id": "ID-341",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "\n",
+      "es-ES": "¿Qué te da paz últimamente?\n"
+    }
+  },
+  {
+    "id": "ID-340",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you value more now than before?\n",
+      "es-ES": "¿Qué has empezado a valorar más con el tiempo?\n"
+    }
+  },
+  {
+    "id": "ID-339",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What part of your personality has changed the most in the last few years?",
+      "es-ES": "¿Qué parte de tu personalidad crees que ha cambiado más en los últimos años?"
+    }
+  },
+  {
+    "id": "ID-338",
     "moment": [
       "On the Road 🚗"
     ],
     "closenessLevel": 1,
     "text": {
-      "en-US": "What is your favorite smell?",
-      "es-ES": "¿Cuál es tu olor favorito?"
+      "en-US": "Have you watched any good shows lately?",
+      "es-ES": "¿Qué serie te has visto últimamente que recomiendes?"
     }
   },
   {
-    "id": "ID-2",
+    "id": "ID-337",
     "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Do you like to go with the flow, or do you prefer to plan things?",
+      "es-ES": "¿Eres más de improvisar o de tener todo planeado?"
+    }
+  },
+  {
+    "id": "ID-336",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What’s something people wouldn’t guess about you?",
+      "es-ES": "¿Qué es algo que la gente nunca adivinaría de ti?"
+    }
+  },
+  {
+    "id": "ID-335",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What always makes you laugh?",
+      "es-ES": "¿Qué te hace reír siempre?"
+    }
+  },
+  {
+    "id": "ID-334",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s one of the best trips you’ve had?",
+      "es-ES": "¿Cuál ha sido uno de tus mejores viajes?"
+    }
+  },
+  {
+    "id": "ID-333",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What would you like to be doing in five years?",
+      "es-ES": "¿Qué te gustaría estar haciendo dentro de 5 años?"
+    }
+  },
+  {
+    "id": "ID-332",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you like most about your job?",
+      "es-ES": "¿Qué es lo que más te gusta de tu trabajo?"
+    }
+  },
+  {
+    "id": "ID-331",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What kind of personalities do you usually like right away?\n",
+      "es-ES": "¿Qué tipo de gente te cae bien al instante?"
+    }
+  },
+  {
+    "id": "ID-330",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Which friend’s closet would you steal?",
+      "es-ES": "Si tuvieras que robarle el armario a un amigo, ¿a quién se lo robarías?"
+    }
+  },
+  {
+    "id": "ID-329",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s your favorite little moment of the day?",
+      "es-ES": "¿Cuál es tu ratito favorito del día a día?"
+    }
+  },
+  {
+    "id": "ID-328",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who texts you the most?",
+      "es-ES": "¿Quién es la persona que te manda mas mensajes?"
+    }
+  },
+  {
+    "id": "ID-327",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What’s the biggest mistake you’ve ever made?",
+      "es-ES": "¿Cuál ha sido el mayor error que has cometido?"
+    }
+  },
+  {
+    "id": "ID-326",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to have a celebrity’s number on their phone?",
+      "es-ES": "¿Quién es más probable que tenga el número de un famoso en el móvil?"
+    }
+  },
+  {
+    "id": "ID-325",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to have the most money in their bank account?",
+      "es-ES": "¿Quién es más probable que tenga más dinero en la cuenta bancaria?"
+    }
+  },
+  {
+    "id": "ID-324",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to cheat in a board game?",
+      "es-ES": "¿Quién es más probable que haga trampas en un juego de mesa?"
+    }
+  },
+  {
+    "id": "ID-323",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to actually believe conspiracy theories?",
+      "es-ES": "¿Quién es más probable que se crea de verdad teorías conspiranoicas?"
+    }
+  },
+  {
+    "id": "ID-322",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to order the weirdest thing on the menu just to try it?",
+      "es-ES": "¿Quién es más probable que pida lo más raro del menú solo por curiosidad?"
+    }
+  },
+  {
+    "id": "ID-321",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to eat the last slice of pizza without asking?",
+      "es-ES": "¿Quién es más probable que se coma el último trozo de pizza sin preguntar?"
+    }
+  },
+  {
+    "id": "ID-320",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to stalk their ex with a fake account?",
+      "es-ES": "¿Quién es más probable que stalkee a su ex con una cuenta fake?"
+    }
+  },
+  {
+    "id": "ID-319",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to spill a secret they shouldn’t?",
+      "es-ES": "¿Quién es más probable que cuente un secreto que no debía?"
+    }
+  },
+  {
+    "id": "ID-318",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to jump on stage and sing or dance?",
+      "es-ES": "¿Quién es más probable que se suba al escenario a cantar o bailar?"
+    }
+  },
+  {
+    "id": "ID-317",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to get their partner’s name tattooed?",
+      "es-ES": "¿Quién es más probable que se haga un tatuaje con el nombre de su pareja?"
+    }
+  },
+  {
+    "id": "ID-316",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to lose everything for love?",
+      "es-ES": "¿Quién es más probable que lo pierda todo por amor?"
+    }
+  },
+  {
+    "id": "ID-315",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to survive the apocalypse?",
+      "es-ES": "¿Quién es más probable que sobreviva al apocalipsis?"
+    }
+  },
+  {
+    "id": "ID-314",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to get into politics?",
+      "es-ES": "¿Quién es más probable que se meta a trabajar en politica?"
+    }
+  },
+  {
+    "id": "ID-313",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to have imaginary shower arguments and win them?",
+      "es-ES": "¿Quién es más probable que tenga una conversación imaginaria en la ducha y la gane?"
+    }
+  },
+  {
+    "id": "ID-312",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to plan something amazing… then cancel?",
+      "es-ES": "¿Quién es más probable que organice un plan increíble… y luego lo cancele?"
+    }
+  },
+  {
+    "id": "ID-311",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to have a secret life no one expects?",
+      "es-ES": "¿Quién es más probable que tenga una vida secreta que nadie espera?"
+    }
+  },
+  {
+    "id": "ID-310",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to end up as an influencer?",
+      "es-ES": "¿Quién es más probable que acabe siendo influencer?"
+    }
+  },
+  {
+    "id": "ID-309",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to be late to something important?",
+      "es-ES": "¿Quién es más probable que llegue tarde a algo importante?"
+    }
+  },
+  {
+    "id": "ID-308",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to rehearse conversations that never happened?",
+      "es-ES": "¿Quién es más probable que ensaye conversaciones que nunca pasaron?"
+    }
+  },
+  {
+    "id": "ID-307",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to have a playlist just for walking dramatically?",
+      "es-ES": "¿Quién es más probable que tenga una playlist solo para caminar dramáticamente?"
+    }
+  },
+  {
+    "id": "ID-306",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to do something crazy for a good story?",
+      "es-ES": "¿Quién es más probable que haga una locura por una buena historia?"
+    }
+  },
+  {
+    "id": "ID-305",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to start a company and get rich?",
+      "es-ES": "¿Quién es más probable que cree su propia empresa y se haga millonario?"
+    }
+  },
+  {
+    "id": "ID-304",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to cheat on a test?",
+      "es-ES": "¿Quién es más probable que copie en un examen?"
+    }
+  },
+  {
+    "id": "ID-303",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to rack up the most parking tickets?",
+      "es-ES": "¿Quién es más probable que reciba más multas de tráfico?"
+    }
+  },
+  {
+    "id": "ID-302",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to become the fan favourite on a reality show?",
+      "es-ES": "¿Quién es más probable que se convierta en el favorito del público en un reality show?"
+    }
+  },
+  {
+    "id": "ID-301",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to drop everything and move to Bali?",
+      "es-ES": "¿Quién es más probable que deje su vida actual y se vaya a vivir a Bali?"
+    }
+  },
+  {
+    "id": "ID-300",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to get drunk and married in Vegas?",
+      "es-ES": "¿Quién es más probable que se case borracho en Vegas?"
+    }
+  },
+  {
+    "id": "ID-299",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to get arrested?",
+      "es-ES": "¿Quién es más probable que sea arrestado por la policía?"
+    }
+  },
+  {
+    "id": "ID-298",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to become a meme?",
+      "es-ES": "¿Quién es más probable que se convierta en meme?"
+    }
+  },
+  {
+    "id": "ID-297",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to live off snacks?",
+      "es-ES": "¿Quién es más probable que sobreviva a base de snacks?"
+    }
+  },
+  {
+    "id": "ID-296",
+    "moment": [
+      "Who is most likely to"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Who’s most likely to adopt an exotic pet?",
+      "es-ES": "¿Quién es más probable que adopte un animal exótico?"
+    }
+  },
+  {
+    "id": "ID-293",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s your go-to late-night snack?",
+      "es-ES": "¿Qué te pides de comer al volver de fiesta?"
+    }
+  },
+  {
+    "id": "ID-292",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Window or aisle?",
+      "es-ES": "¿Ventana o pasillo?"
+    }
+  },
+  {
+    "id": "ID-291",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Always late or always early?",
+      "es-ES": "¿Llegar siempre tarde o siempre pronto?"
+    }
+  },
+  {
+    "id": "ID-290",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s a small win you’ve had recently?",
+      "es-ES": "¿Cuál es un pequeño logro que has hecho hace poco?"
+    }
+  },
+  {
+    "id": "ID-289",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s something people assume about you that isn’t true?",
+      "es-ES": "¿Qué es algo que la gente asume sobre ti y no es cierto?"
+    }
+  },
+  {
+    "id": "ID-288",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s something you’ve always wanted to try but haven’t yet?",
+      "es-ES": "¿Qué es algo que siempre has querido probar pero aún no has hecho?"
+    }
+  },
+  {
+    "id": "ID-287",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What’s something small that makes your day better?",
+      "es-ES": "¿Qué pequeño detalle o cosa te alegra el día?"
+    }
+  },
+  {
+    "id": "ID-286",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you could instantly master something, what would it be?",
+      "es-ES": "Si pudieras ser un maestro en cualquier cosa, ¿qué sería?"
+    }
+  },
+  {
+    "id": "ID-285",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you could live anywhere for a year, where would it be?",
+      "es-ES": "¿Qué lugar elegirías para vivir un año?"
+    }
+  },
+  {
+    "id": "ID-284",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What household task are you embarrassed to admit you don’t know how to do?",
+      "es-ES": "¿Qué tarea del hogar te da vergüenza admitir que no sabes hacer?"
+    }
+  },
+  {
+    "id": "ID-283",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What’s something you pretend to understand but don’t?",
+      "es-ES": "¿Qué es algo que haces como que entiendes, pero no tienes ni idea?"
+    }
+  },
+  {
+    "id": "ID-281",
+    "moment": [
+      "Break the Ice 👀"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you had to switch lives with one of your friends, who would you pick?",
+      "es-ES": "Si tuvieras que intercambiar tu vida con la de uno de tus amigos, ¿a quién elegirías?"
+    }
+  },
+  {
+    "id": "ID-280",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗",
       "Go Deep 🧠"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "Is there an area of your life where you are never satisfied?",
-      "es-ES": "¿Hay algun área en tu vida en la que nunca estés satisfecho?"
+      "en-US": "If someone had to write your memoir, who would you choose?",
+      "es-ES": "Si alguien tuviera que escribir tus memorias, ¿a quién elegirías?"
     }
   },
   {
-    "id": "ID-159",
+    "id": "ID-279",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What did you want to be when you were little?",
+      "es-ES": "¿Qué querías ser de pequeño?"
+    }
+  },
+  {
+    "id": "ID-278",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you had to write a book, what would it be about?",
+      "es-ES": "Si tuvieras que escribir un libro, ¿de qué trataría?\n"
+    }
+  },
+  {
+    "id": "ID-277",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What have you done in the past that you’re still embarrassed about?",
+      "es-ES": "Cuenta algo que hiciste en el pasado creyendo que era cool pero ahora te da cringe recordarlo"
+    }
+  },
+  {
+    "id": "ID-276",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Describe an important teacher in your school life.",
+      "es-ES": "Describe un profesor que fue importante en tu etapa escolar."
+    }
+  },
+  {
+    "id": "ID-275",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What’s the kindest thing anyone has ever done for you?",
+      "es-ES": "¿Qué es lo más bonito que alguien ha hecho por ti?"
+    }
+  },
+  {
+    "id": "ID-273",
+    "moment": [
+      "On the Road 🚗",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What toxic behavior is socially applauded?",
+      "es-ES": "¿Qué comportamiento tóxico está socialmente aplaudido?"
+    }
+  },
+  {
+    "id": "ID-272",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Would you like your child to have a personality similar to your partner’s?",
+      "es-ES": "¿Te gustaría que tu hijo tuviera una personalidad similar a la de tu pareja?"
+    }
+  },
+  {
+    "id": "ID-271",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Date Night 🌙",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Would you tattoo your partner’s name on your body?",
+      "es-ES": "¿Te tatuarías el nombre de tu pareja?"
+    }
+  },
+  {
+    "id": "ID-270",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Have you ever had surgery?",
+      "es-ES": "¿Te han operado alguna vez?"
+    }
+  },
+  {
+    "id": "ID-269",
     "moment": [
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Who is the person who has let you down the most?",
-      "es-ES": "¿Quién es la persona que más te ha fallado?"
+      "en-US": "In what situation have you feared for your life?",
+      "es-ES": "¿En qué situación has sentido miedo por tu vida?"
     }
   },
   {
-    "id": "ID-177",
+    "id": "ID-268",
     "moment": [
-      "Go Deep 🧠"
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
     ],
-    "closenessLevel": 3,
+    "closenessLevel": 1,
     "text": {
-      "en-US": "What version of yourself no longer exists?",
-      "es-ES": "¿Qué versión de ti ya no existe?"
+      "en-US": "Which travel destination would you avoid going back to?",
+      "es-ES": "¿A qué destino de viaje evitarías volver?"
     }
   },
   {
-    "id": "ID-181",
+    "id": "ID-266",
     "moment": [
-      "Go Deep 🧠"
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
     ],
-    "closenessLevel": 3,
+    "closenessLevel": 1,
     "text": {
-      "en-US": "What part of you has changed the most over the past few years?",
-      "es-ES": "¿Qué parte de ti ha cambiado más en los últimos años?"
+      "en-US": "What movie have you watched the most times?",
+      "es-ES": "¿Cuál es la película que más veces has visto?"
     }
   },
   {
-    "id": "ID-189",
+    "id": "ID-265",
     "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you knew you couldn’t die, what adventure would you try?",
+      "es-ES": "Si supieras que no puedes morir, ¿qué aventura probarías?"
+    }
+  },
+  {
+    "id": "ID-264",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you could be the child of any famous person, who would you choose as your parent?",
+      "es-ES": "Si pudieras ser hijo/a de una persona famosa, ¿a quién elegirías como padre o madre?"
+    }
+  },
+  {
+    "id": "ID-263",
+    "moment": [
+      "Drinks with Friends 🍸",
       "Go Deep 🧠"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What would you like people to remember about you?",
-      "es-ES": "¿Qué te gustaría que recordaran de ti?"
+      "en-US": "Who are you more like: your mother or your father?",
+      "es-ES": "¿A quién te pareces más: a tu madre o a tu padre?"
     }
   },
   {
-    "id": "ID-190",
+    "id": "ID-262",
     "moment": [
+      "Drinks with Friends 🍸",
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "What would you like to forgive yourself for?",
-      "es-ES": "¿Qué te gustaría perdonarte?"
+      "en-US": "Are you the kind of person you imagined you would be as a child?",
+      "es-ES": "¿Eres como te imaginabas cuando eras niño/a?"
     }
   },
   {
-    "id": "ID-178",
+    "id": "ID-261",
     "moment": [
-      "Go Deep 🧠"
+      "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "When do you feel most like yourself?",
-      "es-ES": "¿En qué momento sientes que eres más tú?"
+      "en-US": "How many children would you like to have?",
+      "es-ES": "¿Cuántos hijos te gustaría tener?"
     }
   },
   {
-    "id": "ID-186",
+    "id": "ID-260",
     "moment": [
-      "Go Deep 🧠"
+      "Drinks with Friends 🍸",
+      "Date Night 🌙"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "When was the last time you truly surprised yourself?",
-      "es-ES": "¿Cuándo fue la última vez que te sorprendiste a ti mismo/a?"
+      "en-US": "If you had children, what names would you give them?",
+      "es-ES": "Si tuvieras hijos, ¿qué nombres les pondrías?"
     }
   },
   {
-    "id": "ID-184",
+    "id": "ID-259",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Do you believe in God?",
+      "es-ES": "¿Crees en Dios?"
+    }
+  },
+  {
+    "id": "ID-257",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you could have any animal as a pet, which one would you choose?",
+      "es-ES": "Si pudieras tener cualquier animal como mascota, ¿cuál elegirías?"
+    }
+  },
+  {
+    "id": "ID-256",
     "moment": [
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Which emotion is the hardest for you to manage?",
-      "es-ES": "¿Qué emoción te cuesta más gestionar?"
+      "en-US": "If you died tomorrow, would you feel you made good use of your time?",
+      "es-ES": "Si murieras mañana, ¿sentirías que has aprovechado bien tu tiempo?"
     }
   },
   {
-    "id": "ID-191",
+    "id": "ID-255",
     "moment": [
-      "Go Deep 🧠"
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "What would you like to understand better about your personality?",
-      "es-ES": "¿Qué te gustaría entender mejor sobre tu personalidad?"
+      "en-US": "(For women) If during childbirth doctors said only one could survive, you or your baby, what decision would you make?",
+      "es-ES": "(Solo para mujeres) Si durante el parto te dijeran que solo puede sobrevivir uno, tú o tu bebé, ¿qué decisión tomarías?"
     }
   },
   {
-    "id": "ID-161",
-    "moment": [],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "¿Te consideras una persona ambiciosa?",
-      "es-ES": "¿Te consideras una persona ambiciosa?"
-    }
-  },
-  {
-    "id": "ID-165",
+    "id": "ID-254",
     "moment": [
-      "Go Deep 🧠"
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
     ],
-    "closenessLevel": 3,
+    "closenessLevel": 2,
     "text": {
-      "en-US": "Do you care what others think of you?",
-      "es-ES": "¿Te importa lo que piensen de ti?"
+      "en-US": "A classic one: if your life were written like a book, would you read the ending?",
+      "es-ES": "La típica: si tu vida estuviera escrita como un libro, ¿leerías el final?"
     }
   },
   {
-    "id": "ID-163",
+    "id": "ID-253",
     "moment": [
-      "Go Deep 🧠",
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "Do you consider yourself an ambitious person?",
-      "es-ES": "¿Te consideras una persona ambiciosa?"
+      "en-US": "What hobbies do you think you'll have when you're older?",
+      "es-ES": "¿Qué hobbies crees que tendrás cuando tengas 65 años?"
     }
   },
   {
-    "id": "ID-172",
+    "id": "ID-252",
     "moment": [
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "If you lost everything tomorrow, what would you still have?",
-      "es-ES": "Si mañana lo perdieras todo, ¿qué te quedaría?"
+      "en-US": "What would you say to your younger self?",
+      "es-ES": "¿Qué le dirías a tu yo de niño?"
     }
   },
   {
-    "id": "ID-182",
+    "id": "ID-251",
     "moment": [
       "Go Deep 🧠",
       "Drinks with Friends 🍸"
     ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you think people usually misunderstand about you?",
-      "es-ES": "¿Qué crees que la gente suele malinterpretar de ti?"
-    }
-  },
-  {
-    "id": "ID-169",
-    "moment": [
-      "Go Deep 🧠"
-    ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Who do you need to forgive? And who needs to forgive you?",
-      "es-ES": "¿A quién necesitas perdonar? ¿Y quién te tiene que perdonar a ti?"
+      "en-US": "Do you believe in the phrase “You can achieve anything you set your mind to”?",
+      "es-ES": "¿Crees en la frase: “Puedes conseguir todo lo que te propongas”?"
     }
   },
   {
-    "id": "ID-170",
+    "id": "ID-250",
     "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Have you ever felt lonely even when surrounded by people?",
-      "es-ES": "¿Te has sentido sola estando rodeada de gente?"
-    }
-  },
-  {
-    "id": "ID-183",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What have you learned about yourself that you didn’t know before?",
-      "es-ES": "¿Qué has aprendido sobre ti que antes no sabías?"
-    }
-  },
-  {
-    "id": "ID-162",
-    "moment": [],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "¿Te consideras una persona ambiciosa?",
-      "es-ES": "¿Te consideras una persona ambiciosa?"
-    }
-  },
-  {
-    "id": "ID-167",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What has been the hardest moment of your life?",
-      "es-ES": "¿Cuál ha sido el momento más duro de tu vida?"
-    }
-  },
-  {
-    "id": "ID-160",
-    "moment": [],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "¿Te consideras una persona ambiciosa?",
-      "es-ES": "¿Te consideras una persona ambiciosa?"
-    }
-  },
-  {
-    "id": "ID-185",
-    "moment": [
-      "Go Deep 🧠",
       "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What makes you feel at peace?",
-      "es-ES": "¿Qué te hace sentir en paz?"
+      "en-US": "If you could instantly master one more language, which one would you choose?",
+      "es-ES": "Si pudieras aprender perfectamente un idioma más, ¿cuál elegirías?"
     }
   },
   {
-    "id": "ID-179",
+    "id": "ID-249",
     "moment": [
-      "Go Deep 🧠"
+      "Drinks with Friends 🍸"
     ],
-    "closenessLevel": 3,
+    "closenessLevel": 1,
     "text": {
-      "en-US": "What part of your success isn’t visible to others?",
-      "es-ES": "¿Qué parte de tu éxito no se ve?"
+      "en-US": "If you could have any car, which one would you choose?",
+      "es-ES": "Si pudieras tener cualquier coche, ¿cuál tendrías?"
     }
   },
   {
-    "id": "ID-188",
+    "id": "ID-248",
     "moment": [
-      "Go Deep 🧠",
       "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What decision helped you grow the most?",
-      "es-ES": "¿Qué decisión te hizo madurar?"
+      "en-US": "If you could be the CEO of any company, which one would you choose?",
+      "es-ES": "Si pudieras ser el CEO de cualquier empresa, ¿cuál elegirías?"
     }
   },
   {
-    "id": "ID-166",
+    "id": "ID-247",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Do you believe in spirits?",
+      "es-ES": "¿Crees en los espíritus?"
+    }
+  },
+  {
+    "id": "ID-246",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Do you think everything happens for a reason, or that life is random?",
+      "es-ES": "¿Crees que todo pasa por algo o que la vida es aleatoria?"
+    }
+  },
+  {
+    "id": "ID-245",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What habit from your mother have you realized you do yourself?",
+      "es-ES": "¿Qué mania de tu madre te has dado cuenta que ahora haces tú?"
+    }
+  },
+  {
+    "id": "ID-243",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you think about surrogacy?",
+      "es-ES": "¿Qué opinas de los vientres de alquiler?"
+    }
+  },
+  {
+    "id": "ID-242",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Would you adopt a child?",
+      "es-ES": "¿Adoptarías un hijo?"
+    }
+  },
+  {
+    "id": "ID-241",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you could be born with a different nationality, which one would you choose?",
+      "es-ES": "Si pudieras nacer con otra nacionalidad, ¿cuál elegirías?"
+    }
+  },
+  {
+    "id": "ID-240",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you were a household appliance, which one would you be and why?",
+      "es-ES": "Si fueras un electrodoméstico de tu casa, ¿cuál serías y por qué?"
+    }
+  },
+  {
+    "id": "ID-239",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Would you rather live a luxurious life in the mountains or by the beach?",
+      "es-ES": "¿Preferirías una vida de lujo en la montaña o una vida de lujo en la playa?"
+    }
+  },
+  {
+    "id": "ID-238",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you got a dog today, what would you name it?",
+      "es-ES": "Si tuvieras un perro hoy, ¿qué nombre le pondrías?"
+    }
+  },
+  {
+    "id": "ID-237",
     "moment": [
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Who are you when no one is watching?",
-      "es-ES": "¿Quién eres cuando nadie te está mirando?"
+      "en-US": "Have you ever forgiven someone for cheating?",
+      "es-ES": "¿Alguna vez has perdonado una infidelidad?"
     }
   },
   {
-    "id": "ID-180",
+    "id": "ID-236",
     "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Who supports you when you can’t go on?",
-      "es-ES": "¿Quién te sostiene cuando tú no puedes más?"
-    }
-  },
-  {
-    "id": "ID-168",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What wound are you still carrying that hasn’t fully healed?",
-      "es-ES": "¿Qué herida arrastras que todavía no has cerrado?"
-    }
-  },
-  {
-    "id": "ID-175",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What still hurts even though you say it’s over?",
-      "es-ES": "¿Qué te duele todavía aunque digas que ya pasó?"
-    }
-  },
-  {
-    "id": "ID-171",
-    "moment": [
-      "Go Deep 🧠",
+      "Drinks with Friends 🍸",
       "Date Night 🌙"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "What part of you do people not know?",
-      "es-ES": "¿Qué parte de ti no conoce la gente?"
+      "en-US": "Could you forgive someone for cheating? ",
+      "es-ES": "¿Serías capaz de perdonar una infidelidad?\n"
     }
   },
   {
-    "id": "ID-173",
+    "id": "ID-235",
     "moment": [
-      "Go Deep 🧠"
+      "Ikigai 🌸",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What topic could you talk about for hours without getting tired of it?",
+      "es-ES": "¿De qué podrías hablar durante 3 horas seguidas?"
+    }
+  },
+  {
+    "id": "ID-234",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you could turn into an animal, which one would you be?",
+      "es-ES": "Si pudieras convertirte en un animal, ¿cuál serías?"
+    }
+  },
+  {
+    "id": "ID-233",
+    "moment": [
+      "On the Road 🚗",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What’s your biggest wasted talent?",
+      "es-ES": "¿Cuál es tu mayor talento desperdiciado?"
+    }
+  },
+  {
+    "id": "ID-232",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you wish you could do more often?",
+      "es-ES": "¿Qué te gustaría hacer más a menudo?"
+    }
+  },
+  {
+    "id": "ID-231",
+    "moment": [
+      "Date Night 🌙"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Are you afraid of getting older?",
-      "es-ES": "¿Te da miedo envejecer?"
+      "en-US": "Who was the first person you told about me?",
+      "es-ES": "¿Quién fue la primera persona a la que le hablaste de mí?"
     }
   },
   {
-    "id": "ID-174",
+    "id": "ID-229",
     "moment": [
-      "Go Deep 🧠"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "What conversation do you still need to have with yourself?",
-      "es-ES": "¿Qué conversación tienes pendiente contigo mismo?"
+      "en-US": "At what time in your life did you feel the happiest?",
+      "es-ES": "¿En qué etapa de tu vida te has sentido más feliz?"
     }
   },
   {
-    "id": "ID-176",
+    "id": "ID-228",
     "moment": [
-      "Go Deep 🧠"
+      "With Grandparents 💌"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Have you been brave, or mostly afraid?",
-      "es-ES": "¿Has sido valiente o has tenido miedo casi siempre?"
+      "en-US": "What did you give too much importance to when you were young, only to realize later it didn’t matter?",
+      "es-ES": "¿A qué le diste demasiada importancia de joven y luego te diste cuenta de que no la tenía?"
     }
   },
   {
-    "id": "ID-216",
+    "id": "ID-227",
     "moment": [
       "With Grandparents 💌"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "Do you believe in a love that lasts a lifetime?",
-      "es-ES": "¿Crees en un amor que dure toda la vida?"
+      "en-US": "What do you think society has lost?",
+      "es-ES": "¿Qué crees que la sociedad ha perdido?"
     }
   },
   {
-    "id": "ID-214",
+    "id": "ID-226",
     "moment": [
       "With Grandparents 💌"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "If you could go back to your 20-year-old self, what would you tell them?",
-      "es-ES": "Si pudieras volver a tus 20 años, ¿qué te dirías?"
+      "en-US": "Do you think people today have it easier or harder than before? Why?",
+      "es-ES": "¿Crees que hoy la gente lo tiene más fácil o más difícil que antes? ¿Por qué?"
+    }
+  },
+  {
+    "id": "ID-225",
+    "moment": [
+      "With Grandparents 💌",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What does a “good life” mean to you now?",
+      "es-ES": "¿Qué significa ahora para ti una “buena vida”?"
+    }
+  },
+  {
+    "id": "ID-224",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "When did you feel most proud of yourself, even if no one noticed?",
+      "es-ES": "¿Cuándo te sentiste más orgulloso/a de ti aunque nadie lo supiera?"
+    }
+  },
+  {
+    "id": "ID-223",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What memory still makes you emotional?",
+      "es-ES": "¿Qué recuerdo todavía te emociona?"
+    }
+  },
+  {
+    "id": "ID-222",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What fear controlled you at some point in your life?",
+      "es-ES": "¿Qué miedo te controló en algún momento de tu vida?"
+    }
+  },
+  {
+    "id": "ID-221",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What do you value most that other people overlook?",
+      "es-ES": "¿Qué importa más de lo que la gente cree?"
+    }
+  },
+  {
+    "id": "ID-220",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Which member of the family do you think resembles you the most? Why?",
+      "es-ES": "¿Qué miembro de la familia crees que se parece más a ti? ¿Por qué?"
+    }
+  },
+  {
+    "id": "ID-219",
+    "moment": [
+      "With Grandparents 💌",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you see in the younger generations that gives you hope?",
+      "es-ES": "¿Qué ves en las nuevas generaciones que te da esperanza?"
     }
   },
   {
@@ -567,6 +1721,51 @@ export const questions: Question[] = [
     }
   },
   {
+    "id": "ID-216",
+    "moment": [
+      "With Grandparents 💌"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Do you believe in a love that lasts a lifetime?",
+      "es-ES": "¿Crees en un amor que dure toda la vida?"
+    }
+  },
+  {
+    "id": "ID-215",
+    "moment": [
+      "With Grandparents 💌"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What decision changed your life the most?",
+      "es-ES": "¿Qué decisión cambió más tu vida?"
+    }
+  },
+  {
+    "id": "ID-214",
+    "moment": [
+      "With Grandparents 💌"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you could go back to your 20-year-old self, what would you tell them?",
+      "es-ES": "Si pudieras volver a tus 20 años, ¿qué te dirías?"
+    }
+  },
+  {
+    "id": "ID-213",
+    "moment": [
+      "With Grandparents 💌",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What do you think you spent too much time on?",
+      "es-ES": "¿En qué crees que invertiste demasiado tiempo?"
+    }
+  },
+  {
     "id": "ID-208",
     "moment": [
       "With Grandparents 💌"
@@ -575,40 +1774,6 @@ export const questions: Question[] = [
     "text": {
       "en-US": "Is there anything you wish you had worried less about?",
       "es-ES": "¿Hay algo por lo que te hubiera gustado preocuparte menos?"
-    }
-  },
-  {
-    "id": "ID-227",
-    "moment": [
-      "With Grandparents 💌"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you think society has lost?",
-      "es-ES": "¿Qué crees que la sociedad ha perdido?"
-    }
-  },
-  {
-    "id": "ID-204",
-    "moment": [
-      "Go Deep 🧠",
-      "Ikigai 🌸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If your close friends described your “zone of genius”, what would they say?",
-      "es-ES": "Si tus amigos describieran tu “zona de genialidad”, ¿qué dirían?"
-    }
-  },
-  {
-    "id": "ID-228",
-    "moment": [
-      "With Grandparents 💌"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What did you give too much importance to when you were young, only to realize later it didn’t matter?",
-      "es-ES": "¿A qué le diste demasiada importancia de joven y luego te diste cuenta de que no la tenía?"
     }
   },
   {
@@ -636,182 +1801,6 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-226",
-    "moment": [
-      "With Grandparents 💌"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Do you think people today have it easier or harder than before? Why?",
-      "es-ES": "¿Crees que hoy la gente lo tiene más fácil o más difícil que antes? ¿Por qué?"
-    }
-  },
-  {
-    "id": "ID-225",
-    "moment": [
-      "With Grandparents 💌",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What does a “good life” mean to you now?",
-      "es-ES": "¿Qué significa ahora para ti una “buena vida”?"
-    }
-  },
-  {
-    "id": "ID-219",
-    "moment": [
-      "With Grandparents 💌",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you see in the younger generations that gives you hope?",
-      "es-ES": "¿Qué ves en las nuevas generaciones que te da esperanza?"
-    }
-  },
-  {
-    "id": "ID-201",
-    "moment": [
-      "Go Deep 🧠",
-      "Ikigai 🌸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you had to teach something tomorrow, what would you choose?",
-      "es-ES": "Si tuvieses que enseñar algo mañana, ¿qué elegirías?"
-    }
-  },
-  {
-    "id": "ID-221",
-    "moment": [
-      "With Grandparents 💌",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What do you value most that other people overlook?",
-      "es-ES": "¿Qué importa más de lo que la gente cree?"
-    }
-  },
-  {
-    "id": "ID-195",
-    "moment": [
-      "Ikigai 🌸",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What would you do if you knew you couldn’t fail?",
-      "es-ES": "¿Qué harías si supieras que no puedes fracasar?"
-    }
-  },
-  {
-    "id": "ID-222",
-    "moment": [
-      "With Grandparents 💌",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What fear controlled you at some point in your life?",
-      "es-ES": "¿Qué miedo te controló en algún momento de tu vida?"
-    }
-  },
-  {
-    "id": "ID-199",
-    "moment": [
-      "Go Deep 🧠",
-      "Ikigai 🌸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you do naturally that others find difficult?",
-      "es-ES": "¿Qué haces con naturalidad que a otros les cuesta?"
-    }
-  },
-  {
-    "id": "ID-231",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Who was the first person you told about me?",
-      "es-ES": "¿Quién fue la primera persona a la que le hablaste de mí?"
-    }
-  },
-  {
-    "id": "ID-196",
-    "moment": [
-      "Ikigai 🌸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "In what kind of conversations do you lose track of time?",
-      "es-ES": "¿En qué tipo de conversaciones pierdes la noción del tiempo?"
-    }
-  },
-  {
-    "id": "ID-197",
-    "moment": [
-      "Go Deep 🧠",
-      "Ikigai 🌸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What topics do you constantly look up without anyone pushing you?",
-      "es-ES": "¿Qué temas buscas constantemente sin que nadie te obligue?"
-    }
-  },
-  {
-    "id": "ID-224",
-    "moment": [
-      "With Grandparents 💌",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "When did you feel most proud of yourself, even if no one noticed?",
-      "es-ES": "¿Cuándo te sentiste más orgulloso/a de ti aunque nadie lo supiera?"
-    }
-  },
-  {
-    "id": "ID-198",
-    "moment": [
-      "Go Deep 🧠",
-      "Ikigai 🌸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What kind of problems do you enjoy solving?",
-      "es-ES": "¿Qué tipo de problemas disfrutas resolver?"
-    }
-  },
-  {
-    "id": "ID-215",
-    "moment": [
-      "With Grandparents 💌"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What decision changed your life the most?",
-      "es-ES": "¿Qué decisión cambió más tu vida?"
-    }
-  },
-  {
-    "id": "ID-200",
-    "moment": [
-      "Go Deep 🧠",
-      "Ikigai 🌸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "In what situations do you tend to take the lead without realizing it?",
-      "es-ES": "¿En qué situaciones sueles tomar el liderazgo sin darte cuenta?"
-    }
-  },
-  {
     "id": "ID-205",
     "moment": [
       "Go Deep 🧠",
@@ -824,38 +1813,15 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-220",
+    "id": "ID-204",
     "moment": [
-      "With Grandparents 💌",
-      "Go Deep 🧠"
+      "Go Deep 🧠",
+      "Ikigai 🌸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "Which member of the family do you think resembles you the most? Why?",
-      "es-ES": "¿Qué miembro de la familia crees que se parece más a ti? ¿Por qué?"
-    }
-  },
-  {
-    "id": "ID-229",
-    "moment": [
-      "With Grandparents 💌"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "At what time in your life did you feel the happiest?",
-      "es-ES": "¿En qué etapa de tu vida te has sentido más feliz?"
-    }
-  },
-  {
-    "id": "ID-223",
-    "moment": [
-      "With Grandparents 💌",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What memory still makes you emotional?",
-      "es-ES": "¿Qué recuerdo todavía te emociona?"
+      "en-US": "If your close friends described your “zone of genius”, what would they say?",
+      "es-ES": "Si tus amigos describieran tu “zona de genialidad”, ¿qué dirían?"
     }
   },
   {
@@ -871,1542 +1837,529 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-232",
+    "id": "ID-201",
     "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
+      "Go Deep 🧠",
+      "Ikigai 🌸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What do you wish you could do more often?",
-      "es-ES": "¿Qué te gustaría hacer más a menudo?"
+      "en-US": "If you had to teach something tomorrow, what would you choose?",
+      "es-ES": "Si tuvieses que enseñar algo mañana, ¿qué elegirías?"
     }
   },
   {
-    "id": "ID-213",
+    "id": "ID-200",
     "moment": [
-      "With Grandparents 💌",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What do you think you spent too much time on?",
-      "es-ES": "¿En qué crees que invertiste demasiado tiempo?"
-    }
-  },
-  {
-    "id": "ID-233",
-    "moment": [
-      "On the Road 🚗",
-      "Drinks with Friends 🍸"
+      "Go Deep 🧠",
+      "Ikigai 🌸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What’s your biggest wasted talent?",
-      "es-ES": "¿Cuál es tu mayor talento desperdiciado?"
+      "en-US": "In what situations do you tend to take the lead without realizing it?",
+      "es-ES": "¿En qué situaciones sueles tomar el liderazgo sin darte cuenta?"
     }
   },
   {
-    "id": "ID-234",
+    "id": "ID-199",
     "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "If you could turn into an animal, which one would you be?",
-      "es-ES": "Si pudieras convertirte en un animal, ¿cuál serías?"
-    }
-  },
-  {
-    "id": "ID-266",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What movie have you watched the most times?",
-      "es-ES": "¿Cuál es la película que más veces has visto?"
-    }
-  },
-  {
-    "id": "ID-263",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
+      "Go Deep 🧠",
+      "Ikigai 🌸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "Who are you more like: your mother or your father?",
-      "es-ES": "¿A quién te pareces más: a tu madre o a tu padre?"
+      "en-US": "What do you do naturally that others find difficult?",
+      "es-ES": "¿Qué haces con naturalidad que a otros les cuesta?"
     }
   },
   {
-    "id": "ID-239",
+    "id": "ID-198",
     "moment": [
-      "Drinks with Friends 🍸"
+      "Go Deep 🧠",
+      "Ikigai 🌸"
     ],
-    "closenessLevel": 1,
+    "closenessLevel": 2,
     "text": {
-      "en-US": "Would you rather live a luxurious life in the mountains or by the beach?",
-      "es-ES": "¿Preferirías una vida de lujo en la montaña o una vida de lujo en la playa?"
+      "en-US": "What kind of problems do you enjoy solving?",
+      "es-ES": "¿Qué tipo de problemas disfrutas resolver?"
     }
   },
   {
-    "id": "ID-253",
+    "id": "ID-197",
+    "moment": [
+      "Go Deep 🧠",
+      "Ikigai 🌸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What topics do you constantly look up without anyone pushing you?",
+      "es-ES": "¿Qué temas buscas constantemente sin que nadie te obligue?"
+    }
+  },
+  {
+    "id": "ID-196",
     "moment": [
       "Ikigai 🌸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What hobbies do you think you'll have when you're older?",
-      "es-ES": "¿Qué hobbies crees que tendrás cuando tengas 65 años?"
+      "en-US": "In what kind of conversations do you lose track of time?",
+      "es-ES": "¿En qué tipo de conversaciones pierdes la noción del tiempo?"
     }
   },
   {
-    "id": "ID-265",
+    "id": "ID-195",
     "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
+      "Ikigai 🌸",
+      "Go Deep 🧠"
     ],
-    "closenessLevel": 1,
+    "closenessLevel": 3,
     "text": {
-      "en-US": "If you knew you couldn’t die, what adventure would you try?",
-      "es-ES": "Si supieras que no puedes morir, ¿qué aventura probarías?"
+      "en-US": "What would you do if you knew you couldn’t fail?",
+      "es-ES": "¿Qué harías si supieras que no puedes fracasar?"
     }
   },
   {
-    "id": "ID-257",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "If you could have any animal as a pet, which one would you choose?",
-      "es-ES": "Si pudieras tener cualquier animal como mascota, ¿cuál elegirías?"
-    }
-  },
-  {
-    "id": "ID-241",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "If you could be born with a different nationality, which one would you choose?",
-      "es-ES": "Si pudieras nacer con otra nacionalidad, ¿cuál elegirías?"
-    }
-  },
-  {
-    "id": "ID-237",
+    "id": "ID-191",
     "moment": [
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Have you ever forgiven someone for cheating?",
-      "es-ES": "¿Alguna vez has perdonado una infidelidad?"
+      "en-US": "What would you like to understand better about your personality?",
+      "es-ES": "¿Qué te gustaría entender mejor sobre tu personalidad?"
     }
   },
   {
-    "id": "ID-236",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Could you forgive someone for cheating? ",
-      "es-ES": "¿Serías capaz de perdonar una infidelidad?\n"
-    }
-  },
-  {
-    "id": "ID-269",
+    "id": "ID-190",
     "moment": [
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "In what situation have you feared for your life?",
-      "es-ES": "¿En qué situación has sentido miedo por tu vida?"
+      "en-US": "What would you like to forgive yourself for?",
+      "es-ES": "¿Qué te gustaría perdonarte?"
     }
   },
   {
-    "id": "ID-271",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Date Night 🌙",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Would you tattoo your partner’s name on your body?",
-      "es-ES": "¿Te tatuarías el nombre de tu pareja?"
-    }
-  },
-  {
-    "id": "ID-261",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "How many children would you like to have?",
-      "es-ES": "¿Cuántos hijos te gustaría tener?"
-    }
-  },
-  {
-    "id": "ID-250",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you could instantly master one more language, which one would you choose?",
-      "es-ES": "Si pudieras aprender perfectamente un idioma más, ¿cuál elegirías?"
-    }
-  },
-  {
-    "id": "ID-238",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "If you got a dog today, what would you name it?",
-      "es-ES": "Si tuvieras un perro hoy, ¿qué nombre le pondrías?"
-    }
-  },
-  {
-    "id": "ID-246",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Do you think everything happens for a reason, or that life is random?",
-      "es-ES": "¿Crees que todo pasa por algo o que la vida es aleatoria?"
-    }
-  },
-  {
-    "id": "ID-259",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Do you believe in God?",
-      "es-ES": "¿Crees en Dios?"
-    }
-  },
-  {
-    "id": "ID-245",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What habit from your mother have you realized you do yourself?",
-      "es-ES": "¿Qué mania de tu madre te has dado cuenta que ahora haces tú?"
-    }
-  },
-  {
-    "id": "ID-254",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "A classic one: if your life were written like a book, would you read the ending?",
-      "es-ES": "La típica: si tu vida estuviera escrita como un libro, ¿leerías el final?"
-    }
-  },
-  {
-    "id": "ID-270",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Have you ever had surgery?",
-      "es-ES": "¿Te han operado alguna vez?"
-    }
-  },
-  {
-    "id": "ID-252",
+    "id": "ID-189",
     "moment": [
       "Go Deep 🧠"
     ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What would you say to your younger self?",
-      "es-ES": "¿Qué le dirías a tu yo de niño?"
-    }
-  },
-  {
-    "id": "ID-256",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "If you died tomorrow, would you feel you made good use of your time?",
-      "es-ES": "Si murieras mañana, ¿sentirías que has aprovechado bien tu tiempo?"
-    }
-  },
-  {
-    "id": "ID-249",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "If you could have any car, which one would you choose?",
-      "es-ES": "Si pudieras tener cualquier coche, ¿cuál tendrías?"
-    }
-  },
-  {
-    "id": "ID-248",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "If you could be the CEO of any company, which one would you choose?",
-      "es-ES": "Si pudieras ser el CEO de cualquier empresa, ¿cuál elegirías?"
+      "en-US": "What would you like people to remember about you?",
+      "es-ES": "¿Qué te gustaría que recordaran de ti?"
     }
   },
   {
-    "id": "ID-243",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you think about surrogacy?",
-      "es-ES": "¿Qué opinas de los vientres de alquiler?"
-    }
-  },
-  {
-    "id": "ID-242",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Would you adopt a child?",
-      "es-ES": "¿Adoptarías un hijo?"
-    }
-  },
-  {
-    "id": "ID-260",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you had children, what names would you give them?",
-      "es-ES": "Si tuvieras hijos, ¿qué nombres les pondrías?"
-    }
-  },
-  {
-    "id": "ID-255",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "(For women) If during childbirth doctors said only one could survive, you or your baby, what decision would you make?",
-      "es-ES": "(Solo para mujeres) Si durante el parto te dijeran que solo puede sobrevivir uno, tú o tu bebé, ¿qué decisión tomarías?"
-    }
-  },
-  {
-    "id": "ID-251",
+    "id": "ID-188",
     "moment": [
       "Go Deep 🧠",
       "Drinks with Friends 🍸"
     ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Do you believe in the phrase “You can achieve anything you set your mind to”?",
-      "es-ES": "¿Crees en la frase: “Puedes conseguir todo lo que te propongas”?"
-    }
-  },
-  {
-    "id": "ID-262",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Are you the kind of person you imagined you would be as a child?",
-      "es-ES": "¿Eres como te imaginabas cuando eras niño/a?"
-    }
-  },
-  {
-    "id": "ID-247",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "Do you believe in spirits?",
-      "es-ES": "¿Crees en los espíritus?"
+      "en-US": "What decision helped you grow the most?",
+      "es-ES": "¿Qué decisión te hizo madurar?"
     }
   },
   {
-    "id": "ID-268",
+    "id": "ID-186",
     "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Which travel destination would you avoid going back to?",
-      "es-ES": "¿A qué destino de viaje evitarías volver?"
-    }
-  },
-  {
-    "id": "ID-235",
-    "moment": [
-      "Ikigai 🌸",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What topic could you talk about for hours without getting tired of it?",
-      "es-ES": "¿De qué podrías hablar durante 3 horas seguidas?"
-    }
-  },
-  {
-    "id": "ID-240",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "If you were a household appliance, which one would you be and why?",
-      "es-ES": "Si fueras un electrodoméstico de tu casa, ¿cuál serías y por qué?"
-    }
-  },
-  {
-    "id": "ID-264",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you could be the child of any famous person, who would you choose as your parent?",
-      "es-ES": "Si pudieras ser hijo/a de una persona famosa, ¿a quién elegirías como padre o madre?"
-    }
-  },
-  {
-    "id": "ID-272",
-    "moment": [
-      "With Grandparents 💌",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Would you like your child to have a personality similar to your partner’s?",
-      "es-ES": "¿Te gustaría que tu hijo tuviera una personalidad similar a la de tu pareja?"
-    }
-  },
-  {
-    "id": "ID-276",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Describe an important teacher in your school life.",
-      "es-ES": "Describe un profesor que fue importante en tu etapa escolar."
-    }
-  },
-  {
-    "id": "ID-273",
-    "moment": [
-      "On the Road 🚗",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What toxic behavior is socially applauded?",
-      "es-ES": "¿Qué comportamiento tóxico está socialmente aplaudido?"
-    }
-  },
-  {
-    "id": "ID-277",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What have you done in the past that you’re still embarrassed about?",
-      "es-ES": "Cuenta algo que hiciste en el pasado creyendo que era cool pero ahora te da cringe recordarlo"
-    }
-  },
-  {
-    "id": "ID-278",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you had to write a book, what would it be about?",
-      "es-ES": "Si tuvieras que escribir un libro, ¿de qué trataría?\n"
-    }
-  },
-  {
-    "id": "ID-280",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗",
       "Go Deep 🧠"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "If someone had to write your memoir, who would you choose?",
-      "es-ES": "Si alguien tuviera que escribir tus memorias, ¿a quién elegirías?"
+      "en-US": "When was the last time you truly surprised yourself?",
+      "es-ES": "¿Cuándo fue la última vez que te sorprendiste a ti mismo/a?"
     }
   },
   {
-    "id": "ID-275",
+    "id": "ID-185",
     "moment": [
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What’s the kindest thing anyone has ever done for you?",
-      "es-ES": "¿Qué es lo más bonito que alguien ha hecho por ti?"
-    }
-  },
-  {
-    "id": "ID-279",
-    "moment": [
+      "Go Deep 🧠",
       "Drinks with Friends 🍸"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What did you want to be when you were little?",
-      "es-ES": "¿Qué querías ser de pequeño?"
+      "en-US": "What makes you feel at peace?",
+      "es-ES": "¿Qué te hace sentir en paz?"
     }
   },
   {
-    "id": "ID-281",
+    "id": "ID-184",
     "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you had to switch lives with one of your friends, who would you pick?",
-      "es-ES": "Si tuvieras que intercambiar tu vida con la de uno de tus amigos, ¿a quién elegirías?"
-    }
-  },
-  {
-    "id": "ID-292",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Window or aisle?",
-      "es-ES": "¿Ventana o pasillo?"
-    }
-  },
-  {
-    "id": "ID-285",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "If you could live anywhere for a year, where would it be?",
-      "es-ES": "¿Qué lugar elegirías para vivir un año?"
-    }
-  },
-  {
-    "id": "ID-287",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s something small that makes your day better?",
-      "es-ES": "¿Qué pequeño detalle o cosa te alegra el día?"
-    }
-  },
-  {
-    "id": "ID-283",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What’s something you pretend to understand but don’t?",
-      "es-ES": "¿Qué es algo que haces como que entiendes, pero no tienes ni idea?"
-    }
-  },
-  {
-    "id": "ID-284",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What household task are you embarrassed to admit you don’t know how to do?",
-      "es-ES": "¿Qué tarea del hogar te da vergüenza admitir que no sabes hacer?"
-    }
-  },
-  {
-    "id": "ID-293",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s your go-to late-night snack?",
-      "es-ES": "¿Qué te pides de comer al volver de fiesta?"
-    }
-  },
-  {
-    "id": "ID-290",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s a small win you’ve had recently?",
-      "es-ES": "¿Cuál es un pequeño logro que has hecho hace poco?"
-    }
-  },
-  {
-    "id": "ID-288",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s something you’ve always wanted to try but haven’t yet?",
-      "es-ES": "¿Qué es algo que siempre has querido probar pero aún no has hecho?"
-    }
-  },
-  {
-    "id": "ID-289",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s something people assume about you that isn’t true?",
-      "es-ES": "¿Qué es algo que la gente asume sobre ti y no es cierto?"
-    }
-  },
-  {
-    "id": "ID-291",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Always late or always early?",
-      "es-ES": "¿Llegar siempre tarde o siempre pronto?"
-    }
-  },
-  {
-    "id": "ID-286",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you could instantly master something, what would it be?",
-      "es-ES": "Si pudieras ser un maestro en cualquier cosa, ¿qué sería?"
-    }
-  },
-  {
-    "id": "ID-311",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to have a secret life no one expects?",
-      "es-ES": "¿Quién es más probable que tenga una vida secreta que nadie espera?"
-    }
-  },
-  {
-    "id": "ID-304",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to cheat on a test?",
-      "es-ES": "¿Quién es más probable que copie en un examen?"
-    }
-  },
-  {
-    "id": "ID-301",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to drop everything and move to Bali?",
-      "es-ES": "¿Quién es más probable que deje su vida actual y se vaya a vivir a Bali?"
-    }
-  },
-  {
-    "id": "ID-307",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to have a playlist just for walking dramatically?",
-      "es-ES": "¿Quién es más probable que tenga una playlist solo para caminar dramáticamente?"
-    }
-  },
-  {
-    "id": "ID-300",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to get drunk and married in Vegas?",
-      "es-ES": "¿Quién es más probable que se case borracho en Vegas?"
-    }
-  },
-  {
-    "id": "ID-325",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to have the most money in their bank account?",
-      "es-ES": "¿Quién es más probable que tenga más dinero en la cuenta bancaria?"
-    }
-  },
-  {
-    "id": "ID-320",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to stalk their ex with a fake account?",
-      "es-ES": "¿Quién es más probable que stalkee a su ex con una cuenta fake?"
-    }
-  },
-  {
-    "id": "ID-316",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to lose everything for love?",
-      "es-ES": "¿Quién es más probable que lo pierda todo por amor?"
-    }
-  },
-  {
-    "id": "ID-323",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to actually believe conspiracy theories?",
-      "es-ES": "¿Quién es más probable que se crea de verdad teorías conspiranoicas?"
-    }
-  },
-  {
-    "id": "ID-318",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to jump on stage and sing or dance?",
-      "es-ES": "¿Quién es más probable que se suba al escenario a cantar o bailar?"
-    }
-  },
-  {
-    "id": "ID-322",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to order the weirdest thing on the menu just to try it?",
-      "es-ES": "¿Quién es más probable que pida lo más raro del menú solo por curiosidad?"
-    }
-  },
-  {
-    "id": "ID-321",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to eat the last slice of pizza without asking?",
-      "es-ES": "¿Quién es más probable que se coma el último trozo de pizza sin preguntar?"
-    }
-  },
-  {
-    "id": "ID-319",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to spill a secret they shouldn’t?",
-      "es-ES": "¿Quién es más probable que cuente un secreto que no debía?"
-    }
-  },
-  {
-    "id": "ID-302",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to become the fan favourite on a reality show?",
-      "es-ES": "¿Quién es más probable que se convierta en el favorito del público en un reality show?"
-    }
-  },
-  {
-    "id": "ID-314",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to get into politics?",
-      "es-ES": "¿Quién es más probable que se meta a trabajar en politica?"
-    }
-  },
-  {
-    "id": "ID-317",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to get their partner’s name tattooed?",
-      "es-ES": "¿Quién es más probable que se haga un tatuaje con el nombre de su pareja?"
-    }
-  },
-  {
-    "id": "ID-309",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to be late to something important?",
-      "es-ES": "¿Quién es más probable que llegue tarde a algo importante?"
-    }
-  },
-  {
-    "id": "ID-324",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to cheat in a board game?",
-      "es-ES": "¿Quién es más probable que haga trampas en un juego de mesa?"
-    }
-  },
-  {
-    "id": "ID-326",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to have a celebrity’s number on their phone?",
-      "es-ES": "¿Quién es más probable que tenga el número de un famoso en el móvil?"
-    }
-  },
-  {
-    "id": "ID-297",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to live off snacks?",
-      "es-ES": "¿Quién es más probable que sobreviva a base de snacks?"
-    }
-  },
-  {
-    "id": "ID-299",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to get arrested?",
-      "es-ES": "¿Quién es más probable que sea arrestado por la policía?"
-    }
-  },
-  {
-    "id": "ID-315",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to survive the apocalypse?",
-      "es-ES": "¿Quién es más probable que sobreviva al apocalipsis?"
-    }
-  },
-  {
-    "id": "ID-310",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to end up as an influencer?",
-      "es-ES": "¿Quién es más probable que acabe siendo influencer?"
-    }
-  },
-  {
-    "id": "ID-298",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to become a meme?",
-      "es-ES": "¿Quién es más probable que se convierta en meme?"
-    }
-  },
-  {
-    "id": "ID-306",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to do something crazy for a good story?",
-      "es-ES": "¿Quién es más probable que haga una locura por una buena historia?"
-    }
-  },
-  {
-    "id": "ID-312",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to plan something amazing… then cancel?",
-      "es-ES": "¿Quién es más probable que organice un plan increíble… y luego lo cancele?"
-    }
-  },
-  {
-    "id": "ID-305",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to start a company and get rich?",
-      "es-ES": "¿Quién es más probable que cree su propia empresa y se haga millonario?"
-    }
-  },
-  {
-    "id": "ID-308",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to rehearse conversations that never happened?",
-      "es-ES": "¿Quién es más probable que ensaye conversaciones que nunca pasaron?"
-    }
-  },
-  {
-    "id": "ID-303",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to rack up the most parking tickets?",
-      "es-ES": "¿Quién es más probable que reciba más multas de tráfico?"
-    }
-  },
-  {
-    "id": "ID-313",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to have imaginary shower arguments and win them?",
-      "es-ES": "¿Quién es más probable que tenga una conversación imaginaria en la ducha y la gane?"
-    }
-  },
-  {
-    "id": "ID-296",
-    "moment": [
-      "Who is most likely to"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who’s most likely to adopt an exotic pet?",
-      "es-ES": "¿Quién es más probable que adopte un animal exótico?"
-    }
-  },
-  {
-    "id": "ID-327",
-    "moment": [
-      "With Grandparents 💌",
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "What’s the biggest mistake you’ve ever made?",
-      "es-ES": "¿Cuál ha sido el mayor error que has cometido?"
+      "en-US": "Which emotion is the hardest for you to manage?",
+      "es-ES": "¿Qué emoción te cuesta más gestionar?"
     }
   },
   {
-    "id": "ID-331",
+    "id": "ID-183",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What have you learned about yourself that you didn’t know before?",
+      "es-ES": "¿Qué has aprendido sobre ti que antes no sabías?"
+    }
+  },
+  {
+    "id": "ID-182",
+    "moment": [
+      "Go Deep 🧠",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you think people usually misunderstand about you?",
+      "es-ES": "¿Qué crees que la gente suele malinterpretar de ti?"
+    }
+  },
+  {
+    "id": "ID-181",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What part of you has changed the most over the past few years?",
+      "es-ES": "¿Qué parte de ti ha cambiado más en los últimos años?"
+    }
+  },
+  {
+    "id": "ID-180",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Who supports you when you can’t go on?",
+      "es-ES": "¿Quién te sostiene cuando tú no puedes más?"
+    }
+  },
+  {
+    "id": "ID-179",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What part of your success isn’t visible to others?",
+      "es-ES": "¿Qué parte de tu éxito no se ve?"
+    }
+  },
+  {
+    "id": "ID-178",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "When do you feel most like yourself?",
+      "es-ES": "¿En qué momento sientes que eres más tú?"
+    }
+  },
+  {
+    "id": "ID-177",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What version of yourself no longer exists?",
+      "es-ES": "¿Qué versión de ti ya no existe?"
+    }
+  },
+  {
+    "id": "ID-176",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Have you been brave, or mostly afraid?",
+      "es-ES": "¿Has sido valiente o has tenido miedo casi siempre?"
+    }
+  },
+  {
+    "id": "ID-175",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What still hurts even though you say it’s over?",
+      "es-ES": "¿Qué te duele todavía aunque digas que ya pasó?"
+    }
+  },
+  {
+    "id": "ID-174",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What conversation do you still need to have with yourself?",
+      "es-ES": "¿Qué conversación tienes pendiente contigo mismo?"
+    }
+  },
+  {
+    "id": "ID-173",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Are you afraid of getting older?",
+      "es-ES": "¿Te da miedo envejecer?"
+    }
+  },
+  {
+    "id": "ID-172",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "If you lost everything tomorrow, what would you still have?",
+      "es-ES": "Si mañana lo perdieras todo, ¿qué te quedaría?"
+    }
+  },
+  {
+    "id": "ID-171",
+    "moment": [
+      "Go Deep 🧠",
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What part of you do people not know?",
+      "es-ES": "¿Qué parte de ti no conoce la gente?"
+    }
+  },
+  {
+    "id": "ID-170",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Have you ever felt lonely even when surrounded by people?",
+      "es-ES": "¿Te has sentido sola estando rodeada de gente?"
+    }
+  },
+  {
+    "id": "ID-169",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Who do you need to forgive? And who needs to forgive you?",
+      "es-ES": "¿A quién necesitas perdonar? ¿Y quién te tiene que perdonar a ti?"
+    }
+  },
+  {
+    "id": "ID-168",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What wound are you still carrying that hasn’t fully healed?",
+      "es-ES": "¿Qué herida arrastras que todavía no has cerrado?"
+    }
+  },
+  {
+    "id": "ID-167",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What has been the hardest moment of your life?",
+      "es-ES": "¿Cuál ha sido el momento más duro de tu vida?"
+    }
+  },
+  {
+    "id": "ID-166",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Who are you when no one is watching?",
+      "es-ES": "¿Quién eres cuando nadie te está mirando?"
+    }
+  },
+  {
+    "id": "ID-165",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Do you care what others think of you?",
+      "es-ES": "¿Te importa lo que piensen de ti?"
+    }
+  },
+  {
+    "id": "ID-163",
+    "moment": [
+      "Go Deep 🧠",
+      "Ikigai 🌸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Do you consider yourself an ambitious person?",
+      "es-ES": "¿Te consideras una persona ambiciosa?"
+    }
+  },
+  {
+    "id": "ID-162",
+    "moment": [],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "¿Te consideras una persona ambiciosa?",
+      "es-ES": "¿Te consideras una persona ambiciosa?"
+    }
+  },
+  {
+    "id": "ID-161",
+    "moment": [],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "¿Te consideras una persona ambiciosa?",
+      "es-ES": "¿Te consideras una persona ambiciosa?"
+    }
+  },
+  {
+    "id": "ID-160",
+    "moment": [],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "¿Te consideras una persona ambiciosa?",
+      "es-ES": "¿Te consideras una persona ambiciosa?"
+    }
+  },
+  {
+    "id": "ID-159",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Who is the person who has let you down the most?",
+      "es-ES": "¿Quién es la persona que más te ha fallado?"
+    }
+  },
+  {
+    "id": "ID-142",
     "moment": [
       "Date Night 🌙"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What kind of personalities do you usually like right away?\n",
-      "es-ES": "¿Qué tipo de gente te cae bien al instante?"
+      "en-US": "What characteristics do you admire most in others?",
+      "es-ES": "¿Qué características admiras más en los demás?"
     }
   },
   {
-    "id": "ID-342",
+    "id": "ID-147",
     "moment": [
-      "Date Night 🌙",
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Is there something you’re afraid of losing?",
-      "es-ES": "¿Qué te da miedo perder, aunque no lo digas mucho?"
+      "en-US": "What or who do you need to let go of in life?",
+      "es-ES": "¿De qué o de quién necesitas desprenderte en la vida?"
     }
   },
   {
-    "id": "ID-332",
+    "id": "ID-143",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Are there any relationships in your life you would like to improve or repair?",
+      "es-ES": "¿Hay alguna relación en tu vida que te gustaría mejorar o reparar?"
+    }
+  },
+  {
+    "id": "ID-139",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What is your biggest regret in life?",
+      "es-ES": "¿Cuál es tu mayor arrepentimiento en la vida?"
+    }
+  },
+  {
+    "id": "ID-145",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you think about the most?",
+      "es-ES": "¿En qué piensas más frecuentemente?"
+    }
+  },
+  {
+    "id": "ID-146",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "When was the last time you have asked for help?",
+      "es-ES": "¿Cuándo fue la última vez que pediste ayuda?"
+    }
+  },
+  {
+    "id": "ID-144",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you miss about being a kid?",
+      "es-ES": "¿Qué extrañas de cuando eras pequeño?"
+    }
+  },
+  {
+    "id": "ID-148",
+    "moment": [
+      "Date Night 🌙",
+      "Drinks with Friends 🍸",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Activity: On a piece of paper, give each other five specific compliments and then read them out loud to each other. Give the paper to the player.",
+      "es-ES": "Juego: En un papel, escribe 5 cumplidos sobre otro jugador y luego léelos en voz alta. Después, regala el papel a esa persona."
+    }
+  },
+  {
+    "id": "ID-120",
     "moment": [
       "Drinks with Friends 🍸",
       "On the Road 🚗"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "What do you like most about your job?",
-      "es-ES": "¿Qué es lo que más te gusta de tu trabajo?"
-    }
-  },
-  {
-    "id": "ID-339",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What part of your personality has changed the most in the last few years?",
-      "es-ES": "¿Qué parte de tu personalidad crees que ha cambiado más en los últimos años?"
-    }
-  },
-  {
-    "id": "ID-337",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Do you like to go with the flow, or do you prefer to plan things?",
-      "es-ES": "¿Eres más de improvisar o de tener todo planeado?"
-    }
-  },
-  {
-    "id": "ID-338",
-    "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Have you watched any good shows lately?",
-      "es-ES": "¿Qué serie te has visto últimamente que recomiendes?"
-    }
-  },
-  {
-    "id": "ID-334",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s one of the best trips you’ve had?",
-      "es-ES": "¿Cuál ha sido uno de tus mejores viajes?"
-    }
-  },
-  {
-    "id": "ID-328",
-    "moment": [
-      "Break the Ice 👀"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Who texts you the most?",
-      "es-ES": "¿Quién es la persona que te manda mas mensajes?"
-    }
-  },
-  {
-    "id": "ID-333",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What would you like to be doing in five years?",
-      "es-ES": "¿Qué te gustaría estar haciendo dentro de 5 años?"
-    }
-  },
-  {
-    "id": "ID-329",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s your favorite little moment of the day?",
-      "es-ES": "¿Cuál es tu ratito favorito del día a día?"
-    }
-  },
-  {
-    "id": "ID-336",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What’s something people wouldn’t guess about you?",
-      "es-ES": "¿Qué es algo que la gente nunca adivinaría de ti?"
-    }
-  },
-  {
-    "id": "ID-340",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you value more now than before?\n",
-      "es-ES": "¿Qué has empezado a valorar más con el tiempo?\n"
-    }
-  },
-  {
-    "id": "ID-341",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "\n",
-      "es-ES": "¿Qué te da paz últimamente?\n"
-    }
-  },
-  {
-    "id": "ID-330",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Which friend’s closet would you steal?",
-      "es-ES": "Si tuvieras que robarle el armario a un amigo, ¿a quién se lo robarías?"
-    }
-  },
-  {
-    "id": "ID-335",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What always makes you laugh?",
-      "es-ES": "¿Qué te hace reír siempre?"
-    }
-  },
-  {
-    "id": "ID-359",
-    "moment": [
-      "Date Night 🌙",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s your favorite smell? It can be something everyday.",
-      "es-ES": "¿Cuál es tu olor favorito? Puede ser algo cotidiano"
-    }
-  },
-  {
-    "id": "ID-357",
-    "moment": [
-      "Date Night 🌙",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What hobby have you spent the most time on?",
-      "es-ES": "¿Cuál es el hobby al que más tiempo has dedicado?"
-    }
-  },
-  {
-    "id": "ID-367",
-    "moment": [
-      "Date Night 🌙",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Do you consider yourself a lucky person?",
-      "es-ES": "¿Crees que eres una persona con suerte?"
-    }
-  },
-  {
-    "id": "ID-372",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Who is your favorite superhero?",
-      "es-ES": "¿Quién es tu superhero?"
-    }
-  },
-  {
-    "id": "ID-362",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Would you like to be a parent someday?",
-      "es-ES": "¿Te gustaría ser padre o madre algún día?"
-    }
-  },
-  {
-    "id": "ID-366",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Are you more of a morning person or a night person?",
-      "es-ES": "¿Eres morning person o night person?"
-    }
-  },
-  {
-    "id": "ID-348",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What’s an irrational fear or a strange phobia you have?",
-      "es-ES": "¿Cuál es tu miedo irracional o fobia extraña?"
-    }
-  },
-  {
-    "id": "ID-344",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Who is your favorite family member?",
-      "es-ES": "¿Quién es tu miembro favorito de la familia?"
-    }
-  },
-  {
-    "id": "ID-369",
-    "moment": [
-      "Date Night 🌙",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you could experience something again for the first time, what would it be?",
-      "es-ES": "Si pudieras vivir algo por primera vez otra vez, ¿qué sería?"
-    }
-  },
-  {
-    "id": "ID-355",
-    "moment": [
-      "Date Night 🌙",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Who is your biggest fan?",
-      "es-ES": "¿Quién es tu mayor fan?"
-    }
-  },
-  {
-    "id": "ID-373",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you love most about yourself?",
-      "es-ES": "¿Qué es lo que más te gusta de ti?"
-    }
-  },
-  {
-    "id": "ID-346",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Would you rather stay in a luxury hotel with bad food or a hostel with Michelin-star food?",
-      "es-ES": "¿Prefieres un hotel lujoso con mala comida o un hostal con comida de estrella Michelin?"
-    }
-  },
-  {
-    "id": "ID-351",
-    "moment": [
-      "Date Night 🌙",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you had to start a business, what would it be?",
-      "es-ES": "Si tuvieras que emprender, ¿qué negocio abrirías?"
-    }
-  },
-  {
-    "id": "ID-349",
-    "moment": [
-      "Date Night 🌙",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What would you do if you won the lottery?",
-      "es-ES": "¿Qué harías si te tocara la lotería?"
-    }
-  },
-  {
-    "id": "ID-352",
-    "moment": [
-      "Date Night 🌙",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What makes you feel insecure?",
-      "es-ES": "¿Qué te hace sentir inseguro/a?"
-    }
-  },
-  {
-    "id": "ID-368",
-    "moment": [
-      "Date Night 🌙",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What would you prefer: to completely forget something or to remember it forever in full detail?",
-      "es-ES": "¿Qué preferirías: olvidar algo por completo o recordarlo siempre con todo detalle?"
-    }
-  },
-  {
-    "id": "ID-354",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What’s the biggest age gap you’ve had with someone you’ve dated?",
-      "es-ES": "¿Cuál es la mayor diferencia de edad que has tenido con una pareja?"
-    }
-  },
-  {
-    "id": "ID-350",
-    "moment": [
-      "Date Night 🌙",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "If you only had 5 minutes left to live and could listen to one song, which would you choose?",
-      "es-ES": "Si solo te quedaran 5 minutos de vida y pudieras escuchar una canción, ¿cuál elegirías?"
-    }
-  },
-  {
-    "id": "ID-361",
-    "moment": [
-      "Date Night 🌙",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What pattern do you see in your family that you wouldn’t want to repeat?",
-      "es-ES": "¿Qué patrón ves en tu familia que no te gustaría repetir?"
-    }
-  },
-  {
-    "id": "ID-364",
-    "moment": [
-      "Date Night 🌙",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "If you could change anything about your current life, what would it be?",
-      "es-ES": "Si pudieras cambiar algo de tu vida actual, ¿qué cambiarías?"
-    }
-  },
-  {
-    "id": "ID-358",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Have you ever broken a bone?",
-      "es-ES": "¿Alguna vez te has roto un hueso?"
-    }
-  },
-  {
-    "id": "ID-356",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Name three countries you’d love to visit soon",
-      "es-ES": "Dime tus tres países que más te gustaría visitar próximamente"
-    }
-  },
-  {
-    "id": "ID-345",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Who do you take after more, your father or your mother?",
-      "es-ES": "¿A quién te pareces más, a tu padre o a tu madre?"
-    }
-  },
-  {
-    "id": "ID-363",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Describe your ideal home",
-      "es-ES": "Describe tu casa ideal"
-    }
-  },
-  {
-    "id": "ID-370",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you like to do when you’re alone?",
-      "es-ES": "¿Qué te gusta hacer cuando estás solo/a?"
-    }
-  },
-  {
-    "id": "ID-353",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What compliment do you get most often?",
-      "es-ES": "¿Cuál es el piropo o halago que más te dicen?"
-    }
-  },
-  {
-    "id": "ID-374",
-    "moment": [
-      "Date Night 🌙",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What’s your favorite accent?",
-      "es-ES": "¿Cuál es tu acento favorito?"
-    }
-  },
-  {
-    "id": "ID-365",
-    "moment": [
-      "Date Night 🌙",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "If you could ask your future self one question, what would it be?",
-      "es-ES": "Si pudieras hacerle una pregunta a tu yo del futuro, ¿cuál sería?"
-    }
-  },
-  {
-    "id": "ID-347",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What is one of your goals for this year?",
-      "es-ES": "¿Cuál es uno de tus objetivos para este año?"
-    }
-  },
-  {
-    "id": "ID-371",
-    "moment": [
-      "Date Night 🌙",
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do people say you’re good at?",
-      "es-ES": "¿En qué te dicen que eres bueno/a?"
-    }
-  },
-  {
-    "id": "ID-360",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What physical aspect do you find most attractive in a person?",
-      "es-ES": "¿Qué rasgo fisico te parece más atractivo en una persona?"
+      "en-US": "Have you ever seen something you cannot explain?",
+      "es-ES": "¿Alguna vez has visto algo que no puedes explicar?"
     }
   },
   {
@@ -2433,28 +2386,6 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-14",
-    "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Are you a fanatic of anything or anyone?",
-      "es-ES": "¿Eres fanático/a de algo o de alguien?"
-    }
-  },
-  {
-    "id": "ID-129",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What is one thing you wish someone did or will do for you?",
-      "es-ES": "¿Cuál es una cosa que desearías que alguien hiciera o haga por ti?"
-    }
-  },
-  {
     "id": "ID-119",
     "moment": [
       "Go Deep 🧠"
@@ -2463,95 +2394,6 @@ export const questions: Question[] = [
     "text": {
       "en-US": "What makes you cry?",
       "es-ES": "¿Qué te hace llorar?"
-    }
-  },
-  {
-    "id": "ID-15",
-    "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What was the last costume you wore?",
-      "es-ES": "¿Cuál fue el último disfraz que usaste?"
-    }
-  },
-  {
-    "id": "ID-147",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What or who do you need to let go of in life?",
-      "es-ES": "¿De qué o de quién necesitas desprenderte en la vida?"
-    }
-  },
-  {
-    "id": "ID-16",
-    "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What is the funniest pet name you have ever heard?",
-      "es-ES": "¿Cuál es el nombre de mascota más gracioso que has escuchado?"
-    }
-  },
-  {
-    "id": "ID-23",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What is your ideal place to raise kids or start a family?",
-      "es-ES": "¿Cuál es tu lugar ideal para tener hijos o formar una familia?"
-    }
-  },
-  {
-    "id": "ID-25",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "How did your parents meet?",
-      "es-ES": "¿Cómo se conocieron tus padres?"
-    }
-  },
-  {
-    "id": "ID-110",
-    "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Which experience has given you the most adrenaline?",
-      "es-ES": "¿Qué vivencia te ha hecho sentir más adrenalina?"
-    }
-  },
-  {
-    "id": "ID-155",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Do you think that you take good care of yourself?",
-      "es-ES": "¿Crees que te cuidas bien?"
-    }
-  },
-  {
-    "id": "ID-143",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Are there any relationships in your life you would like to improve or repair?",
-      "es-ES": "¿Hay alguna relación en tu vida que te gustaría mejorar o reparar?"
     }
   },
   {
@@ -2567,95 +2409,59 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-139",
+    "id": "ID-125",
     "moment": [
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "What is your biggest regret in life?",
-      "es-ES": "¿Cuál es tu mayor arrepentimiento en la vida?"
+      "en-US": "What makes you sad?",
+      "es-ES": "¿Qué te pone triste?"
     }
   },
   {
-    "id": "ID-34",
+    "id": "ID-124",
     "moment": [
-      "Drinks with Friends 🍸",
-      "On the Road 🚗",
-      "Date Night 🌙"
+      "Go Deep 🧠",
+      "Ikigai 🌸"
     ],
-    "closenessLevel": 2,
+    "closenessLevel": 3,
     "text": {
-      "en-US": "Are you an introvert or an extrovert?",
-      "es-ES": "¿Eres introvertido/a o extrovertido/a?"
+      "en-US": "Are you living the life of your dreams?",
+      "es-ES": "¿Estás viviendo la vida de tus sueños?"
     }
   },
   {
-    "id": "ID-152",
+    "id": "ID-128",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What is the most miraculous thing that has ever happened to you?",
+      "es-ES": "¿Cuál es la cosa más milagrosa que te ha pasado?"
+    }
+  },
+  {
+    "id": "ID-108",
     "moment": [
       "On the Road 🚗"
     ],
     "closenessLevel": 1,
     "text": {
-      "en-US": "What was the most memorable toy you played with when you were little?",
-      "es-ES": "¿Cuál fue el juguete más memorable con el que jugaste cuando eras pequeño?"
+      "en-US": "What do you think my closet looks like?",
+      "es-ES": "¿Cómo crees que es mi armario: organizado o caótico?"
     }
   },
   {
-    "id": "ID-154",
+    "id": "ID-110",
     "moment": [
-      "Drinks with Friends 🍸"
+      "On the Road 🚗"
     ],
     "closenessLevel": 2,
     "text": {
-      "en-US": "Do you have an old item you cannot let go of?",
-      "es-ES": "¿Tienes algún objeto antiguo que no puedas soltar?"
-    }
-  },
-  {
-    "id": "ID-137",
-    "moment": [
-      "Go Deep 🧠",
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you value most in a friendship or relationship?",
-      "es-ES": "¿Qué valoras más en una amistad o relación?"
-    }
-  },
-  {
-    "id": "ID-31",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What makes you lose confidence in yourself?",
-      "es-ES": "¿Qué te hace perder la seguridad en ti mismo?"
-    }
-  },
-  {
-    "id": "ID-29",
-    "moment": [
-      "Date Night 🌙",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Who was your first crush?",
-      "es-ES": "¿Quién fue tu primer crush?"
-    }
-  },
-  {
-    "id": "ID-12",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What kind of life would you try to avoid at all costs?",
-      "es-ES": "¿Qué tipo de vida nunca querrías tener?"
+      "en-US": "Which experience has given you the most adrenaline?",
+      "es-ES": "¿Qué vivencia te ha hecho sentir más adrenalina?"
     }
   },
   {
@@ -2681,14 +2487,83 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-149",
+    "id": "ID-111",
     "moment": [
       "Go Deep 🧠"
     ],
     "closenessLevel": 3,
     "text": {
-      "en-US": "Is there something in your life that you ignore because you are not ready to face it?",
-      "es-ES": "¿Hay algo en tu vida que ignoras porque no estás listo para enfrentarlo?"
+      "en-US": "What is an obstacle you’re currently trying to overcome?",
+      "es-ES": "¿Cuál es un obstáculo que estás intentando superar actualmente?"
+    }
+  },
+  {
+    "id": "ID-112",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "When and why did you last cry?",
+      "es-ES": "¿Cuándo y por qué lloraste por última vez?"
+    }
+  },
+  {
+    "id": "ID-114",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What is the first thing you notice about me?",
+      "es-ES": "¿Qué es lo primero que te llamó la atención de mí?"
+    }
+  },
+  {
+    "id": "ID-109",
+    "moment": [
+      "On the Road 🚗",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "If you could change your first name, what would you change it to?",
+      "es-ES": "Si pudieras cambiar tu nombre, ¿a cuál lo cambiarías?"
+    }
+  },
+  {
+    "id": "ID-117",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What is one thing you would like to change about yourself?",
+      "es-ES": "¿Cuál es una cosa que te gustaría cambiar de ti?"
+    }
+  },
+  {
+    "id": "ID-129",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What is one thing you wish someone did or will do for you?",
+      "es-ES": "¿Cuál es una cosa que desearías que alguien hiciera o haga por ti?"
+    }
+  },
+  {
+    "id": "ID-137",
+    "moment": [
+      "Go Deep 🧠",
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What do you value most in a friendship or relationship?",
+      "es-ES": "¿Qué valoras más en una amistad o relación?"
     }
   },
   {
@@ -2715,17 +2590,6 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-10",
-    "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Out of your five senses, which one is your strongest?",
-      "es-ES": "De tus cinco sentidos, ¿cuál crees que tienes más desarrollado?"
-    }
-  },
-  {
     "id": "ID-138",
     "moment": [
       "Go Deep 🧠"
@@ -2734,6 +2598,349 @@ export const questions: Question[] = [
     "text": {
       "en-US": "What is your definition of success?",
       "es-ES": "¿Cuál es tu definición de éxito?"
+    }
+  },
+  {
+    "id": "ID-133",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What are you most grateful for?",
+      "es-ES": "¿Qué es lo que más agradeces en tu vida?"
+    }
+  },
+  {
+    "id": "ID-132",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What emotion do you experience the most?",
+      "es-ES": "¿Qué emoción experimentas con más frecuencia?"
+    }
+  },
+  {
+    "id": "ID-130",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What is your greatest gift or talent?",
+      "es-ES": "¿Cuál es tu don o talento especial?"
+    }
+  },
+  {
+    "id": "ID-136",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What is the most adventurous thing you have ever done?",
+      "es-ES": "¿Cuál ha sido la cosa más atrevida que has hecho en tu vida? "
+    }
+  },
+  {
+    "id": "ID-156",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What is the greatest accomplishment of your life?",
+      "es-ES": "¿Cuál es el logro más grande de tu vida?"
+    }
+  },
+  {
+    "id": "ID-157",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What is something you would like to do but are too scared to try?",
+      "es-ES": "¿Qué es algo que te gustaría hacer pero tienes demasiado miedo de intentarlo?"
+    }
+  },
+  {
+    "id": "ID-151",
+    "moment": [
+      "Go Deep 🧠",
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Have you ever broken anyone’s heart?",
+      "es-ES": "¿Has roto el corazón de alguien?"
+    }
+  },
+  {
+    "id": "ID-155",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Do you think that you take good care of yourself?",
+      "es-ES": "¿Crees que te cuidas bien?"
+    }
+  },
+  {
+    "id": "ID-152",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What was the most memorable toy you played with when you were little?",
+      "es-ES": "¿Cuál fue el juguete más memorable con el que jugaste cuando eras pequeño?"
+    }
+  },
+  {
+    "id": "ID-154",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Do you have an old item you cannot let go of?",
+      "es-ES": "¿Tienes algún objeto antiguo que no puedas soltar?"
+    }
+  },
+  {
+    "id": "ID-149",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "Is there something in your life that you ignore because you are not ready to face it?",
+      "es-ES": "¿Hay algo en tu vida que ignoras porque no estás listo para enfrentarlo?"
+    }
+  },
+  {
+    "id": "ID-150",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "How would you like to be remembered?",
+      "es-ES": "¿Cómo te gustaría ser recordado?"
+    }
+  },
+  {
+    "id": "ID-153",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What is the nicest thing anyone has done for you?",
+      "es-ES": "¿Cuál es la cosa más bonita que alguien ha hecho por ti?"
+    }
+  },
+  {
+    "id": "ID-35",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "If you were to get a tattoo tomorrow, what would it be?",
+      "es-ES": "Si fueras a hacerte un tatuaje mañana, ¿qué te tatuarías?"
+    }
+  },
+  {
+    "id": "ID-33",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What are you really intense about?",
+      "es-ES": "¿En qué cosas eres realmente intenso/a?"
+    }
+  },
+  {
+    "id": "ID-32",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What is your favorite smell?",
+      "es-ES": "¿Cuál es tu olor favorito?"
+    }
+  },
+  {
+    "id": "ID-34",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗",
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Are you an introvert or an extrovert?",
+      "es-ES": "¿Eres introvertido/a o extrovertido/a?"
+    }
+  },
+  {
+    "id": "ID-30",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What or who inspires you to be a better person?",
+      "es-ES": "¿Qué o quién te inspira a ser una mejor persona?"
+    }
+  },
+  {
+    "id": "ID-24",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "How much money would make you happy?",
+      "es-ES": "¿Cuánto dinero te haría feliz?"
+    }
+  },
+  {
+    "id": "ID-23",
+    "moment": [
+      "Drinks with Friends 🍸",
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What is your ideal place to raise kids or start a family?",
+      "es-ES": "¿Cuál es tu lugar ideal para tener hijos o formar una familia?"
+    }
+  },
+  {
+    "id": "ID-25",
+    "moment": [
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "How did your parents meet?",
+      "es-ES": "¿Cómo se conocieron tus padres?"
+    }
+  },
+  {
+    "id": "ID-31",
+    "moment": [
+      "Go Deep 🧠"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What makes you lose confidence in yourself?",
+      "es-ES": "¿Qué te hace perder la seguridad en ti mismo?"
+    }
+  },
+  {
+    "id": "ID-29",
+    "moment": [
+      "Date Night 🌙",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Who was your first crush?",
+      "es-ES": "¿Quién fue tu primer crush?"
+    }
+  },
+  {
+    "id": "ID-28",
+    "moment": [
+      "On the Road 🚗",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Which real-life crime would you like to investigate?",
+      "es-ES": "¿Qué crimen real te gustaría investigar?"
+    }
+  },
+  {
+    "id": "ID-27",
+    "moment": [
+      "Go Deep 🧠",
+      "Date Night 🌙"
+    ],
+    "closenessLevel": 3,
+    "text": {
+      "en-US": "What do you think is the biggest violation of privacy?",
+      "es-ES": "¿Cuál crees que es la mayor violación de privacidad?"
+    }
+  },
+  {
+    "id": "ID-20",
+    "moment": [
+      "Go Deep 🧠",
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What's the best thing about your life?",
+      "es-ES": "¿Qué es lo que más te gusta de tu vida?"
+    }
+  },
+  {
+    "id": "ID-14",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Are you a fanatic of anything or anyone?",
+      "es-ES": "¿Eres fanático/a de algo o de alguien?"
+    }
+  },
+  {
+    "id": "ID-15",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What was the last costume you wore?",
+      "es-ES": "¿Cuál fue el último disfraz que usaste?"
+    }
+  },
+  {
+    "id": "ID-16",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "What is the funniest pet name you have ever heard?",
+      "es-ES": "¿Cuál es el nombre de mascota más gracioso que has escuchado?"
+    }
+  },
+  {
+    "id": "ID-12",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "What kind of life would you try to avoid at all costs?",
+      "es-ES": "¿Qué tipo de vida nunca querrías tener?"
     }
   },
   {
@@ -2749,14 +2956,47 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-111",
+    "id": "ID-18",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Which would be impossible for you to give up permanently, beer or coffee?",
+      "es-ES": "¿Qué te costaría más dejar, el café o la cerveza?"
+    }
+  },
+  {
+    "id": "ID-21",
+    "moment": [
+      "Drinks with Friends 🍸"
+    ],
+    "closenessLevel": 2,
+    "text": {
+      "en-US": "Is it right to lie to avoid hurting someone?",
+      "es-ES": "¿Es correcto mentir para no herir a alguien?"
+    }
+  },
+  {
+    "id": "ID-2",
     "moment": [
       "Go Deep 🧠"
     ],
-    "closenessLevel": 3,
+    "closenessLevel": 2,
     "text": {
-      "en-US": "What is an obstacle you’re currently trying to overcome?",
-      "es-ES": "¿Cuál es un obstáculo que estás intentando superar actualmente?"
+      "en-US": "Is there an area of your life where you are never satisfied?",
+      "es-ES": "¿Hay algun área en tu vida en la que nunca estés satisfecho?"
+    }
+  },
+  {
+    "id": "ID-10",
+    "moment": [
+      "On the Road 🚗"
+    ],
+    "closenessLevel": 1,
+    "text": {
+      "en-US": "Out of your five senses, which one is your strongest?",
+      "es-ES": "De tus cinco sentidos, ¿cuál crees que tienes más desarrollado?"
     }
   },
   {
@@ -2772,40 +3012,6 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-145",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you think about the most?",
-      "es-ES": "¿En qué piensas más frecuentemente?"
-    }
-  },
-  {
-    "id": "ID-112",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "When and why did you last cry?",
-      "es-ES": "¿Cuándo y por qué lloraste por última vez?"
-    }
-  },
-  {
-    "id": "ID-133",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What are you most grateful for?",
-      "es-ES": "¿Qué es lo que más agradeces en tu vida?"
-    }
-  },
-  {
     "id": "ID-8",
     "moment": [
       "On the Road 🚗"
@@ -2814,28 +3020,6 @@ export const questions: Question[] = [
     "text": {
       "en-US": "What is your favorite clothing store?",
       "es-ES": "¿Cuál es tu tienda de ropa favorita?"
-    }
-  },
-  {
-    "id": "ID-18",
-    "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Which would be impossible for you to give up permanently, beer or coffee?",
-      "es-ES": "¿Qué te costaría más dejar, el café o la cerveza?"
-    }
-  },
-  {
-    "id": "ID-125",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What makes you sad?",
-      "es-ES": "¿Qué te pone triste?"
     }
   },
   {
@@ -2876,133 +3060,6 @@ export const questions: Question[] = [
     }
   },
   {
-    "id": "ID-28",
-    "moment": [
-      "On the Road 🚗",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Which real-life crime would you like to investigate?",
-      "es-ES": "¿Qué crimen real te gustaría investigar?"
-    }
-  },
-  {
-    "id": "ID-124",
-    "moment": [
-      "Go Deep 🧠",
-      "Ikigai 🌸"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "Are you living the life of your dreams?",
-      "es-ES": "¿Estás viviendo la vida de tus sueños?"
-    }
-  },
-  {
-    "id": "ID-146",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "When was the last time you have asked for help?",
-      "es-ES": "¿Cuándo fue la última vez que pediste ayuda?"
-    }
-  },
-  {
-    "id": "ID-132",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What emotion do you experience the most?",
-      "es-ES": "¿Qué emoción experimentas con más frecuencia?"
-    }
-  },
-  {
-    "id": "ID-114",
-    "moment": [
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "What is the first thing you notice about me?",
-      "es-ES": "¿Qué es lo primero que te llamó la atención de mí?"
-    }
-  },
-  {
-    "id": "ID-27",
-    "moment": [
-      "Go Deep 🧠",
-      "Date Night 🌙"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What do you think is the biggest violation of privacy?",
-      "es-ES": "¿Cuál crees que es la mayor violación de privacidad?"
-    }
-  },
-  {
-    "id": "ID-144",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What do you miss about being a kid?",
-      "es-ES": "¿Qué extrañas de cuando eras pequeño?"
-    }
-  },
-  {
-    "id": "ID-148",
-    "moment": [
-      "Date Night 🌙",
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "Activity: On a piece of paper, give each other five specific compliments and then read them out loud to each other. Give the paper to the player.",
-      "es-ES": "Juego: En un papel, escribe 5 cumplidos sobre otro jugador y luego léelos en voz alta. Después, regala el papel a esa persona."
-    }
-  },
-  {
-    "id": "ID-130",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What is your greatest gift or talent?",
-      "es-ES": "¿Cuál es tu don o talento especial?"
-    }
-  },
-  {
-    "id": "ID-136",
-    "moment": [
-      "On the Road 🚗"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "What is the most adventurous thing you have ever done?",
-      "es-ES": "¿Cuál ha sido la cosa más atrevida que has hecho en tu vida? "
-    }
-  },
-  {
-    "id": "ID-150",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "How would you like to be remembered?",
-      "es-ES": "¿Cómo te gustaría ser recordado?"
-    }
-  },
-  {
     "id": "ID-6",
     "moment": [
       "On the Road 🚗",
@@ -3012,63 +3069,6 @@ export const questions: Question[] = [
     "text": {
       "en-US": "What is the strangest food combination you have ever tried?",
       "es-ES": "¿Cuál es la combinación de alimentos más extraña que has probado?"
-    }
-  },
-  {
-    "id": "ID-128",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What is the most miraculous thing that has ever happened to you?",
-      "es-ES": "¿Cuál es la cosa más milagrosa que te ha pasado?"
-    }
-  },
-  {
-    "id": "ID-109",
-    "moment": [
-      "On the Road 🚗",
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 1,
-    "text": {
-      "en-US": "If you could change your first name, what would you change it to?",
-      "es-ES": "Si pudieras cambiar tu nombre, ¿a cuál lo cambiarías?"
-    }
-  },
-  {
-    "id": "ID-153",
-    "moment": [
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What is the nicest thing anyone has done for you?",
-      "es-ES": "¿Cuál es la cosa más bonita que alguien ha hecho por ti?"
-    }
-  },
-  {
-    "id": "ID-117",
-    "moment": [
-      "Drinks with Friends 🍸",
-      "Go Deep 🧠"
-    ],
-    "closenessLevel": 3,
-    "text": {
-      "en-US": "What is one thing you would like to change about yourself?",
-      "es-ES": "¿Cuál es una cosa que te gustaría cambiar de ti?"
-    }
-  },
-  {
-    "id": "ID-21",
-    "moment": [
-      "Drinks with Friends 🍸"
-    ],
-    "closenessLevel": 2,
-    "text": {
-      "en-US": "Is it right to lie to avoid hurting someone?",
-      "es-ES": "¿Es correcto mentir para no herir a alguien?"
     }
   }
 ];

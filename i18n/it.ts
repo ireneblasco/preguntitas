@@ -72,6 +72,19 @@ export const it = {
     error: 'Errore',
     fetchFailed: 'Caricamento fallito',
   },
+  players: {
+    title: 'Con chi stai giocando?',
+    subtitle:
+      'Ogni domanda sarà rivolta a una persona, così è chiaro chi deve rispondere.',
+    momentLabel: 'Momento',
+    sectionLabel: 'Giocatori',
+    count: '{{count}} persone',
+    namePlaceholder: 'Persona {{n}}',
+    addPlayer: 'Aggiungi persona',
+    start: 'Inizia',
+    skip: 'Salta',
+    remove: 'Rimuovi',
+  },
   favorites: {
     title: 'Salvati',
     savedQuestions: 'Domande salvate',
@@ -86,6 +99,7 @@ export const it = {
     onboardingDone: 'Fatto',
     onboardingHint: 'Tre domande veloci — poi torni alla home.',
     hint: 'Scorri o tocca per cambiare domanda',
+    directedTo: 'Per {{name}}',
     emptySelectMoment: 'Scegli un momento dalla home per iniziare',
     emptyNoQuestions: 'Nessuna domanda per questo momento',
     closenessLabels: {

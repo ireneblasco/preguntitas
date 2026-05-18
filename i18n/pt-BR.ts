@@ -74,6 +74,19 @@ export const ptBR = {
     error: 'Erro',
     fetchFailed: 'Falha ao buscar',
   },
+  players: {
+    title: 'Com quem você está jogando?',
+    subtitle:
+      'Cada pergunta será direcionada a uma pessoa, para ficar claro quem deve responder.',
+    momentLabel: 'Momento',
+    sectionLabel: 'Jogadores',
+    count: '{{count}} pessoas',
+    namePlaceholder: 'Pessoa {{n}}',
+    addPlayer: 'Adicionar pessoa',
+    start: 'Começar',
+    skip: 'Pular',
+    remove: 'Remover',
+  },
   favorites: {
     title: 'Salvos',
     savedQuestions: 'Perguntas salvas',
@@ -88,6 +101,7 @@ export const ptBR = {
     onboardingDone: 'Pronto',
     onboardingHint: 'Três perguntas rápidas — depois você vai ao início.',
     hint: 'Deslize ou toque para mudar de pergunta',
+    directedTo: 'Para {{name}}',
     emptySelectMoment: 'Escolha um momento na tela inicial para começar',
     emptyNoQuestions: 'Não há perguntas para este momento',
     closenessLabels: {

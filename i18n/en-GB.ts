@@ -73,6 +73,19 @@ export const enGB = {
     error: 'Error',
     fetchFailed: 'Fetch failed',
   },
+  players: {
+    title: 'Who are you playing with?',
+    subtitle:
+      'Each question will be directed to one person, so it is clear who should answer.',
+    momentLabel: 'Moment',
+    sectionLabel: 'Players',
+    count: '{{count}} people',
+    namePlaceholder: 'Person {{n}}',
+    addPlayer: 'Add person',
+    start: 'Start',
+    skip: 'Skip',
+    remove: 'Remove',
+  },
   favorites: {
     title: 'Saved',
     savedQuestions: 'Saved questions',
@@ -87,6 +100,7 @@ export const enGB = {
     onboardingDone: 'Done',
     onboardingHint: 'Three quick questions — then you will be on the home screen.',
     hint: 'Swipe or tap to change question',
+    directedTo: 'For {{name}}',
     emptySelectMoment: 'Select a moment from home to start',
     emptyNoQuestions: 'No questions for this moment',
     closenessLabels: {

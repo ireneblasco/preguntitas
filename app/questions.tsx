@@ -33,6 +33,8 @@ import { useFavorites } from '../utils/useFavorites';
 import { usePreferredLanguage, getQuestionText } from '../utils/usePreferredLanguage';
 import { useTranslation } from '../hooks/useTranslation';
 import { analytics } from '../utils/analytics';
+import { getGamePlayers } from '../utils/players';
+import { formatTranslation } from '../utils/formatTranslation';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const SWIPE_THRESHOLD = 80;
@@ -143,6 +145,7 @@ export default function Questions() {
   const [viewPath, setViewPath] = useState<number[]>([0]);
   const [isCompletingOnboarding, setIsCompletingOnboarding] = useState(false);
   const [currentQuestionId, setCurrentQuestionId] = useState<string>('');
+  const [gamePlayers, setGamePlayers] = useState<string[]>([]);
   /** Evita doble “siguiente” (p. ej. tap + desliz o doble registro) en pocos ms. */
   const lastNextAtRef = useRef(0);
   /**
@@ -203,6 +206,21 @@ export default function Questions() {
     setIsCompletingOnboarding(false);
   }, [filteredQuestionSetKey, moment]);
 
+  useEffect(() => {
+    if (entryFromOnboarding) {
+      setGamePlayers([]);
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      const players = await getGamePlayers();
+      if (!cancelled) setGamePlayers(players);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [entryFromOnboarding, moment]);
+
   const onboardingDeck = useMemo(() => {
     if (!entryFromOnboarding || shuffledQuestions.length === 0) return [];
     const preferredOrder = new Map(
@@ -240,6 +258,11 @@ export default function Questions() {
 
   const currentQuestion =
     activeDeck.length > 0 ? activeDeck[currentDeckPosition] : undefined;
+
+  const directedPlayerName =
+    gamePlayers.length > 0 && !entryFromOnboarding
+      ? gamePlayers[currentDeckPosition % gamePlayers.length]
+      : null;
 
   useEffect(() => {
     if (currentQuestion) {
@@ -512,7 +535,25 @@ export default function Questions() {
                     pointerEvents="none"
                   />
                   <View style={styles.cardInner}>
-                    {!isWhoIsMostLikelyTo && currentQuestion?.closenessLevel != null ? (
+                    {directedPlayerName ? (
+                      <View style={styles.momentPillRow} pointerEvents="none">
+                        <View
+                          style={[
+                            styles.playerPill,
+                            { borderColor: `${COLORS.brand.terracotta}66` },
+                          ]}
+                        >
+                          <Text style={styles.playerPillText} numberOfLines={1}>
+                            {formatTranslation(t('questions.directedTo'), {
+                              name: directedPlayerName,
+                            })}
+                          </Text>
+                        </View>
+                      </View>
+                    ) : null}
+                    {!isWhoIsMostLikelyTo &&
+                    !directedPlayerName &&
+                    currentQuestion?.closenessLevel != null ? (
                       <View style={styles.momentPillRow} pointerEvents="none">
                         <View
                           style={[
@@ -782,6 +823,21 @@ const styles = StyleSheet.create({
     color: `${COLORS.text.secondary}D6`,
     letterSpacing: 0.35,
     textTransform: 'uppercase',
+    textAlign: 'center',
+  },
+  playerPill: {
+    maxWidth: '100%',
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: 8,
+    borderRadius: 100,
+    borderWidth: StyleSheet.hairlineWidth,
+    backgroundColor: 'rgba(255, 255, 255, 0.55)',
+  },
+  playerPillText: {
+    fontSize: FONT_SIZES.sm,
+    fontFamily: FONTS.inter.bold,
+    fontWeight: '700',
+    color: COLORS.brand.terracotta,
     textAlign: 'center',
   },
   cardContentWrap: {

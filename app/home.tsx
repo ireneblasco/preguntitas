@@ -72,7 +72,7 @@ export default function Home() {
     (momentId: string) => {
       const categoryName = momentOptions.find((m) => m.id === momentId)?.name ?? momentId;
       analytics.categoryOpened(categoryName);
-      router.push({ pathname: '/questions', params: { moment: momentId } });
+      router.push({ pathname: '/setup-players', params: { moment: momentId } });
     },
     [momentOptions, router]
   );

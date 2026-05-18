@@ -46,6 +46,12 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
+            name="setup-players"
+            options={{
+              animation: 'slide_from_right',
+            }}
+          />
+          <Stack.Screen
             name="questions"
             options={{
               animation: 'fade',

@@ -73,6 +73,19 @@ export const esMX = {
     error: 'Error',
     fetchFailed: 'Error al traer',
   },
+  players: {
+    title: '¿Con quién juegas?',
+    subtitle:
+      'Cada pregunta irá dirigida a una persona. Así es más fácil saber quién responde.',
+    momentLabel: 'Momento',
+    sectionLabel: 'Jugadores',
+    count: '{{count}} personas',
+    namePlaceholder: 'Persona {{n}}',
+    addPlayer: 'Añadir persona',
+    start: 'Empezar',
+    skip: 'Saltar',
+    remove: 'Quitar',
+  },
   favorites: {
     title: 'Guardados',
     savedQuestions: 'Preguntas guardadas',
@@ -87,6 +100,7 @@ export const esMX = {
     onboardingDone: 'Listo',
     onboardingHint: 'Tres preguntas rápidas; después vas al inicio.',
     hint: 'Desliza o toca para cambiar de pregunta',
+    directedTo: 'Para {{name}}',
     emptySelectMoment: 'Elige un momento desde el inicio para empezar',
     emptyNoQuestions: 'No hay preguntas para este momento',
     closenessLabels: {

@@ -73,6 +73,19 @@ export const de = {
     error: 'Fehler',
     fetchFailed: 'Laden fehlgeschlagen',
   },
+  players: {
+    title: 'Mit wem spielst du?',
+    subtitle:
+      'Jede Frage richtet sich an eine Person, damit klar ist, wer antworten soll.',
+    momentLabel: 'Moment',
+    sectionLabel: 'Spieler',
+    count: '{{count}} Personen',
+    namePlaceholder: 'Person {{n}}',
+    addPlayer: 'Person hinzufügen',
+    start: 'Los geht’s',
+    skip: 'Überspringen',
+    remove: 'Entfernen',
+  },
   favorites: {
     title: 'Gespeichert',
     savedQuestions: 'Gespeicherte Fragen',
@@ -87,6 +100,7 @@ export const de = {
     onboardingDone: 'Fertig',
     onboardingHint: 'Drei kurze Fragen — danach geht es zur Startseite.',
     hint: 'Wische oder tippe, um die Frage zu wechseln',
+    directedTo: 'Für {{name}}',
     emptySelectMoment: 'Wähle zuerst einen Moment auf der Startseite',
     emptyNoQuestions: 'Keine Fragen für diesen Moment',
     closenessLabels: {
