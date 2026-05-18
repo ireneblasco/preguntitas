@@ -7,10 +7,10 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Image,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
@@ -20,14 +20,16 @@ import {
   SPACING,
   BORDER_RADIUS,
   getCategoryDisplayName,
-  getThemeForMomentId,
+  getMomentBannerTheme,
+  getMomentEmblemSource,
 } from '../constants';
 import { useQuestions } from '../contexts/QuestionsContext';
 import { useTranslation } from '../hooks/useTranslation';
 import { formatTranslation } from '../utils/formatTranslation';
 import { getGamePlayers, setGamePlayers, clearGamePlayers } from '../utils/players';
 
-const MIN_SLOTS = 2;
+const MIN_SLOTS = 1;
+const DEFAULT_SLOTS = 2;
 const MAX_PLAYERS = 12;
 
 const AVATAR_PALETTE = [
@@ -56,7 +58,7 @@ function normalizeSlots(names: string[]): string[] {
 
 function playerInitial(name: string): string {
   const trimmed = name.trim();
-  if (!trimmed) return '?';
+  if (!trimmed) return '';
   return trimmed.charAt(0).toUpperCase();
 }
 
@@ -66,7 +68,7 @@ export default function SetupPlayers() {
   const moment = firstParam(params.moment);
   const { t } = useTranslation();
   const { momentOptions } = useQuestions();
-  const [names, setNames] = useState<string[]>(['', '']);
+  const [names, setNames] = useState<string[]>(() => Array.from({ length: DEFAULT_SLOTS }, () => ''));
   const [loaded, setLoaded] = useState(false);
 
   const momentOption = moment ? momentOptions.find((m) => m.id === moment) : null;
@@ -74,9 +76,14 @@ export default function SetupPlayers() {
     ? getCategoryDisplayName(momentOption) || momentOption?.name || moment
     : '';
   const momentEmoji = momentOption?.emoji ?? '✨';
-  const momentTheme = moment
-    ? getThemeForMomentId(moment, momentOptions)
-    : getThemeForMomentId(momentOptions[0]?.id ?? '', momentOptions);
+  const momentBanner = useMemo(() => {
+    const key = moment ?? momentOption?.name ?? '';
+    return getMomentBannerTheme(key);
+  }, [moment, momentOption?.name]);
+  const momentEmblem = useMemo(() => {
+    if (!moment) return undefined;
+    return getMomentEmblemSource(moment) ?? getMomentEmblemSource(momentOption?.name);
+  }, [moment, momentOption?.name]);
 
   useEffect(() => {
     let cancelled = false;
@@ -117,12 +124,13 @@ export default function SetupPlayers() {
 
   const removeSlot = useCallback((index: number) => {
     setNames((prev) => {
-      if (prev.length <= MIN_SLOTS) {
-        const next = [...prev];
-        next[index] = '';
-        return next;
+      if (prev.length > MIN_SLOTS) {
+        const next = prev.filter((_, i) => i !== index);
+        return next.length > 0 ? next : [''];
       }
-      return prev.filter((_, i) => i !== index);
+      const next = [...prev];
+      next[index] = '';
+      return next;
     });
   }, []);
 
@@ -194,27 +202,36 @@ export default function SetupPlayers() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <View style={styles.momentChipOuter}>
-              <LinearGradient
-                colors={[
-                  `${momentTheme.bg}E8`,
-                  'rgba(250, 243, 235, 0.96)',
-                  'rgba(238, 246, 226, 0.9)',
-                ]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.momentChipGradient}
-              >
-                <View style={[styles.momentEmojiTile, { backgroundColor: `${momentTheme.text}14` }]}>
-                  <Text style={styles.momentEmoji}>{momentEmoji}</Text>
+            <View
+              style={[
+                styles.momentChipOuter,
+                { borderColor: momentBanner.borderColor },
+              ]}
+            >
+              <View style={[styles.momentChip, { backgroundColor: momentBanner.bg }]}>
+                <View style={styles.momentEmblemTile}>
+                  {momentEmblem ? (
+                    <Image
+                      source={momentEmblem}
+                      style={styles.momentEmblemImage}
+                      resizeMode="cover"
+                    />
+                  ) : (
+                    <Text style={styles.momentEmoji}>{momentEmoji}</Text>
+                  )}
                 </View>
                 <View style={styles.momentChipCopy}>
-                  <Text style={styles.momentChipLabel}>{t('players.momentLabel')}</Text>
-                  <Text style={styles.momentChipTitle} numberOfLines={2}>
+                  <Text style={[styles.momentChipLabel, { color: momentBanner.labelColor }]}>
+                    {t('players.momentLabel')}
+                  </Text>
+                  <Text
+                    style={[styles.momentChipTitle, { color: momentBanner.titleColor }]}
+                    numberOfLines={2}
+                  >
                     {momentLabel}
                   </Text>
                 </View>
-              </LinearGradient>
+              </View>
             </View>
 
             <Text style={styles.headline}>{t('players.title')}</Text>
@@ -234,7 +251,10 @@ export default function SetupPlayers() {
             <View style={styles.groupCard}>
               {names.map((name, index) => {
                 const palette = AVATAR_PALETTE[index % AVATAR_PALETTE.length];
-                const showRemove = names.length > MIN_SLOTS || name.trim().length > 0;
+                const initial = playerInitial(name);
+                const canRemoveRow = names.length > MIN_SLOTS;
+                const canClearName = initial.length > 0;
+                const showRemove = canRemoveRow || canClearName;
                 const isLast = index === names.length - 1;
                 const showAddRow = names.length < MAX_PLAYERS;
                 return (
@@ -247,9 +267,18 @@ export default function SetupPlayers() {
                   >
                     <View style={styles.avatarColumn}>
                       <View style={[styles.avatar, { backgroundColor: palette.bg }]}>
-                        <Text style={[styles.avatarText, { color: palette.fg }]}>
-                          {playerInitial(name)}
-                        </Text>
+                        {initial ? (
+                          <Text style={[styles.avatarText, { color: palette.fg }]}>
+                            {initial}
+                          </Text>
+                        ) : (
+                          <Ionicons
+                            name="person-outline"
+                            size={22}
+                            color={palette.fg}
+                            style={styles.avatarPlaceholderIcon}
+                          />
+                        )}
                       </View>
                     </View>
                     <TextInput
@@ -278,8 +307,15 @@ export default function SetupPlayers() {
                         hitSlop={8}
                         accessibilityRole="button"
                         accessibilityLabel={t('players.remove')}
+                        accessibilityHint={
+                          canRemoveRow ? t('players.removeHint') : t('players.clearHint')
+                        }
                       >
-                        <Ionicons name="close" size={18} color={COLORS.text.light} />
+                        <Ionicons
+                          name={canRemoveRow ? 'trash-outline' : 'close'}
+                          size={18}
+                          color={canRemoveRow ? COLORS.brand.terracotta : COLORS.text.light}
+                        />
                       </Pressable>
                     ) : (
                       <View style={styles.removePlaceholder} />
@@ -398,28 +434,30 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginBottom: SPACING.xl,
     borderWidth: 1,
-    borderColor: COLORS.border.light,
-    shadowColor: COLORS.brand.forest,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.06,
     shadowRadius: 12,
     elevation: 2,
   },
-  momentChipGradient: {
+  momentChip: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: SPACING.md,
     paddingHorizontal: SPACING.md,
     gap: SPACING.md,
   },
-  momentEmojiTile: {
+  momentEmblemTile: {
     width: 52,
     height: 52,
     borderRadius: 14,
+    overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(45, 90, 71, 0.1)',
+  },
+  momentEmblemImage: {
+    width: '100%',
+    height: '100%',
   },
   momentEmoji: {
     fontSize: 28,
@@ -434,7 +472,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontFamily: FONTS.inter.bold,
     fontWeight: '700',
-    color: COLORS.text.secondary,
     letterSpacing: 0.4,
     textTransform: 'uppercase',
   },
@@ -442,7 +479,6 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.base,
     fontFamily: FONTS.inter.bold,
     fontWeight: '600',
-    color: COLORS.text.primary,
     lineHeight: 22,
   },
   headline: {
@@ -530,6 +566,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     includeFontPadding: false,
     textAlignVertical: 'center',
+  },
+  avatarPlaceholderIcon: {
+    opacity: 0.42,
   },
   addAvatar: {
     backgroundColor: COLORS.brand.forest,

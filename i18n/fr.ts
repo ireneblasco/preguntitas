@@ -76,7 +76,7 @@ export const fr = {
   players: {
     title: 'Avec qui joues-tu ?',
     subtitle:
-      'Chaque question sera adressée à une personne, pour savoir qui doit répondre.',
+      'Ajoute les noms des participants pour que chaque question puisse être attribuée à quelqu’un.',
     momentLabel: 'Moment',
     sectionLabel: 'Joueurs',
     count: '{{count}} personnes',
@@ -85,6 +85,8 @@ export const fr = {
     start: 'Commencer',
     skip: 'Passer',
     remove: 'Retirer',
+    removeHint: 'Retire cette personne de la liste',
+    clearHint: 'Efface ce nom',
   },
   favorites: {
     title: 'Enregistrés',

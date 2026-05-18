@@ -75,7 +75,7 @@ export const it = {
   players: {
     title: 'Con chi stai giocando?',
     subtitle:
-      'Ogni domanda sarà rivolta a una persona, così è chiaro chi deve rispondere.',
+      'Aggiungi i nomi dei partecipanti così ogni domanda può essere assegnata a qualcuno.',
     momentLabel: 'Momento',
     sectionLabel: 'Giocatori',
     count: '{{count}} persone',
@@ -84,6 +84,8 @@ export const it = {
     start: 'Inizia',
     skip: 'Salta',
     remove: 'Rimuovi',
+    removeHint: 'Rimuove questa persona dall’elenco',
+    clearHint: 'Cancella questo nome',
   },
   favorites: {
     title: 'Salvati',

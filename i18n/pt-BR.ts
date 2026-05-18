@@ -77,7 +77,7 @@ export const ptBR = {
   players: {
     title: 'Com quem você está jogando?',
     subtitle:
-      'Cada pergunta será direcionada a uma pessoa, para ficar claro quem deve responder.',
+      'Adicione os nomes dos participantes para que cada pergunta possa ser atribuída a alguém.',
     momentLabel: 'Momento',
     sectionLabel: 'Jogadores',
     count: '{{count}} pessoas',
@@ -86,6 +86,8 @@ export const ptBR = {
     start: 'Começar',
     skip: 'Pular',
     remove: 'Remover',
+    removeHint: 'Remove esta pessoa da lista',
+    clearHint: 'Apaga este nome',
   },
   favorites: {
     title: 'Salvos',

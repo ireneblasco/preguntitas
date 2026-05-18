@@ -76,7 +76,7 @@ export const enUS = {
   players: {
     title: 'Who are you playing with?',
     subtitle:
-      'Each question will be directed to one person, so it is clear who should answer.',
+      'Add participant names so each question can be assigned to someone.',
     momentLabel: 'Moment',
     sectionLabel: 'Players',
     count: '{{count}} people',
@@ -85,6 +85,8 @@ export const enUS = {
     start: 'Start',
     skip: 'Skip',
     remove: 'Remove',
+    removeHint: 'Removes this player from the list',
+    clearHint: 'Clears this name',
   },
   favorites: {
     title: 'Saved',

@@ -76,7 +76,7 @@ export const de = {
   players: {
     title: 'Mit wem spielst du?',
     subtitle:
-      'Jede Frage richtet sich an eine Person, damit klar ist, wer antworten soll.',
+      'Füge die Namen der Teilnehmer hinzu, damit jede Frage jemandem zugewiesen werden kann.',
     momentLabel: 'Moment',
     sectionLabel: 'Spieler',
     count: '{{count}} Personen',
@@ -85,6 +85,8 @@ export const de = {
     start: 'Los geht’s',
     skip: 'Überspringen',
     remove: 'Entfernen',
+    removeHint: 'Entfernt diese Person aus der Liste',
+    clearHint: 'Löscht diesen Namen',
   },
   favorites: {
     title: 'Gespeichert',

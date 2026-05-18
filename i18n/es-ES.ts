@@ -76,7 +76,7 @@ export const esES = {
   players: {
     title: '¿Con quién juegas?',
     subtitle:
-      'Cada pregunta irá dirigida a una persona. Así es más fácil saber quién responde.',
+      'Añade los nombres de los participantes para que cada pregunta pueda asignarse a alguien.',
     momentLabel: 'Momento',
     sectionLabel: 'Jugadores',
     count: '{{count}} personas',
@@ -85,6 +85,8 @@ export const esES = {
     start: 'Empezar',
     skip: 'Saltar',
     remove: 'Quitar',
+    removeHint: 'Elimina a esta persona de la lista',
+    clearHint: 'Borra este nombre',
   },
   favorites: {
     title: 'Guardados',
